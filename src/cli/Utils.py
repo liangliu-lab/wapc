@@ -121,6 +121,18 @@ class Utils():
                                  action='store',
                                  default='5'
         )
+        self.parser.add_argument('-o', '--option',
+                                 dest='option',
+                                 help=Language.MSG_ADD_FREQ_HELP,
+                                 action='store',
+                                 default=''
+        )
+        self.parser.add_argument('-p', '--param',
+                                 dest='parameter',
+                                 help=Language.MSG_ADD_FREQ_HELP,
+                                 action='store',
+                                 default='5'
+        )
 
     def get_args(self, args):
         try:

@@ -12,6 +12,7 @@ from src.resources.resources import Resources
 
 __author__ = 'fatih'
 
+
 class Database:
     """
         Database class implement a database interface between application and postgresql
@@ -22,6 +23,7 @@ class Database:
     def connect(self):
         """
             Connect database with given parameters
+        :rtype : object
         """
         try:
             config = ConfigParser.RawConfigParser()
@@ -51,6 +53,7 @@ class Database:
     def select(self, cmd):
         """
             Remove objects from given tables
+        :param cmd:
         """
         try:
             conn = self.connect()
@@ -75,6 +78,7 @@ class Database:
         """
             Insert objects to database
             expected json formats for inserting objects
+        :param cmd:
         """
         try:
             conn = self.connect()
@@ -100,6 +104,7 @@ class Database:
     def update(self, cmd):
         """
             Update database objects with given values
+        :param cmd:
         """
         try:
             conn = self.connect()
@@ -120,6 +125,7 @@ class Database:
     def remove(self, cmd):
         """
             Remove objects from given tables
+        :param cmd:
         """
         try:
             conn = self.connect()
@@ -138,32 +144,11 @@ class Database:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             pass
 
-    def get_last_insertID(self):
-        """
-
-        """
-        try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute("SELECT lastval() from apc_device")
-            id = cur.fetchone()
-            conn.commit()
-            if id is Empty:
-                pass
-            else:
-                return id
-            self.close_conn(conn)
-        except db.DatabaseError as e:
-            print Language.MSG_ERR_DATABASE_ERROR.format('73','connecting',e.message)
-            pass
-        except IOError as e:
-            print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
-            pass
-        except Exception as e:
-            print Language.MSG_ERR_DB_CONNECT.format(e.message)
-            pass
-
     def close_conn(self, con):
+        """
+
+        :param con:
+        """
         try:
             if con:
                 con.close()

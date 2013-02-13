@@ -6,16 +6,18 @@ from src.resources.resources import Resources
 
 __author__ = 'fatih'
 
+
 class CommunicationInterface():
     """
         Communication interface class to talk with perl script
     """
+
     def get_source_config(self, file):
         """
             Get input json file to parse with params
         """
         try:
-            f = open(file,'r')
+            f = open(file, 'r')
             config_source = f.read()
             f.close()
             return config_source
@@ -38,7 +40,7 @@ class CommunicationInterface():
             print Language.MSG_ERR_COMM_INTERFACE_FAILED.format(e.message)
             pass
 
-    def write_source_file(self,source):
+    def write_source_file(self, source):
         """
             Write source file to provide the communication interface
         """
@@ -51,10 +53,11 @@ class CommunicationInterface():
 
     def get_file_backup(self, source, target, time):
         try:
-            f = open(Resources.BACKUP_PATH+ "/" + target + "/" + Resources.back_name.format(time), 'w')
+            f = open(Resources.BACKUP_PATH + "/" + target + "/" + Resources.back_name.format(time), 'w')
             f.write(json.dumps(source))
             f.close()
         except Exception as e:
             print Language.MSG_ERR_FILE_BACKUP_FAILED.format(e.message)
             pass
+
 

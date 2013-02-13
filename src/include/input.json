@@ -1,0 +1,1 @@
+{"username": "Cisco", "transport_protocol": "Telnet", "ip": "192.168.0.35", "enable_password": "Cisco", "request": {"commands": [{"command": "show run"}], "enable": true, "configure": false}, "password": "Cisco", "personality": "ios"}

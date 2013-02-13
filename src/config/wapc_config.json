@@ -1,0 +1,175 @@
+{
+    "set_channel":{
+        "enable":true,
+        "configure":true,
+        "commands":[
+            {
+                "command":"interface Dot11Radio 0",
+                "param":""
+            },
+            {
+                "command":"channel ",
+                "param":""
+            },
+            {
+                "command":"exit"
+            }
+        ]
+    },
+    "set_maxclients":{
+        "enable":true,
+        "configure":true,
+        "commands":[
+            {
+                "command":"dot11 ssid ",
+                "param":""
+            },
+            {
+                "command":"max-associations ",
+                "param":""
+            },
+            {
+                "command":"exit"
+            }
+        ]
+    },
+    "unset_ssid":{
+        "enable":true,
+        "configure":true,
+        "commands":[
+            {
+                "command":"interface Dot11Radio0"
+            },
+            {
+                "command":"no ssid ",
+                "param":""
+            },
+            {
+                "command":"exit"
+            },
+            {
+                "command":"no dot11 ssid ",
+                "param":""
+            }
+        ]
+    },
+    "set_ssid":{
+        "enable":true,
+        "configure":true,
+        "commands":[
+            {
+                "command":"dot11 ssid ",
+                "param":""
+            },
+            {
+                "command":"authentication open eap eap_methods"
+            },
+            {
+                "command":"authentication network-eap eap_methods"
+            },
+            {
+                "command":"authentication key-management wpa"
+            },
+            {
+                "command":"information-element ssidl advertisement"
+            },
+            {
+                "command":"exit"
+            },
+            {
+                "command":"interface Dot11Radio0"
+            },
+            {
+                "command":"ssid ",
+                "param":""
+            },
+            {
+                "command":"exit"
+            },
+            {
+                "command":"exit"
+            }
+        ]
+    },
+    "set_permanent":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"write mem"
+            }
+        ]
+    },
+    "show_channel":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show controllers dot11Radio 0 | include Current.Frequency"
+            }
+        ]
+    },
+    "show_conf":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show running"
+            }
+        ]
+    },
+    "show_firmware":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show version | include IOS"
+            }
+        ]
+    },
+    "show_model":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show version | include Model"
+            }
+        ]
+    },
+    "show_serial":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show version | include Top Assembly Serial Number"
+            }
+        ]
+    },
+    "show_clients":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show dot11 associations"
+            }
+        ]
+    },
+    "show_ssid":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show dot11 bssid"
+            }
+        ]
+    },
+    "show_run":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"show run"
+            }
+        ]
+    }
+}

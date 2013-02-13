@@ -127,7 +127,7 @@ class Utils():
                                  action='store',
                                  default=''
         )
-        self.parser.add_argument('-p', '--param',
+        self.parser.add_argument('-param', '--param',
                                  dest='parameter',
                                  help=Language.MSG_ADD_FREQ_HELP,
                                  action='store',

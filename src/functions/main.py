@@ -47,6 +47,15 @@ class Main(dict):
         try:
             params = self.util.get_args(args)
 
+            if params:
+                if params.type is Empty:
+                    print ""
+                else:
+                    print ""
+            else:
+                print "error message"
+                pass
+
             #check namespace variables if set
             if params.ip is Empty:
                 print Language.MSG_ERR_EMPTY_IP.format('device')
@@ -109,10 +118,6 @@ class Main(dict):
             config['request'] = request.__dict__
             print "Request generating...\n"
 
-            #write recent config into backup file
-            self.ci.backup(commands, config.getName(), self.now)
-
-
             #call communication interface script and gather response - RPC
             try:
                 print "Executing device commands please wait..."
@@ -155,10 +160,9 @@ class Main(dict):
                     #get inserted device id and inform user
                     id = self.db.insert(cmd)
                     if id:
+                        #write recent config into backup file
+                        self.ci.backup(commands, config.getName(), self.now)
                         print Language.MSG_ADD_NEW.format('device', id[0], device.getName())
-
-                        #create a backup file to backup recent config
-                        #self.ci.get_file_backup(resp['message'],device.getName())
                 else:
                     print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.format(resp['message'])
             else:
@@ -167,6 +171,8 @@ class Main(dict):
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format("34", e.message)
             pass
+
+
 
     def list(self, args):
         """
@@ -330,4 +336,4 @@ class Main(dict):
         """
         formatter = parser._get_formatter()
         parser.exit(message=formatter.format_help())
-        print Language.MSG_ARG_DESC.formatt
+        print Language.MSG_ARG_DESC

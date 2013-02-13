@@ -22,6 +22,7 @@ class Main(dict):
     """
         Main class includes all base functions of the software
     """
+
     def __init__(self):
         self.config = Config()
         self.device = Device()
@@ -91,6 +92,7 @@ class Main(dict):
                     #    config = json.loads(unicode(self.config))
 
             #set new config params
+            config['name'] = device.getName()
             config['ip'] = device.getIP()
             config['username'] = device.getUsername()
             config['password'] = device.getPassword()
@@ -107,10 +109,9 @@ class Main(dict):
             config['request'] = request.__dict__
             print "Request generating...\n"
 
-            #write new config to file
-            f = open(Resources.ci_source, 'w')
-            f.write(json.dumps(config))
-            f.close()
+            #write recent config into backup file
+            self.ci.backup(commands, config.getName(), self.now)
+
 
             #call communication interface script and gather response - RPC
             try:
@@ -122,7 +123,8 @@ class Main(dict):
 
             #check if rpc is responded
             if resp:
-                if resp['status'] == 110:  #check if wap is connected and returned with success status message 110
+                #check if wap is connected and returned with success status message 110
+                if resp['status'] == 110:
                     cmd = SQL.SQL_INSERT_CONFIG.format(
                         config.getName(),
                         config.getDescription(),
@@ -230,12 +232,12 @@ class Main(dict):
             if id is Empty:
                 print Language.MSG_ERR_DATABASE_ERROR.format('128', 'inserting new group', id)
             else:
-                print Language.MSG_ADD_NEW.format('group', id, group.getName());
+                print Language.MSG_ADD_NEW.format('group', id, group.getName())
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format("133", e.message)
             pass
 
-    def configure(self,args):
+    def configure(self, args):
         """
         """
         print ""
@@ -244,13 +246,15 @@ class Main(dict):
         """
         """
 
-    def vlan(self,args):
+    def vlan(self, args):
         """
         """
 
     def set(self, args):
         """
 
+
+        :param args:
         """
 
     def remove(self, args):
@@ -320,6 +324,10 @@ class Main(dict):
             pass
 
     def help(self, args):
+        """
+
+        :param args:
+        """
         formatter = parser._get_formatter()
         parser.exit(message=formatter.format_help())
         print Language.MSG_ARG_DESC.formatt

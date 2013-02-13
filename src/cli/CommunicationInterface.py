@@ -15,6 +15,7 @@ class CommunicationInterface():
     def get_source_config(self, file):
         """
             Get input json file to parse with params
+        :param file: 
         """
         try:
             f = open(file, 'r')
@@ -28,6 +29,7 @@ class CommunicationInterface():
     def call_communication_interface(self, source):
         """
             Call script with source json data file path
+        :param source: 
             Usage: call_communication_interface('config.json')
         """
         try:
@@ -43,6 +45,7 @@ class CommunicationInterface():
     def write_source_file(self, source):
         """
             Write source file to provide the communication interface
+        :param source: 
         """
         try:
             with io.open(Resources.ci_source, 'w', encoding='utf-8') as outfile:
@@ -51,7 +54,15 @@ class CommunicationInterface():
             print e.message
             pass
 
-    def get_file_backup(self, source, target, time):
+    def backup(self, source, target, time):
+        """
+
+
+        :rtype : object
+        :param source: 
+        :param target: 
+        :param time: 
+        """
         try:
             f = open(Resources.BACKUP_PATH + "/" + target + "/" + Resources.back_name.format(time), 'w')
             f.write(json.dumps(source))

@@ -1,19 +1,31 @@
+# coding=utf-8
 __author__ = 'fatih'
 
-class ConfigMethods():
-    def create(self, args):
+
+class ConfigMethods(object):
+    """
+        ConfigMethods
+    """
+    def create(self, params):
         """
 
-        """
-    def read(self, args):
-        """
-
-        """
-    def update(self, args):
+        :param params:
         """
 
+    def read(self, params):
         """
-    def delete(self, args):
+
+        :param params:
         """
-        
+
+    def update(self, params):
+        """
+
+        :param params:
+        """
+
+    def delete(self, params):
+        """
+
+        :param params:
         """

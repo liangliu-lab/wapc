@@ -1,3 +1,4 @@
+# coding=utf-8
 import time
 from src.cli.ConsoleInterface import ConsoleInterface
 

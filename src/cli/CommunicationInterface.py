@@ -1,3 +1,4 @@
+# coding=utf-8
 import io
 import json
 import subprocess
@@ -7,7 +8,7 @@ from src.resources.resources import Resources
 __author__ = 'fatih'
 
 
-class CommunicationInterface():
+class CommunicationInterface(object):
     """
         Communication interface class to talk with perl script
     """
@@ -56,7 +57,6 @@ class CommunicationInterface():
 
     def backup(self, source, target, time):
         """
-
 
         :rtype : object
         :param source: 

@@ -1,11 +1,6 @@
+# coding=utf-8
 import cmd
-from src.cli.CommunicationInterface import CommunicationInterface
-from src.cli.Utils import Utils
 from src.functions.main import Main
-from src.language.language import Language
-from src.model.Device import Device
-from src.model.Config import Config
-from src.database.db import Database
 from time import gmtime, strftime
 from src.resources.resources import Resources
 
@@ -15,13 +10,7 @@ class ConsoleInterface(cmd.Cmd):
         Command list to implement all required methods
     """
     cmd.Cmd.prompt = Resources.prompt
-    config = Config()
-    device = Device()
-    ci = CommunicationInterface()
-    db = Database()
     now = strftime(Resources.time_format, gmtime())
-    script = Resources.ci_script
-    cfg_device = Resources.cfg_device_resource
     main = Main()
 
     def do_add(self, args):
@@ -30,6 +19,7 @@ class ConsoleInterface(cmd.Cmd):
             [-i] [--ip] Use this params when adding some new variables which needs an ip such as device, config, etc.
             [-n] [--name] To set a name to related type variable
             [-u] [--username] Provide a username which will be used to connect device
+        :param args:
         """
         try:
             self.main.add(args)
@@ -52,7 +42,7 @@ class ConsoleInterface(cmd.Cmd):
             Add new vlan with params
         """
         try:
-            self.main.group(args)
+            self.main.vlan(args)
         except Exception as e:
             print e.message
 

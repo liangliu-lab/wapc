@@ -1,14 +1,15 @@
+# coding=utf-8
 __author__ = "fatih"
 __date__ = "$Jan 22, 2013 11:08:40 AM$"
 
 
-class Resources():
+class Resources(object):
     """
         Resources file covers all required global variables, pathnames, filenames, etc.
         You need to configure only this file anytime you need to change variables
     """
     #path variables
-    ROOT_PATH = "/opt/labris/sbin/fatihkaratana/wapc/"
+    ROOT_PATH = "/opt/labris/sbin/wapc/"
     SOURCE_PATH = ROOT_PATH + "src/"
     INCLUDE_PATH = SOURCE_PATH + "include/"
     CONFIG_PATH = SOURCE_PATH + "config/"

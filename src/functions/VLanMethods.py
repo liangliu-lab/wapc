@@ -1,13 +1,11 @@
 # coding=utf-8
 from Queue import Empty
 import json
-from time import strftime, gmtime
-from src.cli.CommunicationInterface import CommunicationInterface
 from src.config.__sql__ import SQL
-from src.database.db import Database
 from src.language.language import Language
 from src.model.Commands import Commands
-from src.model.Device import NewDevice
+from src.model.Config import Config
+from src.model.Device import Device
 from src.model.Request import Request
 from src.model.Response import Response
 from src.resources.resources import Resources
@@ -15,24 +13,18 @@ from src.resources.resources import Resources
 __author__ = 'fatih'
 
 
-class DeviceMethods():
+class VLanMethods(object):
     """
-        DeviceMethods
+        VLan Methods
     """
-    def __init__(self):
-        self.db = Database()
-        self.ci = CommunicationInterface()
-        self.script = Resources.ci_script
-        self.cfg_device = Resources.cfg_device_resource
-        self.now = strftime(Resources.time_format, gmtime())
-
     def create(self, params):
         """
             Add function to implement a thread at background responds to Web or CLI request
         :param params:
+        :param args:
         """
-        device = NewDevice()
-        config = device.getConfig()
+        device = Device()
+        config = Config()
         resp = Response()
         request = Request()
         commands = Commands()
@@ -60,7 +52,7 @@ class DeviceMethods():
                 device.setPassword(params.password.strip())
 
             #gather commands config
-            config_source = self.ci.get_source_config(Resources.cfg_device_resource)
+            config_source = self.ci.get_source_config(Resources.cfg_device_resource) #get config file sort of json
 
             if config_source:
                 try:
@@ -83,10 +75,13 @@ class DeviceMethods():
                     #    config = json.loads(unicode(self.config))
 
             #set new config params
-            config.setName(device.getName())
-            config.setIP(device.getIP())
-            config.setTProtocol(device.getConfig().getTProtocol())
-            config.setPersonality(device.getConfig().getPersonality())
+            config['name'] = device.getName()
+            config['ip'] = device.getIP()
+            config['username'] = device.getUsername()
+            config['password'] = device.getPassword()
+            config['transport_protocol'] = device.getConfig().getTProtocol()
+            config['enable_password'] = device.getPassword()
+            config['personality'] = device.getConfig().getPersonality()
 
             #set request
             request.setEnable(True)
@@ -94,9 +89,8 @@ class DeviceMethods():
             #get device recent config
             request.setCommands(commands['show_run']['commands'])
 
-            config.setRequest(request.__dict__)
+            config['request'] = request.__dict__
             print "Request generating...\n"
-            self.ci.write_source_file(unicode(config))
 
             #call communication interface script and gather response - RPC
             try:
@@ -145,10 +139,8 @@ class DeviceMethods():
                         print Language.MSG_ADD_NEW.format('device', id[0], device.getName())
                 else:
                     print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.format(resp['message'])
-                    pass
             else:
                 print Language.MSG_ERR_COMM_INTERFACE_FAILED
-                pass
         except Exception as e:
             print e.message
             pass

@@ -1,3 +1,4 @@
+# coding=utf-8
 from Queue import Empty
 import argparse
 from src.language.language import Language
@@ -5,12 +6,20 @@ from src.language.language import Language
 __author__ = 'fatih'
 
 
-class Utils():
+class ArgParser(object):
+    """
+        ArgParser object
+    """
+
     parser = argparse.ArgumentParser(description=Language.MSG_ARG_DESC, version='2.3',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     params = ''
 
     def __init__(self):
+        """
+            Create instance
+
+        """
         try:
             self.set_parser()
         except Exception as e:
@@ -18,6 +27,9 @@ class Utils():
             pass
 
     def set_parser(self):
+        """
+            Set parser
+        """
         self.parser.add_argument('-t', '--type',
                                  dest='type',
                                  help=Language.MSG_ADD_TYPE_HELP,
@@ -135,6 +147,11 @@ class Utils():
         )
 
     def get_args(self, args):
+        """
+
+        :param args:
+        :return:
+        """
         try:
             if self.parser._get_args() is Empty:
                 self.params = self.parser.parse_known_args(args)
@@ -145,7 +162,3 @@ class Utils():
             pass
         return self.params
 
-    def formatter(self, stream):
-        """
-            Format output text as a human readable style
-        """

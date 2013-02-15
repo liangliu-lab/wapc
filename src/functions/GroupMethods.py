@@ -1,20 +1,34 @@
+# coding=utf-8
 __author__ = 'fatih'
 
-class GroupMethods():
-    def create(self, args):
+
+class GroupMethods(object):
+    """
+        GroupMethods
+    """
+
+    def create(self, params):
         """
 
-        """
-    def read(self, args):
+
+        :rtype : object
+        :param params:
         """
 
-        """
-    def update(self, args):
-        """
-
+    def read(self, params):
         """
 
-    def delete(self, args):
+        :param params:
         """
 
+    def update(self, params):
+        """
+
+        :param params:
+        """
+
+    def delete(self, params):
+        """
+
+        :param params:
         """

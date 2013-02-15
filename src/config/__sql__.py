@@ -1,18 +1,21 @@
+# coding=utf-8
 __author__ = 'fatih'
-class SQL():
+
+
+class SQL(object):
     """
         This class includes all using database commands such as insert, remove, select etc.
         Only need to do is you will write your sql command and format it into running command by given values
     """
 
     #insert commands
-    SQL_INSERT_CONFIG = "INSERT INTO apc_config(name, description, ip, radius_config_id, ssid, vlan_id, channel, channel_freq, date_added, date_modified) "\
+    SQL_INSERT_CONFIG = "INSERT INTO apc_config(name, description, ip, radius_config_id, ssid, vlan_id, channel, channel_freq, date_added, date_modified) " \
                         "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}') RETURNING id;"
-                        #(config_name, description, ip, radius_config_id, ssid, vlan_id, channel, channel_freq, date_added, date_modified)
+    #(config_name, description, ip, radius_config_id, ssid, vlan_id, channel, channel_freq, date_added, date_modified)
 
-    SQL_INSERT_DEVICE = "INSERT INTO apc_device(name, ip, config_id, username, password, date_added, date_modified) "\
+    SQL_INSERT_DEVICE = "INSERT INTO apc_device(name, ip, config_id, username, password, date_added, date_modified) " \
                         "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}') RETURNING id;"
-                        #(nick, ip, config_id, username, password, date_added, date_modified)
+    #(nick, ip, config_id, username, password, date_added, date_modified)
 
     SQL_INSERT_GROUP = "INSERT INTO apc_groups(name, config_id) VALUES('{0}','{1}') RETURNING id;" #insert group to the database
 

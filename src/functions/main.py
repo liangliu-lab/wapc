@@ -1,19 +1,22 @@
+# coding=utf-8
+
+"""
+    Documentation
+    :author Fatih Karatana
+"""
+
 from Queue import Empty
-import json
 from time import strftime, gmtime
 import parser
-from src.cli.CommunicationInterface import CommunicationInterface
-from src.cli.Utils import Utils
+from src.cli.ArgParser import ArgParser
 from src.config.__sql__ import SQL
 from src.database.db import Database
+from src.helper.Utils import Utils
 from src.language.language import Language
-from src.model.Commands import Commands
-from src.model.Config import Config
-from src.model.Device import Device
-from src.model.Group import Group
-from src.model.Request import Request
-from src.model.Response import Response
 from src.resources.resources import Resources
+from src.functions.DeviceMethods import DeviceMethods
+from src.functions.GroupMethods import GroupMethods
+from src.functions.ConfigMethods import ConfigMethods
 
 __author__ = 'fatih'
 
@@ -22,157 +25,42 @@ class Main(dict):
     """
         Main class includes all base functions of the software
     """
-
     def __init__(self):
-        self.config = Config()
-        self.device = Device()
-        self.util = Utils()
-        self.ci = CommunicationInterface()
-        self.db = Database()
+        self.deviceMethods = DeviceMethods()
+        self.config = ConfigMethods()
+        self.groups = GroupMethods()
+        self.utils = Utils()
+        self.argparser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
-        self.script = Resources.ci_script
-        self.cfg_device = Resources.cfg_device_resource
+        self.db = Database()
 
     def add(self, args):
         """
-            Add function to implement a thread at background responds to Web or CLI request
+
+
         :param args:
         """
-        device = Device()
-        config = Config()
-        resp = Response()
-        request = Request()
-        commands = Commands()
-
+        params = self.argparser.get_args(args)
         try:
-            params = self.util.get_args(args)
-
             if params:
-                if params.type is Empty:
-                    print ""
+                # noinspection PyArgumentList
+                if params.type == 'device':
+                    # noinspection PyArgumentList
+                    self.deviceMethods.create(params)
+                elif params.type == 'group':
+                    # noinspection PyArgumentList
+                    GroupMethods.create(params)
+                elif params.type == 'config':
+                    # noinspection PyArgumentList
+                    ConfigMethods.create(params)
                 else:
-                    print ""
+                    print Language.MSG_ERR_GENERIC.format('91', 'No [type] argument provided')
             else:
-                print "error message"
+                raise Exception("Something wrong with type")
                 pass
-
-            #check namespace variables if set
-            if params.ip is Empty:
-                print Language.MSG_ERR_EMPTY_IP.format('device')
-            else:
-                device.setIP(params.ip.strip())
-
-            if params.name is Empty:
-                print Language.MSG_ERR_EMPTY_NAME.format('device')
-            else:
-                device.setName(params.name.strip())
-
-            if params.username is Empty:
-                print Language.MSG_ERR_EMPTY_USERNAME.format('device')
-            else:
-                device.setUsername(params.username.strip())
-
-            if params.password is Empty:
-                print Language.MSG_ERR_EMPTY_PASSWORD.format('device')
-            else:
-                device.setPassword(params.password.strip())
-
-            #gather commands config
-            config_source = self.ci.get_source_config(Resources.cfg_device_resource) #get config file sort of json
-
-            if config_source:
-                try:
-                    commands = json.loads(unicode(config_source))
-                except Exception as e:
-                    print e.message
-                    pass
-
-                    #open input file
-                    #in_source = self.ci.get_source_config(Resources.ci_source)
-                    #if in_source:
-                    #read and bind its inside
-                    #    try:
-                    #        config = json.loads(unicode(in_source))
-                    #    except Exception as e:
-                    #        print e.message
-                    #        pass
-                    #else:
-                    #read and bind its inside
-                    #    config = json.loads(unicode(self.config))
-
-            #set new config params
-            config['name'] = device.getName()
-            config['ip'] = device.getIP()
-            config['username'] = device.getUsername()
-            config['password'] = device.getPassword()
-            config['transport_protocol'] = device.getConfig().getTProtocol()
-            config['enable_password'] = device.getPassword()
-            config['personality'] = device.getConfig().getPersonality()
-
-            #set request
-            request.setEnable(True)
-            request.setConfigure(False)
-            #get device recent config
-            request.setCommands(commands['show_run']['commands'])
-
-            config['request'] = request.__dict__
-            print "Request generating...\n"
-
-            #call communication interface script and gather response - RPC
-            try:
-                print "Executing device commands please wait..."
-                resp = json.loads(unicode(self.ci.call_communication_interface(Resources.ci_source)))
-            except Exception as e:
-                print e.message
-                pass
-
-            #check if rpc is responded
-            if resp:
-                #check if wap is connected and returned with success status message 110
-                if resp['status'] == 110:
-                    cmd = SQL.SQL_INSERT_CONFIG.format(
-                        config.getName(),
-                        config.getDescription(),
-                        config.getIP(),
-                        config.getRadiusID(),
-                        config.getSSID(),
-                        config.getVLAN(),
-                        config.getChannel(),
-                        config.getChannelFreq(),
-                        self.now,
-                        self.now
-                    )
-
-                    cid = self.db.insert(cmd)
-                    print "New configuration generated for the new device with id: %s" % cid[0]
-                    #cid = str(cid).rfind()
-                    #insert new device to the database
-                    cmd = SQL.SQL_INSERT_DEVICE.format(
-                        device.getName(),
-                        device.getIP(),
-                        cid[0],
-                        device.getUsername(),
-                        device.getPassword(),
-                        self.now,
-                        self.now
-                    )
-
-                    #get inserted device id and inform user
-                    id = self.db.insert(cmd)
-                    if id:
-                        #write recent config into backup file
-                        self.ci.backup(commands, config.getName(), self.now)
-                        print Language.MSG_ADD_NEW.format('device', id[0], device.getName())
-                else:
-                    print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.format(resp['message'])
-            else:
-                print Language.MSG_ERR_COMM_INTERFACE_FAILED
-
         except Exception as e:
-            print Language.MSG_ERR_GENERIC.format("34", e.message)
+            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
-
-
 
     def list(self, args):
         """
@@ -180,45 +68,54 @@ class Main(dict):
         :param args:
         """
         cmd = None
+        flag = False
 
         try:
-            params = self.util.get_args(args)
+            params = self.argparser.get_args(args)
             #check namespace variables if set
             type = params.type
             #moderate type value to determine the statement
             if type == 'group':
                 cmd = SQL.SQL_SELECT_GROUP_ALL
+                flag = True
             elif type == 'device':
                 cmd = SQL.SQL_SELECT_DEVICE_ALL
+                flag = True
             elif type == 'config':
                 cmd = SQL.SQL_SELECT_CONFIG
+                flag = True
             elif type == 'vlan':
                 cmd = SQL.SQL_SELECT_VLAN
+                flag = True
             else:
-                print Language.MSG_ERR_GENERIC.format('190', 'No [type] argument provided')
+                print Language.MSG_ERR_GENERIC.format('91', 'No [type] argument provided')
+                flag = False
 
             #functions database operations
-            if cmd is Empty:
-                print Language.MSG_ERR_GENERIC.format("194", "SQL command could not be created")
+            if flag is False:
+                print Language.MSG_ERR_GENERIC.format("95", "SQL command could not be created")
             else:
                 results = self.db.select(cmd)
                 if results:
                     try:
                         for row in results:
-                            print str(row).strip()
+                            for r in row:
+                                print r, '\n'
                     except Exception as e:
                         print e.message
+                else:
+                    raise Exception(Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "Cmd not created"))
         except Exception as e:
-            print Language.MSG_ERR_GENERIC.format("133", e.message)
+            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
     def group(self, args):
         """
             add new group with params
         """
-        group = Group()
+        #group = Group()
         try:
-            params = self.util.get_args(args)
+            params = self.argparser.get_args(args)
             #check namespace variables if set
             if params.name is Empty:
                 print Language.MSG_ERR_EMPTY_NAME.format('group')
@@ -273,7 +170,7 @@ class Main(dict):
         cmd = None
 
         try:
-            params = self.util.get_args(args)
+            params = self.argparser.get_args(args)
             #check namespace variables if set
             type = params.type
             #moderate type value to determine the statement
@@ -334,6 +231,6 @@ class Main(dict):
 
         :param args:
         """
-        formatter = parser._get_formatter()
-        parser.exit(message=formatter.format_help())
+        #formatter = parser._get_formatter()
+        #parser.exit(message=formatter.format_help())
         print Language.MSG_ARG_DESC

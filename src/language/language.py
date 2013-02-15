@@ -1,7 +1,11 @@
+# coding=utf-8
 __author__ = 'fatih'
 
 
-class Language():
+class Language(object):
+    """
+        Language class
+    """
 
     def __init__(self):
         Language.MSG_ARG_DESC.format(
@@ -20,7 +24,8 @@ class Language():
             Language.MSG_ADD_CHANNEL_HELP,
             Language.MSG_ADD_FREQ_HELP
         )
-    #generic statement messages for whole structure
+
+        #generic statement messages for whole structure
     MSG_ERR_CLASS_INIT_FAILED = '{0} class could not be initialized!'
     MSG_ERR_COMM_INTERFACE_FAILED = "Unknown error occurred while connecting with communication interface error"
     MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED = "Access point connected but an unknown error occurred while executing command : {0}"

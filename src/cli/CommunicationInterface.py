@@ -1,5 +1,7 @@
+# coding=utf-8
 import io
 import json
+import os
 import subprocess
 from src.language.language import Language
 from src.resources.resources import Resources
@@ -7,7 +9,7 @@ from src.resources.resources import Resources
 __author__ = 'fatih'
 
 
-class CommunicationInterface():
+class CommunicationInterface(object):
     """
         Communication interface class to talk with perl script
     """
@@ -48,8 +50,9 @@ class CommunicationInterface():
         :param source: 
         """
         try:
-            with io.open(Resources.ci_source, 'w', encoding='utf-8') as outfile:
-                json.dump(source, outfile)
+            f = open(Resources.ci_source, 'w+')
+            f.write(json.dumps(source))
+            f.close()
         except Exception as e:
             print e.message
             pass
@@ -57,14 +60,16 @@ class CommunicationInterface():
     def backup(self, source, target, time):
         """
 
-
         :rtype : object
         :param source: 
         :param target: 
         :param time: 
         """
         try:
-            f = open(Resources.BACKUP_PATH + "/" + target + "/" + Resources.back_name.format(time), 'w')
+            backup_folder = Resources.BACKUP_PATH + target
+            if not os.path.exists(backup_folder):
+                os.makedirs(backup_folder)
+            f = open(backup_folder + "/" + Resources.back_name.format(time.replace(' ', '-')), 'w+')
             f.write(json.dumps(source))
             f.close()
         except Exception as e:

@@ -25,14 +25,16 @@
                 "param":""
             },
             {
-                "command":"max-associations ",
-                "param":""
-            },
-            {
                 "command":"exit"
+            }
+        ],
+        "subprocess": [
+            {
+
             }
         ]
     },
+
     "unset_ssid":{
         "enable":true,
         "configure":true,

@@ -1,7 +1,11 @@
+# coding=utf-8
 __author__ = 'fatih'
 
 
-class Language():
+class Language(object):
+    """
+        Language class
+    """
 
     def __init__(self):
         Language.MSG_ARG_DESC.format(
@@ -20,7 +24,10 @@ class Language():
             Language.MSG_ADD_CHANNEL_HELP,
             Language.MSG_ADD_FREQ_HELP
         )
+
     #generic statement messages for whole structure
+    MSG_APP_WELCOME = "Welcome to Labris Wireless Access Point Controller"
+    MSG_APP_CMD_INIT = "Command Line Tool initializing..."
     MSG_ERR_CLASS_INIT_FAILED = '{0} class could not be initialized!'
     MSG_ERR_COMM_INTERFACE_FAILED = "Unknown error occurred while connecting with communication interface error"
     MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED = "Access point connected but an unknown error occurred while executing command : {0}"
@@ -50,6 +57,7 @@ class Language():
 
     #newly added variables
     MSG_ADD_NEW = 'A new {0} added with record id {1} and with name {2}'
+    MSG_UPDATE_RECORD = 'Recorded {0} updated with record id {1} and with name {2}'
 
     #argument parsing exception error messages
     MSG_ERR_PARSER_EXCEPTION = 'Error occurred on parsing arguments ({0})'
@@ -58,6 +66,7 @@ class Language():
     MSG_ERR_EMPTY_USERNAME = 'Please provide an USERNAME for the {0} you would like to add'
     MSG_ERR_EMPTY_PASSWORD = 'Please provide an PASSWORD for the {0} you would like to add'
     MSG_ERR_EMPTY_CONFIG = 'Please provide an CONFIG id for the {0} you would like to add'
+    MSG_ERR_EMPTY_ID = 'There is no ID has been provided. Please make sure you already provide it.'
 
     #config parser statement messages
     MSG_ERR_NO_CONFIG_SECTION = 'No section found in config file exception ({0})'
@@ -73,7 +82,7 @@ class Language():
     MSG_ERR_DB_CLOSE = "Connection could not close because of ({0})"
 
     #success statement messages
-    MSG_SUCCESS_SELECT = "Command ls successfully executed. Continue..."
+    MSG_SUCCESS_SELECT = "Retrieving data from database successfully executed. Continue..."
     MSG_SUCCESS_ADD = "Command add successfully executed. Continue..."
     MSG_SUCCESS_REMOVE = "Command rm successfully executed. Continue..."
     MSG_SUCCESS_UPDATE = "Command update successfully executed. Continue..."

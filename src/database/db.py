@@ -1,24 +1,34 @@
+# coding=utf-8
 """
 This file will be used to implement database interactions with postgresql
 
 """
 from Queue import Empty
-import datetime
-import psycopg2 as db
 import ConfigParser
-import sys
+
+import psycopg2 as db
+
+from src.helper.Utils import Utils
 from src.language.language import Language
 from src.resources.resources import Resources
+
 
 __author__ = 'fatih'
 
 
-class Database:
+class Database(object):
     """
         Database class implement a database interface between application and postgresql
     """
-    __config__ = Resources.__db__config__
-    __section__ = Resources.cfg_section_postgre
+
+    def __init__(self):
+        """
+
+
+        """
+        self.__config__ = Resources.__db__config__
+        self.__section__ = Resources.cfg_section_postgre
+        self.utils = Utils()
 
     def connect(self):
         """
@@ -29,7 +39,6 @@ class Database:
             config = ConfigParser.RawConfigParser()
             config.read(self.__config__)
             #gather connection parameters from database config file
-            dt = datetime.datetime.now()
             db_name = config.get(self.__section__, 'db_name')
             user = config.get(self.__section__, 'username')
             password = config.get(self.__section__, 'password')
@@ -38,10 +47,10 @@ class Database:
             conn = db.connect(connStr)
             return conn
         except db.DatabaseError as e:
-            print Language.MSG_ERR_DATABASE_ERROR.format('35','connecting',e.message)
+            print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'connecting', e.message)
             pass
         except ConfigParser.NoSectionError as e:
-            print Language.MSG_ERR_NO_CONFIG_SECTION.format(e.messagem)
+            print Language.MSG_ERR_NO_CONFIG_SECTION.format(e.message)
             pass
         except IOError as e:
             print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
@@ -59,13 +68,14 @@ class Database:
             conn = self.connect()
             cur = conn.cursor()
             cur.execute(cmd)
+            fields = [i[0] for i in cur.description]
             results = cur.fetchall()
             conn.commit()
             print Language.MSG_SUCCESS_SELECT
             self.close_conn(conn)
-            return results
+            return fields, results
         except db.DatabaseError as e:
-            print Language.MSG_ERR_DATABASE_ERROR.format('63','selecting',e.message)
+            print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'selecting', e.message)
             pass
         except IOError as e:
             print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
@@ -92,7 +102,7 @@ class Database:
                 return id
             self.close_conn(conn)
         except db.DatabaseError as e:
-            print Language.MSG_ERR_DATABASE_ERROR.format('76','inserting',e.message)
+            print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting', e.message)
             pass
         except IOError as e:
             print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
@@ -112,14 +122,18 @@ class Database:
             cur.execute(cmd)
             conn.commit()
             self.close_conn(conn)
+            return True
         except db.DatabaseError as e:
-            print Language.MSG_ERR_DATABASE_ERROR.format('90','updating',e.message)
+            print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating', e.message)
+            return False
             pass
         except IOError as e:
             print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
+            return False
             pass
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
+            return False
             pass
 
     def remove(self, cmd):
@@ -135,7 +149,7 @@ class Database:
             print Language.MSG_SUCCESS_REMOVE
             self.close_conn(conn)
         except db.DatabaseError as e:
-            print Language.MSG_ERR_DATABASE_ERROR.format('90','updating',e.message)
+            print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating', e.message)
             pass
         except IOError as e:
             print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
@@ -153,7 +167,7 @@ class Database:
             if con:
                 con.close()
         except Exception as e:
-            print Language.MSG_ERR_DB_CLOSE.format(e.message())
+            print Language.MSG_ERR_DB_CLOSE.format(e.message)
 
 
 

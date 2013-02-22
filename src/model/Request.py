@@ -1,3 +1,4 @@
+# coding=utf-8
 from src.model.Commands import Commands
 
 __author__ = 'fatih'
@@ -14,27 +15,55 @@ class Request(dict):
             }
         ]
     """
-    enable = True
-    configure = False
-    commands = Commands()
+    def __init__(self):
+        super(Request, self).__init__()
+        self["enable"] = True
+        self["configure"] = False
+        self["commands"] = Commands()
 
     def setEnable(self, status):
-        self.enable = status
+        """
+
+        :param status:
+        """
+        self["enable"] = status
 
     def getEnable(self):
-        return self.enable
+        """
+
+        :return:
+        """
+        return self["enable"]
 
     def setConfigure(self, status):
-        self.configure = status
+        """
+
+        :param status:
+        """
+        self["configure"] = status
 
     def getConfigure(self):
-        return self.configure
+        """
+
+
+        :return:
+        """
+        return self["configure"]
 
     def setCommands(self, commands):
-        self.commands = commands
+        """
+
+        :param commands:
+        """
+        self["commands"] = commands
 
     def getCommands(self):
-        return self.commands
+        """
+
+
+        :return:
+        """
+        return self["commands"]
 
     def addCommand(self, command):
-        self.commands.append(command)
+        self["commands"].append(command)

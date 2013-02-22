@@ -1,3 +1,4 @@
+# coding=utf-8
 from src.model.Config import Config
 from src.model.Request import Request
 
@@ -8,48 +9,105 @@ class Device(dict):
     """
         Device object class to create a runtime instance while adding a new device
     """
-    ip = None
-    name = None
-    username = 'Cisco'
-    password = 'Cisco'
-    config_id = None
-    enable_password = 'Cisco'
-    personality = None
-    request = Request()
-    config = Config()
+
+    def __init__(self):
+        super(Device, self).__init__()
+        self["ip"] = None
+        self["name"] = None
+        self["username"] = 'Cisco'
+        self["password"] = 'Cisco'
+        self["config_id"] = None
+        self["config"] = Config()
+        self["description"] = None
 
     def setIP(self, ip):
-        self.ip = ip
+        """
+
+        :param ip:
+        """
+        self["ip"] = ip
 
     def getIP(self):
-        return self.ip
+        """
 
-    def setName(self, name):
-        self.name = name
-
-    def getName(self):
-        return self.name
+        :return:
+        """
+        return self["ip"]
 
     def setUsername(self, username):
-        self.username = username
+        """
+
+        :param username:
+        """
+        self["username"] = username
 
     def getUsername(self):
-        return self.username
+        """
+        :return:
+        """
+        return self["username"]
 
     def setPassword(self, password):
-        self.password = password
+        """
+
+        :param password:
+        """
+        self["username"] = password
 
     def getPassword(self):
-        return self.password
+        """
+        :return:
+        """
+        return self["username"]
+
+    def setName(self, name):
+        """
+        :param name:
+        """
+        self["name"] = name
+
+    def getName(self):
+        """
+        :return:
+        """
+        return self["name"]
+
+    def setDescription(self, description):
+        """
+        :param description:
+        """
+        self["description"] = description
+
+    def getDescription(self):
+        """
+        :return:
+        """
+        return self["description"]
 
     def setConfigID(self, config):
-        self.config_id = config
+        """
+
+        :param config:
+        """
+        self["config_id"] = config
 
     def getConfigID(self):
-        return self.config_id
+        """
+
+        :return:
+        """
+        return self["config_id"]
 
     def setConfig(self, config):
-        self.config.update(config)
+        """
+
+        :param config:
+        """
+        self["config"].update(config)
 
     def getConfig(self):
-        return self.config
+        """
+
+        :return:
+        """
+        return self["config"]

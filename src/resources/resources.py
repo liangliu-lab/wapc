@@ -1,18 +1,19 @@
+# coding=utf-8
 __author__ = "fatih"
 __date__ = "$Jan 22, 2013 11:08:40 AM$"
 
 
-class Resources():
+class Resources(object):
     """
         Resources file covers all required global variables, pathnames, filenames, etc.
         You need to configure only this file anytime you need to change variables
     """
     #path variables
-    ROOT_PATH = "/opt/labris/sbin/fatihkaratana/wapc/"
+    ROOT_PATH = "/opt/labris/sbin/wapc/"
     SOURCE_PATH = ROOT_PATH + "src/"
     INCLUDE_PATH = SOURCE_PATH + "include/"
     CONFIG_PATH = SOURCE_PATH + "config/"
-    BACKUP_PATH = ROOT_PATH + "backup/"
+    BACKUP_PATH = SOURCE_PATH + "backup/"
 
     #communication interface script
     ci_script = INCLUDE_PATH + "labris-wap-controller.pl"
@@ -40,3 +41,7 @@ class Resources():
 
     #config file variables for mysql
     cfg_section_mysql = "mysql"
+
+    #column headers for files
+    headers = {'device' : '',
+               'group': {'ID', 'Name', 'Description', 'Configuration ID', 'Add Date', 'Last Modify'}}

@@ -1,3 +1,4 @@
+# coding=utf-8
 from Queue import Empty
 import argparse
 from src.language.language import Language
@@ -5,12 +6,19 @@ from src.language.language import Language
 __author__ = 'fatih'
 
 
-class Utils():
+class ArgParser(object):
+    """
+        ArgParser object
+    """
+
     parser = argparse.ArgumentParser(description=Language.MSG_ARG_DESC, version='2.3',
-                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
     params = ''
 
     def __init__(self):
+        """
+            Create instance
+        """
         try:
             self.set_parser()
         except Exception as e:
@@ -18,134 +26,118 @@ class Utils():
             pass
 
     def set_parser(self):
+        """
+            Set parser
+        """
         self.parser.add_argument('-t', '--type',
                                  dest='type',
                                  help=Language.MSG_ADD_TYPE_HELP,
-                                 action='store',
-                                 default='device'
+                                 action='store'
         )
-        self.parser.add_argument('-id', '--id',
+        self.parser.add_argument('-i', '--id',
                                  dest='id',
                                  help=Language.MSG_ADD_ID_HELP,
-                                 action='store',
-                                 default='0'
+                                 action='store'
         )
-        self.parser.add_argument('-i', '--ip',
+        self.parser.add_argument('-I', '--ip',
                                  dest='ip',
                                  help=Language.MSG_ADD_IP_HELP,
-                                 action='store',
-                                 default='10.0.0.1'
+                                 action='store'
         )
         self.parser.add_argument('-n', '--name',
                                  dest='name',
                                  help=Language.MSG_ADD_NAME_HELP,
-                                 action='store',
-                                 default='New Device'
+                                 action='store'
         )
         self.parser.add_argument('-u', '--username',
                                  dest='username',
                                  help=Language.MSG_ADD_USERNAME_HELP,
-                                 action='store',
-                                 default='admin'
+                                 action='store'
         )
         self.parser.add_argument('-p', '--password',
                                  dest='password',
                                  help=Language.MSG_ADD_PASSWORD_HELP,
-                                 action='store',
-                                 default='admin'
+                                 action='store'
         )
         self.parser.add_argument('-g', '--group',
                                  dest='group',
                                  help=Language.MSG_ADD_GROUP_HELP,
-                                 action='store',
-                                 default='wapc'
+                                 action='store'
         )
         self.parser.add_argument('-c', '--config',
                                  dest='config',
                                  help=Language.MSG_ADD_GROUP_HELP,
-                                 action='store',
-                                 default='wapc'
+                                 action='store'
         )
         self.parser.add_argument('-s', '--subnet',
                                  dest='subnet',
                                  help=Language.MSG_ADD_SUBNET_HELP,
-                                 action='store',
-                                 default='255.255.255.0'
+                                 action='store'
         )
         self.parser.add_argument('-d', '--device',
                                  dest='device',
                                  help=Language.MSG_ADD_DEVICE_HELP,
-                                 action='store',
-                                 default='12'
+                                 action='store'
         )
-        self.parser.add_argument('-inet', '--interface',
+        self.parser.add_argument('-e', '--inet',
                                  dest='interface',
                                  help=Language.MSG_ADD_INTERFACE_HELP,
-                                 action='store',
-                                 default='eth0'
+                                 action='store'
         )
-        self.parser.add_argument('-desc', '--description',
+        self.parser.add_argument('-D', '--desc',
                                  dest='description',
-                                 help=Language.MSG_ADD_DESC_HELP,
-                                 action='store',
-                                 default='Default description for device or group included in configuration values'
+                                 help=Language.MSG_ADD_DESC_HELP
         )
         self.parser.add_argument('-r', '--radius',
                                  dest='radius',
                                  help=Language.MSG_ADD_RADIUS_HELP,
-                                 action='store',
-                                 default='radius'
+                                 action='store'
         )
-        self.parser.add_argument('-sid', '--ssid',
+        self.parser.add_argument('-S', '--ssid',
                                  dest='ssid',
                                  help=Language.MSG_ADD_SSID_HELP,
-                                 action='store',
-                                 default='ssid'
+                                 action='store'
         )
-        self.parser.add_argument('-vid', '--vlan',
+        self.parser.add_argument('-V', '--vlan',
                                  dest='vlan',
                                  help=Language.MSG_ADD_VLAN_HELP,
-                                 action='store',
-                                 default='vlan'
+                                 action='store'
         )
-        self.parser.add_argument('-ch', '--channel',
+        self.parser.add_argument('-H', '--channel',
                                  dest='channel',
                                  help=Language.MSG_ADD_CHANNEL_HELP,
                                  action='store',
-                                 default='12',
                                  type=int
         )
-        self.parser.add_argument('-fq', '--frequency',
+        self.parser.add_argument('-f', '--frequency',
                                  dest='frequency',
                                  help=Language.MSG_ADD_FREQ_HELP,
-                                 action='store',
-                                 default='5'
+                                 action='store'
         )
         self.parser.add_argument('-o', '--option',
                                  dest='option',
                                  help=Language.MSG_ADD_FREQ_HELP,
-                                 action='store',
-                                 default=''
+                                 action='store'
         )
-        self.parser.add_argument('-param', '--param',
+        self.parser.add_argument('-P', '--param',
                                  dest='parameter',
                                  help=Language.MSG_ADD_FREQ_HELP,
-                                 action='store',
-                                 default='5'
+                                 action='store'
         )
 
     def get_args(self, args):
+        """
+
+        :param args:
+        :return:
+        """
         try:
             if self.parser._get_args() is Empty:
-                self.params = self.parser.parse_known_args(args)
+                self.params = self.parser.parse_known_args(args.split())
             else:
-                self.params = self.parser.parse_args(args.split())
+                self.params = self.parser.parse_args(args)
         except Exception as e:
-            print Language.MSG_ERR_ARG_PARSE_GET.format(e.message)
+            raise Exception(Language.MSG_ERR_ARG_PARSE_GET.format(e.message))
             pass
         return self.params
 
-    def formatter(self, stream):
-        """
-            Format output text as a human readable style
-        """

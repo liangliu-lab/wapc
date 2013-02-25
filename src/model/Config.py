@@ -1,5 +1,7 @@
 # coding=utf-8
-from src.model.Commands import Commands
+"""
+    Config model to handle device or group configuration
+"""
 from src.model.Request import Request
 
 __author__ = 'fatih'
@@ -23,17 +25,16 @@ class Config(dict):
         self["transport_protocol"] = 'Telnet'
         self["personality"] = 'ios'
         self["ssid"] = 0
-        self["group"] = 0
         self["vlan_id"] = 0
         self["channel"] = 0
         self["channel_freq"] = None
         self["request"] = Request()
 
-    def setID(self, id):
+    def setID(self, cID):
         """
-            :param id:
+            :param cID:
             """
-        self["id"] = id
+        self["id"] = cID
 
     def getID(self):
         """
@@ -146,21 +147,6 @@ class Config(dict):
             :return:
             """
         return self["ssid"]
-
-    def setGroup(self, group):
-        """
-
-            :param group:
-            """
-        self["group"] = group
-
-    def getGroup(self):
-        """
-
-
-            :return:
-            """
-        return self["group"]
 
     def setVLAN(self, vlan_id):
         """

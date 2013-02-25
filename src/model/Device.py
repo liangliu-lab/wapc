@@ -1,6 +1,8 @@
 # coding=utf-8
+"""
+    Communication Interface
+"""
 from src.model.Config import Config
-from src.model.Request import Request
 
 __author__ = 'fatih'
 
@@ -12,6 +14,7 @@ class Device(dict):
 
     def __init__(self):
         super(Device, self).__init__()
+        self["id"] = None
         self["ip"] = None
         self["name"] = None
         self["username"] = 'Cisco'
@@ -19,6 +22,20 @@ class Device(dict):
         self["config_id"] = None
         self["config"] = Config()
         self["description"] = None
+
+    def setID(self, dID):
+        """
+        :param dID:
+        """
+        self["id"] = dID
+
+    def getID(self):
+        """
+
+        :return:
+        """
+        return self["id"]
+
 
     def setIP(self, ip):
         """
@@ -103,7 +120,7 @@ class Device(dict):
 
         :param config:
         """
-        self["config"].update(config)
+        self["config"] = config
 
     def getConfig(self):
         """

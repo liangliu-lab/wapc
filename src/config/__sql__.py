@@ -1,4 +1,8 @@
-# coding=utf-8
+#coding=utf-8
+"""
+    SQL object covers all sql scripts
+"""
+
 __author__ = 'fatih'
 
 
@@ -22,7 +26,7 @@ class SQL(object):
                         "date_added AS Added, " \
                         "date_modified AS Modified " \
                         "FROM apc_device d " \
-                        "WHERE d.name IS NOT NULL AND d.id = {0};"
+                        "WHERE d.name IS NOT NULL AND d.id = %(id)d;"
     SQL_SELECT_DEVICE_CONFIG = "SELECT * " \
                                "FROM apc_device d " \
                                "LEFT JOIN apc_config c ON d.config_id = c.id " \
@@ -40,9 +44,11 @@ class SQL(object):
                             "WHERE d.name IS NOT NULL " \
                             "ORDER BY DATE(date_added) ASC;"
 
-    #select config records
+    # =====================
+    # select config records
     SQL_SELECT_CONFIG = "SELECT * FROM apc_config c WHERE c.name IS NOT NULL ORDER BY date_added ASC;"
-    SQL_SELECT_CONFIG_DETAIL = "SELECT * FROM apc_config AS c WHERE c.name IS NOT NULL AND c.name IS '{0}';"
+    SQL_SELECT_CONFIG_DETAIL = "SELECT * FROM apc_config AS c WHERE c.name IS NOT NULL AND c.id = %(id)d;"
+
 
     #select group queries
     SQL_SELECT_GROUP_DETAIL = "SELECT id AS ID, " \
@@ -94,15 +100,18 @@ class SQL(object):
                         "'{8}', " \
                         "'{9}') RETURNING id;"
 
+    # =============================
     #insert new device
     SQL_INSERT_DEVICE = "INSERT INTO " \
                         "apc_device(name, description, ip, config_id, username, password, date_added, date_modified) " \
                         "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}') RETURNING id;"
 
+    # =============================
     #insert group to the database
     SQL_INSERT_GROUP = "INSERT INTO apc_groups(name, description, config_id, date_added, date_modified) " \
                        "VALUES('{0}','{1}', '{2}', '{3}', '{4}') RETURNING id;"
 
+    # =============================
     #insert vlan config values to the database
     SQL_INSERT_VLAN_CONFIG = "INSERT INTO apc_vlan(name, ip, subnet, number, interface, date_added, date_modified) " \
                              "VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
@@ -116,12 +125,13 @@ class SQL(object):
                         "SET name='%(name)s', ip='%(ip)s',description='%(description)s', config_id=%(config_id)d, " \
                         "username='%(username)s', password='%(password)s, date_modified='%(modified)s''" \
                         "WHERE id=%(id)d"
+    # =============================
     #update group
     SQL_UPDATE_GROUP = "UPDATE apc_groups " \
                        "SET name='%(name)s', description='%(description)s', " \
                        "config_id=%(config_id)d, date_modified='%(modified)s'" \
                        "WHERE id=%(id)d"
-
+    # =============================
     #update device
     SQL_UPDATE_DEVICE = "UPDATE apc_device " \
                         "SET name='%(name)s', ip='%(ip)s',description='%(description)s', config_id=%(config_id)d, " \

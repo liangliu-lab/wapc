@@ -6,7 +6,6 @@
 """
 
 from Queue import Empty
-import re
 from time import strftime, gmtime
 from src.config.__sql__ import SQL
 from src.database.db import Database
@@ -22,7 +21,7 @@ from src.functions.ConfigMethods import ConfigMethods
 __author__ = 'fatih'
 
 
-class Main(dict):
+class Main(object):
     """
         Main class includes all base functions of the software
     """
@@ -37,6 +36,7 @@ class Main(dict):
         self.now = strftime(Resources.time_format, gmtime())
         self.db = Database()
 
+    #this methods works fine do not touch it!!!
     def add(self, args):
         """
             Add any object to the related tables such as new wireless access point, group, configuration, vlan etc.
@@ -44,22 +44,21 @@ class Main(dict):
         :param args:
         """
         try:
-            regex = re.compile("\-\S*[^\-]*", re.IGNORECASE)#.[\w\s]+[\s\w]+[\'\w\wA-Za-z0-9/\']
-            arglist = regex.findall(args)
+            arglist = self.utils.getCleanParams(args)
             params = self.argparser.get_args(arglist)
             if params:
-                type = params.type.split()[0]
+                pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if type == 'device':
+                if pType == 'device':
                     # noinspection PyArgumentList
                     self.deviceMethods.create(params)
-                elif type == 'group':
+                elif pType == 'group':
                     # noinspection PyArgumentList
                     self.groupMethods.create(params)
-                elif type == 'config':
+                elif pType == 'config':
                     # noinspection PyArgumentList
-                    ConfigMethods.create(params)
-                elif type == 'vlan':
+                    self.configMethods.create(params)
+                elif pType == 'vlan':
                     self.vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -67,28 +66,28 @@ class Main(dict):
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
+    #this methods works fine do not touch it!!!
     def edit(self, args):
         """
-            Add any object to the related tables such as new wireless access point, group, configuration, vlan etc.
+            Edit any object to the related tables such as new wireless access point, group, configuration, vlan etc.
         :param args:
         """
-        regex = re.compile("\-\S*[^\-]*", re.IGNORECASE)#.[\w\s]+[\s\w]+[\'\w\wA-Za-z0-9/\']
-        arglist = regex.findall(args)
-        params = self.argparser.get_args(arglist)
         try:
+            arglist = self.utils.getCleanParams(args)
+            params = self.argparser.get_args(arglist)
             if params:
-                type = params.type.split()[0]
+                pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if type == 'device':
+                if pType == 'device':
                     # noinspection PyArgumentList
                     self.deviceMethods.update(params)
-                elif type == 'group':
+                elif pType == 'group':
                     # noinspection PyArgumentList
                     self.groupMethods.update(params)
-                elif type == 'config':
+                elif pType == 'config':
                     # noinspection PyArgumentList
                     ConfigMethods.update(params)
-                elif type == 'vlan':
+                elif pType == 'vlan':
                     self.vlanMethods.update(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -102,29 +101,29 @@ class Main(dict):
     #this methods works fine do not touch it!!!
     def list(self, args):
         """
-            list devices from inventory given
+        Remove any record from the inventory by given
+        type and values such as device, group and id to decribe the record
         :param args:
         """
         cmd = None
         flag = False
 
         try:
-            regex = re.compile("\-\S*[^\-]*", re.IGNORECASE)#.[\w\s]+[\s\w]+[\'\w\wA-Za-z0-9/\']
-            arglist = regex.findall(args)
+            arglist = self.utils.getCleanParams(args)
             params = self.argparser.get_args(arglist)
             #check namespace variables if set
-            type = params.type.split()[0]
+            pType = params.type.split()[0]
             #moderate type value to determine the statement
-            if type == 'group':
+            if pType == 'group':
                 cmd = SQL.SQL_SELECT_GROUP_ALL
                 flag = True
-            elif type == 'device':
+            elif pType == 'device':
                 cmd = SQL.SQL_SELECT_DEVICE_ALL
                 flag = True
-            elif type == 'config':
+            elif pType == 'config':
                 cmd = SQL.SQL_SELECT_CONFIG
                 flag = True
-            elif type == 'vlan':
+            elif pType == 'vlan':
                 cmd = SQL.SQL_SELECT_VLAN
                 flag = True
             else:
@@ -151,29 +150,20 @@ class Main(dict):
 
     def group(self, args):
         """
-            add device(s) to group with params
+            Add device(s) to group with params
         :param args:
         """
-        regex = re.compile("\-\S*[^\-]*", re.IGNORECASE)#.[\w\s]+[\s\w]+[\'\w\wA-Za-z0-9/\']
-        arglist = regex.findall(args)
-        params = self.argparser.get_args(arglist)
         try:
+            arglist = self.utils.getCleanParams(args)
+            params = self.argparser.get_args(arglist)
+            #check namespace variables if set
+            #pType = params.type.split()[0]
+            #moderate type value to determine the statement
             if params:
-                type = params.type.split()[0]
+                #pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if type == 'device':
-                    # noinspection PyArgumentList
-                    self.groupMethods.create(params)
-                elif type == 'group':
-                    # noinspection PyArgumentList
-                    self.groupMethods.create(params)
-                elif type == 'config':
-                    # noinspection PyArgumentList
-                    ConfigMethods.create(params)
-                elif type == 'vlan':
-                    self.vlanMethods.create(params)
-                else:
-                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+                #group given items
+                print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
             else:
                 raise Exception("Something wrong with type")
                 pass
@@ -183,40 +173,64 @@ class Main(dict):
 
     def configure(self, args):
         """
+
+        :param args:
         """
         print ""
 
     def show(self, args):
         """
-        """
 
-    def vlan(self, args):
-        """
+        :param args:
         """
 
     def set(self, args):
         """
-
-
+        This method enables to set the device by given variables such as ssid, channel, frequency, maxclient
         :param args:
         """
+        try:
+            #moderate type value to determine the statement
+            arglist = self.utils.getCleanParams(args)
+            params = self.argparser.get_args(arglist)
+            if params:
+                pType = params.type.split()[0]
+                # noinspection PyArgumentList
+                if pType == 'device':
+                    # noinspection PyArgumentList
+                    self.deviceMethods.set(params)
+                elif pType == 'group':
+                    # noinspection PyArgumentList
+                    self.groupMethods.create(params)
+                elif pType == 'config':
+                    # noinspection PyArgumentList
+                    self.configMethods.create(params)
+                elif pType == 'vlan':
+                    self.vlanMethods.create(params)
+                else:
+                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+        except Exception as e:
+            print str(e)
+            pass
 
     def remove(self, args):
         """
-            remove device from inventory
+        Remove any record from the inventory by given
+        type and values such as device, group and id to decribe the record
         :param args:
         """
-        id = None
+        pid = None
         name = None
         cmd = None
 
         try:
-            params = self.argparser.get_args(args)
+            arglist = self.utils.getCleanParams(args)
+            params = self.argparser.get_args(arglist)
             #check namespace variables if set
-            type = params.type
+            pType = params.type.split()[0]
             #moderate type value to determine the statement
             #check if type is group to remove the group belong to given id and name
-            if type == 'group':
+            if pType == 'group':
                 if params.id is Empty:
                     print Language.MSG_ERR_PARSER_EXCEPTION.format('id'), '\n'
                     print Language.MSG_ADD_ID_HELP
@@ -224,11 +238,11 @@ class Main(dict):
                     print Language.MSG_ERR_PARSER_EXCEPTION.format('name'), '\n'
                     print Language.MSG_ADD_NAME_HELP
                 else:
-                    id = params.id
+                    pid = params.id
                     name = params.name
-                    cmd = SQL.SQL_REMOVE_GROUP.format(name, id)
+                    cmd = SQL.SQL_REMOVE_GROUP.format(name, pid)
             #check if type is device to remove the group belong to given id and name
-            elif type == 'device':
+            elif pType == 'device':
                 if params.id is Empty:
                     print Language.MSG_ERR_PARSER_EXCEPTION.format('id'), '\n'
                     print Language.MSG_ADD_ID_HELP
@@ -236,25 +250,25 @@ class Main(dict):
                     print Language.MSG_ERR_PARSER_EXCEPTION.format('name'), '\n'
                     print Language.MSG_ADD_NAME_HELP
                 else:
-                    id = params.id
+                    pid = params.id
                     name = params.name
-                    cmd = SQL.SQL_REMOVE_DEVICE.format(name, id)
-            elif type == 'config':
+                    cmd = SQL.SQL_REMOVE_DEVICE.format(name, pid)
+            elif pType == 'config':
                 if params.name is Empty:
                     print Language.MSG_ERR_PARSER_EXCEPTION.format('name'), '\n'
                     print Language.MSG_ADD_NAME_HELP
                 else:
-                    id = params.id
+                    #pid = params.id
                     cmd = SQL.SQL_INSERT_CONFIG.format(name)
-            elif type == 'from':
+            elif pType == 'from':
                 cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP
-            elif type == 'vlan':
+            elif pType == 'vlan':
                 if params.id is Empty:
                     print Language.MSG_ERR_PARSER_EXCEPTION.format('id'), '\n'
                     print Language.MSG_ADD_ID_HELP
                 else:
-                    id = params.id
-                    cmd = SQL.SQL_REMOVE_VLAN.format(id)
+                    pid = params.id
+                    cmd = SQL.SQL_REMOVE_VLAN.format(pid)
             else:
                 print Language.MSG_ERR_GENERIC.format('186', 'No [type] argument provided')
 

@@ -4,15 +4,32 @@
         "configure":true,
         "commands":[
             {
-                "command":"interface Dot11Radio 0",
-                "param":""
+                "command":"interface Dot11Radio",
+                "param":"",
+                "type": "interface",
+                "regex":"0|1"
             },
             {
                 "command":"channel ",
-                "param":""
+                "param":"",
+                "type": "channel"
             },
             {
                 "command":"exit"
+            }
+        ]
+    },
+    "set_ip" : {
+        "enable" : true,
+        "configure" : true,
+        "commands" : [
+            {
+                "command" : "interface BVI1 "
+            },
+            {
+                "command" : "ip address ",
+                "param" : "",
+                "type": "ip"
             }
         ]
     },
@@ -22,15 +39,16 @@
         "commands":[
             {
                 "command":"dot11 ssid ",
-                "param":""
+                "param":"",
+                "type": "ssid"
+            },
+            {
+                "command" : "max-associations ",
+                "param" : "",
+                "type": "maxclient"
             },
             {
                 "command":"exit"
-            }
-        ],
-        "subprocess": [
-            {
-
             }
         ]
     },
@@ -40,18 +58,22 @@
         "configure":true,
         "commands":[
             {
-                "command":"interface Dot11Radio0"
+                "command":"interface Dot11Radio",
+                "param": "",
+                "type": "interface"
             },
             {
                 "command":"no ssid ",
-                "param":""
+                "param":"",
+                "type": "ssid"
             },
             {
                 "command":"exit"
             },
             {
                 "command":"no dot11 ssid ",
-                "param":""
+                "param":"",
+                "type": "ssid"
             }
         ]
     },
@@ -61,7 +83,8 @@
         "commands":[
             {
                 "command":"dot11 ssid ",
-                "param":""
+                "param":"",
+                "type": "ssid"
             },
             {
                 "command":"authentication open eap eap_methods"
@@ -79,17 +102,50 @@
                 "command":"exit"
             },
             {
-                "command":"interface Dot11Radio0"
+                "command":"interface Dot11Radio",
+                "param" :"",
+                "type": "interface"
             },
             {
                 "command":"ssid ",
-                "param":""
+                "param":"",
+                "type": "ssid"
             },
             {
                 "command":"exit"
             },
             {
                 "command":"exit"
+            }
+        ]
+    },
+    "show_ip" : {
+        "enable" : true,
+        "configure" : false,
+        "commands" : [
+            {
+                "command" : "show interfaces BVI 1 | include Internet address"
+            }
+        ]
+    },
+
+
+    "show_cpu" : {
+        "enable" : true,
+        "configure" : false,
+        "commands" : [
+            {
+                "command" : "show processes | include CPU utilization "
+            }
+        ]
+    },
+
+    "show_memory" : {
+        "enable" : true,
+        "configure" : false,
+        "commands" : [
+            {
+                "command" : "show memory stat"
             }
         ]
     },

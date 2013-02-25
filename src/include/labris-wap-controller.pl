@@ -79,7 +79,8 @@ my $_personality     = $decoded_json->{'personality'};
 my $_enable_mode;
 my $_configure_mode;
 
-
+my $return_json;
+my @return_json_content;
 if ($decoded_json->{'request'}->{'enable'}){
     $_enable_mode = 1; # true
 }
@@ -94,13 +95,9 @@ else{
 }
 
 my @_commands = @{$decoded_json->{'request'}->{'commands'}};
-
+my $return_json_status;
+my $current_command;
 eval {
-    #print $_device_ip."\n";
-    #print $_transport_p."\n";
-    #print $_ios_username."\n";
-    #print $_ios_password."\n";
-    #print $_enable_password."\n";
     #print $_enable_mode."\n";
     #print $_configure_mode."\n";
 
@@ -134,13 +131,19 @@ sub execute_in_remote {
 
     for my $cmd (@_commands) {
         #print $cmd->{'command'}."\n";
-        my @out = $session->cmd($cmd->{'command'});
+
+        $current_command=$cmd->{'command'};
+        my @out = $session->cmd($current_command);
         #print @out;
         my $output = join "", @out;
-        my $response = { status => 110, message => $output };
-        print to_json($response);
+        my $response = { status => 110, message => $output, command => $current_command };
+        push(@return_json_content, $response);
+        $return_json_status = 110;
+        #print to_json($response);
         #print "{\n".'"status":'.'"110"'.",\n".'"message":'.'"'. $output .'"'."\n}";
     }
+    $return_json_status= { status => $return_json_status, content => @return_json_content };
+    print to_json($return_json_status);
 }
 
 
@@ -155,7 +158,9 @@ sub error_report {
     my $report;    # holder for report message to return to caller
 
     if ( UNIVERSAL::isa( $err, 'Net::Appliance::Session::Exception' ) ) {
-        $report = "{\n".'"status":'.'"100"'.",\n".'"message":'.'"'.$err->lastline .'"'."\n}";
+        $report = { status => 100, message => $err->lastline, command => $current_command };
+
+        #$report = "{\n".'"status":'.'"100"'.",\n".'"message":'.'"'.$err->lastline .'"'."\n}";
         # fault description from Net::Appliance::Session
         #$report =
 #"\nWe had an error during our Telnet/SSH session to device  : $device_name \n";
@@ -167,19 +172,27 @@ sub error_report {
         # last line of output from your appliance
         #$report .=
         #  "Last line of output from device : " . $err->lastline . "\n\n";
+
+        $return_json_status = 100;
+
     }
     elsif ( UNIVERSAL::isa( $err, 'Net::Appliance::Session::Error' ) ) {
 
         # fault description from Net::Appliance::Session
-        $report = "{\n".'"status":'.'"101"'.",\n".'"message":'.'"'.$err->message .'"'."\n}";
+        #$report = "{\n".'"status":'.'"101"'.",\n".'"message":'.'"'.$err->message .'"'."\n}";
+        $report = { status => 101, message => $err->message, command => $current_command };
+        $return_json_status = 101;
     }
     else {
-        $report = "{\n".'"status":'.'"102"'.",\n".'"message":'.'"'.$err .'"'."\n}";
+        $report = { status => 102, message => $err, command => $current_command };
+        #$report = "{\n".'"status":'.'"102"'.",\n".'"message":'.'"'.$err .'"'."\n}";
+        $return_json_status = 102;
         # we had some other error that wasn't a deliberately created exception
         #$report = "We had an issue when accessing the device : $device_name \n";
         #$report .= "The reported error was : $err \n";
     }
-
-    return $report;
+    push(@return_json_content, $report);
+    $return_json_status= { status => $return_json_status, content => @return_json_content };
+    return $return_json_status;
 }
 

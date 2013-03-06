@@ -5,9 +5,7 @@ This file will be used to implement database interactions with postgresql
 """
 from Queue import Empty
 import ConfigParser
-
 import psycopg2 as db
-
 from src.helper.Utils import Utils
 from src.language.language import Language
 from src.resources.resources import Resources

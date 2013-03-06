@@ -1,5 +1,7 @@
 # coding=utf-8
-import time
+"""
+    Commandline interface to handle user interaction commands between WAP
+"""
 from src.cli.ConsoleInterface import ConsoleInterface
 from src.language.language import Language
 
@@ -14,6 +16,9 @@ def __main__():
     except Exception as e:
         print e.message
         pass
+    finally:
+        pass
+
 
 if __name__ == "__main__":
     __main__()

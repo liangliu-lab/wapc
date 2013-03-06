@@ -21,6 +21,9 @@ class Resources(object):
     #communication interface script source file
     ci_source = INCLUDE_PATH + "input.json"
 
+    #defulat config commands for brand new addded device
+    ci_config = INCLUDE_PATH + "default.json"
+
     #global device config file resource
     cfg_device_resource = CONFIG_PATH + "wapc_config.json"
 

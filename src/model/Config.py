@@ -24,7 +24,7 @@ class Config(dict):
         self["radius_config_id"] = 0
         self["transport_protocol"] = 'Telnet'
         self["personality"] = 'ios'
-        self["ssid"] = 0
+        self["ssid"] = "LBREAP"
         self["vlan_id"] = 0
         self["channel"] = 0
         self["channel_freq"] = None
@@ -218,7 +218,7 @@ class Config(dict):
     def getPersonality(self):
         """
 
-            :return:
+            :return personality:
             """
         return self["personality"]
 

@@ -137,13 +137,15 @@ sub execute_in_remote {
         #print @out;
         my $output = join "", @out;
         my $response = { status => 110, message => $output, command => $current_command };
-        push(@return_json_content, $response);
+        #print to_json($response);
+        push(@return_json_content, to_json($response));
+        #print @return_json_content;
         $return_json_status = 110;
         #print to_json($response);
         #print "{\n".'"status":'.'"110"'.",\n".'"message":'.'"'. $output .'"'."\n}";
     }
-    $return_json_status= { status => $return_json_status, content => @return_json_content };
-    print to_json($return_json_status);
+    $return_json= { status => $return_json_status, content => @return_json_content };
+    print to_json($return_json);
 }
 
 
@@ -156,10 +158,10 @@ sub error_report {
     my $device_name = shift or croak("No device name !");
 
     my $report;    # holder for report message to return to caller
-
+    print $current_command;
     if ( UNIVERSAL::isa( $err, 'Net::Appliance::Session::Exception' ) ) {
         $report = { status => 100, message => $err->lastline, command => $current_command };
-
+        print $err->lastline;
         #$report = "{\n".'"status":'.'"100"'.",\n".'"message":'.'"'.$err->lastline .'"'."\n}";
         # fault description from Net::Appliance::Session
         #$report =
@@ -177,13 +179,14 @@ sub error_report {
 
     }
     elsif ( UNIVERSAL::isa( $err, 'Net::Appliance::Session::Error' ) ) {
-
+        print $err->message;
         # fault description from Net::Appliance::Session
         #$report = "{\n".'"status":'.'"101"'.",\n".'"message":'.'"'.$err->message .'"'."\n}";
         $report = { status => 101, message => $err->message, command => $current_command };
         $return_json_status = 101;
     }
     else {
+        print $err;
         $report = { status => 102, message => $err, command => $current_command };
         #$report = "{\n".'"status":'.'"102"'.",\n".'"message":'.'"'.$err .'"'."\n}";
         $return_json_status = 102;
@@ -192,7 +195,7 @@ sub error_report {
         #$report .= "The reported error was : $err \n";
     }
     push(@return_json_content, $report);
-    $return_json_status= { status => $return_json_status, content => @return_json_content };
-    return $return_json_status;
+    $return_json= { status => $return_json_status, content => @return_json_content };
+    return $return_json;
 }
 

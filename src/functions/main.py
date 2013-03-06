@@ -27,10 +27,6 @@ class Main(object):
     """
 
     def __init__(self):
-        self.deviceMethods = DeviceMethods()
-        self.configMethods = ConfigMethods()
-        self.groupMethods = GroupMethods()
-        self.vlanMethods = VLanMethods()
         self.utils = Utils()
         self.argparser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
@@ -43,6 +39,10 @@ class Main(object):
         :rtype : object
         :param args:
         """
+        deviceMethods = DeviceMethods()
+        configMethods = ConfigMethods()
+        groupMethods = GroupMethods()
+        vlanMethods = VLanMethods()
         try:
             arglist = self.utils.getCleanParams(args)
             params = self.argparser.get_args(arglist)
@@ -51,15 +51,15 @@ class Main(object):
                 # noinspection PyArgumentList
                 if pType == 'device':
                     # noinspection PyArgumentList
-                    self.deviceMethods.create(params)
+                    deviceMethods.create(params)
                 elif pType == 'group':
                     # noinspection PyArgumentList
-                    self.groupMethods.create(params)
+                    groupMethods.create(params)
                 elif pType == 'config':
                     # noinspection PyArgumentList
-                    self.configMethods.create(params)
+                    configMethods.create(params)
                 elif pType == 'vlan':
-                    self.vlanMethods.create(params)
+                    vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
         except Exception as e:
@@ -72,6 +72,10 @@ class Main(object):
             Edit any object to the related tables such as new wireless access point, group, configuration, vlan etc.
         :param args:
         """
+        deviceMethods = DeviceMethods()
+        configMethods = ConfigMethods()
+        groupMethods = GroupMethods()
+        vlanMethods = VLanMethods()
         try:
             arglist = self.utils.getCleanParams(args)
             params = self.argparser.get_args(arglist)
@@ -80,15 +84,15 @@ class Main(object):
                 # noinspection PyArgumentList
                 if pType == 'device':
                     # noinspection PyArgumentList
-                    self.deviceMethods.update(params)
+                    deviceMethods.update(params)
                 elif pType == 'group':
                     # noinspection PyArgumentList
-                    self.groupMethods.update(params)
+                    groupMethods.update(params)
                 elif pType == 'config':
                     # noinspection PyArgumentList
-                    ConfigMethods.update(params)
+                    configMethods.update(params)
                 elif pType == 'vlan':
-                    self.vlanMethods.update(params)
+                    vlanMethods.update(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
             else:
@@ -101,7 +105,7 @@ class Main(object):
     #this methods works fine do not touch it!!!
     def list(self, args):
         """
-        Remove any record from the inventory by given
+        List all record from the inventory by given
         type and values such as device, group and id to decribe the record
         :param args:
         """
@@ -171,13 +175,6 @@ class Main(object):
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
-    def configure(self, args):
-        """
-
-        :param args:
-        """
-        print ""
-
     def show(self, args):
         """
 
@@ -189,6 +186,10 @@ class Main(object):
         This method enables to set the device by given variables such as ssid, channel, frequency, maxclient
         :param args:
         """
+        deviceMethods = DeviceMethods()
+        configMethods = ConfigMethods()
+        groupMethods = GroupMethods()
+        vlanMethods = VLanMethods()
         try:
             #moderate type value to determine the statement
             arglist = self.utils.getCleanParams(args)
@@ -198,15 +199,15 @@ class Main(object):
                 # noinspection PyArgumentList
                 if pType == 'device':
                     # noinspection PyArgumentList
-                    self.deviceMethods.set(params)
+                    deviceMethods.set(params)
                 elif pType == 'group':
                     # noinspection PyArgumentList
-                    self.groupMethods.create(params)
+                    groupMethods.set(params)
                 elif pType == 'config':
                     # noinspection PyArgumentList
-                    self.configMethods.create(params)
+                    configMethods.create(params)
                 elif pType == 'vlan':
-                    self.vlanMethods.create(params)
+                    vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
         except Exception as e:
@@ -219,66 +220,54 @@ class Main(object):
         type and values such as device, group and id to decribe the record
         :param args:
         """
-        pid = None
-        name = None
+        pName = None
+        pID = None
         cmd = None
 
         try:
             arglist = self.utils.getCleanParams(args)
             params = self.argparser.get_args(arglist)
             #check namespace variables if set
-            pType = params.type.split()[0]
             #moderate type value to determine the statement
             #check if type is group to remove the group belong to given id and name
-            if pType == 'group':
-                if params.id is Empty:
-                    print Language.MSG_ERR_PARSER_EXCEPTION.format('id'), '\n'
-                    print Language.MSG_ADD_ID_HELP
-                elif params.name is Empty:
-                    print Language.MSG_ERR_PARSER_EXCEPTION.format('name'), '\n'
-                    print Language.MSG_ADD_NAME_HELP
+            if params:
+                pType = params.type.split()[0]
+                #set gathered id params to be used
+                if params.id:
+                    pID = params.id
+                elif params.name:
+                    pName = params.name
                 else:
-                    pid = params.id
-                    name = params.name
-                    cmd = SQL.SQL_REMOVE_GROUP.format(name, pid)
-            #check if type is device to remove the group belong to given id and name
-            elif pType == 'device':
-                if params.id is Empty:
-                    print Language.MSG_ERR_PARSER_EXCEPTION.format('id'), '\n'
-                    print Language.MSG_ADD_ID_HELP
-                elif params.name is Empty:
-                    print Language.MSG_ERR_PARSER_EXCEPTION.format('name'), '\n'
-                    print Language.MSG_ADD_NAME_HELP
-                else:
-                    pid = params.id
-                    name = params.name
-                    cmd = SQL.SQL_REMOVE_DEVICE.format(name, pid)
-            elif pType == 'config':
-                if params.name is Empty:
-                    print Language.MSG_ERR_PARSER_EXCEPTION.format('name'), '\n'
-                    print Language.MSG_ADD_NAME_HELP
-                else:
-                    #pid = params.id
-                    cmd = SQL.SQL_INSERT_CONFIG.format(name)
-            elif pType == 'from':
-                cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP
-            elif pType == 'vlan':
-                if params.id is Empty:
-                    print Language.MSG_ERR_PARSER_EXCEPTION.format('id'), '\n'
-                    print Language.MSG_ADD_ID_HELP
-                else:
-                    pid = params.id
-                    cmd = SQL.SQL_REMOVE_VLAN.format(pid)
-            else:
-                print Language.MSG_ERR_GENERIC.format('186', 'No [type] argument provided')
+                    print Language.MSG_ERR_EMPTY_ID + '\n' + Language.MSG_ERR_EMPTY_NAME
+
+                if pType and pID or pName:
+                    if pType == 'group':
+                        cmd = SQL.SQL_REMOVE_GROUP % {'id': int(pID)}
+
+                    #check if type is device to remove the group belong to given id and name
+                    elif pType == 'device':
+                        cmd = SQL.SQL_REMOVE_DEVICE % {'id': int(pID)}
+
+                    #check if type is config to remove the group belong to given id and name
+                    elif pType == 'config':
+                        cmd = SQL.SQL_REMOVE_CONFIG % {'id': int(pID)}
+                    #remove from given device from given group
+                    elif pType == 'from':
+                        cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP % {'device': int(pID), 'group': ''}
+
+                    #remove vlan record from database
+                    elif pType == 'vlan':
+                        cmd = SQL.SQL_REMOVE_VLAN % {'id': int(pID)}
+                    else:
+                        print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
 
             #functions database operations
             if cmd is Empty:
-                print Language.MSG_ERR_GENERIC.format("222", "SQL command could not be created")
+                print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "SQL command could not be created")
             else:
                 self.db.remove(cmd)
         except Exception as e:
-            print Language.MSG_ERR_GENERIC.format("133", e.message)
+            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
     def help(self, args):
@@ -288,4 +277,31 @@ class Main(object):
         """
         #formatter = parser._get_formatter()
         #parser.exit(message=formatter.format_help())
-        print Language.MSG_ARG_DESC
+        print Language.MSG_ARG_DESC.format(
+            Language.MSG_CMD_ADD_HELP,
+            Language.MSG_CMD_EDIT_HELP,
+            Language.MSG_CMD_GROUP_HELP,
+            Language.MSG_CMD_SET_HELP,
+            Language.MSG_CMD_UNSET_HELP,
+            Language.MSG_CMD_LIST_HELP,
+            Language.MSG_CMD_SHOW_HELP,
+            Language.MSG_CMD_REMOVE_HELP,
+            Language.MSG_CMD_SELFTEST_HELP,
+            Language.MSG_ADD_ID_HELP,
+            Language.MSG_ADD_IP_HELP,
+            Language.MSG_ADD_NAME_HELP,
+            Language.MSG_ADD_USERNAME_HELP,
+            Language.MSG_ADD_PASSWORD_HELP,
+            Language.MSG_ADD_GROUP_HELP,
+            Language.MSG_ADD_CONFIG,
+            Language.MSG_ADD_SUBNET_HELP,
+            Language.MSG_ADD_DEVICE_HELP,
+            Language.MSG_ADD_DESC_HELP,
+            Language.MSG_ADD_RADIUS_HELP,
+            Language.MSG_ADD_SSID_HELP,
+            Language.MSG_ADD_VLAN_HELP,
+            Language.MSG_ADD_CHANNEL_HELP,
+            Language.MSG_ADD_FREQ_HELP,
+            Language.MSG_ADD_TYPE_HELP,
+            Language.MSG_ADD_OPTION_HELP
+        )

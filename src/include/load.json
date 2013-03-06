@@ -1,0 +1,21 @@
+{
+    "ip":"192.168.0.35",
+    "username":"Cisco",
+    "password":"Cisco",
+    "transport_protocol":"Telnet",
+    "enable_password":"Cisco",
+    "personality":"ios",
+    "request":{
+        "enable" : true,
+        "configure" : false,
+        "commands" : [
+            {
+                "command" : "show processes | include CPU utilization "
+            },
+            {
+                "command" : "show memory stat"
+            }
+        ]
+    }
+
+}

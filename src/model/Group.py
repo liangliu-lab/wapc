@@ -8,7 +8,7 @@ class Group(object):
     """
     def __init__(self):
         self.name = None
-        self.config_id = None
+        self.config_id = 0
         self.description = None
         self.added = None
         self.modified = None

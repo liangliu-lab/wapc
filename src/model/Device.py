@@ -36,7 +36,6 @@ class Device(dict):
         """
         return self["id"]
 
-
     def setIP(self, ip):
         """
 

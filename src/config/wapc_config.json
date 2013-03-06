@@ -58,19 +58,6 @@
         "configure":true,
         "commands":[
             {
-                "command":"interface Dot11Radio",
-                "param": "",
-                "type": "interface"
-            },
-            {
-                "command":"no ssid ",
-                "param":"",
-                "type": "ssid"
-            },
-            {
-                "command":"exit"
-            },
-            {
                 "command":"no dot11 ssid ",
                 "param":"",
                 "type": "ssid"
@@ -80,6 +67,7 @@
     "set_ssid":{
         "enable":true,
         "configure":true,
+        "pre":"unset",
         "commands":[
             {
                 "command":"dot11 ssid ",

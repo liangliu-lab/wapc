@@ -86,19 +86,29 @@ class SQL(object):
                         "vlan_id, " \
                         "channel, " \
                         "channel_freq, " \
+                        "username," \
+                        "password," \
+                        "enable_password," \
+                        "transport_protocol," \
+                        "personality," \
                         "date_added, " \
                         "date_modified) " \
                         "VALUES(" \
-                        "'{0}', " \
-                        "'{1}', " \
-                        "'{2}', " \
-                        "'{3}', " \
-                        "'{4}', " \
-                        "'{5}', " \
-                        "'{6}', " \
-                        "'{7}', " \
-                        "'{8}', " \
-                        "'{9}') RETURNING id;"
+                        "'%(name)s', " \
+                        "'%(description)s', " \
+                        "'%(ip)s', " \
+                        "'%(radius_config_id)s', " \
+                        "'%(ssid)s', " \
+                        "'%(vlan_id)s', " \
+                        "'%(channel)s', " \
+                        "'%(channel_freq)s', " \
+                        "'%(username)s', " \
+                        "'%(password)s', " \
+                        "'%(enable_password)s', " \
+                        "'%(transport_protocol)s', " \
+                        "'%(personality)s', " \
+                        "'%(date_added)s', " \
+                        "'%(date_modified)s') RETURNING id;"
 
     # =============================
     #insert new device
@@ -143,8 +153,8 @@ class SQL(object):
     # remove queries
     # =============================
     #remove commands
-    SQL_REMOVE_CONFIG = "DELETE FROM apc_config WHERE name = '{0}';"
-    SQL_REMOVE_DEVICE = "DELETE FROM apc_device WHERE name = '{0}' AND id = {1};"
-    SQL_REMOVE_GROUP = "DELETE FROM apc_groups WHERE name = '{0}' AND id = {1};"
-    SQL_REMOVE_VLAN = "DELETE FROM apc_vlan WHERE name = '{0}' AND id = {1};"
-    SQL_REMOVE_DEVICE_FROM_GROUP = "DELETE FROM apc_device_group WHERE device_id = {0} AND group_id = {1};"
+    SQL_REMOVE_CONFIG = "DELETE FROM apc_config WHERE id = %(id)d;"
+    SQL_REMOVE_DEVICE = "DELETE FROM apc_device WHERE id = %(id)d;"
+    SQL_REMOVE_GROUP = "DELETE FROM apc_groups WHERE id = %(id)d;"
+    SQL_REMOVE_VLAN = "DELETE FROM apc_vlan WHERE id = %(id)d;"
+    SQL_REMOVE_DEVICE_FROM_GROUP = "DELETE FROM apc_device_group WHERE device_id = %(device)d AND group_id = %(group)d;"

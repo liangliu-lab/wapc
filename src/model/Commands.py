@@ -29,10 +29,9 @@ class Commands(list):
         """
         self.param = param
 
-    def getCommand(self):
+    def getParam(self):
         """
 
         :return:
         """
         return self.param
-

@@ -103,22 +103,24 @@ class ConsoleInterface(cmd.Cmd):
             print e.message
             pass
 
-    def do_config(self, args):
-        """
-            Create new config for devices
-        :param args:
-        """
-        try:
-            self.main.configure(args)
-        except Exception as e:
-            print e.message
-            pass
-
     def do_selftest(self, command):
         """
             This method will implement a self testing with pre-defined parameters and values
         :param command:
             """
+
+    def do_help(self, args):
+        """
+
+
+        :rtype : object
+        :param args:
+        """
+        try:
+            self.main.help(args)
+        except Exception as e:
+            print e.message
+            pass
 
     def do_EOF(self, line):
         """

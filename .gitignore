@@ -49,3 +49,7 @@ nosetests.xml
 *.pot
 *.pyc
 local_settings.py
+
+### Project Specific ###
+src/backup
+*.bak

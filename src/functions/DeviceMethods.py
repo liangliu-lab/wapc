@@ -21,6 +21,17 @@ __author__ = 'fatih'
 class DeviceMethods():
     """
         DeviceMethods
+        +Marka bağımsız temel WAP yönetim uygulaması
+        - SSID Ayarları
+        - IP ve Network Ayarları
+        - Kimlik Doğrulama Ayarları
+
+        - WAP Discovery
+        - Kanal Yönetimi
+        - Roaming
+        - Load Balancing
+
+    + WAP ların 802,1x yetkilendirmesi
     """
     def __init__(self):
         """
@@ -44,35 +55,44 @@ class DeviceMethods():
         commands = request.getCommands()
 
         try:
-            #check namespace variables if set
+            #===================================
+            # check namespace variables if set then set them into device model variables
+            #===================================
+
+            # set device ip to connect to the device
             if params.ip:
                 self.device.setIP(params.ip.rstrip().lstrip())
             else:
                 print Language.MSG_ERR_EMPTY_IP.format('device')
 
+            # set device name to connect to the device
             if params.name:
                 self.device.setName(params.name.rstrip().lstrip())
             else:
                 print Language.MSG_ERR_EMPTY_NAME.format('device')
 
+            # set device description to connect to the device
             if params.description:
                 self.device.setDescription(params.description.rstrip().lstrip())
             else:
-                print Language.MSG_ERR_EMPTY_NAME.format('device')
+                print Language.MSG_ERR_EMPTY_DESC.format('device')
 
+            # set device username to connect to the device
             if params.username:
                 self.device.setUsername(params.username.rstrip().lstrip())
             else:
                 print Language.MSG_ERR_EMPTY_USERNAME.format('device')
 
+            # set device password to connect to the device
             if params.password:
                 self.device.setPassword(params.password.rstrip().lstrip())
             else:
                 print Language.MSG_ERR_EMPTY_PASSWORD.format('device')
 
             #gather commands config
-            config_source = self.ci.get_source_config(Resources.cfg_device_resource)
+            config_source = self.ci.get_source_config(Resources.ci_config)
 
+            # get default config object into a dict
             if config_source:
                 try:
                     commands = json.loads(unicode(config_source))
@@ -80,6 +100,7 @@ class DeviceMethods():
                     print e.message
                     pass
 
+            #set config parameters to relate with device
             config.setName(self.device.getName())
             config.setIP(self.device.getIP())
             config.setUsername(self.device.getUsername())
@@ -90,13 +111,19 @@ class DeviceMethods():
 
             #set request
             request.setEnable(True)
-            request.setConfigure(False)
+            request.setConfigure(True)
 
             #get device recent config
-            request.setCommands(commands['show_run']['commands'])
+            # TODO get default commands change ip and re-write config to file
+            request.setCommands(commands['request']['commands'])
 
+            # set request for config object to be called by CI script
             config.setRequest(request.__dict__)
+
+            #set device config to relate each other
             self.device.setConfig(config.__dict__)
+
+            # implement request
             print "Request generating..."
             self.ci.write_source_file(config)
 
@@ -113,18 +140,23 @@ class DeviceMethods():
             if resp:
                 #check if wap is connected and returned with success status message 110
                 if resp['status'] == 110:
-                    cmd = SQL.SQL_INSERT_CONFIG.format(
-                        config.getName(),
-                        config.getDescription(),
-                        config.getIP(),
-                        config.getRadiusID(),
-                        config.getSSID(),
-                        config.getVLAN(),
-                        config.getChannel(),
-                        config.getChannelFreq(),
-                        self.now,
-                        self.now
-                    )
+                    cmd = SQL.SQL_INSERT_CONFIG % {
+                        "name" : config.getName(),\
+                        "description" : config.getDescription(), \
+                        "ip" : config.getIP(), \
+                        "radius_config_id" : config.getRadiusID(), \
+                        "ssid" : config.getSSID(), \
+                        "vlan_id" : config.getVLAN(), \
+                        "channel" : config.getChannel(), \
+                        "channel_freq" : config.getChannelFreq(), \
+                        "username" : config.getUsername(), \
+                        "password" : config.getPassword(), \
+                        "enable_password" : config.getEnablePassword(), \
+                        "transport_protocol" : config.getTProtocol(), \
+                        "personality" : config.getPersonality(), \
+                        "date_added" : self.now, \
+                        "date_modified" : self.now
+                    }
 
                     cid = self.db.insert(cmd)
                     if cid:
@@ -243,7 +275,7 @@ class DeviceMethods():
                       }
 
                 if self.db.update(cmd):
-                    print Language.MSG_UPDATE_RECORD.format('device', did, group.getName())
+                    print Language.MSG_UPDATE_RECORD.format('device', did, device.getName())
                 else:
                     print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating recorded group', did)
             else:
@@ -325,10 +357,13 @@ class DeviceMethods():
                 dataConfig["date_modified"] = dataConfig["date_modified"].strftime(Resources.time_format)
                 config.update(dataConfig)
 
+                #set device config by updated config
                 device.setConfig(config)
-                #gather commands config
+
+                #gather commands config file content
                 config_source = self.ci.get_source_config(Resources.cfg_device_resource)
 
+                #check config source and load inside data
                 if config_source:
                     try:
                         #turn into dictionary from json
@@ -353,21 +388,74 @@ class DeviceMethods():
                 #set request
                 #get device recent config
                 print "Request generating..."
+
+                #gather interface and params
+                print "Your command(s) will be executing... Please enter required command params below:\n"
+                interface = raw_input("Enter parameter for interface of required device:")
+                new_param = raw_input("Enter parameter for %(type)s this command of device:" % {'type': params.option})
+
+                # TODO get interfaces and unset its ssid
+                if 'pre' in commands[str('set_'+option)]:
+                    pre = commands[str('set_'+option)]['pre']
+                    print "Prerequesting command(s) being executed. Please wait...\n"
+                    request.setCommands(commands[str(pre + '_'+ option)]['commands'])
+                    request.setEnable(commands[str(pre + '_'+ option)]['enable'])
+                    request.setConfigure(commands[str(pre + '_'+ option)]['configure'])
+
+                    for p in request['commands']:
+                        if 'param' in p:
+                            #p["command"] = p["command"] + " " + self.utils.validate(param, 'name')
+                            #new param has been approved??
+                            if p["type"]:
+                                if p["type"] == "interface":
+                                    p["command"] = p["command"] + interface.rstrip().lstrip()
+                                elif p["type"] == params.option.rstrip().lstrip():
+                                    p["command"] = p["command"] + new_param.rstrip().lstrip()
+                                else:
+                                    p["command"] = p["command"] + new_param.rstrip().lstrip()
+                            print p["command"]
+
+                    #set config request to generate input.json file
+                    config.setRequest(request)
+
+                    #write config model into input.json file
+                    self.ci.write_source_file(config)
+
+                    #call communication interface script and gather response - RPC
+                    print "Executing device commands please wait..."
+                    resp = json.loads(
+                        unicode(
+                            self.ci.call_communication_interface(Resources.ci_source)
+                        )
+                        .replace('\n',''),
+                        encoding='utf-8'
+                    )
+
+                    #check if rpc is responded and shows that prereques command successfully executed
+                    if resp:
+                        #check if wap is connected and returned with success status message 110
+                        if resp['status'] == 110:
+                            print "Pre-request command(s) successfully executed"
+
+
                 request.setCommands(commands[str('set_'+option)]['commands'])
                 request.setEnable(commands[str('set_'+option)]['enable'])
                 request.setConfigure(commands[str('set_'+option)]['configure'])
 
-                print "Command will be executing... Please enter required command params below:"
                 for p in request['commands']:
                     if 'param' in p:
                         #p["command"] = p["command"] + " " + self.utils.validate(param, 'name')
-                        new_param = raw_input("Enter parameter for this command of device'" + p["command"] + "':")
                         #new param has been approved??
-                        #print new_param
-                        p["command"] = p["command"] + new_param.rstrip().lstrip()
-                        #print p["command"]
+                        if p["type"]:
+                            if p["type"] == "interface":
+                                p["command"] = p["command"] + interface.rstrip().lstrip()
+                            elif p["type"] == params.option.rstrip().lstrip():
+                                p["command"] = p["command"] + new_param.rstrip().lstrip()
+                            else:
+                                p["command"] = p["command"] + new_param.rstrip().lstrip()
+                        print p["command"]
 
-                #set config request to generate input.json file
+                    #set config request to generate input.json file
                 config.setRequest(request)
 
                 #write config model into input.json file
@@ -387,41 +475,43 @@ class DeviceMethods():
                 if resp:
                     #check if wap is connected and returned with success status message 110
                     if resp['status'] == 110:
-                        cmd = SQL.SQL_INSERT_CONFIG.format(
-                            config.getName(),
-                            config.getDescription(),
-                            config.getIP(),
-                            config.getRadiusID(),
-                            config.getSSID(),
-                            config.getVLAN(),
-                            config.getChannel(),
-                            config.getChannelFreq(),
-                            self.now,
-                            self.now
-                        )
-
-                        #insert new config and gather inserted record id
-                        cid = self.db.insert(cmd)
-                        if cid:
-                            self.device.setConfigID(cid[0])
-                            print "New configuration generated for the new device with id: %s" % cid[0]
-                        else:
-                            print Language.MSG_ERR_EMPTY_CONFIG
-
-                        #insert new device to the database
-                        cmd = SQL.SQL_INSERT_DEVICE.format(
-                            self.device.getName(),
-                            self.device.getDescription(),
-                            self.device.getIP(),
-                            cid[0],
-                            self.device.getUsername(),
-                            self.device.getPassword(),
-                            self.now,
-                            self.now
-                        )
-
-                        #get inserted device id and inform user
-                        id = self.db.insert(cmd)
+                        configMethods.update(params)
+                        self.update(params)
+                        # cmd = SQL.SQL_INSERT_CONFIG.format(
+                        #     config.getName(),
+                        #     config.getDescription(),
+                        #     config.getIP(),
+                        #     config.getRadiusID(),
+                        #     config.getSSID(),
+                        #     config.getVLAN(),
+                        #     config.getChannel(),
+                        #     config.getChannelFreq(),
+                        #     self.now,
+                        #     self.now
+                        # )
+                        #
+                        # #insert new config and gather inserted record id
+                        # cid = self.db.insert(cmd)
+                        # if cid:
+                        #     self.device.setConfigID(cid[0])
+                        #     print "New configuration generated for the new device with id: %s" % cid[0]
+                        # else:
+                        #     print Language.MSG_ERR_EMPTY_CONFIG
+                        #
+                        # #insert new device to the database
+                        # cmd = SQL.SQL_INSERT_DEVICE.format(
+                        #     self.device.getName(),
+                        #     self.device.getDescription(),
+                        #     self.device.getIP(),
+                        #     cid[0],
+                        #     self.device.getUsername(),
+                        #     self.device.getPassword(),
+                        #     self.now,
+                        #     self.now
+                        # )
+                        #
+                        # #get inserted device id and inform user
+                        # id = self.db.insert(cmd)
                         if id:
                             #write recent config into backup file
                             self.ci.backup(commands, config.getName(), self.now)

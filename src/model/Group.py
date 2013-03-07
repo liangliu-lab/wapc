@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+    Group model for create group instance determine database column field
+"""
 __author__ = 'fatih'
 
 
@@ -7,11 +10,26 @@ class Group(object):
         Group class to create a runtime instance while adding a new device
     """
     def __init__(self):
+        self.id = None
         self.name = None
         self.config_id = 0
         self.description = None
         self.added = None
         self.modified = None
+
+    def setID(self, gID):
+        """
+            Regular setter for Group model id
+        :param gID:
+        """
+        self.id = gID
+
+    def getID(self):
+        """
+            Regular getter for Group model
+        :return id:
+        """
+        return self.id
 
     def setName(self, name):
         """

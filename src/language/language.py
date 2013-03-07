@@ -46,10 +46,6 @@ class Language(object):
                          "\n\tGroup given devices" \
                          "\n\t[-t],[--type]\tDefine type device, group, vlan, config " \
                          "\n\t[-g],[--group]\tDefine the group where given device will be added into" \
-                         "\n\t[-I],[--ip]\tUse this params when adding some new variables " \
-                         "which needs an ip such as device, config, etc." \
-                         "\n\t[-n],[--name]\tTo set a name to related type variable " \
-                         "\n\t[-u],[--username]\tProvide a username which will be used to connect device " \
                          "\n\t[-i],[--id]\tDefine id of device, group, vlan, config"
 
     MSG_CMD_SET_HELP = "\nUsage:\t$ set [OPTIONS]" \
@@ -117,7 +113,7 @@ class Language(object):
     MSG_ADD_CHANNEL_HELP = '\t-H,--channel\t\tProvide channel to configure for group or device with usage channel'
     MSG_ADD_FREQ_HELP = '\t-f,--frequency\t\tProvide channel frequency to configure for group or device with usage'
     MSG_ADD_TYPE_HELP = '\t-t,--type\t\tProvide type of group/device/config/vlan from database ' \
-                        'with usage  group/device/config/vlan'
+                        'with usage  group/device/config/vlan others will cause error(s)'
     MSG_ADD_OPTION_HELP = '\t-o,--option\t\tProvide type of group/device/config/vlan from database ' \
                           'with usage group/device/config/vlan'
 
@@ -155,7 +151,7 @@ class Language(object):
 
     #success statement messages
     MSG_SUCCESS_SELECT = "Retrieving data from database successfully executed. Continue..."
-    MSG_SUCCESS_ADD = "Command add successfully executed. Continue..."
-    MSG_SUCCESS_REMOVE = "Command rm successfully executed. Continue..."
-    MSG_SUCCESS_UPDATE = "Command update successfully executed. Continue..."
+    MSG_SUCCESS_ADD = "Given values inserted to the database successfully executed. Continue..."
+    MSG_SUCCESS_REMOVE = "Record(s) successfully removed from database. Continue..."
+    MSG_SUCCESS_UPDATE = "Record(s) successfully updated by given values. Continue..."
 

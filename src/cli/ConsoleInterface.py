@@ -5,6 +5,7 @@
 """
 
 import cmd
+import sys
 from src.functions.main import Main
 from time import gmtime, strftime
 from src.resources.resources import Resources
@@ -76,7 +77,7 @@ class ConsoleInterface(cmd.Cmd):
         :param args:
         """
         try:
-            self.main.set(args)
+            self.main.unset(args)
         except Exception as e:
             print e.message
             pass
@@ -88,6 +89,20 @@ class ConsoleInterface(cmd.Cmd):
         """
         try:
             self.main.list(args)
+        except Exception as e:
+            print e.message
+            pass
+
+    def do_sh(self, args):
+        """
+        Add device, group, vlan, config etc with given parameters
+                [-t] [--type] Add device, group, vlan, config
+                [-o],[--option]\tProvide option must be one of
+                [-i],[--id]\tDefine id of device or group
+            :param args:
+            """
+        try:
+            self.main.show(args)
         except Exception as e:
             print e.message
             pass
@@ -111,13 +126,23 @@ class ConsoleInterface(cmd.Cmd):
 
     def do_help(self, args):
         """
-
-
         :rtype : object
         :param args:
         """
         try:
             self.main.help(args)
+        except Exception as e:
+            print e.message
+            pass
+
+    def do_exit(self, args):
+        """
+            Exit command
+        :rtype : object
+            :param args:
+        """
+        try:
+            sys.exit()
         except Exception as e:
             print e.message
             pass

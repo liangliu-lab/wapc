@@ -1,6 +1,6 @@
 # coding=utf-8
 """
-    Communication Interface
+    Device model
 """
 from src.model.Config import Config
 

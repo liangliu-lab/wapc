@@ -102,7 +102,7 @@ class Main(object):
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
-    #this methods works fine do not touch it!!!
+    #this method works fine do not touch it!!!
     def list(self, args):
         """
         List all record from the inventory by given
@@ -110,7 +110,6 @@ class Main(object):
         :param args:
         """
         cmd = None
-        flag = False
 
         try:
             arglist = self.utils.getCleanParams(args)
@@ -154,33 +153,66 @@ class Main(object):
 
     def group(self, args):
         """
-            Add device(s) to group with params
+            Add device(s) or given type to group with params
         :param args:
         """
         try:
             arglist = self.utils.getCleanParams(args)
             params = self.argparser.get_args(arglist)
-            #check namespace variables if set
-            #pType = params.type.split()[0]
-            #moderate type value to determine the statement
             if params:
-                #pType = params.type.split()[0]
-                # noinspection PyArgumentList
-                #group given items
-                print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
-            else:
-                raise Exception("Something wrong with type")
-                pass
+                if params.id and params.group:
+                    dID = params.id
+                    gID = params.group
+                    cmd = SQL.SQL_INSERT_DEVICE_TO_GROUP % {
+                        'device_id': int(dID),
+                        'group_id': int(gID),
+                        'added': self.now,
+                        'modified': self.now
+                    }
+                    self.db.insert(cmd)
+                    print Language.MSG_SUCCESS_ADD
+                else:
+                    print Language.MSG_ERR_EMPTY_ID.format('device')
+                    pass
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
+    #this method works fine do not touch it!!!
     def show(self, args):
         """
-
+            This method show running configuration by given option
         :param args:
         """
+        deviceMethods = DeviceMethods()
+        configMethods = ConfigMethods()
+        groupMethods = GroupMethods()
+        vlanMethods = VLanMethods()
+        try:
+            #moderate type value to determine the statement
+            arglist = self.utils.getCleanParams(args)
+            params = self.argparser.get_args(arglist)
+            if params:
+                pType = params.type.split()[0]
+                # noinspection PyArgumentList
+                if pType == 'device':
+                    # noinspection PyArgumentList
+                    deviceMethods.show(params)
+                elif pType == 'group':
+                    # noinspection PyArgumentList
+                    groupMethods.show(params)
+                elif pType == 'config':
+                    # noinspection PyArgumentList
+                    configMethods.show(params)
+                elif pType == 'vlan':
+                    vlanMethods.show(params)
+                else:
+                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+        except Exception as e:
+            print str(e)
+            pass
 
+    #this method works fine do not touch it!!!
     def set(self, args):
         """
         This method enables to set the device by given variables such as ssid, channel, frequency, maxclient
@@ -214,6 +246,7 @@ class Main(object):
             print str(e)
             pass
 
+    #this method works fine do not touch it!!!
     def remove(self, args):
         """
         Remove any record from the inventory by given
@@ -270,6 +303,7 @@ class Main(object):
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
 
+    #this method works fine do not touch it!!!
     def help(self, args):
         """
 

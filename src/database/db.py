@@ -70,7 +70,6 @@ class Database(object):
             results = cur.fetchall()
             conn.commit()
             print Language.MSG_SUCCESS_SELECT
-            self.close_conn(conn)
             return fields, results
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'selecting', e.message)
@@ -81,6 +80,8 @@ class Database(object):
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             pass
+        finally:
+            self.close_conn(conn)
 
     def insert(self, cmd):
         """
@@ -92,13 +93,12 @@ class Database(object):
             conn = self.connect()
             cur = conn.cursor()
             cur.execute(cmd)
-            id = cur.fetchone()
+            rid = cur.fetchone()
             conn.commit()
-            if id is Empty:
+            if rid is Empty:
                 pass
             else:
-                return id
-            self.close_conn(conn)
+                return rid
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting', e.message)
             pass
@@ -108,6 +108,9 @@ class Database(object):
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             pass
+        finally:
+            self.close_conn(conn)
+
 
     def update(self, cmd):
         """
@@ -119,7 +122,6 @@ class Database(object):
             cur = conn.cursor()
             cur.execute(cmd)
             conn.commit()
-            self.close_conn(conn)
             return True
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating', e.message)
@@ -133,6 +135,8 @@ class Database(object):
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             return False
             pass
+        finally:
+            self.close_conn(conn)
 
     def remove(self, cmd):
         """
@@ -145,7 +149,6 @@ class Database(object):
             cur.execute(cmd)
             conn.commit()
             print Language.MSG_SUCCESS_REMOVE
-            self.close_conn(conn)
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating', e.message)
             pass
@@ -155,6 +158,8 @@ class Database(object):
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             pass
+        finally:
+            self.close_conn(conn)
 
     def close_conn(self, con):
         """

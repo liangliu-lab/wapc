@@ -255,8 +255,6 @@ class GroupMethods(object):
                     'value' : params.parameter,
                     'group_id': int(group.getID())
                 }
-            else:
-                pass
         except Exception as e:
             print e.message
             pass
@@ -354,8 +352,6 @@ class GroupMethods(object):
                 else:
                     print Language.MSG_ERR_COMM_INTERFACE_FAILED
                     pass
-            else:
-                pass
         except Exception as e:
             print e.message
             pass

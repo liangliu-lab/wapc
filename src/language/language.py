@@ -20,7 +20,7 @@ class Language(object):
     #argument parsing while cli statement messages
     MSG_ARG_DESC = 'Use methods below to add, remove, update and list device(s), ' \
                    'group(s) or config(s) with commands:\n' \
-                   'Commands:\n{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n' \
+                   'Commands:{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n' \
                    '\nOptions:\n{9}\n{10}\n{11}\n{12}\n{13}\n{14}\n{15}\n{16}' \
                    '\n{17}\n{18}\n{19}\n{20}\n{21}\n{22}\n{23}\n{24}\n{25}\n'
 
@@ -76,7 +76,10 @@ class Language(object):
 
     MSG_CMD_SHOW_HELP = "\nUsage:\t$ sh [OPTIONS]" \
                         "\n\tShow details of given type" \
-                        "\n\t[-t],[--type]\tDefine type device, group, vlan, config"
+                        "\n\t[-t],[--type]\tDefine type device, group, vlan, config" \
+                        "\n\t[-i],[--id]\tDefine id of device or group" \
+                        "\n\t[-o],[--option]\tProvide option must be one of\n\t" \
+                        "\"ssid, vlan, channel, frequency, maxclients, ip, cpu, memory, permanent, conf, "
 
     MSG_CMD_REMOVE_HELP = "\nUsage:\t$ rm [OPTIONS]" \
                           "\n\tShow details of given type" \

@@ -17,6 +17,8 @@ class Device(dict):
         self["id"] = None
         self["ip"] = None
         self["name"] = None
+        self["username"] = "Cisco"
+        self["password"] = "Cisco"
         self["brand"] = 'cisco'
         self["model"] = 'cisco'
         self["firmware"] = 'cisco'
@@ -51,6 +53,32 @@ class Device(dict):
         :return:
         """
         return self["ip"]
+
+    def setUsername(self, username):
+        """
+
+        :param username:
+        """
+        self["username"] = username
+
+    def getUsername(self):
+        """
+        :return:
+        """
+        return self["username"]
+
+    def setPassword(self, password):
+        """
+
+        :param password:
+        """
+        self["username"] = password
+
+    def getPassword(self):
+        """
+        :return:
+        """
+        return self["username"]
 
     def setBrand(self, brand):
         """

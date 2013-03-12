@@ -84,13 +84,13 @@ class DeviceMethods(threading.Thread):
 
             # set device username to connect to the device
             if params.username:
-                config.setUsername(params.username.rstrip().lstrip())
+                self.device.setUsername(params.username.rstrip().lstrip())
             else:
                 print Language.MSG_ERR_EMPTY_USERNAME.format('device')
 
             # set device password to connect to the device
             if params.password:
-                config.setPassword(params.password.rstrip().lstrip())
+                self.device.setPassword(params.password.rstrip().lstrip())
             else:
                 print Language.MSG_ERR_EMPTY_PASSWORD.format('device')
 
@@ -170,6 +170,8 @@ class DeviceMethods(threading.Thread):
 
             #set config parameters to relate with device
             config.setName(self.device.getName())
+            config.setUsername(self.device.getUsername())
+            config.setPassword(self.device.getPassword())
             config.setIP(self.device.getIP())
             config.setEnablePassword(config.getPassword())
             config.setTProtocol(self.device.getConfig().getTProtocol())
@@ -214,6 +216,9 @@ class DeviceMethods(threading.Thread):
                     .replace('\n',''),
                     encoding='utf-8'
                 )
+            #remove input.json
+            os.remove(Resources.ci_source)
+
             #check if rpc is responded
             if resp:
                 #check if wap is connected and returned with success status message 110
@@ -244,6 +249,8 @@ class DeviceMethods(threading.Thread):
                         #insert new device to the database
                         cmd = SQL.SQL_INSERT_DEVICE % {
                             "name" : self.device.getName(),
+                            "username": self.device.getUsername(),
+                            "password": self.device.getPassword(),
                             "description" : self.device.getDescription(),
                             "ip" : self.device.getIP(),
                             "config_id" : int(cid[0]),
@@ -261,9 +268,6 @@ class DeviceMethods(threading.Thread):
                             #write recent config into backup file
                             self.ci.backup(commands, config.getName(), self.now)
                             print Language.MSG_ADD_NEW.format('device', id[0], self.device.getName())
-
-                        #remove input.json
-                        os.remove(Resources.ci_source)
                     else:
                         raise Exception(
                             Language.MSG_ERR_DATABASE_INSERT
@@ -477,6 +481,9 @@ class DeviceMethods(threading.Thread):
                         encoding='utf-8'
                     )
 
+                    #remove input.json
+                    os.remove(Resources.ci_source)
+
                     #check if rpc is responded and shows that prereques command successfully executed
                     if resp:
                         #check if wap is connected and returned with success status message 110
@@ -515,6 +522,9 @@ class DeviceMethods(threading.Thread):
                     encoding='utf-8'
                 )
 
+                #remove input.json
+                os.remove(Resources.ci_source)
+
                 #check if rpc is responded
                 if resp:
                     #check if wap is connected and returned with success status message 110
@@ -535,8 +545,6 @@ class DeviceMethods(threading.Thread):
                 else:
                     print Language.MSG_ERR_COMM_INTERFACE_FAILED
                     pass
-            else:
-                pass
         except Exception as e:
             print e.message
             pass
@@ -667,8 +675,6 @@ class DeviceMethods(threading.Thread):
                 else:
                     print "No such an unset command found on config file for given %(option)s" % {'option': params.option}
                     pass
-            else:
-                pass
         except Exception as e:
             print e.message
             pass
@@ -775,8 +781,6 @@ class DeviceMethods(threading.Thread):
                 else:
                     print Language.MSG_ERR_COMM_INTERFACE_FAILED
                     pass
-            else:
-                pass
         except Exception as e:
             print e.message
             pass

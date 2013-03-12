@@ -98,8 +98,7 @@ class Main(object):
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
             else:
-                raise Exception("Something wrong with type")
-                pass
+                print Language.MSG_CMD_EDIT_HELP
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass

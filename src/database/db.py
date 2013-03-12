@@ -73,9 +73,6 @@ class Database(object):
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'selecting', e.message)
             pass
-        except IOError as e:
-            print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
-            pass
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             pass
@@ -101,9 +98,6 @@ class Database(object):
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting', e.message)
             pass
-        except IOError as e:
-            print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
-            pass
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)
             pass
@@ -123,10 +117,6 @@ class Database(object):
             return True
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating', e.message)
-            return False
-            pass
-        except IOError as e:
-            print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
             return False
             pass
         except Exception as e:
@@ -149,9 +139,6 @@ class Database(object):
             print Language.MSG_SUCCESS_REMOVE
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating', e.message)
-            pass
-        except IOError as e:
-            print Language.MSG_ERR_IO_ERROR.format(e.errno, e.strerror)
             pass
         except Exception as e:
             print Language.MSG_ERR_DB_CONNECT.format(e.message)

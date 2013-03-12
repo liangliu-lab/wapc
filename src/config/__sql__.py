@@ -114,7 +114,7 @@ class SQL(object):
     SQL_SELECT_GROUP_DEVICE = "SELECT * FROM apc_device d LEFT JOIN apc_group g ON d.config_id = g.id WHERE d.id = {0};"
 
     SQL_SELECT_VLAN = "SELECT * FROM apc_vlan v WHERE v.id IS NOT NULL ORDER BY date_added ASC;"
-    SQL_SELECT_VLAN_DETAIL = "SELECT * FROM apc_config AS c WHERE c.name IS NOT NULL AND c.name IS '{0}';"
+    SQL_SELECT_VLAN_DETAIL = "SELECT * FROM apc_config AS c WHERE c.name IS NOT NULL AND c.id = '%(id)d';"
 
     # =============================
     # insert queries
@@ -161,6 +161,8 @@ class SQL(object):
     SQL_INSERT_DEVICE = "INSERT INTO " \
                         "apc_device(" \
                         "name, " \
+                        "username," \
+                        "password," \
                         "description, " \
                         "ip, " \
                         "config_id, " \
@@ -172,6 +174,8 @@ class SQL(object):
                         "date_modified) " \
                         "VALUES(" \
                         "'%(name)s', " \
+                        "'%(username)s', " \
+                        "'%(password)s', " \
                         "'%(desc)s', " \
                         "'%(ip)s', " \
                         "'%(config)d', " \

@@ -24,6 +24,12 @@ class Resources(object):
     #defulat config commands for brand new addded device
     ci_config = INCLUDE_PATH + "default.json"
 
+    # initial config will ve set to
+    device_initial_config = CONFIG_PATH + '%(path)s/%(relation)s-config.conf'
+    device_load_command = INCLUDE_PATH + "load.json"
+    device_tftp_file = '%(relation)s-config.conf'
+    device_tftp_path = "/var/tftpboot/" + device_tftp_file
+
     #global device config file resource
     cfg_device_resource = CONFIG_PATH + "wapc_config.json"
 

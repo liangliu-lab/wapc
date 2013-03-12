@@ -5,25 +5,24 @@
     :author Fatih Karatana
 """
 
-from Queue import Empty
 from time import strftime, gmtime
 from src.config.__sql__ import SQL
 from src.database.db import Database
-from src.functions.VLanMethods import VLanMethods
+from src.controller.VLanMethods import VLanMethods
 from src.helper.ArgParser import ArgParser
 from src.helper.Utils import Utils
 from src.language.language import Language
 from src.resources.resources import Resources
-from src.functions.DeviceMethods import DeviceMethods
-from src.functions.GroupMethods import GroupMethods
-from src.functions.ConfigMethods import ConfigMethods
+from src.controller.DeviceMethods import DeviceMethods
+from src.controller.GroupMethods import GroupMethods
+from src.controller.ConfigMethods import ConfigMethods
 
 __author__ = 'fatih'
 
 
 class Main(object):
     """
-        Main class includes all base functions of the software
+        Main class includes all base controller methods of the software
     """
 
     def __init__(self):
@@ -39,14 +38,15 @@ class Main(object):
         :rtype : object
         :param args:
         """
-        deviceMethods = DeviceMethods()
-        configMethods = ConfigMethods()
-        groupMethods = GroupMethods()
-        vlanMethods = VLanMethods()
         try:
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            if params:
+
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
+                deviceMethods = DeviceMethods(params)
+                configMethods = ConfigMethods()
+                groupMethods = GroupMethods()
+                vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
                 if pType == 'device':
@@ -62,6 +62,8 @@ class Main(object):
                     vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+            else:
+                print Language.MSG_CMD_ADD_HELP
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
@@ -72,14 +74,14 @@ class Main(object):
             Edit any object to the related tables such as new wireless access point, group, configuration, vlan etc.
         :param args:
         """
-        deviceMethods = DeviceMethods()
-        configMethods = ConfigMethods()
-        groupMethods = GroupMethods()
-        vlanMethods = VLanMethods()
         try:
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            if params:
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
+                deviceMethods = DeviceMethods(params)
+                configMethods = ConfigMethods()
+                groupMethods = GroupMethods()
+                vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
                 if pType == 'device':
@@ -109,46 +111,48 @@ class Main(object):
         type and values such as device, group and id to decribe the record
         :param args:
         """
-        cmd = None
-
         try:
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            #check namespace variables if set
-            pType = params.type.split()[0]
-            #moderate type value to determine the statement
-            if pType == 'group':
-                cmd = SQL.SQL_SELECT_GROUP_ALL
-                flag = True
-            elif pType == 'device':
-                cmd = SQL.SQL_SELECT_DEVICE_ALL
-                flag = True
-            elif pType == 'config':
-                cmd = SQL.SQL_SELECT_CONFIG
-                flag = True
-            elif pType == 'vlan':
-                cmd = SQL.SQL_SELECT_VLAN
-                flag = True
-            else:
-                print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
-                flag = False
-
-            #functions database operations
-            if flag is False:
-                print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "SQL command could not be created")
-            else:
-                fields, results = self.db.select(cmd)
-                if fields and results:
-                    try:
-                        self.utils.formatter(fields, results)
-                    except Exception as e:
-                        print e.message
-                        pass
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
+                #check namespace variables if set
+                pType = params.type.split()[0]
+                #moderate type value to determine the statement
+                if pType == 'group':
+                    cmd = SQL.SQL_SELECT_GROUP_ALL
+                    flag = True
+                elif pType == 'device':
+                    cmd = SQL.SQL_SELECT_DEVICE_ALL
+                    flag = True
+                elif pType == 'config':
+                    cmd = SQL.SQL_SELECT_CONFIG
+                    flag = True
+                elif pType == 'vlan':
+                    cmd = SQL.SQL_SELECT_VLAN
+                    flag = True
                 else:
                     raise Exception(
-                        Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "There is no record found on table"))
+                        Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+                    )
+                    pass
+
+                if flag is False:
+                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "SQL command could not be created")
+                else:
+                    fields, results = self.db.select(cmd)
+                    if fields and results:
+                        try:
+                            self.utils.formatter(fields, results)
+                        except Exception as e:
+                            print e.message
+                            pass
+                    else:
+                        raise Exception(
+                            Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "There is no record found on table"))
+            else:
+                print Language.MSG_CMD_LIST_HELP
         except Exception as e:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
+            print e.message
             pass
 
     def group(self, args):
@@ -157,9 +161,10 @@ class Main(object):
         :param args:
         """
         try:
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            if params:
+
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
                 if params.id and params.group:
                     dID = params.id
                     gID = params.group
@@ -174,6 +179,8 @@ class Main(object):
                 else:
                     print Language.MSG_ERR_EMPTY_ID.format('device')
                     pass
+            else:
+                print Language.MSG_CMD_GROUP_HELP
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
@@ -184,15 +191,15 @@ class Main(object):
             This method show running configuration by given option
         :param args:
         """
-        deviceMethods = DeviceMethods()
-        configMethods = ConfigMethods()
-        groupMethods = GroupMethods()
-        vlanMethods = VLanMethods()
         try:
             #moderate type value to determine the statement
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            if params:
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
+                deviceMethods = DeviceMethods(params)
+                configMethods = ConfigMethods()
+                groupMethods = GroupMethods()
+                vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
                 if pType == 'device':
@@ -208,6 +215,8 @@ class Main(object):
                     vlanMethods.show(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+            else:
+                print Language.MSG_CMD_SHOW_HELP
         except Exception as e:
             print str(e)
             pass
@@ -218,15 +227,15 @@ class Main(object):
         This method enables to set the device by given variables such as ssid, channel, frequency, maxclient
         :param args:
         """
-        deviceMethods = DeviceMethods()
-        configMethods = ConfigMethods()
-        groupMethods = GroupMethods()
-        vlanMethods = VLanMethods()
         try:
             #moderate type value to determine the statement
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            if params:
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
+                deviceMethods = DeviceMethods(params)
+                configMethods = ConfigMethods()
+                groupMethods = GroupMethods()
+                vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
                 if pType == 'device':
@@ -242,6 +251,44 @@ class Main(object):
                     vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+            else:
+                print Language.MSG_CMD_SET_HELP
+        except Exception as e:
+            print str(e)
+            pass
+
+    #this method works fine do not touch it!!!
+    def unset(self, args):
+        """
+        This method enables to set the device by given variables such as ssid, channel, frequency, maxclient
+        :param args:
+        """
+        try:
+            #moderate type value to determine the statement
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
+                deviceMethods = DeviceMethods(params)
+                configMethods = ConfigMethods()
+                groupMethods = GroupMethods()
+                vlanMethods = VLanMethods()
+                pType = params.type.split()[0]
+                # noinspection PyArgumentList
+                if pType == 'device':
+                    # noinspection PyArgumentList
+                    deviceMethods.unset(params)
+                elif pType == 'group':
+                    # noinspection PyArgumentList
+                    groupMethods.unset(params)
+                elif pType == 'config':
+                    # noinspection PyArgumentList
+                    configMethods.unset(params)
+                elif pType == 'vlan':
+                    vlanMethods.unset(params)
+                else:
+                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+            else:
+                print Language.MSG_CMD_UNSET_HELP
         except Exception as e:
             print str(e)
             pass
@@ -258,18 +305,15 @@ class Main(object):
         cmd = None
 
         try:
-            arglist = self.utils.getCleanParams(args)
-            params = self.argparser.get_args(arglist)
-            #check namespace variables if set
-            #moderate type value to determine the statement
-            #check if type is group to remove the group belong to given id and name
-            if params:
+            if args:
+                arglist = self.utils.getCleanParams(args)
+                params = self.argparser.get_args(arglist)
                 pType = params.type.split()[0]
                 #set gathered id params to be used
                 if params.id:
-                    pID = params.id
+                    pID = params.id.rstrip().lstrip()
                 elif params.name:
-                    pName = params.name
+                    pName = params.name.rstrip().lstrip()
                 else:
                     print Language.MSG_ERR_EMPTY_ID + '\n' + Language.MSG_ERR_EMPTY_NAME
 
@@ -286,19 +330,25 @@ class Main(object):
                         cmd = SQL.SQL_REMOVE_CONFIG % {'id': int(pID)}
                     #remove from given device from given group
                     elif pType == 'from':
-                        cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP % {'device': int(pID), 'group': ''}
+                        if params.group:
+                            gID = params.group.rstrip().lstrip()
+                            cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP % {'device': int(pID), 'group': int(gID)}
+                        else:
+                            raise Exception(
+                                Language.MSG_ERR_EMPTY_GROUP
+                            )
 
                     #remove vlan record from database
                     elif pType == 'vlan':
                         cmd = SQL.SQL_REMOVE_VLAN % {'id': int(pID)}
                     else:
                         print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
-
-            #functions database operations
-            if cmd is Empty:
-                print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "SQL command could not be created")
             else:
+                print Language.MSG_CMD_REMOVE_HELP
+            if cmd:
                 self.db.remove(cmd)
+            else:
+                raise Exception("SQL command could not be created")
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass

@@ -175,14 +175,16 @@ class GroupMethods(object):
         # TODO get all devices under given group by SQL: done
         # TODO set update every config file belongs to given device
 
-        from src.functions.ConfigMethods import ConfigMethods
+        from src.controller.ConfigMethods import ConfigMethods
         from src.model.Config import Config
+        from src.controller.DeviceMethods import DeviceMethods
         group = Group()
         config = Config()
+        deviceMethods = DeviceMethods(params)
         configMethods = ConfigMethods()
         try:
 
-            if params.option:
+            if params.option.rstrip().lstrip():
                 option = params.option.rstrip().lstrip()
             else:
                 print Language.MSG_ERR_EMPTY_OPTION.format('device')
@@ -192,17 +194,61 @@ class GroupMethods(object):
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
 
-            if params.parameter:
-                param = params.parameter.rstrip().lstrip()
-            else:
-                print Language.MSG_ERR_EMPTY_ID.format('device')
-
             #if params.parameter:
             #    param = params.parameter.rstrip().lstrip()
             #else:
             #    print Language.MSG_ERR_EMPTY_PARAMETER.format('device')
 
-            if group.getID() and option and param:# and param:
+            if group.getID() and option:# and param:
+
+                print "Your command(s) will be executing... Please enter required command params below:\n"
+                interface = raw_input("Enter parameter for interface of required device:")
+                param = raw_input("Enter parameter for %(type)s this command of device:" % {'type': params.option})
+
+                configSet = self.getGroupConfig(group.getID())
+                """
+                    This line gather an object like below:
+                    {   'fields':
+                            [   'Config', 'Device', 'Device Name', 'Config Name', 'description', 'ip', 'radius', 'ssid',
+                                'vlan', 'channel', 'frequency', 'maxclients', 'username', 'password', 'enable_password',
+                                'transport_protocol', 'personality', 'date_added', 'date_modified'
+                            ],
+                        'results': [
+                            [   23, 45, 'New test2 for demo', 'New test2 for demo', 'Default desc for device',
+                                '192.168.0.100',13, '0', 0, 4, 'None', None, 'Cisco', 'Cisco', 'Cisco', 'Telnet', 'ios',
+                                datetime.datetime(2013, 3, 6, 13, 52, 14), datetime.datetime(2013, 3, 7, 14, 27, 39)
+                            ],
+                            [   23, 47, 'Test after a couple hours', 'New test2 for demo', 'Default desc for device',
+                                '192.168.0.100', 13, '0', 0, 4, 'None', None, 'Cisco', 'Cisco', 'Cisco', 'Telnet', 'ios',
+                                datetime.datetime(2013, 3, 6, 13, 52, 14), datetime.datetime(2013, 3, 7, 14, 27, 39)
+                            ]
+                        ]
+                    }
+                """
+                """
+                    Now convert this object into this
+                    [
+                    {'username': 'Cisco', 'transport_protocol': 'Telnet', 'Device Name': 'With a fresh breath',
+                    'description': 'Default desc for device', 'date_added': datetime.datetime(2013, 3, 8, 9, 32, 13),
+                    'date_modified': datetime.datetime(2013, 3, 8, 9, 32, 13), 'ip': '192.168.0.100', 'vlan': 0,
+                    'enable_password': 'Cisco', 'Config Name': 'With a fresh breath', 'frequency': '0', 'radius': 0,
+                    'personality': 'ios', 'Device': 49, 'maxclients': 0, 'password': 'Cisco', 'Config': 27,
+                    'channel': 0, 'ssid': 'LBREAP'},
+                    {'username': 'Cisco', 'transport_protocol': 'Telnet', 'Device Name': 'With a fresh breath for
+                    second device', 'description': 'Default desc for device',
+                    'date_added': datetime.datetime(2013, 3, 8, 9, 33, 57),
+                    'date_modified': datetime.datetime(2013, 3, 8, 11, 23, 1),
+                    'ip': '192.168.0.35', 'vlan': 0, 'enable_password': 'Cisco',
+                    'Config Name': 'With a fresh breath for second device', 'frequency': '0', 'radius': 0,
+                    'personality': 'ios', 'Device': 50, 'maxclients': 0, 'password': 'Cisco', 'Config': 28,
+                    'channel': 4, 'ssid': 'LBREAP'}
+                    ]
+                """
+                # results cover
+                results = [dict(zip(configSet['fields'], result)) for result in configSet['results']]
+
+
+
                 # Generate update command
                 cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
                     'key' : params.option,
@@ -216,7 +262,7 @@ class GroupMethods(object):
             pass
 
     def show(self, params):
-        from src.functions.ConfigMethods import ConfigMethods
+        from src.controller.ConfigMethods import ConfigMethods
         config = self.device.getConfig()
         resp = Response()
         request = config.getRequest()

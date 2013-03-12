@@ -22,7 +22,6 @@ class Database(object):
     def __init__(self):
         """
 
-
         """
         self.__config__ = Resources.__db__config__
         self.__section__ = Resources.cfg_section_postgre
@@ -110,7 +109,6 @@ class Database(object):
             pass
         finally:
             self.close_conn(conn)
-
 
     def update(self, cmd):
         """

@@ -44,14 +44,22 @@ class CommunicationInterface(object):
             print Language.MSG_ERR_COMM_INTERFACE_FAILED.format(e.message)
             pass
 
-    def write_source_file(self, source):
+    def write_source_file(self, source, target, type='JSON'):
         """
             Write source file to provide the communication interface
         :param source: 
         """
         try:
-            f = open(Resources.ci_source, 'w+')
-            f.write(json.dumps(source))
+            f = open(target, 'w+')
+            if type is 'JSON':
+                f.write(json.dumps(source))
+            elif type is 'RAW':
+                f.write(source)
+            elif type is 'XML':
+                # Convert source into XML file will be implemented
+                pass
+            else:
+                f.write(source)
             f.close()
         except Exception as e:
             print e.message

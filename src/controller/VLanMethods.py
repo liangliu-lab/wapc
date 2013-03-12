@@ -286,9 +286,8 @@ class VLanMethods(threading.Thread):
             This methods handle options and connect throug device by given name
         :param params:
         """
-        from src.functions.ConfigMethods import ConfigMethods
+        from src.controller.ConfigMethods import ConfigMethods
         config = self.device.getConfig()
-        resp = Response()
         request = config.getRequest()
         commands = request.getCommands()
         device = Device()
@@ -491,9 +490,8 @@ class VLanMethods(threading.Thread):
         """
 
     def show(self, params):
-        from src.functions.ConfigMethods import ConfigMethods
+        from src.controller.ConfigMethods import ConfigMethods
         config = self.device.getConfig()
-        resp = Response()
         request = config.getRequest()
         commands = request.getCommands()
         device = Device()

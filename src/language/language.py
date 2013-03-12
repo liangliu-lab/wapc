@@ -30,6 +30,10 @@ class Language(object):
                        "\n\t[-I],[--ip]\tUse this params when adding some new variables " \
                        "which needs an ip such as device, config, etc." \
                        "\n\t[-n],[--name]\tTo set a name to related type variable " \
+                       "\n\t[-b],[--brand]\tTo set device brand to relate with its model and/or firmware" \
+                       "\n\t[-m],[--model]\tTo set device model to relate with its config file" \
+                       "\n\t[-F],[--firmware]\tTo set device firmware to relate with its config file" \
+                       "\n\t[-R],[--relation]\tTo set device relation one of MASTER of SLAVE" \
                        "\n\t[-D],[--description]\tTo set a description to related type variable " \
                        "\n\t[-u],[--username]\tProvide a username which will be used to connect device" \
                        "\n\t[-p],[--password]\tProvide a password which will be used to connect  and configure device"
@@ -58,7 +62,7 @@ class Language(object):
                        "\n\tThese will be used to gather related commands from config file you provided"
 
     MSG_CMD_UNSET_HELP = "\nUsage:\t$ unset [OPTIONS]" \
-                         "\n\tAdd device, group, vlan, config etc with given parameters " \
+                         "\n\tUnset option, group, vlan, config etc with given parameters " \
                          "\n\t[-t],[--type]\tDefine type device, group, vlan, config " \
                          "\n\t[-i],[--id]\tDefine id of device or group" \
                          "\n\t[-o],[--option]\tProvide option must be one of\n\t" \
@@ -92,30 +96,62 @@ class Language(object):
 
     MSG_ADD_ID_HELP = '\t-i,--id\t\t\tProvide ID address to determine the variable ' \
                       'with usage id'
+
     MSG_ADD_IP_HELP = '\t-I,--ip\t\t\tProvide IP address for the newly added device ' \
                       'with usage to connect'
+
     MSG_ADD_NAME_HELP = '\t-n,--name\t\tProvide name for the newly added device with usage name'
+
     MSG_ADD_USERNAME_HELP = '\t-u,--username\t\tProvide username for the newly added device ' \
                             'with usage username'
+
     MSG_ADD_PASSWORD_HELP = '\t-p,--password\t\tProvide password for given username of the newly added device ' \
                             'with usage password'
+
     MSG_ADD_GROUP_HELP = '\t-g,--group\t\tAdd device to the group with usage group '
+
     MSG_ADD_CONFIG = '\t-c,--config\t\tAdd new configuration and map it to the given group or device'
+
     MSG_ADD_SUBNET_HELP = '\t-s,--subnet\t\tDefine subnet for VLAN will be configured with usage 255.255.255.0'
+
     MSG_ADD_DEVICE_HELP = '\t-d,--device\t\tProvide device id to add provided device to the group'
+
     MSG_ADD_INTERFACE_HELP = '\t-e,--interface\tProvide ethernet interface to configure VLAN for group or device ' \
                              'with usage  eth0'
+
     MSG_ADD_DESC_HELP = '\t-D,--description\tProvide a short description for group or device with usage '
+
     MSG_ADD_RADIUS_HELP = '\t-r,--radius\t\tProvide Radius id to configure radius authentication for group or device' \
                           ' with usage radius_id'
+
     MSG_ADD_SSID_HELP = '\t-S,--ssid\t\tProvide SSID for group or device with usage ssid'
+
     MSG_ADD_VLAN_HELP = '\t-V,--vlan\t\tProvide VLAN id to determine VLAN for group or device with usage vlan_id'
+
     MSG_ADD_CHANNEL_HELP = '\t-H,--channel\t\tProvide channel to configure for group or device with usage channel'
+
     MSG_ADD_FREQ_HELP = '\t-f,--frequency\t\tProvide channel frequency to configure for group or device with usage'
+
     MSG_ADD_TYPE_HELP = '\t-t,--type\t\tProvide type of group/device/config/vlan from database ' \
                         'with usage  group/device/config/vlan others will cause error(s)'
+
     MSG_ADD_OPTION_HELP = '\t-o,--option\t\tProvide type of group/device/config/vlan from database ' \
                           'with usage group/device/config/vlan'
+
+    MSG_ADD_RELATION_HELP = '\t-R, --relation\t\tProvide a relation to define which device is master and ' \
+                            'which device is slave to initialize the device in inventory'
+
+    MSG_ADD_BRAND_HELP = '\t-b, --brand\t\tProvide device brand to identify which model and/or firmware ' \
+                         'config file will be loaded to initialize the device in inventory'
+
+    MSG_ADD_MODEL_HELP = '\t-m, --model\t\tProvide device model to identify which config file will be loaded ' \
+                         'to initialize the device in inventory'
+
+    MSG_ADD_FIRMWARE_HELP = '\t-F, --firmware\t\tProvide device firmware to identify which config file will be loaded '\
+                            'to initialize the device in inventory'
+
+    MSG_ADD_FIRMWARE_HELP = '\t-F, --firmware\t\tProvide device firmware to identify which config file will be loaded '\
+                            'to initialize the device in inventory'
 
     #newly added variables
     MSG_ADD_NEW = 'A new {0} added with record id {1} and with name {2}'
@@ -137,6 +173,9 @@ class Language(object):
     MSG_ERR_EMPTY_PARAMETER = 'There is no Parameter has been provided for the {0} you would like to set.' \
                               'Please make sure you provide an option with -P, --param usage '
 
+    MSG_ERR_EMPTY_GROUP = "Please provide a group id with usage -g, --group " \
+                          "to define which group item will be removed from"
+
     #config parser statement messages
     MSG_ERR_NO_CONFIG_SECTION = 'No section found in config file exception ({0})'
 
@@ -146,11 +185,12 @@ class Language(object):
 
     #database statement messages
     MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on {0} line while {1} database with error: ({2})'
+    MSG_ERR_DATABASE_INSERT = 'New record could not be inserted into database. Please try again your command.'
     MSG_ERR_DB_CONNECT = "An unknown error occurred while connecting database ({0})"
     MSG_ERR_DB_CLOSE = "Connection could not close because of ({0})"
 
     #success statement messages
-    MSG_SUCCESS_SELECT = "Retrieving data from database successfully executed. Continue..."
+    MSG_SUCCESS_SELECT = "Getting records from database please wait..."
     MSG_SUCCESS_ADD = "Given values inserted to the database successfully executed. Continue..."
     MSG_SUCCESS_REMOVE = "Record(s) successfully removed from database. Continue..."
     MSG_SUCCESS_UPDATE = "Record(s) successfully updated by given values. Continue..."

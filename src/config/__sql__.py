@@ -97,7 +97,7 @@ class SQL(object):
                               "ac.vlan," \
                               "ac.channel," \
                               "ac.frequency," \
-                              "ac.maxclients" \
+                              "ac.maxclients," \
                               "ac.username," \
                               "ac.password," \
                               "ac.enable_password," \
@@ -127,10 +127,10 @@ class SQL(object):
                         "ip, " \
                         "radius, " \
                         "ssid, " \
-                        "vlan_id, " \
+                        "vlan, " \
                         "channel, " \
                         "frequency, " \
-                        "maxclients" \
+                        "maxclients," \
                         "username," \
                         "password," \
                         "enable_password," \
@@ -159,8 +159,29 @@ class SQL(object):
     # =============================
     #insert new device
     SQL_INSERT_DEVICE = "INSERT INTO " \
-                        "apc_device(name, description, ip, config_id, username, password, date_added, date_modified) " \
-                        "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}') RETURNING id;"
+                        "apc_device(" \
+                        "name, " \
+                        "description, " \
+                        "ip, " \
+                        "config_id, " \
+                        "brand, " \
+                        "model, " \
+                        "firmware, " \
+                        "relation, " \
+                        "date_added, " \
+                        "date_modified) " \
+                        "VALUES(" \
+                        "'%(name)s', " \
+                        "'%(desc)s', " \
+                        "'%(ip)s', " \
+                        "'%(config)d', " \
+                        "'%(brand)s', " \
+                        "'%(model)s', " \
+                        "'%(firmware)s', " \
+                        "'%(relation)s'," \
+                        "'%(date_added)s', " \
+                        "'%(date_modified)s', " \
+                        ") RETURNING id;"
 
     # =============================
     #insert group to the database
@@ -180,6 +201,14 @@ class SQL(object):
     # update queries
     # =============================
     #update device group
+    SQL_UPDATE_DEVICE_CONFIG = "UPDATE apc_config " \
+                               "SET %(key)s = '%(value)s', date_modified='%(modified)s' " \
+                               "WHERE id IN (" \
+                               "SELECT ac.id FROM apc_config AS ac " \
+                               "INNER JOIN apc_device AS ad ON ad.config_id = ac.id " \
+                               "WHERE ad.id=%(id)d);"
+
+
     #update config
     SQL_UPDATE_CONFIG = "UPDATE apc_config " \
                         "SET %(key)s = '%(value)s', date_modified='%(modified)s'" \

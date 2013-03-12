@@ -6,7 +6,7 @@
 
 import cmd
 import sys
-from src.functions.main import Main
+from src.controller.main import Main
 from time import gmtime, strftime
 from src.resources.resources import Resources
 

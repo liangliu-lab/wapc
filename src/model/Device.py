@@ -17,8 +17,10 @@ class Device(dict):
         self["id"] = None
         self["ip"] = None
         self["name"] = None
-        self["username"] = 'Cisco'
-        self["password"] = 'Cisco'
+        self["brand"] = 'cisco'
+        self["model"] = 'cisco'
+        self["firmware"] = 'cisco'
+        self["relation"] = 'slave'
         self["config_id"] = None
         self["config"] = Config()
         self["description"] = None
@@ -50,31 +52,57 @@ class Device(dict):
         """
         return self["ip"]
 
-    def setUsername(self, username):
+    def setBrand(self, brand):
         """
 
-        :param username:
+        :param brand:
         """
-        self["username"] = username
+        self["brand"] = brand
 
-    def getUsername(self):
+    def getBrand(self):
         """
         :return:
         """
-        return self["username"]
+        return self["brand"]
 
-    def setPassword(self, password):
+    def setModel(self, model):
         """
 
-        :param password:
+        :param model:
         """
-        self["username"] = password
+        self["model"] = model
 
-    def getPassword(self):
+    def getModel(self):
         """
         :return:
         """
-        return self["username"]
+        return self["model"]
+
+    def setFirmware(self, firmware):
+        """
+
+        :param firmware:
+        """
+        self["firmware"] = firmware
+
+    def getFirmware(self):
+        """
+        :return:
+        """
+        return self["firmware"]
+
+    def setRelation(self, relation):
+        """
+
+        :param relation:
+        """
+        self["relation"] = relation
+
+    def getRelation(self):
+        """
+        :return:
+        """
+        return self["relation"]
 
     def setName(self, name):
         """

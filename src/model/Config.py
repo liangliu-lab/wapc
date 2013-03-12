@@ -27,7 +27,8 @@ class Config(dict):
         self["ssid"] = "LBREAP"
         self["vlan_id"] = 0
         self["channel"] = 0
-        self["channel_freq"] = None
+        self["channel_freq"] = 0
+        self["maxclient"] = 0
         self["request"] = Request()
 
     def setID(self, cID):
@@ -221,6 +222,20 @@ class Config(dict):
             :return personality:
             """
         return self["personality"]
+
+    def setMaxclient(self, request):
+        """
+                Set request
+            :param request:
+            """
+        self["maxclient"].update(request)
+
+    def getMaxclient(self):
+        """
+
+            :return:
+            """
+        return self["maxclient"]
 
     def setRequest(self, request):
         """

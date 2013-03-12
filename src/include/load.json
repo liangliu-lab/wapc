@@ -1,21 +1,13 @@
 {
-    "ip":"192.168.0.35",
-    "username":"Cisco",
-    "password":"Cisco",
-    "transport_protocol":"Telnet",
-    "enable_password":"Cisco",
-    "personality":"ios",
-    "request":{
-        "enable" : true,
-        "configure" : false,
-        "commands" : [
-            {
-                "command" : "show processes | include CPU utilization "
-            },
-            {
-                "command" : "show memory stat"
-            }
-        ]
-    }
+    "commands" :[
+        {
+            "command" : "copy tftp://10.6.1.1/%(file)s running-config",
+            "match" : "/Destination filename.*/"
+        },
+        {
+            "command" : "running-config",
+            "match" : "//"
+        }
 
+    ]
 }

@@ -41,10 +41,8 @@ class Language(object):
     MSG_CMD_EDIT_HELP = "\nUsage:\t$ edit [OPTIONS]"\
                         "\n\tEdit details of given type of device with given parameters " \
                         "\n\t[-t],[--type]\tDefine type device, group, vlan, config " \
-                        "\n\t[-I],[--ip]\tUse this params when adding some new variables " \
-                        "which needs an ip such as device, config, etc." \
-                        "\n\t[-n],[--name]\tTo set a name to related type variable " \
-                        "\n\t[-u],[--username]\tProvide a username which will be used to connect device"
+                        "\n\t[-o],[--option]\tProvide option must be one of related type database fields\n\t" \
+                        "\n\t[-P],[--param]\tProvide parameter to be update value"
 
     MSG_CMD_GROUP_HELP = "\nUsage:\t$ group [OPTIONS]" \
                          "\n\tGroup given devices" \
@@ -72,7 +70,9 @@ class Language(object):
 
     MSG_CMD_LIST_HELP = "\nUsage:\t$ ls [OPTIONS]" \
                         "\n\tList details of given type" \
-                        "\n\t[-t],[--type]\tAdd device, group, vlan, config "
+                        "\n\t[-t],[--type]\tList device, group, vlan, config" \
+                        "\n\t[-g],[--group]\tList device, vlan or config from given group" \
+                        "\n\t[-i],[--id]\tDefine id of group"
 
     MSG_CMD_SHOW_HELP = "\nUsage:\t$ sh [OPTIONS]" \
                         "\n\tShow details of given type" \
@@ -133,13 +133,13 @@ class Language(object):
 
     MSG_ADD_CHANNEL_HELP = '\t-H,--channel\t\tProvide channel to configure for group or device with usage channel'
 
-    MSG_ADD_FREQ_HELP = '\t-f,--frequency\t\tProvide channel frequency to configure for group or device with usage'
-
     MSG_ADD_TYPE_HELP = '\t-t,--type\t\tProvide type of group/device/config/vlan from database ' \
                         'with usage  group/device/config/vlan others will cause error(s)'
 
     MSG_ADD_OPTION_HELP = '\t-o,--option\t\tProvide type of group/device/config/vlan from database ' \
                           'with usage group/device/config/vlan'
+
+    MSG_ADD_PARAM_HELP = '\t-P,--param\t\tProvide a parameter to be set to the given option'
 
     MSG_ADD_RELATION_HELP = '\t-R, --relation\t\tProvide a relation to define which device is master and ' \
                             'which device is slave to initialize the device in inventory'

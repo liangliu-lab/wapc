@@ -14,7 +14,7 @@ def __main__():
     try:
         print Language.MSG_APP_WELCOME
         print Language.MSG_APP_CMD_INIT
-        ConsoleInterface().cmdloop()
+        ConsoleInterface().cmdloop_with_keyboard_interrupt()
     except Exception as e:
         print e.message
         pass

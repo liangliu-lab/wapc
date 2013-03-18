@@ -171,39 +171,36 @@ class GroupMethods(object):
             Sample command: set -t group -o ssid -i [GROUPID]
         :param params:
         """
-        # TODO implement group editing one by one device
+        # TODO implement group editing one by one device: done
         # TODO get all devices under given group by SQL: done
-        # TODO set update every config file belongs to given device
+        # TODO set update every config file belongs to given device: done
 
         from src.controller.ConfigMethods import ConfigMethods
         from src.model.Config import Config
         from src.controller.DeviceMethods import DeviceMethods
+        import threading
         group = Group()
         config = Config()
-        deviceMethods = DeviceMethods(params)
-        configMethods = ConfigMethods()
+        configMethods = ConfigMethods(config, params)
         try:
 
-            if params.option.rstrip().lstrip():
-                option = params.option.rstrip().lstrip()
+            if params.option:
+                option = params.option.strip()
             else:
                 print Language.MSG_ERR_EMPTY_OPTION.format('device')
 
             if params.id:
-                group.setID(params.id.rstrip().lstrip())
+                group.setID(params.id.strip())
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
 
-            #if params.parameter:
-            #    param = params.parameter.rstrip().lstrip()
-            #else:
-            #    print Language.MSG_ERR_EMPTY_PARAMETER.format('device')
-
-            if group.getID() and option:# and param:
+            if group.getID() and option:
 
                 print "Your command(s) will be executing... Please enter required command params below:\n"
-                interface = raw_input("Enter parameter for interface of required device:")
-                param = raw_input("Enter parameter for %(type)s this command of device:" % {'type': params.option})
+                #params.interface = raw_input("Enter parameter for interface of required device:").strip()
+                params.interface = "0"
+                params.param = raw_input("Enter parameter for %(type)s this command of device:"
+                                         % {'type': params.option}).strip()
 
                 configSet = self.getGroupConfig(group.getID())
                 """
@@ -247,12 +244,27 @@ class GroupMethods(object):
                 # results cover
                 results = [dict(zip(configSet['fields'], result)) for result in configSet['results']]
 
+                for row in results:
+                    if 'date_added' in row:
+                        row['date_added'] = row['date_added'].strftime(Resources.time_format)
+                    if 'date_modified' in row:
+                        row['date_modified'] = row['date_modified'].strftime(Resources.time_format)
+                    else:
+                        raise Exception("Related option you provided could not be found in object definition.")
 
+                pool = []
+                for conf in results:
+                    thread_config = ConfigMethods(conf, params)
+                    pool.append(thread_config)
+
+                for thread in pool:
+                    thread.start()
+                    thread.join()
 
                 # Generate update command
                 cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
-                    'key' : params.option,
-                    'value' : params.parameter,
+                    'key' : option,
+                    'value' : params.param,
                     'group_id': int(group.getID())
                 }
         except Exception as e:
@@ -328,7 +340,7 @@ class GroupMethods(object):
                 config.setRequest(request)
 
                 #write config model into input.json file
-                self.ci.write_source_file(config)
+                self.ci.write_source_file(config, Resources.ci_source, 'JSON')
 
                 #call communication interface script and gather response - RPC
                 print "Executing device commands please wait..."

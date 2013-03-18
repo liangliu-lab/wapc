@@ -1,8 +1,11 @@
 # coding=utf-8
 
 """
-    Documentation
-    :author Fatih Karatana
+    Main class handles main requires and distribute them into related subprocesses. This class is called by
+    @class ConsoleInterface() and communicate with sub-controllers. Main class also manipulate commandline arguments,
+    clear them from whitespaces, apply a filter regex and send them into @class ArgParser().
+
+    @author Fatih Karatana
 """
 
 from time import strftime, gmtime
@@ -12,6 +15,7 @@ from src.controller.VLanMethods import VLanMethods
 from src.helper.ArgParser import ArgParser
 from src.helper.Utils import Utils
 from src.language.language import Language
+from src.model.Config import Config
 from src.resources.resources import Resources
 from src.controller.DeviceMethods import DeviceMethods
 from src.controller.GroupMethods import GroupMethods
@@ -24,7 +28,7 @@ class Main(object):
     """
         Main class includes all base controller methods of the software
     """
-
+    # TODO create an environment to make software work as in development, test and production
     def __init__(self):
         self.utils = Utils()
         self.argparser = ArgParser()
@@ -44,7 +48,7 @@ class Main(object):
                 arglist = self.utils.getCleanParams(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
-                configMethods = ConfigMethods()
+                configMethods = ConfigMethods(Config(), params)
                 groupMethods = GroupMethods()
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
@@ -79,7 +83,7 @@ class Main(object):
                 arglist = self.utils.getCleanParams(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
-                configMethods = ConfigMethods()
+                configMethods = ConfigMethods(Config(), params)
                 groupMethods = GroupMethods()
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
@@ -119,35 +123,30 @@ class Main(object):
                 #moderate type value to determine the statement
                 if pType == 'group':
                     cmd = SQL.SQL_SELECT_GROUP_ALL
-                    flag = True
                 elif pType == 'device':
-                    cmd = SQL.SQL_SELECT_DEVICE_ALL
-                    flag = True
+                    if params.group:
+                        cmd = SQL.SQL_SELECT_DEVICE_FROM_GROUP % {'group_id': int(params.group.strip())}
+                    else:
+                        cmd = SQL.SQL_SELECT_DEVICE_ALL
                 elif pType == 'config':
                     cmd = SQL.SQL_SELECT_CONFIG
-                    flag = True
                 elif pType == 'vlan':
                     cmd = SQL.SQL_SELECT_VLAN
-                    flag = True
                 else:
                     raise Exception(
-                        Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
+                        Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No or wrong [type] argument provided')
                     )
-                    pass
 
-                if flag is False:
-                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "SQL command could not be created")
-                else:
+                if cmd:
                     fields, results = self.db.select(cmd)
                     if fields and results:
-                        try:
-                            self.utils.formatter(fields, results)
-                        except Exception as e:
-                            print e.message
-                            pass
+                        self.utils.formatter(fields, results)
                     else:
                         raise Exception(
                             Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "There is no record found on table"))
+                else:
+                    print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "SQL command could not be created")
+
             else:
                 print Language.MSG_CMD_LIST_HELP
         except Exception as e:
@@ -196,7 +195,7 @@ class Main(object):
                 arglist = self.utils.getCleanParams(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
-                configMethods = ConfigMethods()
+                configMethods = ConfigMethods(Config(), params)
                 groupMethods = GroupMethods()
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
@@ -232,7 +231,7 @@ class Main(object):
                 arglist = self.utils.getCleanParams(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
-                configMethods = ConfigMethods()
+                configMethods = ConfigMethods(Config(), params)
                 groupMethods = GroupMethods()
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
@@ -268,7 +267,7 @@ class Main(object):
                 arglist = self.utils.getCleanParams(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
-                configMethods = ConfigMethods()
+                configMethods = ConfigMethods(Config(), params)
                 groupMethods = GroupMethods()
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
@@ -375,6 +374,7 @@ class Main(object):
             Language.MSG_ADD_NAME_HELP,
             Language.MSG_ADD_USERNAME_HELP,
             Language.MSG_ADD_PASSWORD_HELP,
+            Language.MSG_ADD_PARAM_HELP,
             Language.MSG_ADD_GROUP_HELP,
             Language.MSG_ADD_CONFIG,
             Language.MSG_ADD_SUBNET_HELP,
@@ -384,7 +384,6 @@ class Main(object):
             Language.MSG_ADD_SSID_HELP,
             Language.MSG_ADD_VLAN_HELP,
             Language.MSG_ADD_CHANNEL_HELP,
-            Language.MSG_ADD_FREQ_HELP,
             Language.MSG_ADD_TYPE_HELP,
             Language.MSG_ADD_OPTION_HELP
         )

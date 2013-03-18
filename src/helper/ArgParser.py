@@ -38,6 +38,11 @@ class ArgParser(object):
                                  help=Language.MSG_ADD_BRAND_HELP,
                                  action='store'
         )
+        self.parser.add_argument('-c', '--config',
+                                 dest='config',
+                                 help=Language.MSG_ADD_CONFIG,
+                                 action='store'
+        )
         self.parser.add_argument('-d', '--device',
                                  dest='device',
                                  help=Language.MSG_ADD_DEVICE_HELP,
@@ -50,11 +55,6 @@ class ArgParser(object):
         self.parser.add_argument('-e', '--inet',
                                  dest='interface',
                                  help=Language.MSG_ADD_INTERFACE_HELP,
-                                 action='store'
-        )
-        self.parser.add_argument('-f', '--frequency',
-                                 dest='frequency',
-                                 help=Language.MSG_ADD_FREQ_HELP,
                                  action='store'
         )
         self.parser.add_argument('-F', '--firmware',
@@ -95,7 +95,7 @@ class ArgParser(object):
         )
         self.parser.add_argument('-o', '--option',
                                  dest='option',
-                                 help=Language.MSG_ADD_FREQ_HELP,
+                                 help=Language.MSG_ADD_OPTION_HELP,
                                  action='store'
         )
         self.parser.add_argument('-p', '--password',
@@ -104,8 +104,8 @@ class ArgParser(object):
                                  action='store'
         )
         self.parser.add_argument('-P', '--param',
-                                 dest='parameter',
-                                 help=Language.MSG_ADD_FREQ_HELP,
+                                 dest='param',
+                                 help=Language.MSG_ADD_PARAM_HELP,
                                  action='store'
         )
         self.parser.add_argument('-r', '--radius',

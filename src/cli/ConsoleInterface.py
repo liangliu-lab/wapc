@@ -142,15 +142,75 @@ class ConsoleInterface(cmd.Cmd):
             :param args:
         """
         try:
-            sys.exit()
+            sys.exit(0)
         except Exception as e:
             print e.message
             pass
 
-    def do_EOF(self, line):
+    def preloop(self):
+        """
+            Preloop is a helper method to handle commands before loop executed
+
+        """
+        cmd.Cmd.preloop(self)
+        self._hist = []
+        self._locals = {}
+        self._globals = {}
+
+    def postloop(self):
+        """
+            Postloop is a helper method to declare command will be run after loop executed
+
+        """
+        cmd.Cmd.postloop(self)
+        print "Exiting ..."
+
+    def precmd(self, line):
         """
 
         :param line:
         :return:
         """
-        return True
+        self._hist += [ line.strip() ]
+        return line
+
+    def postcmd(self, stop, line):
+        """
+
+        :param stop:
+        :param line:
+        :return:
+        """
+        return stop
+
+    def emptyline(self):
+        """
+
+
+        :return:
+        """
+        return cmd.Cmd.emptyline(self)
+
+    def cmdloop_with_keyboard_interrupt(self):
+        """
+            Keyboard interruption method
+
+        """
+        doQuit = False
+        while not doQuit:
+            try:
+                self.cmdloop()
+                doQuit = True
+            except KeyboardInterrupt:
+                sys.stdout.write('\n')
+            # enable this when production
+            except BaseException:
+                sys.stdout.write('\n')
+
+    def do_EOF(self, args):
+        """
+
+        :param args:
+        :return:
+        """
+        return self.do_exit(args)

@@ -1,21 +1,21 @@
-## Labris Wirelss Access Point Controller v1.0#
+##Labris Wirelss Access Point Controller v1.0#
 
-## DESCRIPTION ##
+##DESCRIPTION##
 #This software has been created to manage wireless acess point controllers with no brand dependency.
 #Version 1.0 includes only CLI(Command Line Interface) to manage devices via Linux-familiar commands such as rm, ls, etc..
 #Please see commands and options list below.
 
-## FEATURES ##
-# Add new devices into the inventory
-# Create groups with given devices
-# Manage device configurations, add, update and delete
-# Manage device SSID, Channel, Associations, Maxclients
-# Roaming
-# Group management
-# Service oriented architecture to communicate devices over Telnet
-# Configure device commands over wapc-config.json
+##FEATURES##
+#Add new devices into the inventory
+#Create groups with given devices
+#Manage device configurations, add, update and delete
+#Manage device SSID, Channel, Associations, Maxclients
+#Roaming
+#Group management
+#Service oriented architecture to communicate devices over Telnet
+#Configure device commands over wapc-config.json
 
-## COMMAND & OPTIONS ##
+##COMMAND & OPTIONS##
 Use methods below to add, remove, update and list device(s), group(s) or config(s) with commands:
 Commands:
 Usage:	$ add [OPTIONS]
@@ -107,8 +107,8 @@ Options:
 	-o,--option		Provide type of group/device/config/vlan from database with usage group/device/config/vlan
 
 
-## LICENSE ##
+##LICENSE##
 This software is commercially licensed by Labris Teknoloji Ltd. Şti.
 
-## CHANGELOG ##
+##CHANGELOG##
 #v1.0

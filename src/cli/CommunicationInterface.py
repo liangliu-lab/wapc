@@ -65,7 +65,7 @@ class CommunicationInterface(object):
             print e.message
             pass
 
-    def backup(self, source, target, time):
+    def backup(self, source, target, time, type='RAW'):
         """
 
         :rtype : object
@@ -78,7 +78,13 @@ class CommunicationInterface(object):
             if not os.path.exists(backup_folder):
                 os.makedirs(backup_folder)
             f = open(backup_folder + "/" + Resources.back_name.format(time.replace(' ', '-')), 'w+')
-            f.write(json.dumps(source))
+            if type is 'JSON':
+                f.write(json.dumps(source))
+            elif type is 'RAW':
+                f.write(source)
+            elif type is 'XML':
+                # Convert source into XML file will be implemented
+                pass
             f.close()
         except Exception as e:
             print Language.MSG_ERR_FILE_BACKUP_FAILED.format(e.message)

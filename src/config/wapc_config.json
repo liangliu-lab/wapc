@@ -15,7 +15,8 @@
                 "type": "channel"
             },
             {
-                "command":"exit"
+                "configure" : "end",
+                "command":"write mem"
             }
         ]
     },
@@ -30,6 +31,10 @@
                 "command" : "ip address ",
                 "param" : "",
                 "type": "ip"
+            },
+            {
+                "configure" : "end",
+                "command":"write mem"
             }
         ]
     },
@@ -49,7 +54,8 @@
                 "type": "maxclient"
             },
             {
-                "command":"exit"
+                "configure" : "end",
+                "command":"write mem"
             }
         ]
     },
@@ -62,6 +68,10 @@
                 "command":"no dot11 ssid ",
                 "param":"",
                 "type": "ssid"
+            },
+            {
+                "configure" : "end",
+                "command":"write mem"
             }
         ]
     },
@@ -100,11 +110,9 @@
                 "param":"",
                 "type": "ssid"
             },
-            {
-                "command":"exit"
-            },
-            {
-                "command":"exit"
+	        {
+                "configure" : "end",
+                "command":"write mem"
             }
         ]
     },
@@ -152,7 +160,7 @@
         "configure":false,
         "commands":[
             {
-                "command":"show controllers dot11Radio 0 | include Current.Frequency"
+                "command":"show controllers dot11Radio 0 | include Frequency"
             }
         ]
     },

@@ -20,6 +20,7 @@ class Resources(object):
 
     #communication interface script source file
     ci_source = INCLUDE_PATH + "input.json"
+    input_source = INCLUDE_PATH + "%(file)s.json"
 
     #defulat config commands for brand new addded device
     ci_config = INCLUDE_PATH + "default.json"
@@ -40,7 +41,7 @@ class Resources(object):
     back_name = "backup-{0}.bak"
 
     #shell initial prompt
-    prompt = "WACP:~ cli$ "
+    prompt = "WAPC:~ cli$ "
 
     #global recent time format
     time_format = "%Y-%m-%d %H:%M:%S"

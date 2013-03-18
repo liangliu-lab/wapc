@@ -184,7 +184,7 @@ class SQL(object):
                         "'%(firmware)s', " \
                         "'%(relation)s'," \
                         "'%(date_added)s', " \
-                        "'%(date_modified)s', " \
+                        "'%(date_modified)s'" \
                         ") RETURNING id;"
 
     # =============================

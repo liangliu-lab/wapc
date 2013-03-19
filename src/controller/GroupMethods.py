@@ -35,14 +35,14 @@ class GroupMethods(object):
         try:
             #check namespace variables if set
             if params.name:
-                group.setName(params.name.rstrip().lstrip())
+                group.setName(params.name.strip())
             else:
-                print Language.MSG_ERR_EMPTY_NAME.format('group')
+                group.setName(raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'),":"))
 
             if params.description:
-                group.setDescription(params.name.rstrip().lstrip())
+                group.setDescription(params.description.strip())
             else:
-                print Language.MSG_ERR_EMPTY_NAME.format('group')
+                print Language.MSG_ERR_EMPTY_DESC.format('group')
 
             if params.config:
                 group.setConfig(params.config)
@@ -57,10 +57,10 @@ class GroupMethods(object):
                 self.now
             )
             gID = self.db.insert(cmd)
-            if gID is Empty:
-                print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting new group', gID[0])
-            else:
+            if gID:
                 print Language.MSG_ADD_NEW.format('group', gID[0], group.getName())
+            else:
+                print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting new group', gID[0])
         except Exception as e:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
             pass
@@ -123,29 +123,22 @@ class GroupMethods(object):
         try:
             if params.id:
                 did = params.id.rstrip().lstrip()
-                rset = self.read(did)
-                data = dict(map(list, zip(rset['fields'], rset['results'])))
+                if params.option:
+                    option = params.option.strip()
+                else:
+                    print Language.MSG_ADD_OPTION_HELP
+                    option = raw_input("Please enter 'option' value:").strip()
 
-                if params.name:
-                    group.setName(params.name.rstrip().lstrip())
+                if params.param:
+                    param = params.param.strip()
                 else:
-                    group.setName(data["name"])
-                if params.description:
-                    group.setDescription(params.description.rstrip().lstrip())
-                else:
-                    group.setDescription(data["description"])
-                if params.config:
-                    group.setConfig(params.config.rstrip().lstrip())
-                else:
-                    group.setConfig(data["config"])
-
-                group.setModified(self.now)
+                    print Language.MSG_ADD_PARAM_HELP
+                    param = raw_input("Please enter 'param' value:").strip()
 
                 cmd = SQL.SQL_UPDATE_GROUP % \
                       {
-                          "name": group.getName(),
-                          "description": group.getDescription(),
-                          "config_id": int(group.getConfig()),
+                          "key": option,
+                          "value": param,
                           "modified": self.now,
                           "id": int(did)
                       }
@@ -245,10 +238,10 @@ class GroupMethods(object):
                 results = [dict(zip(configSet['fields'], result)) for result in configSet['results']]
 
                 for row in results:
-                    if 'date_added' in row:
-                        row['date_added'] = row['date_added'].strftime(Resources.time_format)
-                    if 'date_modified' in row:
-                        row['date_modified'] = row['date_modified'].strftime(Resources.time_format)
+                    if 'Add Date' in row:
+                        row['Add Date'] = row['Add Date'].strftime(Resources.time_format)
+                    if 'Last Modified' in row:
+                        row['Last Modified'] = row['Last Modified'].strftime(Resources.time_format)
                     else:
                         raise Exception("Related option you provided could not be found in object definition.")
 
@@ -272,98 +265,7 @@ class GroupMethods(object):
             pass
 
     def show(self, params):
-        from src.controller.ConfigMethods import ConfigMethods
-        config = self.device.getConfig()
-        resp = Response()
-        request = config.getRequest()
-        commands = request.getCommands()
-        device = Device()
-        config = Config()
-        configMethods = ConfigMethods()
-        try:
-            if params.option:
-                option = params.option.rstrip().lstrip()
-            else:
-                print Language.MSG_ERR_EMPTY_OPTION.format('device')
-
-            if params.id:
-                device.setID(params.id.rstrip().lstrip())
-            else:
-                print Language.MSG_ERR_EMPTY_ID.format('device')
-
-            if device.getID():
-                #gather device detail
-                rsetDevice = self.read(device.getID())
-                dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
-                dataDevice["added"] = dataDevice["added"].strftime(Resources.time_format)
-                dataDevice["modified"] = dataDevice["modified"].strftime(Resources.time_format)
-                device.update(dataDevice)
-
-                rsetConfig = configMethods.read(dataDevice["config"])
-                dataConfig = dict(map(list, zip(rsetConfig['fields'], rsetConfig['results'])))
-                dataConfig["date_added"] = dataConfig["date_added"].strftime(Resources.time_format)
-                dataConfig["date_modified"] = dataConfig["date_modified"].strftime(Resources.time_format)
-                config.update(dataConfig)
-
-                #set device config by updated config
-                device.setConfig(config)
-
-                #gather commands config file content
-                config_source = self.ci.get_source_config(Resources.cfg_device_resource)
-
-                #check config source and load inside data
-                if config_source:
-                    try:
-                        #turn into dictionary from json
-                        commands = json.loads(unicode(config_source))
-                    except Exception as e:
-                        print e.message
-                        pass
-
-                # set config variables
-                config.setName(device.getName())
-                config.setIP(device.getIP())
-                config.setUsername(device.getUsername())
-                config.setPassword(device.getPassword())
-                config.setEnablePassword(dataConfig["enable_password"])
-                config.setTProtocol(dataConfig["transport_protocol"])
-                config.setPersonality(dataConfig["personality"])
-
-                #set request
-                print "Request generating..."
-
-                request.setCommands(commands[str('show_'+option)]['commands'])
-                request.setEnable(commands[str('show_'+option)]['enable'])
-                request.setConfigure(commands[str('show_'+option)]['configure'])
-
-                #set config request to generate input.json file
-                config.setRequest(request)
-
-                #write config model into input.json file
-                self.ci.write_source_file(config, Resources.ci_source, 'JSON')
-
-                #call communication interface script and gather response - RPC
-                print "Executing device commands please wait..."
-                resp = json.loads(
-                    unicode(
-                        self.ci.call_communication_interface(Resources.ci_source)
-                    )
-                    .replace('\n',''),
-                    encoding='utf-8'
-                )
-
-                #check if rpc is responded
-                if resp:
-                    #check if wap is connected and returned with success status message 110
-                    if resp['status'] == 110:
-                        print resp['message']
-                        os.remove(Resources.ci_source)
-                    else:
-                        print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.format(resp['message'])
-                        pass
-                else:
-                    print Language.MSG_ERR_COMM_INTERFACE_FAILED
-                    pass
-        except Exception as e:
-            print e.message
-            pass
+        """
+            Show methods for devices in given group id
+            @param params
+        """

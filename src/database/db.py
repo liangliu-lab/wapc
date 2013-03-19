@@ -61,6 +61,7 @@ class Database(object):
             Remove objects from given tables
         :param cmd:
         """
+        conn = None
         try:
             conn = self.connect()
             cur = conn.cursor()
@@ -85,15 +86,14 @@ class Database(object):
             expected json formats for inserting objects
         :param cmd:
         """
+        conn = None
         try:
             conn = self.connect()
             cur = conn.cursor()
             cur.execute(cmd)
             rid = cur.fetchone()
             conn.commit()
-            if rid is Empty:
-                pass
-            else:
+            if rid:
                 return rid
         except db.DatabaseError as e:
             print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting', e.message)
@@ -109,6 +109,7 @@ class Database(object):
             Update database objects with given values
         :param cmd:
         """
+        conn = None
         try:
             conn = self.connect()
             cur = conn.cursor()
@@ -131,6 +132,7 @@ class Database(object):
             Remove objects from given tables
         :param cmd:
         """
+        conn = None
         try:
             conn = self.connect()
             cur = conn.cursor()

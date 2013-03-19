@@ -126,6 +126,8 @@ class Main(object):
                 elif pType == 'device':
                     if params.group:
                         cmd = SQL.SQL_SELECT_DEVICE_FROM_GROUP % {'group_id': int(params.group.strip())}
+                    elif not params.group and params.id:
+                        cmd = SQL.SQL_SELECT_DEVICE
                     else:
                         cmd = SQL.SQL_SELECT_DEVICE_ALL
                 elif pType == 'config':

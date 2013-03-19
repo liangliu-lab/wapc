@@ -106,9 +106,10 @@ else {
 my @_commands = @{ $decoded_json->{'request'}->{'commands'} };
 my $return_json_status;      # Status field in the returned json
 my $current_command;         # The command being executed in the loop
+my $session;
 try {
     ## Opening a session to remote device
-    my $session = Net::Appliance::Session->new(
+    $session = Net::Appliance::Session->new(
         Host      => $_device_ip,
         Timeout   => $SESSION_TIMEOUT,
         Transport => $_transport_p
@@ -118,17 +119,25 @@ try {
     $session->connect( Name => $_ios_username, Password => $_ios_password );
     my $result = execute_in_remote($session);
     print $result;
-    $session->close;
+    try {
+        $session->close;
+    }
+    catch {};
+
 }
 catch {
     print error_report( $_, $_device_ip );
+    try {
+        $session->close;
+    }
+    catch {};
     exit;
 };
 
 # This is the main function where we execute command on remote device and return a json object
 # containing a status code and the message received from the remote device
 sub execute_in_remote {
-    my ($session) = @_;
+    ($session) = @_;
     my @out
       ;    # The output message from the remote device is held in this variable
     my $message;
@@ -183,7 +192,7 @@ sub execute_in_remote {
 # interactive session fails
 sub error_report {
     my $err         = shift or croak('No err !');
-    my $device_name = shift or croak('No device name !');
+    #my $device_name = shift or croak('No device name !');
     my $message;    # The variable which will hold the error message
 
     if ( eval { $err->isa('Net::Appliance::Session::Exception') } ) {

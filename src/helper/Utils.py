@@ -27,33 +27,18 @@ class Utils(object):
         """
             Format output text as a human readable style
 
-        :param heading:
-        :param source:
+        :param heading list
+        :param source is a tuple list
         """
+        import formatter
         try:
-
-            out = ""
-            #maxWidth = self.get_max_len(heading, source)
-            for head in heading:
-                out += "| %-20s" % str(head).capitalize() + " "
-            out += ' |' + '\n'
-            #self.print_topics(heading, source, 15, 80)
-
-            for field in source:
-                 for s in field:
-                     out += "| %-20s" % str(s) + " "
-                 out += ' |\n'
-            out += "\n"
-            print out
+            width = 30
+            head = [str(i).replace("_"," ").upper() for i in heading]
+            print formatter.indent([head]+source, hasHeader=True, separateRows=True,
+                             prefix='| ', postfix=' |',
+                             wrapfunc=lambda x: formatter.wrap_onspace(x,width))
         except Exception as e:
             print e.message
-
-    def get_max_len(self, heading, source):
-        max = None
-        colsize = len(heading)
-        rowsize = len(source)
-        for nrows in range(1,len(data)):
-            print nrows
 
     def get_line(self):
         """

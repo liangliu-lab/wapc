@@ -413,14 +413,14 @@ class DeviceMethods(threading.Thread):
                 #gather device detail
                 rsetDevice = self.read(device.getID())
                 dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
-                dataDevice["added"] = dataDevice["added"].strftime(Resources.time_format)
-                dataDevice["modified"] = dataDevice["modified"].strftime(Resources.time_format)
+                dataDevice["Add Date"] = dataDevice["Add Date"].strftime(Resources.time_format)
+                dataDevice["Last Modified"] = dataDevice["Last Modified"].strftime(Resources.time_format)
                 device.update(dataDevice)
 
-                rsetConfig = configMethods.read(dataDevice["config"])
+                rsetConfig = configMethods.read(dataDevice["Configuration"])
                 dataConfig = dict(map(list, zip(rsetConfig['fields'], rsetConfig['results'])))
-                dataConfig["date_added"] = dataConfig["date_added"].strftime(Resources.time_format)
-                dataConfig["date_modified"] = dataConfig["date_modified"].strftime(Resources.time_format)
+                dataConfig["Add Date"] = dataConfig["Add Date"].strftime(Resources.time_format)
+                dataConfig["Last Modified"] = dataConfig["Last Modified"].strftime(Resources.time_format)
                 config.update(dataConfig)
 
                 #set device config by updated config
@@ -437,15 +437,6 @@ class DeviceMethods(threading.Thread):
                     except Exception as e:
                         print e.message
                         pass
-
-                # set config variables
-                config.setName(device.getName())
-                config.setIP(device.getIP())
-                config.setUsername(device.getUsername())
-                config.setPassword(device.getPassword())
-                config.setEnablePassword(dataConfig["enable_password"])
-                config.setTProtocol(dataConfig["transport_protocol"])
-                config.setPersonality(dataConfig["personality"])
 
                 #set request
                 print "Request generating..."
@@ -592,14 +583,14 @@ class DeviceMethods(threading.Thread):
                 #gather device detail
                 rsetDevice = self.read(device.getID())
                 dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
-                dataDevice["added"] = dataDevice["added"].strftime(Resources.time_format)
-                dataDevice["modified"] = dataDevice["modified"].strftime(Resources.time_format)
+                dataDevice["Add Date"] = dataDevice["Add Date"].strftime(Resources.time_format)
+                dataDevice["Last Modified"] = dataDevice["Last Modified"].strftime(Resources.time_format)
                 device.update(dataDevice)
 
-                rsetConfig = configMethods.read(dataDevice["config"])
+                rsetConfig = configMethods.read(dataDevice["Configuration"])
                 dataConfig = dict(map(list, zip(rsetConfig['fields'], rsetConfig['results'])))
-                dataConfig["date_added"] = dataConfig["date_added"].strftime(Resources.time_format)
-                dataConfig["date_modified"] = dataConfig["date_modified"].strftime(Resources.time_format)
+                dataConfig["Add Date"] = dataConfig["Add Date"].strftime(Resources.time_format)
+                dataConfig["Last Modified"] = dataConfig["Last Modified"].strftime(Resources.time_format)
                 config.update(dataConfig)
 
                 #set device config by updated config
@@ -616,15 +607,6 @@ class DeviceMethods(threading.Thread):
                     except Exception as e:
                         print e.message
                         pass
-
-                # set config variables
-                config.setName(device.getName())
-                config.setIP(device.getIP())
-                config.setUsername(device.getUsername())
-                config.setPassword(device.getPassword())
-                config.setEnablePassword(dataConfig["enable_password"])
-                config.setTProtocol(dataConfig["transport_protocol"])
-                config.setPersonality(dataConfig["personality"])
 
                 #set request
                 print "Request generating..."
@@ -719,14 +701,14 @@ class DeviceMethods(threading.Thread):
                 #gather device detail
                 rsetDevice = self.read(device.getID())
                 dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
-                dataDevice["added"] = dataDevice["added"].strftime(Resources.time_format)
-                dataDevice["modified"] = dataDevice["modified"].strftime(Resources.time_format)
+                dataDevice["Add Date"] = dataDevice["Add Date"].strftime(Resources.time_format)
+                dataDevice["Last Modified"] = dataDevice["Last Modified"].strftime(Resources.time_format)
                 device.update(dataDevice)
 
-                rsetConfig = configMethods.read(dataDevice["config"])
+                rsetConfig = configMethods.read(dataDevice["Configuration"])
                 dataConfig = dict(map(list, zip(rsetConfig['fields'], rsetConfig['results'])))
-                dataConfig["date_added"] = dataConfig["date_added"].strftime(Resources.time_format)
-                dataConfig["date_modified"] = dataConfig["date_modified"].strftime(Resources.time_format)
+                dataConfig["Add Date"] = dataConfig["Add Date"].strftime(Resources.time_format)
+                dataConfig["Last Modified"] = dataConfig["Last Modified"].strftime(Resources.time_format)
                 config.update(dataConfig)
 
                 #set device config by updated config
@@ -739,15 +721,6 @@ class DeviceMethods(threading.Thread):
                 if config_source:
                     #turn into dictionary from json
                     commands = json.loads(unicode(config_source))
-
-                # set config variables
-                config.setName(device.getName())
-                config.setIP(device.getIP())
-                config.setUsername(device.getUsername())
-                config.setPassword(device.getPassword())
-                config.setEnablePassword(dataConfig["enable_password"])
-                config.setTProtocol(dataConfig["transport_protocol"])
-                config.setPersonality(dataConfig["personality"])
 
                 #set request
                 print "Request generating..."
@@ -776,8 +749,11 @@ class DeviceMethods(threading.Thread):
                 if resp:
                     #check if wap is connected and returned with success status message 110
                     if resp['status'] == 110:
-                        print resp['message']
-                        os.remove(Resources.ci_source)
+                        if resp['message'] and resp['message'] is not None:
+                            print "There is no active %(option)s" % {'option':option}
+                        elif not resp['message'] or resp['message'] is None:
+                            print resp['message']
+                        #os.remove(Resources.ci_source)
                     else:
                         print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.format(resp['message'])
                         pass

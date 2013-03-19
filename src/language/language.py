@@ -15,7 +15,7 @@ class Language(object):
     MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED = "Access point connected but an unknown error occurred while " \
                                                   "executing command : {0}"
     MSG_ERR_ARG_PARSE_GET = "Get_args stopped with an error ({o})"
-    MSG_ERR_GENERIC = "Unknown error occurred on line {0} with error ({1})"
+    MSG_ERR_GENERIC = "Unknown error occurred on line {0} with error:\n{1}"
 
     #argument parsing while cli statement messages
     MSG_ARG_DESC = 'Use methods below to add, remove, update and list device(s), ' \

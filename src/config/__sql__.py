@@ -16,16 +16,20 @@ class SQL(object):
     # select queries
     # =============================
     #select device records
-    SQL_SELECT_DEVICE = "SELECT id AS ID, " \
-                        "name, " \
-                        "description, " \
-                        "ip, " \
-                        "username, " \
-                        "password," \
-                        "config_id AS config, " \
-                        "date_added AS Added, " \
-                        "date_modified AS Modified " \
-                        "FROM apc_device d " \
+    SQL_SELECT_DEVICE = "SELECT ad.id, " \
+                        "ad.name, " \
+                        "ad.description, " \
+                        "ad.ip, " \
+                        "ad.username, " \
+                        "ad.password," \
+                        "ad.brand," \
+                        "ad.model," \
+                        "ad.firmware," \
+                        "ad.relation," \
+                        "config_id AS \"Configuration\"," \
+                        "date_added \"Add Date\", " \
+                        "date_modified AS \"Last Modified\" " \
+                        "FROM apc_device ad " \
                         "WHERE d.name IS NOT NULL AND d.id = %(id)d;"
 
     SQL_SELECT_DEVICE_CONFIG = "SELECT * " \
@@ -39,9 +43,13 @@ class SQL(object):
                             "ip, " \
                             "username, " \
                             "password, " \
-                            "config_id AS Configuration, " \
-                            "date_added AS Added, " \
-                            "date_modified AS Modified " \
+                            "brand," \
+                            "model," \
+                            "firmware," \
+                            "relation," \
+                            "config_id AS \"Configuration\"," \
+                            "date_added \"Add Date\", " \
+                            "date_modified AS \"Last Modified\" " \
                             "FROM apc_device AS d " \
                             "WHERE d.name IS NOT NULL " \
                             "ORDER BY DATE(date_added) ASC;"
@@ -53,25 +61,66 @@ class SQL(object):
                                    "ad.ip, " \
                                    "ad.username, " \
                                    "ad.password, " \
-                                   "ad.config_id AS config," \
-                                   "ad.date_added AS Added, " \
-                                   "ad.date_modified AS Modified " \
+                                   "ad.brand," \
+                                   "ad.model," \
+                                   "ad.firmware," \
+                                   "ad.relation," \
+                                   "ad.config_id AS \"Configuration\"," \
+                                   "ad.date_added \"Add Date\", " \
+                                   "ad.date_modified AS \"Last Modified\" " \
                                    "FROM apc_device AS ad " \
                                    "LEFT JOIN apc_device_group AS adg ON ad.id = adg.device_id " \
                                    "RIGHT JOIN apc_groups AS ag ON ag.id = adg.group_id " \
                                    "WHERE ag.id = %(group_id)d;"
 
     # select config records
-    SQL_SELECT_CONFIG = "SELECT * FROM apc_config c WHERE c.name IS NOT NULL ORDER BY date_added ASC;"
-    SQL_SELECT_CONFIG_DETAIL = "SELECT * FROM apc_config AS c WHERE c.name IS NOT NULL AND c.id = %(id)d;"
+    SQL_SELECT_CONFIG = "SELECT ac.id AS \"ID\"," \
+                        "ac.name AS \"Name\", " \
+                        "ac.description," \
+                        "ac.ip, " \
+                        "ac.radius," \
+                        "ac.ssid," \
+                        "ac.vlan," \
+                        "ac.channel," \
+                        "ac.frequency," \
+                        "ac.maxclients," \
+                        "ac.username," \
+                        "ac.password," \
+                        "ac.enable_password," \
+                        "ac.transport_protocol," \
+                        "ac.personality," \
+                        "ac.date_added AS \"Add Date\"," \
+                        "ac.date_modified AS \"Last Modified\"" \
+                        "FROM apc_config AS ac " \
+                        "WHERE ac.name IS NOT NULL ORDER BY date_added ASC;"
+
+    SQL_SELECT_CONFIG_DETAIL = "SELECT ac.id AS \"ID\"," \
+                               "ac.name AS \"Name\", " \
+                               "ac.description," \
+                               "ac.ip, " \
+                               "ac.radius," \
+                               "ac.ssid," \
+                               "ac.vlan," \
+                               "ac.channel," \
+                               "ac.frequency," \
+                               "ac.maxclients," \
+                               "ac.username," \
+                               "ac.password," \
+                               "ac.enable_password," \
+                               "ac.transport_protocol," \
+                               "ac.personality," \
+                               "ac.date_added AS \"Add Date\"," \
+                               "ac.date_modified AS \"Last Modified\"" \
+                               "FROM apc_config AS ac " \
+                               "WHERE ac.name IS NOT NULL AND ac.id = %(id)d;"
 
     #select group queries
     SQL_SELECT_GROUP_DETAIL = "SELECT id AS ID, " \
                               "name, " \
                               "description, " \
-                              "config_id AS config, " \
-                              "date_added AS Added, " \
-                              "date_modified AS Modified " \
+                              "config_id AS \"Configuration\", " \
+                              "date_added AS \"Add Date\", " \
+                              "date_modified AS \"Last Modified\"" \
                               "FROM apc_groups g " \
                               "WHERE g.name IS NOT NULL AND g.id = {0} " \
                               "ORDER BY date_added ASC;"
@@ -79,9 +128,9 @@ class SQL(object):
     SQL_SELECT_GROUP_ALL = "SELECT id AS ID, " \
                            "name, " \
                            "description, " \
-                           "config_id AS Configuration, " \
-                           "date_added AS Added, " \
-                           "date_modified AS Modified " \
+                           "config_id AS \"Configuration\", " \
+                           "date_added AS \"Add Date\", " \
+                           "date_modified AS \"Last Modified\"" \
                            "FROM apc_groups d " \
                            "WHERE d.name IS NOT NULL " \
                            "ORDER BY date_added ASC;"
@@ -103,8 +152,8 @@ class SQL(object):
                               "ac.enable_password," \
                               "ac.transport_protocol," \
                               "ac.personality," \
-                              "ac.date_added," \
-                              "ac.date_modified " \
+                              "ac.date_added AS \"Add Date\"," \
+                              "ac.date_modified AS \"Last Modified\"" \
                               "FROM apc_config AS ac " \
                               "LEFT JOIN apc_device AS ad ON ad.config_id = ac.id " \
                               "LEFT JOIN apc_device_group AS adg ON ad.id = adg.device_id " \
@@ -212,7 +261,6 @@ class SQL(object):
                                "INNER JOIN apc_device AS ad ON ad.config_id = ac.id " \
                                "WHERE ad.id=%(id)d);"
 
-
     #update config
     SQL_UPDATE_CONFIG = "UPDATE apc_config " \
                         "SET %(key)s = '%(value)s', date_modified='%(modified)s'" \
@@ -220,14 +268,12 @@ class SQL(object):
     # =============================
     #update group
     SQL_UPDATE_GROUP = "UPDATE apc_groups " \
-                       "SET name='%(name)s', description='%(description)s', " \
-                       "config_id=%(config_id)d, date_modified='%(modified)s'" \
+                       "SET %(key)s='%(value)s', date_modified='%(modified)s'" \
                        "WHERE id=%(id)d"
     # =============================
     #update device
     SQL_UPDATE_DEVICE = "UPDATE apc_device " \
-                        "SET name='%(name)s', ip='%(ip)s',description='%(description)s', config_id=%(config_id)d, " \
-                        "username='%(username)s', password='%(password)s', date_modified='%(modified)s'" \
+                        "SET %(key)s='%(value)s', date_modified='%(modified)s'" \
                         "WHERE id=%(id)d"
 
     SQL_UPDATE_GROUP_CONFIG = "UPDATE apc_config SET %(key)s = '%(value)s' WHERE id IN " \

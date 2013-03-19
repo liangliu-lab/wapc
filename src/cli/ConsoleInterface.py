@@ -207,6 +207,7 @@ class ConsoleInterface(cmd.Cmd):
             except BaseException:
                 sys.stdout.write('\n')
 
+
     def do_EOF(self, args):
         """
 

@@ -20,7 +20,7 @@ class Config(dict):
         self["ip"] = "192.168.0.1"
         self["username"] = 'Username'
         self["password"] = 'Password'
-        self["enable_password"] = 'Password'
+        self["enable_password"] = ''
         self["radius_config_id"] = 0
         self["transport_protocol"] = 'Telnet'
         self["personality"] = 'ios'

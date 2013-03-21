@@ -11,7 +11,8 @@ class Language(object):
     MSG_APP_WELCOME = "Welcome to Labris Wireless Access Point Controller"
     MSG_APP_CMD_INIT = "Command Line Tool initializing..."
     MSG_ERR_CLASS_INIT_FAILED = '{0} class could not be initialized!'
-    MSG_ERR_COMM_INTERFACE_FAILED = "Unknown error occurred while connecting with communication interface error"
+    MSG_ERR_COMM_INTERFACE_FAILED = "Unknown error occurred while connecting with communication interface" \
+                                    "at %(line)s with detail: %(exception)s"
     MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED = "Access point connected but an unknown error occurred while " \
                                                   "executing command : {0}"
     MSG_ERR_ARG_PARSE_GET = "Get_args stopped with an error ({o})"

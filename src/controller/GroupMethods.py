@@ -35,30 +35,30 @@ class GroupMethods(object):
         try:
             #check namespace variables if set
             if params.name:
-                group.setName(params.name.strip())
+                group.set_name(params.name.strip())
             else:
-                group.setName(raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'),":"))
+                group.set_name(raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'),":"))
 
             if params.description:
-                group.setDescription(params.description.strip())
+                group.set_description(params.description.strip())
             else:
                 print Language.MSG_ERR_EMPTY_DESC.format('group')
 
             if params.config:
-                group.setConfig(params.config)
+                group.set_config(params.config)
             else:
                 print Language.MSG_ERR_EMPTY_CONFIG.format('group')
 
             cmd = SQL.SQL_INSERT_GROUP.format(
-                group.getName(),
-                group.getDescription(),
-                group.getConfig(),
+                group.get_name(),
+                group.get_description(),
+                group.get_config(),
                 self.now,
                 self.now
             )
             gID = self.db.insert(cmd)
             if gID:
-                print Language.MSG_ADD_NEW.format('group', gID[0], group.getName())
+                print Language.MSG_ADD_NEW.format('group', gID[0], group.get_name())
             else:
                 print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting new group', gID[0])
         except Exception as e:
@@ -144,7 +144,7 @@ class GroupMethods(object):
                       }
 
                 if self.db.update(cmd):
-                    print Language.MSG_UPDATE_RECORD.format('group', params.id, group.getName())
+                    print Language.MSG_UPDATE_RECORD.format('group', params.id, group.get_name())
                 else:
                     print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating recorded group', did)
             else:
@@ -183,11 +183,11 @@ class GroupMethods(object):
                 print Language.MSG_ERR_EMPTY_OPTION.format('device')
 
             if params.id:
-                group.setID(params.id.strip())
+                group.set_id(params.id.strip())
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
 
-            if group.getID() and option:
+            if group.get_id() and option:
 
                 print "Your command(s) will be executing... Please enter required command params below:\n"
                 #params.interface = raw_input("Enter parameter for interface of required device:").strip()
@@ -195,7 +195,7 @@ class GroupMethods(object):
                 params.param = raw_input("Enter parameter for %(type)s this command of device:"
                                          % {'type': params.option}).strip()
 
-                configSet = self.getGroupConfig(group.getID())
+                configSet = self.getGroupConfig(group.get_id())
                 """
                     This line gather an object like below:
                     {   'fields':
@@ -258,7 +258,7 @@ class GroupMethods(object):
                 cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
                     'key' : option,
                     'value' : params.param,
-                    'group_id': int(group.getID())
+                    'group_id': int(group.get_id())
                 }
         except Exception as e:
             print e.message

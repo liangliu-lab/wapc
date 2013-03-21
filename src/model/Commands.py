@@ -8,28 +8,28 @@ class Commands(list):
     command = None
     param = None
 
-    def setCommand(self, command):
+    def set_command(self, command):
         """
 
         :param command:
         """
         self.command = command
 
-    def getCommand(self):
+    def get_command(self):
         """
 
         :return:
         """
         return self.command
 
-    def setParam(self, param):
+    def set_param(self, param):
         """
 
         :param param:
         """
         self.param = param
 
-    def getParam(self):
+    def get_param(self):
         """
 
         :return:

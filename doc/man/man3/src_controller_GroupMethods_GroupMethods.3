@@ -1,0 +1,152 @@
+.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.controller.GroupMethods.GroupMethods \- 
+.PP
+\fBGroupMethods\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBcreate\fP"
+.br
+.RI "\fI.PP
+.nf
+add new group with params
+.fi
+.PP
+ :rtype : object :param params: \fP"
+.ti -1c
+.RI "def \fBread\fP"
+.br
+.RI "\fI:param gID: \fP"
+.ti -1c
+.RI "def \fBgetGroupConfig\fP"
+.br
+.RI "\fI:param gID: \fP"
+.ti -1c
+.RI "def \fBupdate\fP"
+.br
+.RI "\fI:param params: \fP"
+.ti -1c
+.RI "def \fBdelete\fP"
+.br
+.RI "\fI:param params: \fP"
+.ti -1c
+.RI "def \fBset\fP"
+.br
+.RI "\fI.PP
+.nf
+This methods handle options and connect throug device by given name
+Sample command: set -t group -o ssid -i [GROUPID]
+.fi
+.PP
+ :param params: \fP"
+.ti -1c
+.RI "def \fBshow\fP"
+.br
+.RI "\fIShow methods for devices in given group id\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.ti -1c
+.RI "\fBdb\fP"
+.br
+.ti -1c
+.RI "\fBci\fP"
+.br
+.ti -1c
+.RI "\fBscript\fP"
+.br
+.ti -1c
+.RI "\fBcfg_device\fP"
+.br
+.ti -1c
+.RI "\fBnow\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBGroupMethods\fP\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.__init__ (self)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.create (self, params)"
+
+.PP
+.PP
+.nf
+add new group with params
+.fi
+.PP
+ :rtype : object :param params: 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.delete (self, params)"
+
+.PP
+:param params: 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.getGroupConfig (self, gID)"
+
+.PP
+:param gID: 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.read (self, gID)"
+
+.PP
+:param gID: 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.set (self, params)"
+
+.PP
+.PP
+.nf
+This methods handle options and connect throug device by given name
+Sample command: set -t group -o ssid -i [GROUPID]
+.fi
+.PP
+ :param params: 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.show (self, params)"
+
+.PP
+Show methods for devices in given group id\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
+
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.update (self, params)"
+
+.PP
+:param params: 
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.cfg_device"
+
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.ci"
+
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.db"
+
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.now"
+
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.script"
+
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

@@ -1,0 +1,83 @@
+.TH "src.helper.ArgParser.ArgParser" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.helper.ArgParser.ArgParser \- 
+.PP
+\fBArgParser\fP object\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fICreate instance\&. \fP"
+.ti -1c
+.RI "def \fBset_parser\fP"
+.br
+.RI "\fIThis methos parsing retrieved arguments into namespace variables\&. \fP"
+.ti -1c
+.RI "def \fBget_args\fP"
+.br
+.RI "\fI:param args: :return: \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBparams\fP"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "tuple \fBparser\fP"
+.br
+.ti -1c
+.RI "string \fBparams\fP = ''"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBArgParser\fP object\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.helper\&.ArgParser\&.ArgParser\&.__init__ (self)"
+
+.PP
+Create instance\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.helper\&.ArgParser\&.ArgParser\&.get_args (self, args)"
+
+.PP
+:param args: :return: 
+.SS "def src\&.helper\&.ArgParser\&.ArgParser\&.set_parser (self)"
+
+.PP
+This methos parsing retrieved arguments into namespace variables\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "string src\&.helper\&.ArgParser\&.ArgParser\&.params = ''\fC [static]\fP"
+
+.SS "src\&.helper\&.ArgParser\&.ArgParser\&.params"
+
+.SS "tuple src\&.helper\&.ArgParser\&.ArgParser\&.parser\fC [static]\fP"
+\fBInitial value:\fP
+.PP
+.nf
+1 = argparse\&.ArgumentParser(description=Language\&.MSG_ARG_DESC, version='2\&.3',
+2                                      formatter_class=argparse\&.RawDescriptionHelpFormatter)
+.fi
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

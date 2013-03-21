@@ -55,8 +55,8 @@ class DeviceMethods(threading.Thread):
         :param params:
         """
         device = Device()
-        config = device.getConfig()
-        request = config.getRequest()
+        config = device.get_config()
+        request = config.get_request()
         commands = request.getCommands()
 
         try:
@@ -66,37 +66,37 @@ class DeviceMethods(threading.Thread):
 
             # set device ip to connect to the device
             if params.ip:
-                device.setIP(params.ip.strip())
+                device.set_ip(params.ip.strip())
             else:
                 print Language.MSG_ERR_EMPTY_IP.format('device')
-                device.setIP(raw_input("Please enter an IP address:"))
+                device.set_ip(raw_input("Please enter an IP address:"))
 
             # set device name to connect to the device
             if params.name:
-                device.setName(params.name.strip())
+                device.set_name(params.name.strip())
             else:
                 print Language.MSG_ERR_EMPTY_NAME.format('device')
-                device.setName(raw_input("Please enter an nick name:"))
+                device.set_name(raw_input("Please enter an nick name:"))
 
             # set device description to connect to the device
             if params.description:
-                device.setDescription(params.description.strip())
+                device.set_description(params.description.strip())
             else:
                 print Language.MSG_ERR_EMPTY_DESC.format('device')
 
             # set device username to connect to the device
             if params.username:
-                device.setUsername(params.username.strip())
+                device.set_username(params.username.strip())
             else:
                 print Language.MSG_ERR_EMPTY_USERNAME.format('device')
-                device.setUsername(raw_input("Please enter an username:"))
+                device.set_username(raw_input("Please enter an username:"))
 
             # set device password to connect to the device
             if params.password:
-                device.setPassword(params.password.strip())
+                device.set_password(params.password.strip())
             else:
                 print Language.MSG_ERR_EMPTY_PASSWORD.format('device')
-                device.setPassword(raw_input("Please enter a password:"))
+                device.set_password(raw_input("Please enter a password:"))
 
             # define config file path to initial a new device
             # ==============================================
@@ -107,20 +107,20 @@ class DeviceMethods(threading.Thread):
             # ==============================================
             path = None
             if params.brand:
-                device.setBrand(str(params.brand.strip()).lower())
+                device.set_brand(str(params.brand.strip()).lower())
                 if params.model:
-                    device.setModel(str(params.model.strip()).lower())
+                    device.set_model(str(params.model.strip()).lower())
                     if params.firmware:
-                        device.setFirmware(str(params.firmware.strip()).lower())
-                        path = device.getBrand() + "/" + \
-                               device.getModel() + "/" + \
-                               device.getFirmware()
+                        device.set_firmware(str(params.firmware.strip()).lower())
+                        path = device.get_brand() + "/" + \
+                               device.get_model() + "/" + \
+                               device.get_firmware()
                     else:
-                        path = device.getBrand() + "/" + \
-                               device.getModel() + "/default"
+                        path = device.get_brand() + "/" + \
+                               device.get_model() + "/default"
                 else:
                     # path = params.model.rstript().lstrip()
-                    path = device.getBrand() + "/default/default"
+                    path = device.get_brand() + "/default/default"
             else:
                 print (
                     "It must be provided at least brand to identify " \
@@ -128,23 +128,23 @@ class DeviceMethods(threading.Thread):
                     + Language.MSG_ADD_BRAND_HELP + \
                     "\nPlease use 'help' command to see detailed usage." \
                 )
-                device.setBrand(raw_input("Please enter a brand:").lower())
+                device.set_brand(raw_input("Please enter a brand:").lower())
                 if params.model:
-                    device.setModel(str(params.model.strip()).lower())
+                    device.set_model(str(params.model.strip()).lower())
                     if params.firmware:
-                        device.setFirmware(str(params.firmware.strip()).lower())
-                        path = device.getBrand() + "/" + \
-                               device.getModel() + "/" + \
-                               device.getFirmware()
+                        device.set_firmware(str(params.firmware.strip()).lower())
+                        path = device.get_brand() + "/" + \
+                               device.get_model() + "/" + \
+                               device.get_firmware()
                     else:
-                        path = device.getBrand() + "/" + \
-                               device.getModel() + "/default"
+                        path = device.get_brand() + "/" + \
+                               device.get_model() + "/default"
                 else:
                     # path = params.model.rstript().lstrip()
-                    path = device.getBrand() + "/default/default"
+                    path = device.get_brand() + "/default/default"
 
             if params.relation:
-                device.setRelation(str(params.relation.strip()).lower())
+                device.set_relation(str(params.relation.strip()).lower())
             else:
                 print "You did not provide a relation such as one of 'master' or 'slave'. " \
                       "Therefore, the default value is set to 'slave'."
@@ -152,25 +152,25 @@ class DeviceMethods(threading.Thread):
 
             #gather commands config
             # config_source = self.ci.get_source_config(Resources.ci_config)
-            if path and device.getRelation():
+            if path and device.get_relation():
                 # set default config file path
                 config_source_file = Resources.device_initial_config % \
-                                     {'path': path, 'relation': device.getRelation()}
+                                     {'path': path, 'relation': device.get_relation()}
 
                 # get default config file content
                 config_source = self.ci.get_source_config(config_source_file)
 
                 # replace ipaddress in file content
-                config_source = config_source.replace('###', device.getIP())
+                config_source = config_source.replace('###', device.get_ip())
 
                 # write new content into default config file
-                tftp_target = Resources.device_tftp_path % { 'relation': device.getRelation()}
+                tftp_target = Resources.device_tftp_path % { 'relation': device.get_relation()}
                 self.ci.write_source_file(config_source, tftp_target, 'RAW')
             else:
                 raise Exception(
                     "Device config path could not be found or not correctly configured please check given parameters" \
                     "then try again. Here is recent path: " + Resources.device_initial_config %
-                                                            {'path': path, 'relation': device.getRelation()})
+                                                            {'path': path, 'relation': device.get_relation()})
 
             # get default config object into a dict
             if config_source:
@@ -178,7 +178,7 @@ class DeviceMethods(threading.Thread):
                 commands = json.loads(unicode(self.ci.get_source_config(Resources.device_load_command)))
                 commands['commands'][0]['command'] = commands['commands'][0]['command'] % \
                                                      { 'file': Resources.device_tftp_file %
-                                                               {'relation': device.getRelation() }
+                                                               {'relation': device.get_relation() }
                                                      }
                 #commands = json.loads(unicode(config_source))
             else:
@@ -187,13 +187,13 @@ class DeviceMethods(threading.Thread):
                     "Please try again.")
 
             #set config parameters to relate with device
-            config.setName(device.getName())
-            config.setUsername(device.getUsername())
-            config.setPassword(device.getPassword())
-            config.setIP(device.getIP())
-            config.setEnablePassword(config.getPassword())
-            config.setTProtocol(device.getConfig().getTProtocol())
-            config.setPersonality(device.getConfig().getPersonality())
+            config.set_name(device.get_name())
+            config.set_username(device.get_username())
+            config.set_password(device.get_password())
+            config.set_ip(device.get_ip())
+            config.set_enable_password(config.get_password())
+            config.set_transport_protocol(device.get_config().get_transport_protocol())
+            config.set_personality(device.get_config().get_personality())
 
             #set request
             request.setEnable(True)
@@ -203,10 +203,10 @@ class DeviceMethods(threading.Thread):
             request.setCommands(commands['commands'])
 
             # set request for config object to be called by CI script
-            config.setRequest(request.__dict__)
+            config.set_request(request.__dict__)
 
             #set device config to relate each other
-            device.setConfig(config.__dict__)
+            device.set_config(config.__dict__)
 
             # destroy variables no need them longer
             del request
@@ -240,20 +240,20 @@ class DeviceMethods(threading.Thread):
                 #check if wap is connected and returned with success status message 110
                 if resp['status'] == 110:
                     cmd = SQL.SQL_INSERT_CONFIG % {
-                        "name" : config.getName(),\
-                        "description" : config.getDescription(), \
-                        "ip" : config.getIP(), \
-                        "radius_config_id" : config.getRadiusID(), \
-                        "ssid" : config.getSSID(), \
-                        "vlan_id" : config.getVLAN(), \
-                        "channel" : config.getChannel(), \
+                        "name" : config.get_name(),\
+                        "description" : config.get_description(), \
+                        "ip" : config.get_ip(), \
+                        "radius_config_id" : config.get_radius(), \
+                        "ssid" : config.get_ssid(), \
+                        "vlan_id" : config.get_vlan(), \
+                        "channel" : config.get_channel(), \
                         "channel_freq" : config.getChannelFreq(), \
-                        "maxclients": config.getMaxclient(), \
-                        "username" : config.getUsername(), \
-                        "password" : config.getPassword(), \
-                        "enable_password" : config.getEnablePassword(), \
-                        "transport_protocol" : config.getTProtocol(), \
-                        "personality" : config.getPersonality(), \
+                        "maxclients": config.get_maxclient(), \
+                        "username" : config.get_username(), \
+                        "password" : config.get_password(), \
+                        "enable_password" : config.get_enable_password(), \
+                        "transport_protocol" : config.get_transport_protocol(), \
+                        "personality" : config.get_personality(), \
                         "date_added" : self.now, \
                         "date_modified" : self.now
                     }
@@ -262,30 +262,30 @@ class DeviceMethods(threading.Thread):
                     cid = self.db.insert(cmd)
 
                     if cid:
-                        device.setConfigID(cid[0])
+                        device.set_config_id(cid[0])
                         print "New configuration generated for the new device with id: %s" % cid[0]
                         #insert new device to the database
                         cmd = SQL.SQL_INSERT_DEVICE % {
-                            "name" : device.getName(),
-                            "username": device.getUsername(),
-                            "password": device.getPassword(),
-                            "desc": device.getDescription(),
-                            "ip" : device.getIP(),
+                            "name" : device.get_name(),
+                            "username": device.get_username(),
+                            "password": device.get_password(),
+                            "desc": device.get_description(),
+                            "ip" : device.get_ip(),
                             "config" : int(cid[0]),
-                            "brand" : device.getBrand(),
-                            "model" : device.getModel(),
-                            "firmware" : device.getFirmware(),
-                            "relation" : device.getRelation(),
+                            "brand" : device.get_brand(),
+                            "model" : device.get_model(),
+                            "firmware" : device.get_firmware(),
+                            "relation" : device.get_relation(),
                             "date_added" : self.now,
                             "date_modified" : self.now
                         }
 
                         #get inserted device id and inform user
-                        id = self.db.insert(cmd)
-                        if id:
+                        new_id = self.db.insert(cmd)
+                        if new_id:
                             #write recent config into backup file
-                            self.ci.backup(config_source, config.getName(), self.now, 'RAW')
-                            print Language.MSG_ADD_NEW.format('device', id[0], device.getName())
+                            self.ci.backup(config_source, config.get_name(), self.now, 'RAW')
+                            print Language.MSG_ADD_NEW.format('device', new_id[0], device.get_name())
                     else:
                         raise Exception(
                             Language.MSG_ERR_DATABASE_INSERT
@@ -300,7 +300,7 @@ class DeviceMethods(threading.Thread):
             print e.message
             pass
 
-    def read(self, id):
+    def read(self, cid):
         """
 
         :param id:
@@ -309,7 +309,7 @@ class DeviceMethods(threading.Thread):
             #check namespace variables if set
 
             #moderate type value to determine the statement
-            cmd = SQL.SQL_SELECT_DEVICE % {'id': int(id)}
+            cmd = SQL.SQL_SELECT_DEVICE % {'id': int(cid)}
             fields, results = self.db.select(cmd)
             if fields and results:
                 try:
@@ -371,7 +371,7 @@ class DeviceMethods(threading.Thread):
                           }
 
                 if self.db.update(cmd):
-                    print Language.MSG_UPDATE_RECORD.format('device', did, device.getName())
+                    print Language.MSG_UPDATE_RECORD.format('device', did, device.get_name())
                 else:
                     print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating recorded group', did)
             else:
@@ -393,7 +393,7 @@ class DeviceMethods(threading.Thread):
         from src.controller.ConfigMethods import ConfigMethods
         device = Device()
         config = Config()
-        request = config.getRequest()
+        request = config.get_request()
         commands = request.getCommands()
         configMethods = ConfigMethods(config, params)
         try:
@@ -404,14 +404,14 @@ class DeviceMethods(threading.Thread):
                 option = raw_input("Please enter an option to be set:")
 
             if params.id:
-                device.setID(params.id.strip())
+                device.set_id(params.id.strip())
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
-                device.setID(raw_input("Please enter id for device will be set:"))
+                device.set_id(raw_input("Please enter id for device will be set:"))
 
-            if device.getID():
+            if device.get_id():
                 #gather device detail
-                rsetDevice = self.read(device.getID())
+                rsetDevice = self.read(device.get_id())
                 dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
                 dataDevice["Add Date"] = dataDevice["Add Date"].strftime(Resources.time_format)
                 dataDevice["Last Modified"] = dataDevice["Last Modified"].strftime(Resources.time_format)
@@ -424,7 +424,7 @@ class DeviceMethods(threading.Thread):
                 config.update(dataConfig)
 
                 #set device config by updated config
-                device.setConfig(config)
+                device.set_config(config)
 
                 #gather commands config file content
                 config_source = self.ci.get_source_config(Resources.cfg_device_resource)
@@ -464,13 +464,13 @@ class DeviceMethods(threading.Thread):
                                 if p["type"] == "interface":
                                     p["command"] = p["command"] + interface.strip()
                                 elif p["type"] == params.option.strip():
-                                    p["command"] = p["command"] + config.getSSID()
+                                    p["command"] = p["command"] + config.get_ssid()
                                 else:
-                                    p["command"] = p["command"] + config.getSSID()
+                                    p["command"] = p["command"] + config.get_ssid()
                             #print p["command"]
 
                     #set config request to generate input.json file
-                    config.setRequest(request)
+                    config.set_request(request)
 
                     #write config model into input.json file
                     self.ci.write_source_file(config, Resources.ci_source, 'JSON')
@@ -512,7 +512,7 @@ class DeviceMethods(threading.Thread):
                         #print p["command"]
 
                     #set config request to generate input.json file
-                config.setRequest(request)
+                config.set_request(request)
 
                 #write config model into input.json file
                 self.ci.write_source_file(config, Resources.ci_source, 'JSON')
@@ -538,7 +538,7 @@ class DeviceMethods(threading.Thread):
                             'key': option,
                             'value': new_param,
                             'modified': self.now,
-                            'id': int(device.getID())
+                            'id': int(device.get_id())
                         }
 
                         #insert updated config and gather inserted record id
@@ -561,8 +561,8 @@ class DeviceMethods(threading.Thread):
         """
         from src.controller.ConfigMethods import ConfigMethods
         device = Device()
-        config = device.getConfig()
-        request = config.getRequest()
+        config = device.get_config()
+        request = config.get_request()
         commands = request.getCommands()
         config = Config()
         configMethods = ConfigMethods(config, params)
@@ -574,14 +574,14 @@ class DeviceMethods(threading.Thread):
                 option = raw_input("Please enter an option to be unset:")
 
             if params.id:
-                device.setID(params.id.strip())
+                device.set_id(params.id.strip())
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
-                device.setID(raw_input("Please enter an id to define the device:"))
+                device.set_id(raw_input("Please enter an id to define the device:"))
 
-            if device.getID():
+            if device.get_id():
                 #gather device detail
-                rsetDevice = self.read(device.getID())
+                rsetDevice = self.read(device.get_id())
                 dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
                 dataDevice["Add Date"] = dataDevice["Add Date"].strftime(Resources.time_format)
                 dataDevice["Last Modified"] = dataDevice["Last Modified"].strftime(Resources.time_format)
@@ -594,7 +594,7 @@ class DeviceMethods(threading.Thread):
                 config.update(dataConfig)
 
                 #set device config by updated config
-                device.setConfig(config)
+                device.set_config(config)
 
                 #gather commands config file content
                 config_source = self.ci.get_source_config(Resources.cfg_device_resource)
@@ -634,7 +634,7 @@ class DeviceMethods(threading.Thread):
                                     #print p["command"]
 
                                 #set config request to generate input.json file
-                    config.setRequest(request)
+                    config.set_request(request)
 
                     #write config model into input.json file
                     self.ci.write_source_file(config, Resources.ci_source, 'JSON')
@@ -657,7 +657,7 @@ class DeviceMethods(threading.Thread):
                                 'key': option,
                                 'value': '',
                                 'modified': self.now,
-                                'id': int(config.getID())
+                                'id': int(config.get_id())
                             }
 
                             #insert updated config and gather inserted record id
@@ -681,7 +681,7 @@ class DeviceMethods(threading.Thread):
         from src.controller.ConfigMethods import ConfigMethods
         device = Device()
         config = Config()
-        request = config.getRequest()
+        request = config.get_request()
         commands = request.getCommands()
         configMethods = ConfigMethods(config, params)
         try:
@@ -692,14 +692,14 @@ class DeviceMethods(threading.Thread):
                 option = raw_input("Please enter an option you would like to set:")
 
             if params.id:
-                device.setID(params.id.strip())
+                device.set_id(params.id.strip())
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
-                device.setID(raw_input("Please enter an ID you would like to set:"))
+                device.set_id(raw_input("Please enter an ID you would like to set:"))
 
-            if device.getID():
+            if device.get_id():
                 #gather device detail
-                rsetDevice = self.read(device.getID())
+                rsetDevice = self.read(device.get_id())
                 dataDevice = dict(map(list, zip(rsetDevice['fields'], rsetDevice['results'])))
                 dataDevice["Add Date"] = dataDevice["Add Date"].strftime(Resources.time_format)
                 dataDevice["Last Modified"] = dataDevice["Last Modified"].strftime(Resources.time_format)
@@ -712,7 +712,7 @@ class DeviceMethods(threading.Thread):
                 config.update(dataConfig)
 
                 #set device config by updated config
-                device.setConfig(config)
+                device.set_config(config)
 
                 #gather commands config file content
                 config_source = self.ci.get_source_config(Resources.cfg_device_resource)
@@ -730,7 +730,7 @@ class DeviceMethods(threading.Thread):
                 request.setConfigure(commands[str('show_'+option)]['configure'])
 
                 #set config request to generate input.json file
-                config.setRequest(request)
+                config.set_request(request)
 
                 #write config model into input.json file
                 self.ci.write_source_file(config, Resources.ci_source, 'JSON')
@@ -749,9 +749,9 @@ class DeviceMethods(threading.Thread):
                 if resp:
                     #check if wap is connected and returned with success status message 110
                     if resp['status'] == 110:
-                        if resp['message'] and resp['message'] is not None:
+                        if not resp['message'] and resp['message'] is None:
                             print "There is no active %(option)s" % {'option':option}
-                        elif not resp['message'] or resp['message'] is None:
+                        elif resp['message'] or resp['message'] is not None:
                             print resp['message']
                         #os.remove(Resources.ci_source)
                     else:
@@ -795,7 +795,7 @@ class DeviceMethods(threading.Thread):
         new_param = params.param.strip()
 
         #set request
-        request = config.getRequest()
+        request = config.get_request()
         
         #execute pre requested commands if exists
         if 'pre' in commands[str('set_'+option)]:
@@ -819,7 +819,7 @@ class DeviceMethods(threading.Thread):
                             #print p["command"]
 
             #set config request to generate input.json file
-            config.setRequest(request)
+            config.set_request(request)
 
             #write config model into input.json file
             self.ci.write_source_file(config, Resources.ci_source, 'JSON')
@@ -859,7 +859,7 @@ class DeviceMethods(threading.Thread):
                         #print p["command"]
 
                         #set config request to generate input.json file
-        config.setRequest(request)
+        config.set_request(request)
 
         #write config model into input.json file
         source_input = Resources.input_source % { 'file': config['Device']}

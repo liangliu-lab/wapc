@@ -1,0 +1,199 @@
+.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.controller.ConfigMethods.ConfigMethods \- 
+.PP
+\fBConfigMethods\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Thread\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBcreate\fP"
+.br
+.RI "\fI:param params: \fP"
+.ti -1c
+.RI "def \fBread\fP"
+.br
+.RI "\fI:param config_id: \fP"
+.ti -1c
+.RI "def \fBset\fP"
+.br
+.RI "\fISet method will update given config by parameter\&. \fP"
+.ti -1c
+.RI "def \fBupdate\fP"
+.br
+.RI "\fIUpdate methods certainly moderated by $ edit [OPTIONS] command by CLI\&. \fP"
+.ti -1c
+.RI "def \fBrun\fP"
+.br
+.RI "\fIThis methods runs a thread to update pyshical devices by given parameters gathered from database\&. \fP"
+.ti -1c
+.RI "def \fBdelete\fP"
+.br
+.RI "\fI:param params: \fP"
+.ti -1c
+.RI "def \fBshow\fP"
+.br
+.RI "\fI:param params: \fP"
+.ti -1c
+.RI "def \fBsetConfig\fP"
+.br
+.RI "\fI\fBConfigMethods\fP controller class config setter\&. \fP"
+.ti -1c
+.RI "def \fBgetConfig\fP"
+.br
+.RI "\fI\fBConfigMethods\fP controller class config getter\&. \fP"
+.ti -1c
+.RI "def \fBsetParams\fP"
+.br
+.RI "\fI\fBConfigMethods\fP controller class config setter\&. \fP"
+.ti -1c
+.RI "def \fBgetParams\fP"
+.br
+.RI "\fI\fBConfigMethods\fP controller class config getter\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.ti -1c
+.RI "\fBdb\fP"
+.br
+.ti -1c
+.RI "\fBci\fP"
+.br
+.ti -1c
+.RI "\fBscript\fP"
+.br
+.ti -1c
+.RI "\fBcfg_device\fP"
+.br
+.ti -1c
+.RI "\fBnow\fP"
+.br
+.ti -1c
+.RI "\fBconfig\fP"
+.br
+.ti -1c
+.RI "\fBparams\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBConfigMethods\fP\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.__init__ (self, new_config, params)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.create (self, params)"
+
+.PP
+:param params: 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.delete (self, params)"
+
+.PP
+:param params: 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.getConfig (self)"
+
+.PP
+\fBConfigMethods\fP controller class config getter\&. \fBReturns:\fP
+.RS 4
+config is a Config object 
+.RE
+.PP
+
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.getParams (self)"
+
+.PP
+\fBConfigMethods\fP controller class config getter\&. \fBReturns:\fP
+.RS 4
+params is a Config object 
+.RE
+.PP
+
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.read (self, config_id)"
+
+.PP
+:param config_id: 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.run (self)"
+
+.PP
+This methods runs a thread to update pyshical devices by given parameters gathered from database\&. 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.set (self, config)"
+
+.PP
+Set method will update given config by parameter\&. \fBParameters:\fP
+.RS 4
+\fIconfig\fP is a Config model which provided by parameter 
+.RE
+.PP
+
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.setConfig (self, config)"
+
+.PP
+\fBConfigMethods\fP controller class config setter\&. \fBParameters:\fP
+.RS 4
+\fIconfig\fP is a Config object includes details 
+.RE
+.PP
+
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.setParams (self, params)"
+
+.PP
+\fBConfigMethods\fP controller class config setter\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP is a Config object includes details 
+.RE
+.PP
+
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.show (self, params)"
+
+.PP
+:param params: 
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.update (self, params)"
+
+.PP
+Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This methods only inherit update database records by no touching physical device config\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparams,:\fP 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.cfg_device"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.ci"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.config"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.db"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.now"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.params"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.script"
+
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

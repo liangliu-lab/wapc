@@ -1,4 +1,19 @@
 {
+    "unset_ssid":{
+        "enable":true,
+        "configure":true,
+        "commands":[
+            {
+                "command":"no dot11 ssid ",
+                "param":"",
+                "type": "ssid"
+            },
+            {
+                "configure" : "end",
+                "command":"write mem"
+            }
+        ]
+    },
     "set_channel":{
         "enable":true,
         "configure":true,
@@ -59,22 +74,6 @@
             }
         ]
     },
-
-    "unset_ssid":{
-        "enable":true,
-        "configure":true,
-        "commands":[
-            {
-                "command":"no dot11 ssid ",
-                "param":"",
-                "type": "ssid"
-            },
-            {
-                "configure" : "end",
-                "command":"write mem"
-            }
-        ]
-    },
     "set_ssid":{
         "enable":true,
         "configure":true,
@@ -116,6 +115,15 @@
             }
         ]
     },
+    "set_permanent":{
+        "enable":true,
+        "configure":false,
+        "commands":[
+            {
+                "command":"write mem"
+            }
+        ]
+    },
     "show_ip" : {
         "enable" : true,
         "configure" : false,
@@ -143,15 +151,6 @@
         "commands" : [
             {
                 "command" : "show memory stat"
-            }
-        ]
-    },
-    "set_permanent":{
-        "enable":true,
-        "configure":false,
-        "commands":[
-            {
-                "command":"write mem"
             }
         ]
     },

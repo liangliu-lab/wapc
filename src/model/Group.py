@@ -17,84 +17,84 @@ class Group(object):
         self.added = None
         self.modified = None
 
-    def setID(self, gID):
+    def set_id(self, gID):
         """
             Regular setter for Group model id
         :param gID:
         """
         self.id = gID
 
-    def getID(self):
+    def get_id(self):
         """
             Regular getter for Group model
         :return id:
         """
         return self.id
 
-    def setName(self, name):
+    def set_name(self, name):
         """
 
         :param name:
         """
         self.name = name
 
-    def getName(self):
+    def get_name(self):
         """
 
         :return:
         """
         return self.name
 
-    def setConfig(self, config):
+    def set_config(self, config):
         """
 
         :param config:
         """
         self.config_id = config
 
-    def getConfig(self):
+    def get_config(self):
         """
 
         :return:
         """
         return self.config_id
 
-    def setDescription(self, description):
+    def set_description(self, description):
         """
 
         :param description:
         """
         self.description = description
 
-    def getDescription(self):
+    def get_description(self):
         """
 
         :return:
         """
         return self.description
 
-    def setAdded(self, date):
+    def set_date_add(self, date):
         """
 
         :param date:
         """
         self.added = date
 
-    def getAdded(self):
+    def get_date_add(self):
         """
 
         :return:
         """
         return self.added
 
-    def setModified(self, date):
+    def set_date_modified(self, date):
         """
 
         :param date:
         """
         self.modified = date
 
-    def getModified(self):
+    def get_date_modified(self):
         """
 
         :return:

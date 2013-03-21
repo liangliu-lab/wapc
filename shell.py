@@ -15,10 +15,12 @@ def __main__():
         print Language.MSG_APP_WELCOME
         print Language.MSG_APP_CMD_INIT
         ConsoleInterface().cmdloop()
-    except Exception as e:
-        print e.message
-        pass
+    except KeyboardInterrupt as exception:
+        print exception.message
+    except BaseException as exception:
+        print exception.message
     finally:
+        ConsoleInterface().cmdloop()
         pass
 
 

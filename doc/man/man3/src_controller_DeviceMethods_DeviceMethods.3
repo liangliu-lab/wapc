@@ -1,0 +1,177 @@
+.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.controller.DeviceMethods.DeviceMethods \- 
+.PP
+\fBDeviceMethods\fP +Marka bağımsız temel WAP yönetim uygulaması  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Thread\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBcreate\fP"
+.br
+.RI "\fI.PP
+.nf
+Add function to implement a thread at background responds to Web or CLI request
+.fi
+.PP
+ :param params: \fP"
+.ti -1c
+.RI "def \fBread\fP"
+.br
+.RI "\fI:param id: \fP"
+.ti -1c
+.RI "def \fBupdate\fP"
+.br
+.RI "\fIUpdate methods certainly moderated by $ edit [OPTIONS] command by CLI\&. \fP"
+.ti -1c
+.RI "def \fBdelete\fP"
+.br
+.ti -1c
+.RI "def \fBset\fP"
+.br
+.RI "\fI.PP
+.nf
+This methods handle options and connect throug device by given name
+.fi
+.PP
+ :param params: \fP"
+.ti -1c
+.RI "def \fBunset\fP"
+.br
+.RI "\fI.PP
+.nf
+This methods handle options and connect throug device by given name
+.fi
+.PP
+ :param params: \fP"
+.ti -1c
+.RI "def \fBshow\fP"
+.br
+.ti -1c
+.RI "def \fBgroup_set\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.ti -1c
+.RI "\fBdb\fP"
+.br
+.ti -1c
+.RI "\fBci\fP"
+.br
+.ti -1c
+.RI "\fBscript\fP"
+.br
+.ti -1c
+.RI "\fBcfg_device\fP"
+.br
+.ti -1c
+.RI "\fBnow\fP"
+.br
+.ti -1c
+.RI "\fBparams\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBDeviceMethods\fP +Marka bağımsız temel WAP yönetim uygulaması 
+
+.PP
+.nf
+- SSID Ayarları
+- IP ve Network Ayarları
+- Kimlik Doğrulama Ayarları
+
+- WAP Discovery
+- Kanal Yönetimi
+- Roaming
+- Load Balancing
+.fi
+.PP
+.PP
+.IP "\(bu" 2
+WAP ların 802,1x yetkilendirmesi 
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.__init__ (self, params)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.create (self, params)"
+
+.PP
+.PP
+.nf
+Add function to implement a thread at background responds to Web or CLI request
+.fi
+.PP
+ :param params: 
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.delete (self, params)"
+
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.group_set (self, config, params)"
+
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.read (self, cid)"
+
+.PP
+:param id: 
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.set (self, params)"
+
+.PP
+.PP
+.nf
+This methods handle options and connect throug device by given name
+.fi
+.PP
+ :param params: 
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.show (self, params)"
+
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.unset (self, params)"
+
+.PP
+.PP
+.nf
+This methods handle options and connect throug device by given name
+.fi
+.PP
+ :param params: 
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.update (self, params)"
+
+.PP
+Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This methods only inherit update database records by no touching physical device config\&.  Params comes from main class 
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.cfg_device"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.ci"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.db"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.now"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.params"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.script"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

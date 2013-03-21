@@ -1,0 +1,309 @@
+.TH "src.cli.ConsoleInterface.ConsoleInterface" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.cli.ConsoleInterface.ConsoleInterface \- 
+.PP
+Command list to implement all required methods pre-defined\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Cmd\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fIConstructure of \fBConsoleInterface\fP class\&. \fP"
+.ti -1c
+.RI "def \fBdo_add\fP"
+.br
+.RI "\fIadd command insert a new device with its suddenly created configuration into inventory\&. \fP"
+.ti -1c
+.RI "def \fBdo_edit\fP"
+.br
+.RI "\fIedit commands updates keys given with provided parameters in database\&. \fP"
+.ti -1c
+.RI "def \fBdo_group\fP"
+.br
+.RI "\fIgroup command groups provided devices into given group one by one\&. \fP"
+.ti -1c
+.RI "def \fBdo_set\fP"
+.br
+.RI "\fIset command set device recent configuration to given values value and update recent records in database by provided type \fP"
+.ti -1c
+.RI "def \fBdo_unset\fP"
+.br
+.RI "\fIunset command unset device recent configuration to a default or none value and update recent records in database by provided type \fP"
+.ti -1c
+.RI "def \fBdo_ls\fP"
+.br
+.RI "\fIls command implements a list method to get recent records from database by provided type \fP"
+.ti -1c
+.RI "def \fBdo_sh\fP"
+.br
+.RI "\fIsh command implements a show method to get recent device config options \fP"
+.ti -1c
+.RI "def \fBdo_rm\fP"
+.br
+.RI "\fIrm command removes given device, config or group from database \fP"
+.ti -1c
+.RI "def \fBdo_selftest\fP"
+.br
+.RI "\fIThis method will implement a self testing with pre-defined parameters and values\&. \fP"
+.ti -1c
+.RI "def \fBdo_help\fP"
+.br
+.RI "\fIPrints help message\&. \fP"
+.ti -1c
+.RI "def \fBdo_exit\fP"
+.br
+.RI "\fIExit command to terminate command line script\&. \fP"
+.ti -1c
+.RI "def \fBcmdloop_with_keyboard_interrupt\fP"
+.br
+.RI "\fIKeyboard interruption method\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBprompt\fP"
+.br
+.ti -1c
+.RI "\fBnow\fP"
+.br
+.ti -1c
+.RI "\fBmain\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Command list to implement all required methods pre-defined\&. 
+
+inherited from cmd library to handle commandline interface with user interaction\&. This class gathers commands from user and declare them into individual methods written in project own classes\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP cmd\&.Cmd is a library object 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.__init__ (self)"
+
+.PP
+Constructure of \fBConsoleInterface\fP class\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.cmdloop_with_keyboard_interrupt (self)"
+
+.PP
+Keyboard interruption method\&. 
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_add (self, args)"
+
+.PP
+add command insert a new device with its suddenly created configuration into inventory\&. .PP
+.nf
+     Add methods push a default configuration by updating only IP value in
+     configuration file with given IP and it insert a database record if
+     device response is successfull with status code 110.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t] [--type] Add device, group, vlan, config [-i] [--ip] Use this params when adding some new variables which needs an ip such as device, config, etc\&. [-n] [--name] To set a name to related type variable [-u] [--username] Provide a username which will be used to connect device 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_edit (self, args)"
+
+.PP
+edit commands updates keys given with provided parameters in database\&. .PP
+.nf
+     Edit methods update only database records by not touching recent device
+     configuration. It is supposed that this operation is a soft update.
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.edit() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t],[--type] Type of device, group, vlan, config, group [-o],[--option] Provide option to be updated in database [-P],[--parameter] Provide parameter to be set as a value 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_exit (self)"
+
+.PP
+Exit command to terminate command line script\&. 
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_group (self, args)"
+
+.PP
+group command groups provided devices into given group one by one\&. .PP
+.nf
+     Group devices with given parameters.
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.group() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t] [--type] Type of device or group [-g],[--group] Group id if you want to insert into group [-i],[--id] Define id of device 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_help (self, args)"
+
+.PP
+Prints help message\&. \fBReturns:\fP
+.RS 4
+help Detailed help message 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_ls (self, args)"
+
+.PP
+ls command implements a list method to get recent records from database by provided type .PP
+.nf
+     Show device, group, vlan, config etc with given parameters
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.list() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t] [--type] Type of device or group [-g],[--group] Group id if you want to list from group [-i],[--id] Define id of device or group 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_rm (self, args)"
+
+.PP
+rm command removes given device, config or group from database .PP
+.nf
+     Remove command removes given type from only database and the recent
+     configuration on the device will still remains as it is. It is should be
+     added again and then the default configuration file will be pushed into
+     device again.
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.show() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t],[--type] Type of device or group [-o],[--option] Provide option must be one of [-i],[--id] Define id of device or group 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_selftest (self, args)"
+
+.PP
+This method will implement a self testing with pre-defined parameters and values\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_set (self, args)"
+
+.PP
+set command set device recent configuration to given values value and update recent records in database by provided type .PP
+.nf
+     Unset device or group with given parameters
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.set() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t] [--type] Type of device or group [-o],[--option] Provide option must be one of [-i],[--id] Define id of device or group 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_sh (self, args)"
+
+.PP
+sh command implements a show method to get recent device config options .PP
+.nf
+     Show device or group with given parameters
+     Options can be one of: ssid, channel, ip, cpu, memory, channel, conf,
+     firmware, model, serial, clients, run or any "show_" commands provided
+     in wapc_condif.json
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.show() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t],[--type] Type of device or group [-o],[--option] Provide option must be one of [-i],[--id] Define id of device or group 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_unset (self, args)"
+
+.PP
+unset command unset device recent configuration to a default or none value and update recent records in database by provided type .PP
+.nf
+     Unset device or group with given parameters
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+Main()\&.unset() 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t] [--type] Type of device or group [-o],[--option] Provide option must be one of [-i],[--id] Define id of device or group 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.main"
+
+.SS "src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.now"
+
+.SS "src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.prompt"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

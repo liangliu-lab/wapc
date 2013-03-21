@@ -45,7 +45,7 @@ class Main(object):
         try:
 
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
                 configMethods = ConfigMethods(Config(), params)
@@ -53,16 +53,16 @@ class Main(object):
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if pType == 'device':
+                if str(pType).lower() == 'device':
                     # noinspection PyArgumentList
                     deviceMethods.create(params)
-                elif pType == 'group':
+                elif str(pType).lower() == 'group':
                     # noinspection PyArgumentList
                     groupMethods.create(params)
-                elif pType == 'config':
+                elif str(pType).lower() == 'config':
                     # noinspection PyArgumentList
                     configMethods.create(params)
-                elif pType == 'vlan':
+                elif str(pType).lower() == 'vlan':
                     vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -80,7 +80,7 @@ class Main(object):
         """
         try:
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
                 configMethods = ConfigMethods(Config(), params)
@@ -88,16 +88,16 @@ class Main(object):
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if pType == 'device':
+                if str(pType).lower() == 'device':
                     # noinspection PyArgumentList
                     deviceMethods.update(params)
-                elif pType == 'group':
+                elif str(pType).lower() == 'group':
                     # noinspection PyArgumentList
                     groupMethods.update(params)
-                elif pType == 'config':
+                elif str(pType).lower() == 'config':
                     # noinspection PyArgumentList
                     configMethods.update(params)
-                elif pType == 'vlan':
+                elif str(pType).lower() == 'vlan':
                     vlanMethods.update(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -116,23 +116,23 @@ class Main(object):
         """
         try:
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 #check namespace variables if set
                 pType = params.type.split()[0]
                 #moderate type value to determine the statement
-                if pType == 'group':
+                if str(pType).lower() == 'group':
                     cmd = SQL.SQL_SELECT_GROUP_ALL
-                elif pType == 'device':
+                elif str(pType).lower() == 'device':
                     if params.group:
                         cmd = SQL.SQL_SELECT_DEVICE_FROM_GROUP % {'group_id': int(params.group.strip())}
                     elif not params.group and params.id:
-                        cmd = SQL.SQL_SELECT_DEVICE
+                        cmd = SQL.SQL_SELECT_DEVICE % {'id':int(params.id)}
                     else:
                         cmd = SQL.SQL_SELECT_DEVICE_ALL
-                elif pType == 'config':
+                elif str(pType).lower() == 'config':
                     cmd = SQL.SQL_SELECT_CONFIG
-                elif pType == 'vlan':
+                elif str(pType).lower() == 'vlan':
                     cmd = SQL.SQL_SELECT_VLAN
                 else:
                     raise Exception(
@@ -163,7 +163,7 @@ class Main(object):
         try:
 
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 if params.id and params.group:
                     dID = params.id
@@ -194,7 +194,7 @@ class Main(object):
         try:
             #moderate type value to determine the statement
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
                 configMethods = ConfigMethods(Config(), params)
@@ -202,16 +202,16 @@ class Main(object):
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if pType == 'device':
+                if str(pType).lower() == 'device':
                     # noinspection PyArgumentList
                     deviceMethods.show(params)
-                elif pType == 'group':
+                elif str(pType).lower() == 'group':
                     # noinspection PyArgumentList
                     groupMethods.show(params)
-                elif pType == 'config':
+                elif str(pType).lower() == 'config':
                     # noinspection PyArgumentList
                     configMethods.show(params)
-                elif pType == 'vlan':
+                elif str(pType).lower() == 'vlan':
                     vlanMethods.show(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -230,7 +230,7 @@ class Main(object):
         try:
             #moderate type value to determine the statement
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
                 configMethods = ConfigMethods(Config(), params)
@@ -238,16 +238,16 @@ class Main(object):
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if pType == 'device':
+                if str(pType).lower() == 'device':
                     # noinspection PyArgumentList
                     deviceMethods.set(params)
-                elif pType == 'group':
+                elif str(pType).lower() == 'group':
                     # noinspection PyArgumentList
                     groupMethods.set(params)
-                elif pType == 'config':
+                elif str(pType).lower() == 'config':
                     # noinspection PyArgumentList
                     configMethods.create(params)
-                elif pType == 'vlan':
+                elif str(pType).lower() == 'vlan':
                     vlanMethods.create(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -266,7 +266,7 @@ class Main(object):
         try:
             #moderate type value to determine the statement
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 deviceMethods = DeviceMethods(params)
                 configMethods = ConfigMethods(Config(), params)
@@ -274,16 +274,16 @@ class Main(object):
                 vlanMethods = VLanMethods()
                 pType = params.type.split()[0]
                 # noinspection PyArgumentList
-                if pType == 'device':
+                if str(pType).lower() == 'device':
                     # noinspection PyArgumentList
                     deviceMethods.unset(params)
-                elif pType == 'group':
+                elif str(pType).lower() == 'group':
                     # noinspection PyArgumentList
                     groupMethods.unset(params)
-                elif pType == 'config':
+                elif str(pType).lower() == 'config':
                     # noinspection PyArgumentList
                     configMethods.unset(params)
-                elif pType == 'vlan':
+                elif str(pType).lower() == 'vlan':
                     vlanMethods.unset(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')
@@ -306,7 +306,7 @@ class Main(object):
 
         try:
             if args:
-                arglist = self.utils.getCleanParams(args)
+                arglist = self.utils.get_clean_params(args)
                 params = self.argparser.get_args(arglist)
                 pType = params.type.split()[0]
                 #set gathered id params to be used
@@ -318,18 +318,18 @@ class Main(object):
                     print Language.MSG_ERR_EMPTY_ID + '\n' + Language.MSG_ERR_EMPTY_NAME
 
                 if pType and pID or pName:
-                    if pType == 'group':
+                    if str(pType).lower() == 'group':
                         cmd = SQL.SQL_REMOVE_GROUP % {'id': int(pID)}
 
                     #check if type is device to remove the group belong to given id and name
-                    elif pType == 'device':
+                    elif str(pType).lower() == 'device':
                         cmd = SQL.SQL_REMOVE_DEVICE % {'id': int(pID)}
 
                     #check if type is config to remove the group belong to given id and name
-                    elif pType == 'config':
+                    elif str(pType).lower() == 'config':
                         cmd = SQL.SQL_REMOVE_CONFIG % {'id': int(pID)}
                     #remove from given device from given group
-                    elif pType == 'from':
+                    elif str(pType).lower() == 'from':
                         if params.group:
                             gID = params.group.rstrip().lstrip()
                             cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP % {'device': int(pID), 'group': int(gID)}
@@ -339,7 +339,7 @@ class Main(object):
                             )
 
                     #remove vlan record from database
-                    elif pType == 'vlan':
+                    elif str(pType).lower() == 'vlan':
                         cmd = SQL.SQL_REMOVE_VLAN % {'id': int(pID)}
                     else:
                         print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), 'No [type] argument provided')

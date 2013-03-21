@@ -1,0 +1,68 @@
+.TH "src.helper.Utils.Utils" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.helper.Utils.Utils \- 
+.PP
+\fBUtils\fP class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBget_clean_params\fP"
+.br
+.RI "\fI:param args: :return: \fP"
+.ti -1c
+.RI "def \fBformatter\fP"
+.br
+.RI "\fIFormat output text as a human readable style\&. \fP"
+.ti -1c
+.RI "def \fBget_line\fP"
+.br
+.RI "\fI.PP
+.nf
+Get current line of file to handle exception lines
+.fi
+.PP
+ :param :self :rtype : object :return line number: \fP"
+.ti -1c
+.RI "def \fBvalidate\fP"
+.br
+.RI "\fIThis method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBUtils\fP class\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.helper\&.Utils\&.Utils\&.formatter (self, heading, source)"
+
+.PP
+Format output text as a human readable style\&. :param heading is a list object comes from other methods to create a pretty table to be printed :param source is a tuple list aims to create pretty table rows 
+.SS "def src\&.helper\&.Utils\&.Utils\&.get_clean_params (self, args)"
+
+.PP
+:param args: :return: 
+.SS "def src\&.helper\&.Utils\&.Utils\&.get_line (self)"
+
+.PP
+.PP
+.nf
+Get current line of file to handle exception lines
+.fi
+.PP
+ :param :self :rtype : object :return line number: 
+.SS "def src\&.helper\&.Utils\&.Utils\&.validate (self, source = \fCNone\fP, stype = \fCNone\fP)"
+
+.PP
+This method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc\&. :param stype: type defines what sort of value will be validated\&. Recently supported keys name, eth & ip :param source: 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

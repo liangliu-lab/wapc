@@ -1,0 +1,151 @@
+.TH "src.controller.main.Main" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.controller.main.Main \- 
+.PP
+\fBMain\fP class includes all base controller methods of the software\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBadd\fP"
+.br
+.RI "\fIAdd any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. \fP"
+.ti -1c
+.RI "def \fBedit\fP"
+.br
+.RI "\fIEdit any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. \fP"
+.ti -1c
+.RI "def \fBlist\fP"
+.br
+.RI "\fIList all record from the inventory by given type and values such as device, group and id to decribe the record :param args: \fP"
+.ti -1c
+.RI "def \fBgroup\fP"
+.br
+.RI "\fI.PP
+.nf
+Add device(s) or given type to group with params
+.fi
+.PP
+ :param args: \fP"
+.ti -1c
+.RI "def \fBshow\fP"
+.br
+.RI "\fI.PP
+.nf
+This method show running configuration by given option
+.fi
+.PP
+ :param args: \fP"
+.ti -1c
+.RI "def \fBset\fP"
+.br
+.RI "\fIThis method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: \fP"
+.ti -1c
+.RI "def \fBunset\fP"
+.br
+.RI "\fIThis method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: \fP"
+.ti -1c
+.RI "def \fBremove\fP"
+.br
+.RI "\fIRemove any record from the inventory by given type and values such as device, group and id to decribe the record :param args: \fP"
+.ti -1c
+.RI "def \fBhelp\fP"
+.br
+.RI "\fI:param args: \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.ti -1c
+.RI "\fBargparser\fP"
+.br
+.ti -1c
+.RI "\fBnow\fP"
+.br
+.ti -1c
+.RI "\fBdb\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBMain\fP class includes all base controller methods of the software\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.controller\&.main\&.Main\&.__init__ (self)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.controller\&.main\&.Main\&.add (self, args)"
+
+.PP
+Add any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. :rtype : object :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.edit (self, args)"
+
+.PP
+Edit any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.group (self, args)"
+
+.PP
+.PP
+.nf
+Add device(s) or given type to group with params
+.fi
+.PP
+ :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.help (self, args)"
+
+.PP
+:param args: 
+.SS "def src\&.controller\&.main\&.Main\&.list (self, args)"
+
+.PP
+List all record from the inventory by given type and values such as device, group and id to decribe the record :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.remove (self, args)"
+
+.PP
+Remove any record from the inventory by given type and values such as device, group and id to decribe the record :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.set (self, args)"
+
+.PP
+This method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.show (self, args)"
+
+.PP
+.PP
+.nf
+This method show running configuration by given option
+.fi
+.PP
+ :param args: 
+.SS "def src\&.controller\&.main\&.Main\&.unset (self, args)"
+
+.PP
+This method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: 
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.controller\&.main\&.Main\&.argparser"
+
+.SS "src\&.controller\&.main\&.Main\&.db"
+
+.SS "src\&.controller\&.main\&.Main\&.now"
+
+.SS "src\&.controller\&.main\&.Main\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

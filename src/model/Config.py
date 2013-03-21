@@ -26,137 +26,138 @@ class Config(dict):
         self["personality"] = 'ios'
         self["ssid"] = "LBREAP"
         self["vlan_id"] = 0
-        self["channel"] = 0
-        self["channel_freq"] = 0
-        self["maxclient"] = 0
+        self["channel"] = 10
+        self["maxclient"] = 20
         self["request"] = Request()
+        self["Add Date"] = None
+        self["Last Modified"] = None
 
-    def setID(self, cID):
+    def set_id(self, cID):
         """
             :param cID:
             """
         self["id"] = cID
 
-    def getID(self):
+    def get_id(self):
         """
             :return:
             """
         return self["id"]
 
-    def setName(self, name):
+    def set_name(self, name):
         """
 
             :param name:
             """
         self["name"] = name
 
-    def getName(self):
+    def get_name(self):
         """
             :return:
             """
         return self["name"]
 
-    def setDescription(self, description):
+    def set_description(self, description):
         """
         :param self:
         :param description:
         """
         self["description"] = description
 
-    def getDescription(self):
+    def get_description(self):
         """
             :return:
             """
         return self["description"]
 
-    def setIP(self, ip):
+    def set_ip(self, ip):
         """
 
             :param ip:
             """
         self["ip"] = ip
 
-    def getIP(self):
+    def get_ip(self):
         """
             :return:
             """
         return self["ip"]
 
-    def setUsername(self, username):
+    def set_username(self, username):
         """
 
         :param username:
         """
         self["username"] = username
 
-    def getUsername(self):
+    def get_username(self):
         """
         :return:
         """
         return self["username"]
 
-    def setPassword(self, password):
+    def set_password(self, password):
         """
 
         :param password:
         """
         self["password"] = password
 
-    def getPassword(self):
+    def get_password(self):
         """
         :return:
         """
         return self["password"]
     
-    def setEnablePassword(self, option):
+    def set_enable_password(self, option):
         """
 
         :param option:
         """
         self["enable_password"] = option
 
-    def getEnablePassword(self):
+    def get_enable_password(self):
         """
         :return:
         """
         return self["enable_password"]
 
-    def setRadiusID(self, radius_config_id):
+    def set_radius(self, radius_config_id):
         """
 
             :param radius_config_id:
             """
         self["radius_config_id"] = radius_config_id
 
-    def getRadiusID(self):
+    def get_radius(self):
         """
 
             :return:
             """
         return self["radius_config_id"]
 
-    def setSSID(self, ssid):
+    def set_ssid(self, ssid):
         """
 
             :param ssid:
             """
         self["ssid"] = ssid
 
-    def getSSID(self):
+    def get_ssid(self):
         """
 
             :return:
             """
         return self["ssid"]
 
-    def setVLAN(self, vlan_id):
+    def set_vlan(self, vlan_id):
         """
 
             :param vlan_id:
             """
         self["vlan_id"] = vlan_id
 
-    def getVLAN(self):
+    def get_vlan(self):
         """
 
 
@@ -164,14 +165,14 @@ class Config(dict):
             """
         return self["vlan_id"]
 
-    def setChannel(self, channel):
+    def set_channel(self, channel):
         """
 
             :param channel:
             """
         self["channel"] = channel
 
-    def getChannel(self):
+    def get_channel(self):
         """
 
 
@@ -179,29 +180,14 @@ class Config(dict):
             """
         return self["channel"]
 
-    def setChannelFreq(self, channel_freq):
-        """
-
-            :param channel_freq:
-            """
-        self["channel_freq"] = channel_freq
-
-    def getChannelFreq(self):
-        """
-
-
-            :return:
-            """
-        return self["channel_freq"]
-
-    def setTProtocol(self, protocol):
+    def set_transport_protocol(self, protocol):
         """
 
             :param protocol:
             """
         self["transport_protocol"] = protocol
 
-    def getTProtocol(self):
+    def get_transport_protocol(self):
         """
 
 
@@ -209,44 +195,72 @@ class Config(dict):
             """
         return self["transport_protocol"]
 
-    def setPersonality(self, personality):
+    def set_personality(self, personality):
         """
 
             :param personality:
             """
         self["personality"] = personality
 
-    def getPersonality(self):
+    def get_personality(self):
         """
 
             :return personality:
             """
         return self["personality"]
 
-    def setMaxclient(self, request):
+    def set_maxclient(self, request):
         """
                 Set request
             :param request:
             """
         self["maxclient"].update(request)
 
-    def getMaxclient(self):
+    def get_maxclient(self):
         """
 
             :return:
             """
         return self["maxclient"]
 
-    def setRequest(self, request):
+    def set_request(self, request):
         """
                 Set request
             :param request:
             """
         self["request"].update(request)
 
-    def getRequest(self):
+    def get_request(self):
         """
 
             :return:
             """
         return self["request"]
+
+        def set_date_add(self, date):
+            """
+
+            :param date:
+            """
+        self["Add Date"] = date
+
+    def get_date_add(self):
+        """
+
+        :return:
+        """
+        return self["Add Date"]
+
+    def set_date_modified(self, date):
+        """
+
+        :param date:
+        """
+        self["Last Modified"] = date
+
+    def get_date_modified(self):
+        """
+
+        :return:
+        """
+        return self["Last Modified"]

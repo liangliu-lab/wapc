@@ -1,0 +1,106 @@
+.TH "src.cli.CommunicationInterface.CommunicationInterface" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.cli.CommunicationInterface.CommunicationInterface \- 
+.PP
+Communication interface class to talk with perl script\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBget_source_config\fP"
+.br
+.RI "\fI.PP
+.nf
+Get input json file to parse with params
+.fi
+.PP
+ :param source_file: \fP"
+.ti -1c
+.RI "def \fBcall_communication_interface\fP"
+.br
+.RI "\fI.PP
+.nf
+Call script with source json data file path
+.fi
+.PP
+ :param source: Usage: call_communication_interface('config\&.json') \fP"
+.ti -1c
+.RI "def \fBwrite_source_file\fP"
+.br
+.RI "\fI.PP
+.nf
+Write source file to provide the communication interface
+.fi
+.PP
+ :param p_type: :param target: :param source: \fP"
+.ti -1c
+.RI "def \fBbackup\fP"
+.br
+.RI "\fI:param p_type: :rtype : object :param source: :param target: :param time: \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Communication interface class to talk with perl script\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.__init__ (self)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.backup (self, source, target, time, p_type = \fC'RAW'\fP)"
+
+.PP
+:param p_type: :rtype : object :param source: :param target: :param time: 
+.SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.call_communication_interface (self, source)"
+
+.PP
+.PP
+.nf
+Call script with source json data file path
+.fi
+.PP
+ :param source: Usage: call_communication_interface('config\&.json') 
+.SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.get_source_config (self, source_file)"
+
+.PP
+.PP
+.nf
+Get input json file to parse with params
+.fi
+.PP
+ :param source_file: 
+.SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.write_source_file (self, source, target, p_type = \fC'JSON'\fP)"
+
+.PP
+.PP
+.nf
+Write source file to provide the communication interface
+.fi
+.PP
+ :param p_type: :param target: :param source: 
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

@@ -26,33 +26,47 @@ class SQL(object):
                         "ad.model," \
                         "ad.firmware," \
                         "ad.relation," \
-                        "config_id AS \"Configuration\"," \
-                        "date_added \"Add Date\", " \
-                        "date_modified AS \"Last Modified\" " \
-                        "FROM apc_device ad " \
-                        "WHERE d.name IS NOT NULL AND d.id = %(id)d;"
+                        "ac.radius," \
+                        "ac.ssid," \
+                        "ac.vlan," \
+                        "ac.channel," \
+                        "ac.frequency," \
+                        "ac.maxclients," \
+                        "ac.id AS \"Configuration\", " \
+                        "ad.date_added \"Add Date\", " \
+                        "ad.date_modified AS \"Last Modified\" " \
+                        "FROM apc_device AS ad " \
+                        "INNER JOIN apc_config AS ac ON ad.config_id = ac.id " \
+                        "WHERE ad.name IS NOT NULL AND ad.id = %(id)d" \
+                        "ORDER BY DATE(ad.date_added);"
 
     SQL_SELECT_DEVICE_CONFIG = "SELECT * " \
                                "FROM apc_device d " \
                                "LEFT JOIN apc_config c ON d.config_id = c.id " \
                                "WHERE d.id = {0};"
 
-    SQL_SELECT_DEVICE_ALL = "SELECT id AS ID, " \
-                            "name, " \
-                            "description, " \
-                            "ip, " \
-                            "username, " \
-                            "password, " \
-                            "brand," \
-                            "model," \
-                            "firmware," \
-                            "relation," \
-                            "config_id AS \"Configuration\"," \
-                            "date_added \"Add Date\", " \
-                            "date_modified AS \"Last Modified\" " \
-                            "FROM apc_device AS d " \
-                            "WHERE d.name IS NOT NULL " \
-                            "ORDER BY DATE(date_added) ASC;"
+    SQL_SELECT_DEVICE_ALL = "SELECT ad.id, " \
+                            "ad.name, " \
+                            "ad.description, " \
+                            "ad.ip, " \
+                            "ad.username, " \
+                            "ad.password," \
+                            "ad.brand," \
+                            "ad.model," \
+                            "ad.firmware," \
+                            "ad.relation," \
+                            "ac.radius," \
+                            "ac.ssid," \
+                            "ac.vlan," \
+                            "ac.channel," \
+                            "ac.frequency," \
+                            "ac.maxclients," \
+                            "ad.date_added \"Add Date\", " \
+                            "ad.date_modified AS \"Last Modified\" " \
+                            "FROM apc_device AS ad " \
+                            "INNER JOIN apc_config AS ac ON ad.config_id = ac.id " \
+                            "WHERE ad.name IS NOT NULL " \
+                            "ORDER BY DATE(ad.date_added);"
 
     SQL_SELECT_DEVICE_FROM_GROUP = "SELECT " \
                                    "ad.id , " \

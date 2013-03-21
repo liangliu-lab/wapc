@@ -1,7 +1,28 @@
 # coding=utf-8
 """
-    Console Interface class has been implemented to gather commands, retrieve options and details and connect to device
-    execute commands.
+Copyright 2013 Labris Technology.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Console Interface class has been implemented to gather commands,
+retrieve options and details and connect to device execute commands.
+
+@package cli
+@date Marh 13, 2013
+@author Fatih Karatana
+@author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
+@copyright Labris Technology
+
 """
 
 import cmd
@@ -13,205 +34,215 @@ from src.resources.resources import Resources
 
 class ConsoleInterface(cmd.Cmd):
     """
-        Command list to implement all required methods
+    Command list to implement all required methods pre-defined
+
+    @class ConsoleInterface has been inherited from cmd library to handle
+    commandline interface with user interaction. This class gathers commands
+    from user and declare them into individual methods written in project
+    own classes.
+
+    @param: cmd.Cmd is a library object
     """
-    cmd.Cmd.prompt = Resources.prompt
-    now = strftime(Resources.time_format, gmtime())
-    main = Main()
+
+    def __init__(self):
+        """
+            Constructure of ConsoleInterface class
+        """
+        cmd.Cmd.__init__(self)
+        self.prompt = Resources.prompt
+
+        #current timestamp
+        self.now = strftime(Resources.time_format, gmtime())
+
+        # main class instance to handle  gathered command
+        self.main = Main()
 
     def do_add(self, args):
         """
-        Add device, group, vlan, config etc with given parameters
-                [-t] [--type] Add device, group, vlan, config
-                [-i] [--ip] Use this params when adding some new variables which needs an ip such as device, config, etc.
+        add command insert a new device with its suddenly created configuration
+        into inventory.
+
+        Add methods push a default configuration by updating only IP value in
+        configuration file with given IP and it insert a database record if
+        device response is successfull with status code 110.
+
+        @param args [-t] [--type] Add device, group, vlan, config
+                [-i] [--ip] Use this params when adding some new variables
+                which needs an ip such as device, config, etc.
                 [-n] [--name] To set a name to related type variable
-                [-u] [--username] Provide a username which will be used to connect device
-            :param args:
-            """
+                [-u] [--username] Provide a username which will be used
+                to connect device
+        """
+
         try:
             self.main.add(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_edit(self, args):
         """
-        Edit details of given type of device with given parameters
-            [-t] [--type] Add device, group, vlan, config, group
-            [-i] [--ip] Use this params when adding some new variables which needs an ip such as device, config, etc.
-            [-n] [--name] To set a name to related type variable
-            [-u] [--username] Provide a username which will be used to connect device
-        :param args:
+        edit commands updates keys given with provided parameters in database.
+
+        Edit methods update only database records by not touching recent device
+        configuration. It is supposed that this operation is a soft update.
+
+        @see Main().edit()
+        @param args [-t],[--type] Type of device, group, vlan, config, group
+            [-o],[--option] Provide option to be updated in database
+            [-P],[--parameter] Provide parameter to be set as a value
         """
         try:
             self.main.edit(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_group(self, args):
         """
-                Add new group with params
-        :param args:
+        group command groups provided devices into given group one by one.
+
+        Group devices with given parameters.
+
+        @see Main().group()
+        @param args  [-t] [--type] Type of device or group
+                     [-g],[--group] Group id if you want to insert into group
+                     [-i],[--id] Define id of device
         """
         try:
             self.main.group(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_set(self, args):
         """
-            Set options with given values to a device or group with params
-        :param args:
+        set command set device recent configuration to given values
+        value and update recent records in database by provided type
+
+        Unset device or group with given parameters
+
+        @see Main().set()
+        @param args  [-t] [--type] Type of device or group
+                     [-o],[--option] Provide option must be one of
+                     [-i],[--id] Define id of device or group
         """
         try:
             self.main.set(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_unset(self, args):
         """
-            Set options with given values to a device or group with params
-        :param args:
+        unset command unset device recent configuration to a default or none
+        value and update recent records in database by provided type
+
+        Unset device or group with given parameters
+
+        @see Main().unset()
+        @param args  [-t] [--type] Type of device or group
+                     [-o],[--option] Provide option must be one of
+                     [-i],[--id] Define id of device or group
         """
         try:
             self.main.unset(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_ls(self, args):
         """
-            List all details of any type given
-        :param args:
+        ls command implements a list method to get
+        recent records from database by provided type
+
+        Show device, group, vlan, config etc with given parameters
+
+        @see Main().list()
+        @param args  [-t] [--type] Type of device or group
+                     [-g],[--group] Group id if you want to list from group
+                     [-i],[--id] Define id of device or group
         """
         try:
             self.main.list(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_sh(self, args):
         """
-        Add device, group, vlan, config etc with given parameters
-                [-t] [--type] Add device, group, vlan, config
-                [-o],[--option]\tProvide option must be one of
-                [-i],[--id]\tDefine id of device or group
-            :param args:
-            """
+        sh command implements a show method to get
+        recent device config options
+
+        Show device or group with given parameters
+        Options can be one of: ssid, channel, ip, cpu, memory, channel, conf,
+        firmware, model, serial, clients, run or any "show_" commands provided
+        in wapc_condif.json
+
+        @see Main().show()
+        @param args [-t],[--type] Type of device or group
+                    [-o],[--option] Provide option must be one of
+                    [-i],[--id] Define id of device or group
+        """
         try:
             self.main.show(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
     def do_rm(self, args):
         """
-            Remove any given variable
-        :param args:
-            """
+        rm command removes given device, config or group from database
+
+        Remove command removes given type from only database and the recent
+        configuration on the device will still remains as it is. It is should be
+        added again and then the default configuration file will be pushed into
+        device again.
+
+        @see Main().show()
+        @param args [-t],[--type] Type of device or group
+                    [-o],[--option] Provide option must be one of
+                    [-i],[--id] Define id of device or group
+        """
         try:
             self.main.remove(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
-    def do_selftest(self, command):
+    def do_selftest(self, args):
         """
-            This method will implement a self testing with pre-defined parameters and values
-        :param command:
-            """
+        This method will implement a self testing
+        with pre-defined parameters and values
+
+        @param args
+        """
 
     def do_help(self, args):
         """
-        :rtype : object
-        :param args:
+        Prints help message
+
+        @return help Detailed help message
+        @param args
         """
         try:
             self.main.help(args)
-        except Exception as e:
-            print e.message
-            pass
+        except BaseException as exception:
+            print exception.message
 
-    def do_exit(self, args):
+    def do_exit(self):
         """
-            Exit command
-        :rtype : object
-            :param args:
+        Exit command to terminate command line script
         """
         try:
             sys.exit(0)
-        except Exception as e:
-            print e.message
-            pass
-
-    def preloop(self):
-        """
-            Preloop is a helper method to handle commands before loop executed
-
-        """
-        cmd.Cmd.preloop(self)
-        self._hist = []
-        self._locals = {}
-        self._globals = {}
-
-    def postloop(self):
-        """
-            Postloop is a helper method to declare command will be run after loop executed
-
-        """
-        cmd.Cmd.postloop(self)
-        print "Exiting ..."
-
-    def precmd(self, line):
-        """
-
-        :param line:
-        :return:
-        """
-        self._hist += [ line.strip() ]
-        return line
-
-    def postcmd(self, stop, line):
-        """
-
-        :param stop:
-        :param line:
-        :return:
-        """
-        return stop
-
-    def emptyline(self):
-        """
-
-
-        :return:
-        """
-        return cmd.Cmd.emptyline(self)
+        except BaseException as exception:
+            print exception.message
 
     def cmdloop_with_keyboard_interrupt(self):
         """
-            Keyboard interruption method
+        Keyboard interruption method
 
         """
-        doQuit = False
-        while not doQuit:
+        do_quit = False
+        while not do_quit:
             try:
                 self.cmdloop()
-                doQuit = True
+                do_quit = True
             except KeyboardInterrupt:
                 sys.stdout.write('\n')
             # enable this when production
             except BaseException:
                 sys.stdout.write('\n')
-
-
-    def do_EOF(self, args):
-        """
-
-        :param args:
-        :return:
-        """
-        return self.do_exit(args)

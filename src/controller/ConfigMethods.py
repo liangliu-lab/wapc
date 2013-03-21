@@ -108,7 +108,7 @@ class ConfigMethods(threading.Thread):
                           }
 
                 if self.db.update(cmd):
-                    print Language.MSG_UPDATE_RECORD.format('device', did, config.getName())
+                    print Language.MSG_UPDATE_RECORD.format('device', did, config.get_name())
                 else:
                     print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating recorded group', did)
             else:

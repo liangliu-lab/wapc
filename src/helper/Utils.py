@@ -13,7 +13,7 @@ class Utils(object):
     """
         Utils class
     """
-    def getCleanParams(self, args):
+    def get_clean_params(self, args):
         """
 
         :param args:
@@ -25,10 +25,10 @@ class Utils(object):
 
     def formatter(self, heading, source):
         """
-            Format output text as a human readable style
+        Format output text as a human readable style
 
-        :param heading list
-        :param source is a tuple list
+        :param heading is a list object comes from other methods to create a pretty table to be printed
+        :param source is a tuple list aims to create pretty table rows
         """
         import formatter
         try:

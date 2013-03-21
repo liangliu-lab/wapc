@@ -1,0 +1,109 @@
+.TH "src.helper.formatter" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.helper.formatter \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBindent\fP"
+.br
+.RI "\fIIndents a table by column\&. \fP"
+.ti -1c
+.RI "def \fBwrap_onspace\fP"
+.br
+.RI "\fIA word-wrap function that preserves existing line breaks and most spaces in the text\&. \fP"
+.ti -1c
+.RI "def \fBwrap_onspace_strict\fP"
+.br
+.RI "\fI:param text: :param width: Similar to wrap_onspace, but enforces the width constraint: words longer than width are split\&. \fP"
+.ti -1c
+.RI "def \fBwrap_always\fP"
+.br
+.RI "\fIA simple word-wrap function that wraps text on exactly width characters\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "tuple \fBlabels\fP = ('First Name', 'Last Name', 'Age', 'Position')"
+.br
+.ti -1c
+.RI "\fBdata\fP = \\"
+.br
+.ti -1c
+.RI "\fBlist\fP \fBrows\fP = [row\&.strip()\&.split(',') for row in data\&.splitlines()]"
+.br
+.ti -1c
+.RI "int \fBwidth\fP = 30"
+.br
+.ti -1c
+.RI "string \fBprefix\fP = '| '"
+.br
+.ti -1c
+.RI "tuple \fBwrapfunc\fP = lambdax:wrapper(x, \fBwidth\fP)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "def src\&.helper\&.formatter\&.indent (rows, hasHeader = \fCFalse\fP, headerChar = \fC'-'\fP, delim = \fC' | '\fP, justify = \fC'left'\fP, separateRows = \fCFalse\fP, prefix = \fC''\fP, postfix = \fC''\fP, wrapfunc = \fClambda x: x\fP)"
+
+.PP
+Indents a table by column\&. :param postfix: :param justify: :param wrapfunc: :param delim: :param headerChar: :param prefix: :param separateRows: :param hasHeader: :param rows:
+.IP "\(bu" 2
+rows: A sequence of sequences of items, one sequence per row\&.
+.IP "\(bu" 2
+hasHeader: True if the first row consists of the columns' names\&.
+.IP "\(bu" 2
+headerChar: Character to be used for the row separator line (if hasHeader==True or separateRows==True)\&.
+.IP "\(bu" 2
+delim: The column delimiter\&.
+.IP "\(bu" 2
+justify: Determines how are data justified in their column\&. Valid values are 'left','right' and 'center'\&.
+.IP "\(bu" 2
+separateRows: True if rows are to be separated by a line of 'headerChar's\&.
+.IP "\(bu" 2
+prefix: A string prepended to each printed row\&.
+.IP "\(bu" 2
+postfix: A string appended to each printed row\&.
+.IP "\(bu" 2
+wrapfunc: A function f(text) for wrapping text; each element in the table is first wrapped by this function\&.
+.PP
+:param row: :return: 
+.PP
+
+.SS "def src\&.helper\&.formatter\&.wrap_always (text, width)"
+
+.PP
+A simple word-wrap function that wraps text on exactly width characters\&. It doesn't split the text in words\&. :param width: :param text: 
+.SS "def src\&.helper\&.formatter\&.wrap_onspace (text, width)"
+
+.PP
+A word-wrap function that preserves existing line breaks and most spaces in the text\&. Expects that existing line breaks are posix newlines (
+.br
+)\&. :param width: :param text: 
+.SS "def src\&.helper\&.formatter\&.wrap_onspace_strict (text, width)"
+
+.PP
+:param text: :param width: Similar to wrap_onspace, but enforces the width constraint: words longer than width are split\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "src\&.helper\&.formatter\&.data = \\"
+
+.SS "tuple src\&.helper\&.formatter\&.labels = ('First Name', 'Last Name', 'Age', 'Position')"
+
+.SS "string src\&.helper\&.formatter\&.prefix = '| '"
+
+.SS "\fBlist\fP src\&.helper\&.formatter\&.rows = [row\&.strip()\&.split(',') for row in data\&.splitlines()]"
+
+.SS "int src\&.helper\&.formatter\&.width = 30"
+
+.SS "tuple src\&.helper\&.formatter\&.wrapfunc = lambdax:wrapper(x, \fBwidth\fP)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

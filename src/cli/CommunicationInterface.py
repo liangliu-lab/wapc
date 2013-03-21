@@ -36,15 +36,30 @@ __author__ = 'fatih'
 
 class CommunicationInterface(object):
     """
-        Communication interface class to talk with perl script
+    Command list to implement all required methods pre-defined
+
+    @class ConsoleInterface has been inherited from cmd library to handle
+    commandline interface with user interaction. This class gathers commands
+    from user and declare them into individual methods written in project
+    own classes.
+
+    @param: cmd.Cmd is a library object
     """
     def __init__(self):
+        """
+            Constructure of ConsoleInterface class
+        """
         self.utils = Utils()
 
     def get_source_config(self, source_file):
         """
-            Get input json file to parse with params
-        :param source_file:
+        get_source_config method read a file content and return as it is
+        with no proceed
+
+        @throw IOError exception
+        @throw BufferError exception
+        @param source_file source file will be read
+        @return config_source file content expected as a configuration
         """
         try:
             new_config = open(source_file, 'r')
@@ -60,9 +75,22 @@ class CommunicationInterface(object):
 
     def call_communication_interface(self, source):
         """
-            Call script with source json data file path
-        :param source: 
-            Usage: call_communication_interface('config.json')
+        call_communication_interface method call perl script to communicate with
+        devices. The Perl script located under "include" folder
+
+        @throw IOError exception
+        @throw BufferError exception
+        @param source source is a input file includes a JSON content as commands
+        and connection parameters.
+
+        @return response as a output of subprocessed execution as JSON
+        possible return responses may be one of below:
+        @return NO_ERROR => 110;
+        @return NET_APPLIANCE_ERROR => 100;
+        @return NET_APPLIANCE_EXCEPTION => 101;
+        @return FILE_OPEN_ERROR => 102;
+        @return FILE_CLOSE_ERROR => 103;
+        @return UNKNOWN_ERROR => 104;
         """
         try:
             response = subprocess.Popen(
@@ -79,10 +107,18 @@ class CommunicationInterface(object):
 
     def write_source_file(self, source, target, p_type='JSON'):
         """
-            Write source file to provide the communication interface
-        :param p_type:
-        :param target:
-        :param source:
+        write_source_file method write the given source into targeted file
+        according to the given type.
+
+        @throw IOError exception
+        @throw BufferError exception
+        @param source Source is a tuple object includes object details such as
+        device or config to be written in a file as a JSON.
+
+        @param target Is the targeted file the source will be written inside.
+
+        @param p_type Defines the kind of proceed to write the content into file
+        such as raw buffer, json or xml
         """
         try:
             new_config = open(target, 'w+')
@@ -105,13 +141,20 @@ class CommunicationInterface(object):
 
     def backup(self, source, target, time, p_type='RAW'):
         """
+        backup method create a backup inside a folder created with device name
+        and includes a .bak file to keep the source will be backed up.
 
+        @throw IOError exception
+        @throw BufferError exception
+        @param source Source is a tuple object includes object details such as
+        device or config to be written in a file as a JSON.
 
-        :param p_type:
-        :rtype : object
-        :param source: 
-        :param target: 
-        :param time: 
+        @param target Is the targeted file the source will be written inside.
+
+        @param time Is the timestamp to sign the target file.
+
+        @param p_type Defines the kind of proceed to write the content into file
+        such as raw buffer, json or xml
         """
         try:
             backup_folder = Resources.BACKUP_PATH + target

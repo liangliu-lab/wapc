@@ -3,9 +3,6 @@
 .nh
 .SH NAME
 src.cli.CommunicationInterface.CommunicationInterface \- 
-.PP
-Communication interface class to talk with perl script\&.  
-
 .SH SYNOPSIS
 .br
 .PP
@@ -17,37 +14,23 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
+.RI "\fIConstructure of \fBConsoleInterface\fP class\&. \fP"
 .ti -1c
 .RI "def \fBget_source_config\fP"
 .br
-.RI "\fI.PP
-.nf
-Get input json file to parse with params
-.fi
-.PP
- :param source_file: \fP"
+.RI "\fIget_source_config method read a file content and return as it is with no proceed \fP"
 .ti -1c
 .RI "def \fBcall_communication_interface\fP"
 .br
-.RI "\fI.PP
-.nf
-Call script with source json data file path
-.fi
-.PP
- :param source: Usage: call_communication_interface('config\&.json') \fP"
+.RI "\fIcall_communication_interface method call perl script to communicate with devices\&. \fP"
 .ti -1c
 .RI "def \fBwrite_source_file\fP"
 .br
-.RI "\fI.PP
-.nf
-Write source file to provide the communication interface
-.fi
-.PP
- :param p_type: :param target: :param source: \fP"
+.RI "\fIwrite_source_file method write the given source into targeted file according to the given type\&. \fP"
 .ti -1c
 .RI "def \fBbackup\fP"
 .br
-.RI "\fI:param p_type: :rtype : object :param source: :param target: :param time: \fP"
+.RI "\fIbackup method create a backup inside a folder created with device name and includes a \&.bak file to keep the source will be backed up\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -56,46 +39,112 @@ Write source file to provide the communication interface
 .RI "\fButils\fP"
 .br
 .in -1c
-.SH "Detailed Description"
-.PP 
-Communication interface class to talk with perl script\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.__init__ (self)"
 
+.PP
+Constructure of \fBConsoleInterface\fP class\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.backup (self, source, target, time, p_type = \fC'RAW'\fP)"
 
 .PP
-:param p_type: :rtype : object :param source: :param target: :param time: 
+backup method create a backup inside a folder created with device name and includes a \&.bak file to keep the source will be backed up\&. \fBExceptions:\fP
+.RS 4
+\fIIOError\fP exception 
+.br
+\fIBufferError\fP exception 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsource\fP Source is a tuple object includes object details such as device or config to be written in a file as a JSON\&.
+.br
+\fItarget\fP Is the targeted file the source will be written inside\&.
+.br
+\fItime\fP Is the timestamp to sign the target file\&.
+.br
+\fIp_type\fP Defines the kind of proceed to write the content into file such as raw buffer, json or xml 
+.RE
+.PP
+
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.call_communication_interface (self, source)"
 
 .PP
+call_communication_interface method call perl script to communicate with devices\&. The Perl script located under 'include' folder
 .PP
-.nf
-Call script with source json data file path
-.fi
+\fBExceptions:\fP
+.RS 4
+\fIIOError\fP exception 
+.br
+\fIBufferError\fP exception 
+.RE
 .PP
- :param source: Usage: call_communication_interface('config\&.json') 
+\fBParameters:\fP
+.RS 4
+\fIsource\fP source is a input file includes a JSON content as commands and connection parameters\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+response as a output of subprocessed execution as JSON possible return responses may be one of below: 
+.PP
+NO_ERROR => 110; 
+.PP
+NET_APPLIANCE_ERROR => 100; 
+.PP
+NET_APPLIANCE_EXCEPTION => 101; 
+.PP
+FILE_OPEN_ERROR => 102; 
+.PP
+FILE_CLOSE_ERROR => 103; 
+.PP
+UNKNOWN_ERROR => 104; 
+.RE
+.PP
+
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.get_source_config (self, source_file)"
 
 .PP
+get_source_config method read a file content and return as it is with no proceed \fBExceptions:\fP
+.RS 4
+\fIIOError\fP exception 
+.br
+\fIBufferError\fP exception 
+.RE
 .PP
-.nf
-Get input json file to parse with params
-.fi
+\fBParameters:\fP
+.RS 4
+\fIsource_file\fP source file will be read 
+.RE
 .PP
- :param source_file: 
+\fBReturns:\fP
+.RS 4
+config_source file content expected as a configuration 
+.RE
+.PP
+
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.write_source_file (self, source, target, p_type = \fC'JSON'\fP)"
 
 .PP
+write_source_file method write the given source into targeted file according to the given type\&. \fBExceptions:\fP
+.RS 4
+\fIIOError\fP exception 
+.br
+\fIBufferError\fP exception 
+.RE
 .PP
-.nf
-Write source file to provide the communication interface
-.fi
+\fBParameters:\fP
+.RS 4
+\fIsource\fP Source is a tuple object includes object details such as device or config to be written in a file as a JSON\&.
+.br
+\fItarget\fP Is the targeted file the source will be written inside\&.
+.br
+\fIp_type\fP Defines the kind of proceed to write the content into file such as raw buffer, json or xml 
+.RE
 .PP
- :param p_type: :param target: :param source: 
+
 .SH "Member Data Documentation"
 .PP 
 .SS "src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.utils"

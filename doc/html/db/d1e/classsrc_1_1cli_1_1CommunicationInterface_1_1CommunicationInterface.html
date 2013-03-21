@@ -96,9 +96,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="title">src.cli.CommunicationInterface.CommunicationInterface Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Communication interface class to talk with perl script.  
- <a href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for src.cli.CommunicationInterface.CommunicationInterface:</div>
 <div class="dyncontent">
@@ -117,21 +114,19 @@ Collaboration diagram for src.cli.CommunicationInterface.CommunicationInterface:
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adec437c7f7f2872a053afaae86985250"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#adec437c7f7f2872a053afaae86985250">__init__</a></td></tr>
+<tr class="memdesc:adec437c7f7f2872a053afaae86985250"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructure of <a class="el" href="../../da/da6/namespacesrc_1_1cli_1_1ConsoleInterface.html">ConsoleInterface</a> class.  <a href="#adec437c7f7f2872a053afaae86985250">More...</a><br/></td></tr>
 <tr class="separator:adec437c7f7f2872a053afaae86985250"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60606ab6c7181cc820bd6c113a404f5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#ac60606ab6c7181cc820bd6c113a404f5">get_source_config</a></td></tr>
-<tr class="memdesc:ac60606ab6c7181cc820bd6c113a404f5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Get input json file to parse with params
-</pre><p> :param source_file:  <a href="#ac60606ab6c7181cc820bd6c113a404f5">More...</a><br/></td></tr>
+<tr class="memdesc:ac60606ab6c7181cc820bd6c113a404f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_source_config method read a file content and return as it is with no proceed  <a href="#ac60606ab6c7181cc820bd6c113a404f5">More...</a><br/></td></tr>
 <tr class="separator:ac60606ab6c7181cc820bd6c113a404f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c7620ed2fac7b4a7d224bfdaed3f88"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#ae6c7620ed2fac7b4a7d224bfdaed3f88">call_communication_interface</a></td></tr>
-<tr class="memdesc:ae6c7620ed2fac7b4a7d224bfdaed3f88"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Call script with source json data file path
-</pre><p> :param source: Usage: call_communication_interface('config.json')  <a href="#ae6c7620ed2fac7b4a7d224bfdaed3f88">More...</a><br/></td></tr>
+<tr class="memdesc:ae6c7620ed2fac7b4a7d224bfdaed3f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">call_communication_interface method call perl script to communicate with devices.  <a href="#ae6c7620ed2fac7b4a7d224bfdaed3f88">More...</a><br/></td></tr>
 <tr class="separator:ae6c7620ed2fac7b4a7d224bfdaed3f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4786f3fd9a237e0672e731343ad61973"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#a4786f3fd9a237e0672e731343ad61973">write_source_file</a></td></tr>
-<tr class="memdesc:a4786f3fd9a237e0672e731343ad61973"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Write source file to provide the communication interface
-</pre><p> :param p_type: :param target: :param source:  <a href="#a4786f3fd9a237e0672e731343ad61973">More...</a><br/></td></tr>
+<tr class="memdesc:a4786f3fd9a237e0672e731343ad61973"><td class="mdescLeft">&#160;</td><td class="mdescRight">write_source_file method write the given source into targeted file according to the given type.  <a href="#a4786f3fd9a237e0672e731343ad61973">More...</a><br/></td></tr>
 <tr class="separator:a4786f3fd9a237e0672e731343ad61973"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b037de7425a4a7cb41a358f8e708c4b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#a0b037de7425a4a7cb41a358f8e708c4b">backup</a></td></tr>
-<tr class="memdesc:a0b037de7425a4a7cb41a358f8e708c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param p_type: :rtype : object :param source: :param target: :param time:  <a href="#a0b037de7425a4a7cb41a358f8e708c4b">More...</a><br/></td></tr>
+<tr class="memdesc:a0b037de7425a4a7cb41a358f8e708c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">backup method create a backup inside a folder created with device name and includes a .bak file to keep the source will be backed up.  <a href="#a0b037de7425a4a7cb41a358f8e708c4b">More...</a><br/></td></tr>
 <tr class="separator:a0b037de7425a4a7cb41a358f8e708c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -139,9 +134,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:afdff400a9e10b380be88b8ab6dee7195"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d1e/classsrc_1_1cli_1_1CommunicationInterface_1_1CommunicationInterface.html#afdff400a9e10b380be88b8ab6dee7195">utils</a></td></tr>
 <tr class="separator:afdff400a9e10b380be88b8ab6dee7195"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Communication interface class to talk with perl script. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="adec437c7f7f2872a053afaae86985250"></a>
 <div class="memitem">
 <div class="memproto">
@@ -155,6 +148,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructure of <a class="el" href="../../da/da6/namespacesrc_1_1cli_1_1ConsoleInterface.html">ConsoleInterface</a> class. </p>
 
 </div>
 </div>
@@ -201,7 +196,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param p_type: :rtype : object :param source: :param target: :param time: </p>
+<p>backup method create a backup inside a folder created with device name and includes a .bak file to keep the source will be backed up. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOError</td><td>exception </td></tr>
+    <tr><td class="paramname">BufferError</td><td>exception </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>Source is a tuple object includes object details such as device or config to be written in a file as a JSON.</td></tr>
+    <tr><td class="paramname">target</td><td>Is the targeted file the source will be written inside.</td></tr>
+    <tr><td class="paramname">time</td><td>Is the timestamp to sign the target file.</td></tr>
+    <tr><td class="paramname">p_type</td><td>Defines the kind of proceed to write the content into file such as raw buffer, json or xml </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -229,8 +240,34 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Call script with source json data file path
-</pre><p> :param source: Usage: call_communication_interface('config.json') </p>
+<p>call_communication_interface method call perl script to communicate with devices. </p>
+<p>The Perl script located under "include" folder</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOError</td><td>exception </td></tr>
+    <tr><td class="paramname">BufferError</td><td>exception </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>source is a input file includes a JSON content as commands and connection parameters.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>response as a output of subprocessed execution as JSON possible return responses may be one of below: </dd>
+<dd>
+NO_ERROR =&gt; 110; </dd>
+<dd>
+NET_APPLIANCE_ERROR =&gt; 100; </dd>
+<dd>
+NET_APPLIANCE_EXCEPTION =&gt; 101; </dd>
+<dd>
+FILE_OPEN_ERROR =&gt; 102; </dd>
+<dd>
+FILE_CLOSE_ERROR =&gt; 103; </dd>
+<dd>
+UNKNOWN_ERROR =&gt; 104; </dd></dl>
 
 </div>
 </div>
@@ -258,8 +295,21 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Get input json file to parse with params
-</pre><p> :param source_file: </p>
+<p>get_source_config method read a file content and return as it is with no proceed </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOError</td><td>exception </td></tr>
+    <tr><td class="paramname">BufferError</td><td>exception </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source_file</td><td>source file will be read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>config_source file content expected as a configuration </dd></dl>
 
 </div>
 </div>
@@ -299,8 +349,22 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Write source file to provide the communication interface
-</pre><p> :param p_type: :param target: :param source: </p>
+<p>write_source_file method write the given source into targeted file according to the given type. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOError</td><td>exception </td></tr>
+    <tr><td class="paramname">BufferError</td><td>exception </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>Source is a tuple object includes object details such as device or config to be written in a file as a JSON.</td></tr>
+    <tr><td class="paramname">target</td><td>Is the targeted file the source will be written inside.</td></tr>
+    <tr><td class="paramname">p_type</td><td>Defines the kind of proceed to write the content into file such as raw buffer, json or xml </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -323,7 +387,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 11:34:06 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 12:11:00 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

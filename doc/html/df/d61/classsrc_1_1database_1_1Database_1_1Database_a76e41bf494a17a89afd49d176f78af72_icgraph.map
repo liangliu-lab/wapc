@@ -1,0 +1,6 @@
+<map id="src.database.Database.Database.close_conn" name="src.database.Database.Database.close_conn">
+<area shape="rect" id="node3" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a23898745a07583db57fe01280f83146a" title="Execute &quot;SELECT&quot; commands to retrieve rows from database." alt="" coords="345,5,601,35"/>
+<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a427dddd161a705ab7506e6810e340f64" title="Execute &quot;INSERT&quot; SQL statements." alt="" coords="347,59,600,88"/>
+<area shape="rect" id="node7" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a13f9733bb45596d8a43cdabed95df2c6" title="Execute &quot;UPDATE&quot; SQL statements." alt="" coords="344,112,603,141"/>
+<area shape="rect" id="node9" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a598f23684b04c27c42fd29b6e194e2c4" title="Execute &quot;DELETE&quot; SQL statements." alt="" coords="341,165,605,195"/>
+</map>

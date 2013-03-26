@@ -1,10 +1,10 @@
-.TH "src.helper.ArgParser.ArgParser" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.helper.ArgParser.ArgParser" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.helper.ArgParser.ArgParser \- 
 .PP
-\fBArgParser\fP object\&.  
+AgrParser is a class aims to parse arguments gathered from command line actually ConsoleInterface class\&.  
 
 .SH SYNOPSIS
 .br
@@ -17,15 +17,15 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
-.RI "\fICreate instance\&. \fP"
+.RI "\fIConstructuer of \fBArgParser\fP\&. \fP"
 .ti -1c
 .RI "def \fBset_parser\fP"
 .br
-.RI "\fIThis methos parsing retrieved arguments into namespace variables\&. \fP"
+.RI "\fIset_parser method pre-defines arguments what will be parsed after instance created\&. \fP"
 .ti -1c
 .RI "def \fBget_args\fP"
 .br
-.RI "\fI:param args: :return: \fP"
+.RI "\fIget_args check existing argument namespace and return this namespace\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -46,23 +46,81 @@ Inherits \fBobject\fP\&.
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBArgParser\fP object\&. 
+AgrParser is a class aims to parse arguments gathered from command line actually ConsoleInterface class\&. 
+
+This class parses arguments and generate a namespace with arguments came from \fBMain\fP controller and procssed by Utils\&.get_clean_params\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.helper\&.ArgParser\&.ArgParser\&.__init__ (self)"
 
 .PP
-Create instance\&. 
+Constructuer of \fBArgParser\fP\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.helper\&.ArgParser\&.ArgParser\&.get_args (self, args)"
 
 .PP
-:param args: :return: 
+get_args check existing argument namespace and return this namespace\&. .PP
+.nf
+     get_args method checks is recent ArgParser instance has already created
+     arguments namespace and return known arguments. It there is no arguments
+     namespace has been set it calls parse_args then return parsed arguments.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP is gathered from commandline interface via cmd library
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+parsed arguments as a namespace list 
+.RE
+.PP
+
 .SS "def src\&.helper\&.ArgParser\&.ArgParser\&.set_parser (self)"
 
 .PP
-This methos parsing retrieved arguments into namespace variables\&. 
+set_parser method pre-defines arguments what will be parsed after instance created\&. set_parser initiates namespace attributes listed below:
+.PP
+.PD 0
+.IP "\(bu" 2
+\fB-i,--id\fP Provide ID address to determine the variable with usage id 
+.IP "\(bu" 2
+\fB-I,--ip\fP Provide IP address for the newly added device with usage to connect 
+.IP "\(bu" 2
+\fB-n,--name\fP Provide name for the newly added device with usage name 
+.IP "\(bu" 2
+\fB-u,--username\fP Provide username for the newly added device with usage username 
+.IP "\(bu" 2
+\fB-p,--password\fP Provide password for given username of the newly added device with usage password 
+.IP "\(bu" 2
+\fB-P,--param\fP Provide a parameter to be set to the given option 
+.IP "\(bu" 2
+\fB-g,--group\fP Add device to the group with usage group 
+.IP "\(bu" 2
+\fB-c,--config\fP Add new configuration and map it to the given group or device 
+.IP "\(bu" 2
+\fB-s,--subnet\fP Define subnet for VLAN will be configured with usage 255\&.255\&.255\&.0 
+.IP "\(bu" 2
+\fB-d,--device\fP Provide device id to add provided device to the group 
+.IP "\(bu" 2
+\fB-D,--description\fP Provide a short description for group or device with usage 
+.IP "\(bu" 2
+\fB-r,--radius\fP Provide Radius id to configure radius authentication for group or device with usage radius_id 
+.IP "\(bu" 2
+\fB-S,--ssid\fP Provide SSID for group or device with usage ssid 
+.IP "\(bu" 2
+\fB-V,--vlan\fP Provide VLAN id to determine VLAN for group or device with usage vlan_id 
+.IP "\(bu" 2
+\fB-H,--channel\fP Provide channel to configure for group or device with usage channel 
+.IP "\(bu" 2
+\fB-t,--type\fP Provide type of group/device/config/vlan from database with usage group/device/config/vlan others will cause error(s) 
+.IP "\(bu" 2
+\fB-o,--option\fP Provide type of group/device/config/vlan from database with usage group/device/config/vlan 
+.PP
+
 .SH "Member Data Documentation"
 .PP 
 .SS "string src\&.helper\&.ArgParser\&.ArgParser\&.params = ''\fC [static]\fP"
@@ -73,8 +131,10 @@ This methos parsing retrieved arguments into namespace variables\&.
 \fBInitial value:\fP
 .PP
 .nf
-1 = argparse\&.ArgumentParser(description=Language\&.MSG_ARG_DESC, version='2\&.3',
-2                                      formatter_class=argparse\&.RawDescriptionHelpFormatter)
+1 = argparse\&.ArgumentParser(
+2         description=Language\&.MSG_ARG_DESC,
+3         version='v1\&.0\&.0',
+4         formatter_class=argparse\&.RawDescriptionHelpFormatter)
 .fi
 
 

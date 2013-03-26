@@ -5,7 +5,7 @@
     Commandline interface to handle user interaction commands between WAP
 """
 from src.cli.ConsoleInterface import ConsoleInterface
-from src.language.language import Language
+from src.language.Language import Language
 
 __author__ = 'fatih'
 
@@ -21,7 +21,6 @@ def __main__():
         print exception.message
     finally:
         ConsoleInterface().cmdloop()
-        pass
 
 
 if __name__ == "__main__":

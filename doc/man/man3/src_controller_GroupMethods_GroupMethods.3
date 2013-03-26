@@ -1,4 +1,4 @@
-.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.GroupMethods.GroupMethods" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -45,13 +45,11 @@ add new group with params
 .ti -1c
 .RI "def \fBset\fP"
 .br
-.RI "\fI.PP
-.nf
-This methods handle options and connect throug device by given name
-Sample command: set -t group -o ssid -i [GROUPID]
-.fi
-.PP
- :param params: \fP"
+.RI "\fIThis methods handle options and connect throug group devices by given name or given id\&. \fP"
+.ti -1c
+.RI "def \fBunset\fP"
+.br
+.RI "\fIThis methods handle options and connect throug group devices by given name or given id\&. \fP"
 .ti -1c
 .RI "def \fBshow\fP"
 .br
@@ -112,17 +110,39 @@ add new group with params
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.set (self, params)"
 
 .PP
-.PP
+This methods handle options and connect throug group devices by given name or given id\&. .PP
 .nf
-This methods handle options and connect throug device by given name
-Sample command: set -t group -o ssid -i [GROUPID]
+     Sample command: set -t group -o ssid -i [GROUPID]
 .fi
 .PP
- :param params: 
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.show (self, params)"
 
 .PP
 Show methods for devices in given group id\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
+
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.unset (self, params)"
+
+.PP
+This methods handle options and connect throug group devices by given name or given id\&. .PP
+.nf
+     Sample command: set -t group -o ssid -i [GROUPID]
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
 .RS 4
 \fIparams\fP 
 .RE

@@ -6,12 +6,12 @@
 import threading
 from time import strftime, gmtime
 from src.cli.CommunicationInterface import CommunicationInterface
-from src.config.__sql__ import SQL
+from src.resources.SQL import SQL
 from src.helper.Utils import Utils
-from src.database.db import Database
-from src.language.language import Language
+from src.database.Database import Database
+from src.language.Language import Language
 from src.model.Device import Device
-from src.resources.resources import Resources
+from src.resources.Resources import Resources
 
 __author__ = 'fatih'
 

@@ -29,19 +29,18 @@ import cmd
 import sys
 from src.controller.main import Main
 from time import gmtime, strftime
-from src.resources.resources import Resources
+from src.resources.Resources import Resources
 
 
 class ConsoleInterface(cmd.Cmd):
     """
     Command list to implement all required methods pre-defined
 
-    @class ConsoleInterface has been inherited from cmd library to handle
+    ConsoleInterface has been inherited from cmd library to handle
     commandline interface with user interaction. This class gathers commands
     from user and declare them into individual methods written in project
     own classes.
 
-    @param: cmd.Cmd is a library object
     """
 
     def __init__(self):
@@ -79,14 +78,14 @@ class ConsoleInterface(cmd.Cmd):
         except BaseException as exception:
             print exception.message
 
-    def do_edit(self, args):
+    def do_up(self, args):
         """
-        edit commands updates keys given with provided parameters in database.
+        up commands updates keys given with provided parameters in database.
 
         Edit methods update only database records by not touching recent device
         configuration. It is supposed that this operation is a soft update.
 
-        @see Main().edit()
+        @see Main.edit
         @param args [-t],[--type] Type of device, group, vlan, config, group
             [-o],[--option] Provide option to be updated in database
             [-P],[--parameter] Provide parameter to be set as a value
@@ -222,12 +221,16 @@ class ConsoleInterface(cmd.Cmd):
         except BaseException as exception:
             print exception.message
 
-    def do_exit(self):
+    def do_exit(self, args):
         """
         Exit command to terminate command line script
+
+        @param args
         """
         try:
-            sys.exit(0)
+            sys.exit()
+        except KeyboardInterrupt as exception:
+            print exception.message
         except BaseException as exception:
             print exception.message
 
@@ -246,3 +249,10 @@ class ConsoleInterface(cmd.Cmd):
             # enable this when production
             except BaseException:
                 sys.stdout.write('\n')
+
+    def do_EOF(self, args):
+        """
+        @param args
+        @return Exits from application
+        """
+        return self.do_exit(args)

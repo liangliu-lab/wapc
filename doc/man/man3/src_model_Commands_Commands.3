@@ -1,10 +1,10 @@
-.TH "src.model.Commands.Commands" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.Commands.Commands" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.model.Commands.Commands \- 
 .PP
-\fBCommands\fP object class\&.  
+\fBCommands\fP object defines a \fBCommands\fP\&.  
 
 .SH SYNOPSIS
 .br
@@ -15,58 +15,90 @@ Inherits \fBlist\fP\&.
 
 .in +1c
 .ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fIConstructer of \fBCommands\fP model\&. \fP"
+.ti -1c
 .RI "def \fBset_command\fP"
 .br
-.RI "\fI:param command: \fP"
+.RI "\fISetter to set a command belong this model\&. \fP"
 .ti -1c
 .RI "def \fBget_command\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for \fBCommands\fP model\&. \fP"
 .ti -1c
 .RI "def \fBset_param\fP"
 .br
-.RI "\fI:param param: \fP"
+.RI "\fISetter for related param belong to any command\&. \fP"
 .ti -1c
 .RI "def \fBget_param\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for param\&. \fP"
 .in -1c
-.SS "Static Public Attributes"
+.SS "Public Attributes"
 
 .in +1c
 .ti -1c
-.RI "\fBcommand\fP = None"
+.RI "\fBcommand\fP"
 .br
 .ti -1c
-.RI "\fBparam\fP = None"
+.RI "\fBparam\fP"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBCommands\fP object class\&. 
+\fBCommands\fP object defines a \fBCommands\fP\&. 
+
+\fBCommands\fP object defines a \fBCommands\fP model to gather command related with given arguments from a pre-defined commands list in a JSON file and map them into \fBCommands\fP model\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.model\&.Commands\&.Commands\&.__init__ (self)"
+
+.PP
+Constructer of \fBCommands\fP model\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.model\&.Commands\&.Commands\&.get_command (self)"
 
 .PP
-:return: 
+Getter for \fBCommands\fP model\&. \fBReturns:\fP
+.RS 4
+command 
+.RE
+.PP
+
 .SS "def src\&.model\&.Commands\&.Commands\&.get_param (self)"
 
 .PP
-:return: 
+Getter for param\&. \fBReturns:\fP
+.RS 4
+related param 
+.RE
+.PP
+
 .SS "def src\&.model\&.Commands\&.Commands\&.set_command (self, command)"
 
 .PP
-:param command: 
+Setter to set a command belong this model\&. \fBParameters:\fP
+.RS 4
+\fIcommand\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Commands\&.Commands\&.set_param (self, param)"
 
 .PP
-:param param: 
+Setter for related param belong to any command\&. \fBParameters:\fP
+.RS 4
+\fIparam\fP 
+.RE
+.PP
+
 .SH "Member Data Documentation"
 .PP 
-.SS "src\&.model\&.Commands\&.Commands\&.command = None\fC [static]\fP"
+.SS "src\&.model\&.Commands\&.Commands\&.command"
 
-.SS "src\&.model\&.Commands\&.Commands\&.param = None\fC [static]\fP"
+.SS "src\&.model\&.Commands\&.Commands\&.param"
 
 
 .SH "Author"

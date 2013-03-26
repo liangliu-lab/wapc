@@ -1,12 +1,34 @@
 # coding=utf-8
-__author__ = "fatih"
-__date__ = "$Jan 22, 2013 11:08:40 AM$"
+"""
+Copyright 2013 Labris Technology.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+@package resources
+@date Marh 13, 2013
+@author Fatih Karatana
+@author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
+@copyright Labris Technology
+
+"""
 
 
 class Resources(object):
     """
-        Resources file covers all required global variables, pathnames, filenames, etc.
-        You need to configure only this file anytime you need to change variables
+    Resources file covers all required global variables,
+    pathnames, filenames, etc.
+
+    You need to configure only this file anytime you need to change variables
     """
     #path variables
     ROOT_PATH = "/opt/labris/sbin/wapc/"
@@ -52,14 +74,11 @@ class Resources(object):
     #config file variables for mysql
     cfg_section_mysql = "mysql"
 
-    #column headers for files
-    headers = {'device': '',
-               'group': {'ID', 'Name', 'Description', 'Configuration ID', 'Add Date', 'Last Modify'}}
-
     #======== Regex patterns =========
     #
     #=================================
     REGEX = dict(name='^[a-zA-Z0-9]+$',
-                 ip='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
+                 ip='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)'
+                    '{3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
                  eth='^(\\w){1,6}[0-9]{1,3}([:.][0-9]{1,3})?$')
 

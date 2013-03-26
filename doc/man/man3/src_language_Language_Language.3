@@ -1,0 +1,355 @@
+.TH "src.language.Language.Language" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.language.Language.Language \- 
+.PP
+\fBLanguage\fP class aims to provide required statement to requester class or methods to read matching locale string with given language code\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fIConstructer of \fBLanguage\fP class\&. \fP"
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBMSG_APP_WELCOME\fP = 'Welcome to Labris Wireless Access Point Controller'"
+.br
+.ti -1c
+.RI "string \fBMSG_APP_CMD_INIT\fP = 'Command Line Tool initializing\&.\&.\&.'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_CLASS_INIT_FAILED\fP = '{0} class could not be initialized!'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_COMM_INTERFACE_FAILED\fP = 'Unknown error occurred while connecting '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED\fP = 'Access point connected '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_ARG_PARSE_GET\fP = 'Get_args stopped with an error ({o})'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_GENERIC\fP = 'Unknown error occurred on line {0} with error:\\n{1}'"
+.br
+.ti -1c
+.RI "string \fBMSG_ARG_DESC\fP = 'Use methods below to add, remove, update and '"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_ADD_HELP\fP = '\\nUsage:\\t$ add [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_EDIT_HELP\fP = '\\nUsage:\\t$ edit [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_GROUP_HELP\fP = '\\nUsage:\\t$ group [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_SET_HELP\fP = '\\nUsage:\\t$ set [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_UNSET_HELP\fP = '\\nUsage:\\t$ unset [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_LIST_HELP\fP = '\\nUsage:\\t$ ls [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_SHOW_HELP\fP = '\\nUsage:\\t$ sh [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_REMOVE_HELP\fP = '\\nUsage:\\t$ rm [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_CMD_SELFTEST_HELP\fP = '\\nUsage:\\t$ self [OPTIONS]'"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_ID_HELP\fP = '\\t-i,--id\\t\\t\\tProvide ID address to determine '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_IP_HELP\fP = '\\t-I,--ip\\t\\t\\tProvide IP address for the '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_NAME_HELP\fP = '\\t-n,--name\\t\\tProvide name for the newly '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_USERNAME_HELP\fP = '\\t-u,--username\\t\\tProvide username for '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_PASSWORD_HELP\fP = '\\t-p,--password\\t\\tProvide password for '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_GROUP_HELP\fP = '\\t-g,--group\\t\\Provide an id to the group '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_CONFIG\fP = '\\t-c,--config\\t\\tAdd new configuration and map it '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_SUBNET_HELP\fP = '\\t-s,--subnet\\t\\tDefine subnet for VLAN will '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_DEVICE_HELP\fP = '\\t-d,--device\\t\\tProvide device id to add '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_INTERFACE_HELP\fP = '\\t-e,--interface\\tProvide ethernet interface '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_DESC_HELP\fP = '\\t-D,--description\\tProvide a short description '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_RADIUS_HELP\fP = '\\t-r,--radius\\t\\tProvide Radius id to configure '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_SSID_HELP\fP = '\\t-S,--ssid\\t\\tProvide SSID for group or device '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_VLAN_HELP\fP = '\\t-V,--vlan\\t\\tProvide VLAN id to determine VLAN '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_CHANNEL_HELP\fP = '\\t-H,--channel\\t\\tProvide channel to configure '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_TYPE_HELP\fP = '\\t-t,--type\\t\\tProvide type of '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_OPTION_HELP\fP = '\\t-o,--option\\t\\tProvide type of '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_PARAM_HELP\fP = '\\t-P,--param\\t\\tProvide a parameter '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_RELATION_HELP\fP = '\\t-R, --relation\\t\\tProvide a relation '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_BRAND_HELP\fP = '\\t-b, --brand\\t\\tProvide device brand to '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_MODEL_HELP\fP = '\\t-m, --model\\t\\tProvide device model to '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_FIRMWARE_HELP\fP = '\\t-F, --firmware\\t\\tProvide device firmware to '"
+.br
+.ti -1c
+.RI "string \fBMSG_ADD_NEW\fP = 'A new {0} added with record id {1} and with name {2}'"
+.br
+.ti -1c
+.RI "string \fBMSG_UPDATE_RECORD\fP = 'Recorded {0} updated with record id {1} and with '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_PARSER_EXCEPTION\fP = 'Error occurred on parsing arguments ({0})'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_IP\fP = 'Please provide an IP for the {0} you would like to add'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_NAME\fP = 'Please provide an NAME for the {0} '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_DESC\fP = 'Please provide a DESCRIPTION for the {0} '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_USERNAME\fP = 'Please provide an USERNAME for the {0}'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_PASSWORD\fP = 'Please provide an PASSWORD for the {0}'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_CONFIG\fP = 'Please provide an CONFIG id for the {0}'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_ID\fP = 'There is no ID has been provided for the {0}'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_OPTION\fP = 'There is no Option has been provided for '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_PARAMETER\fP = 'There is no Parameter has been provided '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_GROUP\fP = 'Please provide a group id with usage -g, --group '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_NO_CONFIG_SECTION\fP = 'No section found in config file'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_IO_ERROR\fP = 'Error occurred while connecting database '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_FILE_BACKUP_FAILED\fP = 'Error occurred while backing up '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_DATABASE_ERROR\fP = 'Unknown error occurred on {0} line while '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_DATABASE_INSERT\fP = 'New record could not be inserted into '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_DB_CONNECT\fP = 'An unknown error occurred while connecting '"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_DB_CLOSE\fP = 'Connection could not close because of ({0})'"
+.br
+.ti -1c
+.RI "string \fBMSG_SUCCESS_SELECT\fP = 'Getting records from database please wait\&.\&.\&.'"
+.br
+.ti -1c
+.RI "string \fBMSG_SUCCESS_ADD\fP = 'Given values inserted to the database successfully '"
+.br
+.ti -1c
+.RI "string \fBMSG_SUCCESS_REMOVE\fP = 'Record(s) successfully removed from database\&. '"
+.br
+.ti -1c
+.RI "string \fBMSG_SUCCESS_UPDATE\fP = 'Record(s) successfully updated by given values\&. '"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBLanguage\fP class aims to provide required statement to requester class or methods to read matching locale string with given language code\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.language\&.Language\&.Language\&.__init__ (self)"
+
+.PP
+Constructer of \fBLanguage\fP class\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_BRAND_HELP = '\\t-b, --brand\\t\\tProvide device brand to '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_CHANNEL_HELP = '\\t-H,--channel\\t\\tProvide channel to configure '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_CONFIG = '\\t-c,--config\\t\\tAdd new configuration and map it '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_DESC_HELP = '\\t-D,--description\\tProvide a short description '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_DEVICE_HELP = '\\t-d,--device\\t\\tProvide device id to add '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_FIRMWARE_HELP = '\\t-F, --firmware\\t\\tProvide device firmware to '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_GROUP_HELP = '\\t-g,--group\\t\\Provide an id to the group '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_ID_HELP = '\\t-i,--id\\t\\t\\tProvide ID address to determine '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_INTERFACE_HELP = '\\t-e,--interface\\tProvide ethernet interface '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_IP_HELP = '\\t-I,--ip\\t\\t\\tProvide IP address for the '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_MODEL_HELP = '\\t-m, --model\\t\\tProvide device model to '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_NAME_HELP = '\\t-n,--name\\t\\tProvide name for the newly '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_NEW = 'A new {0} added with record id {1} and with name {2}'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_OPTION_HELP = '\\t-o,--option\\t\\tProvide type of '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_PARAM_HELP = '\\t-P,--param\\t\\tProvide a parameter '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_PASSWORD_HELP = '\\t-p,--password\\t\\tProvide password for '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_RADIUS_HELP = '\\t-r,--radius\\t\\tProvide Radius id to configure '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_RELATION_HELP = '\\t-R, --relation\\t\\tProvide a relation '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_SSID_HELP = '\\t-S,--ssid\\t\\tProvide SSID for group or device '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_SUBNET_HELP = '\\t-s,--subnet\\t\\tDefine subnet for VLAN will '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_TYPE_HELP = '\\t-t,--type\\t\\tProvide type of '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_USERNAME_HELP = '\\t-u,--username\\t\\tProvide username for '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_VLAN_HELP = '\\t-V,--vlan\\t\\tProvide VLAN id to determine VLAN '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_APP_CMD_INIT = 'Command Line Tool initializing\&.\&.\&.'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_APP_WELCOME = 'Welcome to Labris Wireless Access Point Controller'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ARG_DESC = 'Use methods below to add, remove, update and '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_ADD_HELP = '\\nUsage:\\t$ add [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_EDIT_HELP = '\\nUsage:\\t$ edit [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_GROUP_HELP = '\\nUsage:\\t$ group [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_LIST_HELP = '\\nUsage:\\t$ ls [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_REMOVE_HELP = '\\nUsage:\\t$ rm [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_SELFTEST_HELP = '\\nUsage:\\t$ self [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_SET_HELP = '\\nUsage:\\t$ set [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_SHOW_HELP = '\\nUsage:\\t$ sh [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_CMD_UNSET_HELP = '\\nUsage:\\t$ unset [OPTIONS]'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_ARG_PARSE_GET = 'Get_args stopped with an error ({o})'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_CLASS_INIT_FAILED = '{0} class could not be initialized!'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED = 'Access point connected '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_COMM_INTERFACE_FAILED = 'Unknown error occurred while connecting '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on {0} line while '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_INSERT = 'New record could not be inserted into '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DB_CLOSE = 'Connection could not close because of ({0})'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DB_CONNECT = 'An unknown error occurred while connecting '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_CONFIG = 'Please provide an CONFIG id for the {0}'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_DESC = 'Please provide a DESCRIPTION for the {0} '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_GROUP = 'Please provide a group id with usage -g, --group '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_ID = 'There is no ID has been provided for the {0}'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_IP = 'Please provide an IP for the {0} you would like to add'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_NAME = 'Please provide an NAME for the {0} '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_OPTION = 'There is no Option has been provided for '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_PARAMETER = 'There is no Parameter has been provided '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_PASSWORD = 'Please provide an PASSWORD for the {0}'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_USERNAME = 'Please provide an USERNAME for the {0}'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_FILE_BACKUP_FAILED = 'Error occurred while backing up '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_GENERIC = 'Unknown error occurred on line {0} with error:\\n{1}'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_IO_ERROR = 'Error occurred while connecting database '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_NO_CONFIG_SECTION = 'No section found in config file'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_PARSER_EXCEPTION = 'Error occurred on parsing arguments ({0})'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_ADD = 'Given values inserted to the database successfully '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_REMOVE = 'Record(s) successfully removed from database\&. '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_SELECT = 'Getting records from database please wait\&.\&.\&.'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_UPDATE = 'Record(s) successfully updated by given values\&. '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_UPDATE_RECORD = 'Recorded {0} updated with record id {1} and with '\fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

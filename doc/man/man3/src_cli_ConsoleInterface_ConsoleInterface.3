@@ -1,4 +1,4 @@
-.TH "src.cli.ConsoleInterface.ConsoleInterface" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.cli.ConsoleInterface.ConsoleInterface" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,9 +23,9 @@ Inherits Cmd\&.
 .br
 .RI "\fIadd command insert a new device with its suddenly created configuration into inventory\&. \fP"
 .ti -1c
-.RI "def \fBdo_edit\fP"
+.RI "def \fBdo_up\fP"
 .br
-.RI "\fIedit commands updates keys given with provided parameters in database\&. \fP"
+.RI "\fIup commands updates keys given with provided parameters in database\&. \fP"
 .ti -1c
 .RI "def \fBdo_group\fP"
 .br
@@ -66,6 +66,9 @@ Inherits Cmd\&.
 .RI "def \fBcmdloop_with_keyboard_interrupt\fP"
 .br
 .RI "\fIKeyboard interruption method\&. \fP"
+.ti -1c
+.RI "def \fBdo_EOF\fP"
+.br
 .in -1c
 .SS "Public Attributes"
 
@@ -84,14 +87,7 @@ Inherits Cmd\&.
 .PP 
 Command list to implement all required methods pre-defined\&. 
 
-inherited from cmd library to handle commandline interface with user interaction\&. This class gathers commands from user and declare them into individual methods written in project own classes\&.
-.PP
-\fBParameters:\fP
-.RS 4
-\fI\fP cmd\&.Cmd is a library object 
-.RE
-.PP
-
+\fBConsoleInterface\fP has been inherited from cmd library to handle commandline interface with user interaction\&. This class gathers commands from user and declare them into individual methods written in project own classes\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.__init__ (self)"
@@ -121,31 +117,27 @@ add command insert a new device with its suddenly created configuration into inv
 .RE
 .PP
 
-.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_edit (self, args)"
-
-.PP
-edit commands updates keys given with provided parameters in database\&. .PP
-.nf
-     Edit methods update only database records by not touching recent device
-     configuration. It is supposed that this operation is a soft update.
-.fi
-.PP
-.PP
-\fBSee Also:\fP
-.RS 4
-Main()\&.edit() 
-.RE
-.PP
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_EOF (self, args)"
 \fBParameters:\fP
 .RS 4
-\fIargs\fP [-t],[--type] Type of device, group, vlan, config, group [-o],[--option] Provide option to be updated in database [-P],[--parameter] Provide parameter to be set as a value 
+\fIargs\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Exits from application 
 .RE
 .PP
 
-.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_exit (self)"
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_exit (self, args)"
 
 .PP
-Exit command to terminate command line script\&. 
+Exit command to terminate command line script\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_group (self, args)"
 
 .PP
@@ -292,6 +284,27 @@ Main()\&.unset()
 \fBParameters:\fP
 .RS 4
 \fIargs\fP [-t] [--type] Type of device or group [-o],[--option] Provide option must be one of [-i],[--id] Define id of device or group 
+.RE
+.PP
+
+.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_up (self, args)"
+
+.PP
+up commands updates keys given with provided parameters in database\&. .PP
+.nf
+     Edit methods update only database records by not touching recent device
+     configuration. It is supposed that this operation is a soft update.
+.fi
+.PP
+.PP
+\fBSee Also:\fP
+.RS 4
+\fBMain\&.edit\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIargs\fP [-t],[--type] Type of device, group, vlan, config, group [-o],[--option] Provide option to be updated in database [-P],[--parameter] Provide parameter to be set as a value 
 .RE
 .PP
 

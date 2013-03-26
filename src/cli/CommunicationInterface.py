@@ -27,8 +27,8 @@ a processed output for inherited metdhos running in application
 import json
 import os
 import subprocess
-from src.language.language import Language
-from src.resources.resources import Resources
+from src.language.Language import Language
+from src.resources.Resources import Resources
 from src.helper.Utils import Utils
 
 __author__ = 'fatih'
@@ -38,16 +38,16 @@ class CommunicationInterface(object):
     """
     Command list to implement all required methods pre-defined
 
-    @class ConsoleInterface has been inherited from cmd library to handle
+    ConsoleInterface has been inherited from cmd library to handle
     commandline interface with user interaction. This class gathers commands
     from user and declare them into individual methods written in project
     own classes.
 
-    @param: cmd.Cmd is a library object
     """
     def __init__(self):
         """
-            Constructure of ConsoleInterface class
+        Constructure of ConsoleInterface class
+
         """
         self.utils = Utils()
 
@@ -58,6 +58,7 @@ class CommunicationInterface(object):
 
         @throw IOError exception
         @throw BufferError exception
+
         @param source_file source file will be read
         @return config_source file content expected as a configuration
         """

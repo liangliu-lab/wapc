@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1-20130209"/>
-<title>Labris Wireless Access Point Controller: Main Page</title>
+<title>Labris Wireless Access Point Controller: Labris Wirelss Access Point Controller v1.0</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -77,13 +77,194 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Labris Wireless Access Point Controller Documentation</div>  </div>
+<div class="title">Labris Wirelss Access Point Controller v1.0 </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><h1>DESCRIPTION</h1>
+<p>This software has been created to manage wireless acess point controllers with no brand dependency.</p>
+<p>Version 1.0 includes only CLI(Command Line Interface) to manage devices via Linux-familiar commands such as rm, ls, etc..</p>
+<p>Please see commands and options list below.</p>
+<h1>FEATURES</h1>
+<ul>
+<li>
+Add new devices into the inventory </li>
+<li>
+Create groups with given devices </li>
+<li>
+Manage device configurations, add, update and delete </li>
+<li>
+Manage device SSID, Channel, Associations, Maxclients </li>
+<li>
+Roaming </li>
+<li>
+Group management </li>
+<li>
+Service oriented architecture to communicate devices over Telnet </li>
+<li>
+Configure device commands over wapc-config.json &lt;</li>
+</ul>
+<h1>COMMAND &amp; OPTIONS</h1>
+<p>Use methods below to add, remove, update and list device(s), group(s) or config(s) with commands:</p>
+<h2>Commands:</h2>
+<h3>Usage: $ add [OPTIONS]</h3>
+<p>Add device, group, vlan, config etc with given parameters </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-I],[&ndash;ip] Use this params when adding some new variables which needs an ip such as device, config, etc. </li>
+<li>
+[-n],[&ndash;name] To set a name to related type variable </li>
+<li>
+[-b],[&ndash;brand] To set device brand to relate with its model and/or  firmware </li>
+<li>
+[-m],[&ndash;model] To set device model to relate with its config file </li>
+<li>
+[-F],[&ndash;firmware] To set device firmware to relate with its config file </li>
+<li>
+[-R],[&ndash;relation] To set device relation one of MASTER of SLAVE </li>
+<li>
+[-D],[&ndash;description] To set a description to related type variable </li>
+<li>
+[-u],[&ndash;username] Provide a username which will be used to connect device </li>
+<li>
+[-p],[&ndash;password] Provide a password which will be used to connect and configure device </li>
+</ul>
+<h3>Usage: $ edit [OPTIONS]</h3>
+<p>Edit details of given type of device with given parameters </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-o],[&ndash;option] Provide option must be one of related type database  fields </li>
+<li>
+[-P],[&ndash;param] Provide parameter to be update value </li>
+</ul>
+<h3>Usage: $ group [OPTIONS]</h3>
+<p>Group given devices </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-g],[&ndash;group] Define the group where given device will be added into </li>
+<li>
+[-i],[&ndash;id] Define id of device, group, vlan, config </li>
+</ul>
+<h3>Usage: $ set [OPTIONS]</h3>
+<p>Add device, group, vlan, config etc with given parameters </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-i],[&ndash;id] Define id of device or group </li>
+<li>
+[-o],[&ndash;option] Provide option must be one of "ssid, vlan, channel, frequency, maxclients, ip, cpu, memory, permanent, conf, firmware, model, serial, clients" </li>
+</ul>
+<p>These will be used to gather related commands from config file you provided </p>
+<h3>Usage: $ unset [OPTIONS]</h3>
+<p>Unset option, group, vlan, config etc with given parameters </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-i],[&ndash;id] Define id of device or group </li>
+<li>
+[-o],[&ndash;option] Provide option must be one of </li>
+</ul>
+<p>"ssid, vlan, channel, frequency, maxclients, ip, cpu, memory, permanent, conf,
+ firmware, model, serial, clients" These will be used to gather related commands from config file you provided </p>
+<h3>Usage: $ ls [OPTIONS]</h3>
+<p>List details of given type </p>
+<ul>
+<li>
+[-t],[&ndash;type] List device, group, vlan, config </li>
+<li>
+[-g],[&ndash;group] List device, vlan or config from given group </li>
+<li>
+[-i],[&ndash;id] Define id of group </li>
+</ul>
+<h3>Usage: $ sh [OPTIONS]</h3>
+<p>Show details of given type </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-i],[&ndash;id] Define id of device or group </li>
+<li>
+[-o],[&ndash;option] Provide option must be one of </li>
+</ul>
+<p>"ssid, vlan, channel, frequency, maxclients, ip, cpu, memory, permanent, conf, </p>
+<h3>Usage: $ rm [OPTIONS]</h3>
+<p>Show details of given type </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config and also it can be used such asgiven type is from to remove a device from a group </li>
+<li>
+[-g],[&ndash;group] Define the group where given device will be remove from </li>
+<li>
+[-i],[&ndash;id] Define id of device, group, vlan, config </li>
+</ul>
+<h3>Usage: $ self [OPTIONS]</h3>
+<p>Add device, group, vlan, config etc with given parameters </p>
+<ul>
+<li>
+[-t],[&ndash;type] Define type device, group, vlan, config </li>
+<li>
+[-I],[&ndash;ip] Use this params when adding some new variables which needs an ip such as device, config, etc. </li>
+<li>
+[-n],[&ndash;name] To set a name to related type variable </li>
+<li>
+[-D],[&ndash;description] To set a description to related type variable </li>
+<li>
+[-u],[&ndash;username] Provide a username which will be used to connect device </li>
+</ul>
+<h2>Options:</h2>
+<ul>
+<li>
+-i,&ndash;id Provide ID address to determine the variable with usage id </li>
+<li>
+-I,&ndash;ip Provide IP address for the newly added device with usage to connect </li>
+<li>
+-n,&ndash;name Provide name for the newly added device with usage name </li>
+<li>
+-u,&ndash;username Provide username for the newly added device with usage username </li>
+<li>
+-p,&ndash;password Provide password for given username of the newly added device with usage password </li>
+<li>
+-P,&ndash;param Provide a parameter to be set to the given option </li>
+<li>
+-g,&ndash;group Add device to the group with usage group </li>
+<li>
+-c,&ndash;config Add new configuration and map it to the given group or  device </li>
+<li>
+-s,&ndash;subnet Define subnet for VLAN will be configured with usage  255.255.255.0 </li>
+<li>
+-d,&ndash;device Provide device id to add provided device to the group </li>
+<li>
+-D,&ndash;description Provide a short description for group or device with usage </li>
+<li>
+-r,&ndash;radius Provide Radius id to configure radius authentication for  group or device with usage radius_id </li>
+<li>
+-S,&ndash;ssid Provide SSID for group or device with usage ssid </li>
+<li>
+-V,&ndash;vlan Provide VLAN id to determine VLAN for group or device with  usage vlan_id </li>
+<li>
+-H,&ndash;channel Provide channel to configure for group or device with  usage channel </li>
+<li>
+-t,&ndash;type Provide type of group/device/config/vlan from database with  usage group/device/config/vlan others will cause error(s) </li>
+<li>
+-o,&ndash;option Provide type of group/device/config/vlan from database with  usage group/device/config/vlan </li>
+</ul>
+<h1><a class="anchor" id="LICENSE"></a>
+LICENSE</h1>
+<p>Copyright 2013 Labris Technology.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 12:11:00 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 26 2013 09:18:33 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

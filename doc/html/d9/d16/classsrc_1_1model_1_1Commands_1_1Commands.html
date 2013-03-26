@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,14 +90,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="../../dd/d08/classsrc_1_1model_1_1Commands_1_1Commands-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">src.model.Commands.Commands Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object class.">Commands</a> object class.  
+<p><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> object defines a <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a>.  
  <a href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for src.model.Commands.Commands:</div>
@@ -116,29 +116,52 @@ Collaboration diagram for src.model.Commands.Commands:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ab0813ae6144600ce80a4a4020195c92e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#ab0813ae6144600ce80a4a4020195c92e">__init__</a></td></tr>
+<tr class="memdesc:ab0813ae6144600ce80a4a4020195c92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructer of <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> model.  <a href="#ab0813ae6144600ce80a4a4020195c92e">More...</a><br/></td></tr>
+<tr class="separator:ab0813ae6144600ce80a4a4020195c92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f6cf7dbe819f639abc7ed785417e67f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a2f6cf7dbe819f639abc7ed785417e67f">set_command</a></td></tr>
-<tr class="memdesc:a2f6cf7dbe819f639abc7ed785417e67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param command:  <a href="#a2f6cf7dbe819f639abc7ed785417e67f">More...</a><br/></td></tr>
+<tr class="memdesc:a2f6cf7dbe819f639abc7ed785417e67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter to set a command belong this model.  <a href="#a2f6cf7dbe819f639abc7ed785417e67f">More...</a><br/></td></tr>
 <tr class="separator:a2f6cf7dbe819f639abc7ed785417e67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e10468d7d4c25eb859a825a6dbf41b5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a9e10468d7d4c25eb859a825a6dbf41b5">get_command</a></td></tr>
-<tr class="memdesc:a9e10468d7d4c25eb859a825a6dbf41b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a9e10468d7d4c25eb859a825a6dbf41b5">More...</a><br/></td></tr>
+<tr class="memdesc:a9e10468d7d4c25eb859a825a6dbf41b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> model.  <a href="#a9e10468d7d4c25eb859a825a6dbf41b5">More...</a><br/></td></tr>
 <tr class="separator:a9e10468d7d4c25eb859a825a6dbf41b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb688330c44586537b2dd1f2e728beaf"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#afb688330c44586537b2dd1f2e728beaf">set_param</a></td></tr>
-<tr class="memdesc:afb688330c44586537b2dd1f2e728beaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param param:  <a href="#afb688330c44586537b2dd1f2e728beaf">More...</a><br/></td></tr>
+<tr class="memdesc:afb688330c44586537b2dd1f2e728beaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for related param belong to any command.  <a href="#afb688330c44586537b2dd1f2e728beaf">More...</a><br/></td></tr>
 <tr class="separator:afb688330c44586537b2dd1f2e728beaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a794598ddec9ed533e25cb453be69283a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a794598ddec9ed533e25cb453be69283a">get_param</a></td></tr>
-<tr class="memdesc:a794598ddec9ed533e25cb453be69283a"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a794598ddec9ed533e25cb453be69283a">More...</a><br/></td></tr>
+<tr class="memdesc:a794598ddec9ed533e25cb453be69283a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for param.  <a href="#a794598ddec9ed533e25cb453be69283a">More...</a><br/></td></tr>
 <tr class="separator:a794598ddec9ed533e25cb453be69283a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a4dc98e776bf6a027ffe2667b9f62b9db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a4dc98e776bf6a027ffe2667b9f62b9db">command</a> = None</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a4dc98e776bf6a027ffe2667b9f62b9db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a4dc98e776bf6a027ffe2667b9f62b9db">command</a></td></tr>
 <tr class="separator:a4dc98e776bf6a027ffe2667b9f62b9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3116fcf43eda67c0bb689de0215f7d45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a3116fcf43eda67c0bb689de0215f7d45">param</a> = None</td></tr>
+<tr class="memitem:a3116fcf43eda67c0bb689de0215f7d45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html#a3116fcf43eda67c0bb689de0215f7d45">param</a></td></tr>
 <tr class="separator:a3116fcf43eda67c0bb689de0215f7d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object class.">Commands</a> object class. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<div class="textblock"><p><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> object defines a <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a>. </p>
+<p><a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> object defines a <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> model to gather command related with given arguments from a pre-defined commands list in a JSON file and map them into <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> model. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ab0813ae6144600ce80a4a4020195c92e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.model.Commands.Commands.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructer of <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> model. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a9e10468d7d4c25eb859a825a6dbf41b5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +176,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for <a class="el" href="../../d9/d16/classsrc_1_1model_1_1Commands_1_1Commands.html" title="Commands object defines a Commands.">Commands</a> model. </p>
+<dl class="section return"><dt>Returns</dt><dd>command </dd></dl>
 
 </div>
 </div>
@@ -171,7 +195,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for param. </p>
+<dl class="section return"><dt>Returns</dt><dd>related param </dd></dl>
 
 </div>
 </div>
@@ -199,7 +224,13 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param command: </p>
+<p>Setter to set a command belong this model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -227,7 +258,13 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param param: </p>
+<p>Setter for related param belong to any command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -235,19 +272,11 @@ Static Public Attributes</h2></td></tr>
 <a class="anchor" id="a4dc98e776bf6a027ffe2667b9f62b9db"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">src.model.Commands.Commands.command = None</td>
+          <td class="memname">src.model.Commands.Commands.command</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -255,19 +284,11 @@ Static Public Attributes</h2></td></tr>
 <a class="anchor" id="a3116fcf43eda67c0bb689de0215f7d45"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">src.model.Commands.Commands.param = None</td>
+          <td class="memname">src.model.Commands.Commands.param</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -278,7 +299,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 12:11:00 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 26 2013 09:18:33 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

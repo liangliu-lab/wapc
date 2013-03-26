@@ -1,4 +1,4 @@
-.TH "src.model.Config.Config" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.Config.Config" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,307 +10,494 @@ src.model.Config.Config \-
 .br
 .PP
 .PP
-Inherits \fBdict\fP\&.
+Inherits \fBdict\fP, and \fBdict\fP\&.
+.PP
+Inherited by \fBsrc\&.model\&.Device\&.Device\fP, and \fBsrc\&.model\&.Device\&.Device\fP\&.
 .SS "Public Member Functions"
 
 .in +1c
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
-.ti -1c
-.RI "def \fBset_id\fP"
-.br
-.RI "\fI:param cID: \fP"
-.ti -1c
-.RI "def \fBget_id\fP"
-.br
-.RI "\fI:return: \fP"
+.RI "\fIConstructer for \fBConfig\fP model\&. \fP"
 .ti -1c
 .RI "def \fBset_name\fP"
 .br
-.RI "\fI:param name: \fP"
+.RI "\fISetter for name variable\&. \fP"
 .ti -1c
 .RI "def \fBget_name\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for name variable\&. \fP"
 .ti -1c
 .RI "def \fBset_description\fP"
 .br
-.RI "\fI:param self: :param description: \fP"
+.RI "\fISetter for \fBConfig\fP description\&. \fP"
 .ti -1c
 .RI "def \fBget_description\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for description\&. \fP"
 .ti -1c
 .RI "def \fBset_ip\fP"
 .br
-.RI "\fI:param ip: \fP"
+.RI "\fISetter for ip\&. \fP"
 .ti -1c
 .RI "def \fBget_ip\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for ip variable return\&. \fP"
 .ti -1c
 .RI "def \fBset_username\fP"
 .br
-.RI "\fI:param username: \fP"
+.RI "\fIThis username variable is set to define connection parameters for given device\&. \fP"
 .ti -1c
 .RI "def \fBget_username\fP"
 .br
-.RI "\fI:return: \fP"
 .ti -1c
 .RI "def \fBset_password\fP"
 .br
-.RI "\fI:param password: \fP"
+.RI "\fIThis password variable is set to define connection parameters for given device\&. \fP"
 .ti -1c
 .RI "def \fBget_password\fP"
 .br
-.RI "\fI:return: \fP"
 .ti -1c
 .RI "def \fBset_enable_password\fP"
 .br
-.RI "\fI:param option: \fP"
+.RI "\fIThis variable is set to define enable connection parameters for given device\&. \fP"
 .ti -1c
 .RI "def \fBget_enable_password\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for enable password variable\&. \fP"
 .ti -1c
 .RI "def \fBset_radius\fP"
 .br
-.RI "\fI:param radius_config_id: \fP"
+.RI "\fISetter for radius configuration id for recent \fBConfig\fP instance\&. \fP"
 .ti -1c
 .RI "def \fBget_radius\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGet radius variable\&. \fP"
 .ti -1c
 .RI "def \fBset_ssid\fP"
 .br
-.RI "\fI:param ssid: \fP"
+.RI "\fISetter for ssid variable\&. \fP"
 .ti -1c
 .RI "def \fBget_ssid\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for ssid\&. \fP"
 .ti -1c
 .RI "def \fBset_vlan\fP"
 .br
-.RI "\fI:param vlan_id: \fP"
+.RI "\fISetter for vlan variable\&. \fP"
 .ti -1c
 .RI "def \fBget_vlan\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for vlan\&. \fP"
 .ti -1c
 .RI "def \fBset_channel\fP"
 .br
-.RI "\fI:param channel: \fP"
+.RI "\fISetter for channel\&. \fP"
 .ti -1c
 .RI "def \fBget_channel\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for channel variables\&. \fP"
 .ti -1c
 .RI "def \fBset_transport_protocol\fP"
 .br
-.RI "\fI:param protocol: \fP"
+.RI "\fISetter for transport protocol\&. \fP"
 .ti -1c
 .RI "def \fBget_transport_protocol\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for transport protocol\&. \fP"
 .ti -1c
 .RI "def \fBset_personality\fP"
 .br
-.RI "\fI:param personality: \fP"
+.RI "\fISetter for personality\&. \fP"
 .ti -1c
 .RI "def \fBget_personality\fP"
 .br
-.RI "\fI:return personality: \fP"
+.RI "\fIGetter for personality\&. \fP"
 .ti -1c
 .RI "def \fBset_maxclient\fP"
 .br
-.RI "\fI.PP
-.nf
-Set request
-.fi
-.PP
- :param request: \fP"
+.RI "\fISetter for maxclient\&. \fP"
 .ti -1c
 .RI "def \fBget_maxclient\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for maxclient variable\&. \fP"
 .ti -1c
 .RI "def \fBset_request\fP"
 .br
-.RI "\fI.PP
-.nf
-Set request
-.fi
-.PP
- :param request: \fP"
+.RI "\fISet request\&. \fP"
 .ti -1c
 .RI "def \fBget_request\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for \fBRequest\fP model\&. \fP"
+.ti -1c
+.RI "def \fBset_date_add\fP"
+.br
+.RI "\fISet add date of recent \fBConfig\fP instance\&. \fP"
 .ti -1c
 .RI "def \fBget_date_add\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIAdd date of \fBConfig\fP instance\&. \fP"
 .ti -1c
 .RI "def \fBset_date_modified\fP"
 .br
-.RI "\fI:param date: \fP"
+.RI "\fISet last modified date for recent instance\&. \fP"
 .ti -1c
 .RI "def \fBget_date_modified\fP"
 .br
-.RI "\fI:return: \fP"
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__set_id\fP"
+.br
+.RI "\fISetter for id variable\&. \fP"
+.ti -1c
+.RI "def \fB__get_id\fP"
+.br
+.RI "\fIGetter for instance id\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
 \fBDevice\fP configuration model to implement new instance while inserting a new device\&. 
+
+object 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.model\&.Config\&.Config\&.__init__ (self)"
 
+.PP
+Constructer for \fBConfig\fP model\&. 
 .SH "Member Function Documentation"
 .PP 
+.SS "def src\&.model\&.Config\&.Config\&.__get_id (self)\fC [private]\fP"
+
+.PP
+Getter for instance id\&. \fBReturns:\fP
+.RS 4
+id instance id 
+.RE
+.PP
+
+.SS "def src\&.model\&.Config\&.Config\&.__set_id (self, c_id)\fC [private]\fP"
+
+.PP
+Setter for id variable\&. .PP
+.nf
+     __set_id is a private method to set recent instance id gathered from
+     database.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc_id\fP instance record id 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_channel (self)"
 
 .PP
-:return: 
+Getter for channel variables\&. \fBReturns:\fP
+.RS 4
+channel 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_date_add (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Config\&.Config\&.get_date_modified (self)"
-
+Add date of \fBConfig\fP instance\&. \fBReturns:\fP
+.RS 4
+date the configuration added into database 
+.RE
 .PP
-:return: 
+
+.SS "def src\&.model\&.Config\&.Config\&.get_date_modified (self)"
+\fBReturns:\fP
+.RS 4
+last modified date 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_description (self)"
 
 .PP
-:return: 
+Getter for description\&. \fBReturns:\fP
+.RS 4
+instance description 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_enable_password (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Config\&.Config\&.get_id (self)"
-
+Getter for enable password variable\&. \fBReturns:\fP
+.RS 4
+enable password 
+.RE
 .PP
-:return: 
+
 .SS "def src\&.model\&.Config\&.Config\&.get_ip (self)"
 
 .PP
-:return: 
+Getter for ip variable return\&. 
 .SS "def src\&.model\&.Config\&.Config\&.get_maxclient (self)"
 
 .PP
-:return: 
+Getter for maxclient variable\&. \fBReturns:\fP
+.RS 4
+recent instance maxclient 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_name (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Config\&.Config\&.get_password (self)"
-
+Getter for name variable\&. \fBReturns:\fP
+.RS 4
+instance name 
+.RE
 .PP
-:return: 
+
+.SS "def src\&.model\&.Config\&.Config\&.get_password (self)"
+\fBReturns:\fP
+.RS 4
+instance password 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_personality (self)"
 
 .PP
-:return personality: 
+Getter for personality\&. \fBReturns:\fP
+.RS 4
+personality as a string 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_radius (self)"
 
 .PP
-:return: 
+Get radius variable\&. \fBReturns:\fP
+.RS 4
+radius server ip 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_request (self)"
 
 .PP
-:return: :param date: 
+Getter for \fBRequest\fP model\&. \fBReturns:\fP
+.RS 4
+\fBRequest\fP model as a child instance of \fBConfig\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_ssid (self)"
 
 .PP
-:return: 
+Getter for ssid\&. \fBReturns:\fP
+.RS 4
+recent instance ssid 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_transport_protocol (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Config\&.Config\&.get_username (self)"
-
+Getter for transport protocol\&. \fBReturns:\fP
+.RS 4
+transport protocol 
+.RE
 .PP
-:return: 
+
+.SS "def src\&.model\&.Config\&.Config\&.get_username (self)"
+\fBReturns:\fP
+.RS 4
+instance username 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.get_vlan (self)"
 
 .PP
-:return: 
+Getter for vlan\&. \fBReturns:\fP
+.RS 4
+vlan 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_channel (self, channel)"
 
 .PP
-:param channel: 
+Setter for channel\&. \fBParameters:\fP
+.RS 4
+\fIchannel\fP 
+.RE
+.PP
+
+.SS "def src\&.model\&.Config\&.Config\&.set_date_add (self, date)"
+
+.PP
+Set add date of recent \fBConfig\fP instance\&. \fBParameters:\fP
+.RS 4
+\fIdate\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_date_modified (self, date)"
 
 .PP
-:param date: 
+Set last modified date for recent instance\&. \fBParameters:\fP
+.RS 4
+\fIdate\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_description (self, description)"
 
 .PP
-:param self: :param description: 
+Setter for \fBConfig\fP description\&. .PP
+.nf
+     A description for recent Config to describe the Config in detail
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdescription\fP text 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_enable_password (self, option)"
 
 .PP
-:param option: 
-.SS "def src\&.model\&.Config\&.Config\&.set_id (self, cID)"
+This variable is set to define enable connection parameters for given device\&. In order to provide this variable users will be let to get the device in enable mode and make configuration changes\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIoption\fP as a enable password 
+.RE
+.PP
+
+.SS "def src\&.model\&.Config\&.Config\&.set_ip (self, inet)"
 
 .PP
-:param cID: 
-.SS "def src\&.model\&.Config\&.Config\&.set_ip (self, ip)"
-
+Setter for ip\&. \fBParameters:\fP
+.RS 4
+\fIinet\fP 
+.RE
 .PP
-:param ip: 
+
 .SS "def src\&.model\&.Config\&.Config\&.set_maxclient (self, request)"
 
 .PP
-.PP
+Setter for maxclient\&. .PP
 .nf
-Set request
+     Maxclient variables aims to define how many client can connect to the
+     device as concurrent.
 .fi
 .PP
- :param request: 
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_name (self, name)"
 
 .PP
-:param name: 
+Setter for name variable\&. \fBParameters:\fP
+.RS 4
+\fIname\fP string 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_password (self, password)"
 
 .PP
-:param password: 
+This password variable is set to define connection parameters for given device\&. \fBParameters:\fP
+.RS 4
+\fIpassword\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_personality (self, personality)"
 
 .PP
-:param personality: 
+Setter for personality\&. .PP
+.nf
+     Personality variable defined to implement personality while connecting
+     a device.
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpersonality\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_radius (self, radius_config_id)"
 
 .PP
-:param radius_config_id: 
+Setter for radius configuration id for recent \fBConfig\fP instance\&. \fBParameters:\fP
+.RS 4
+\fIradius_config_id\fP radius server ip 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_request (self, request)"
 
 .PP
+Set request\&. \fBParameters:\fP
+.RS 4
+\fIrequest\fP 
+.RE
 .PP
-.nf
-Set request
-.fi
-.PP
- :param request: 
+
 .SS "def src\&.model\&.Config\&.Config\&.set_ssid (self, ssid)"
 
 .PP
-:param ssid: 
+Setter for ssid variable\&. \fBParameters:\fP
+.RS 4
+\fIssid\fP for recent config ssid 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_transport_protocol (self, protocol)"
 
 .PP
-:param protocol: 
+Setter for transport protocol\&. \fBParameters:\fP
+.RS 4
+\fIprotocol\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_username (self, username)"
 
 .PP
-:param username: 
+This username variable is set to define connection parameters for given device\&. \fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.RE
+.PP
+
 .SS "def src\&.model\&.Config\&.Config\&.set_vlan (self, vlan_id)"
 
 .PP
-:param vlan_id: 
+Setter for vlan variable\&. \fBParameters:\fP
+.RS 4
+\fIvlan_id\fP 
+.RE
+.PP
+
 
 .SH "Author"
 .PP 

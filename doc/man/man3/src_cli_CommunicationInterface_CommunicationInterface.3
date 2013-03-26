@@ -1,8 +1,11 @@
-.TH "src.cli.CommunicationInterface.CommunicationInterface" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.cli.CommunicationInterface.CommunicationInterface" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.cli.CommunicationInterface.CommunicationInterface \- 
+.PP
+Command list to implement all required methods pre-defined\&.  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -39,6 +42,11 @@ Inherits \fBobject\fP\&.
 .RI "\fButils\fP"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Command list to implement all required methods pre-defined\&. 
+
+\fBConsoleInterface\fP has been inherited from cmd library to handle commandline interface with user interaction\&. This class gathers commands from user and declare them into individual methods written in project own classes\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.__init__ (self)"
@@ -111,7 +119,7 @@ get_source_config method read a file content and return as it is with no proceed
 .RS 4
 \fIIOError\fP exception 
 .br
-\fIBufferError\fP exception 
+\fIBufferError\fP exception
 .RE
 .PP
 \fBParameters:\fP

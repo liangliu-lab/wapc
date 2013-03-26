@@ -1,0 +1,163 @@
+.TH "src.resources.SQL.SQL" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.resources.SQL.SQL \- 
+.PP
+This class includes all using database commands such as insert, remove, select etc\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBSQL_SELECT_DEVICE\fP = 'SELECT ad\&.id, '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_DEVICE_CONFIG\fP = 'SELECT * '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_DEVICE_ALL\fP = 'SELECT ad\&.id, '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_DEVICE_FROM_GROUP\fP = 'SELECT '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_CONFIG\fP = 'SELECT ac\&.id AS \\'ID\\','"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_CONFIG_DETAIL\fP = 'SELECT ac\&.id AS \\'ID\\','"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_GROUP_DETAIL\fP = 'SELECT id AS ID, '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_GROUP_ALL\fP = 'SELECT id AS ID, '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_GROUP_CONFIG\fP = 'SELECT ac\&.id AS \\'Config\\','"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_GROUP_DEVICE\fP = 'SELECT * FROM apc_device d '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_VLAN\fP = 'SELECT * FROM apc_vlan v '"
+.br
+.ti -1c
+.RI "string \fBSQL_SELECT_VLAN_DETAIL\fP = 'SELECT * FROM apc_config AS c '"
+.br
+.ti -1c
+.RI "string \fBSQL_INSERT_CONFIG\fP = 'INSERT INTO '"
+.br
+.ti -1c
+.RI "string \fBSQL_INSERT_DEVICE\fP = 'INSERT INTO '"
+.br
+.ti -1c
+.RI "string \fBSQL_INSERT_DEVICE_TO_GROUP\fP = 'INSERT INTO '"
+.br
+.ti -1c
+.RI "string \fBSQL_INSERT_GROUP\fP = 'INSERT INTO '"
+.br
+.ti -1c
+.RI "string \fBSQL_INSERT_VLAN_CONFIG\fP = 'INSERT INTO '"
+.br
+.ti -1c
+.RI "string \fBSQL_UPDATE_DEVICE_CONFIG\fP = 'UPDATE apc_config '"
+.br
+.ti -1c
+.RI "string \fBSQL_UPDATE_CONFIG\fP = 'UPDATE apc_config '"
+.br
+.ti -1c
+.RI "string \fBSQL_UPDATE_GROUP\fP = 'UPDATE apc_groups '"
+.br
+.ti -1c
+.RI "string \fBSQL_UPDATE_DEVICE\fP = 'UPDATE apc_device '"
+.br
+.ti -1c
+.RI "string \fBSQL_UPDATE_GROUP_CONFIG\fP = 'UPDATE apc_config SET %(key)s = '%(value)s' '"
+.br
+.ti -1c
+.RI "string \fBSQL_REMOVE_CONFIG\fP = 'DELETE FROM apc_config WHERE id = %(id)d;'"
+.br
+.ti -1c
+.RI "string \fBSQL_REMOVE_DEVICE\fP = 'DELETE FROM apc_device WHERE id = %(id)d;'"
+.br
+.ti -1c
+.RI "string \fBSQL_REMOVE_GROUP\fP = 'DELETE FROM apc_groups WHERE id = %(id)d;'"
+.br
+.ti -1c
+.RI "string \fBSQL_REMOVE_VLAN\fP = 'DELETE FROM apc_vlan WHERE id = %(id)d;'"
+.br
+.ti -1c
+.RI "string \fBSQL_REMOVE_DEVICE_FROM_GROUP\fP = 'DELETE FROM apc_device_group '"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This class includes all using database commands such as insert, remove, select etc\&. 
+
+Only need to do is you will write your sql command and format it into running command by given values 
+.SH "Member Data Documentation"
+.PP 
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_INSERT_CONFIG = 'INSERT INTO '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_INSERT_DEVICE = 'INSERT INTO '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_INSERT_DEVICE_TO_GROUP = 'INSERT INTO '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_INSERT_GROUP = 'INSERT INTO '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_INSERT_VLAN_CONFIG = 'INSERT INTO '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_REMOVE_CONFIG = 'DELETE FROM apc_config WHERE id = %(id)d;'\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_REMOVE_DEVICE = 'DELETE FROM apc_device WHERE id = %(id)d;'\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_REMOVE_DEVICE_FROM_GROUP = 'DELETE FROM apc_device_group '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_REMOVE_GROUP = 'DELETE FROM apc_groups WHERE id = %(id)d;'\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_REMOVE_VLAN = 'DELETE FROM apc_vlan WHERE id = %(id)d;'\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_CONFIG = 'SELECT ac\&.id AS \\'ID\\','\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_CONFIG_DETAIL = 'SELECT ac\&.id AS \\'ID\\','\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_DEVICE = 'SELECT ad\&.id, '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_DEVICE_ALL = 'SELECT ad\&.id, '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_DEVICE_CONFIG = 'SELECT * '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_DEVICE_FROM_GROUP = 'SELECT '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_GROUP_ALL = 'SELECT id AS ID, '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_GROUP_CONFIG = 'SELECT ac\&.id AS \\'Config\\','\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_GROUP_DETAIL = 'SELECT id AS ID, '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_GROUP_DEVICE = 'SELECT * FROM apc_device d '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_VLAN = 'SELECT * FROM apc_vlan v '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_SELECT_VLAN_DETAIL = 'SELECT * FROM apc_config AS c '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_UPDATE_CONFIG = 'UPDATE apc_config '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_UPDATE_DEVICE = 'UPDATE apc_device '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_UPDATE_DEVICE_CONFIG = 'UPDATE apc_config '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_UPDATE_GROUP = 'UPDATE apc_groups '\fC [static]\fP"
+
+.SS "string src\&.resources\&.SQL\&.SQL\&.SQL_UPDATE_GROUP_CONFIG = 'UPDATE apc_config SET %(key)s = '%(value)s' '\fC [static]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

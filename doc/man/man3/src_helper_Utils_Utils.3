@@ -1,10 +1,10 @@
-.TH "src.helper.Utils.Utils" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.helper.Utils.Utils" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.helper.Utils.Utils \- 
 .PP
-\fBUtils\fP class\&.  
+\fBUtils\fP class implements utility methods to help core methods work fine, independent, reliable and effective\&.  
 
 .SH SYNOPSIS
 .br
@@ -17,7 +17,7 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fBget_clean_params\fP"
 .br
-.RI "\fI:param args: :return: \fP"
+.RI "\fIget_clean_params method return filtered and processed arguments gathered from command line into argument parser\&. \fP"
 .ti -1c
 .RI "def \fBformatter\fP"
 .br
@@ -25,12 +25,7 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fBget_line\fP"
 .br
-.RI "\fI.PP
-.nf
-Get current line of file to handle exception lines
-.fi
-.PP
- :param :self :rtype : object :return line number: \fP"
+.RI "\fIGet current line of file to handle exception lines\&. \fP"
 .ti -1c
 .RI "def \fBvalidate\fP"
 .br
@@ -38,30 +33,74 @@ Get current line of file to handle exception lines
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBUtils\fP class\&. 
+\fBUtils\fP class implements utility methods to help core methods work fine, independent, reliable and effective\&. 
 .SH "Member Function Documentation"
 .PP 
-.SS "def src\&.helper\&.Utils\&.Utils\&.formatter (self, heading, source)"
+.SS "def src\&.helper\&.Utils\&.Utils\&.formatter (cls, heading, source)"
 
 .PP
-Format output text as a human readable style\&. :param heading is a list object comes from other methods to create a pretty table to be printed :param source is a tuple list aims to create pretty table rows 
-.SS "def src\&.helper\&.Utils\&.Utils\&.get_clean_params (self, args)"
+Format output text as a human readable style\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP is class itself 
+.br
+\fIheading\fP is a list object comes from other methods to create a pretty table to be printed
+.br
+\fIsource\fP is a tuple list aims to create pretty table rows 
+.RE
+.PP
+
+.SS "def src\&.helper\&.Utils\&.Utils\&.get_clean_params (cls, args)"
 
 .PP
-:param args: :return: 
-.SS "def src\&.helper\&.Utils\&.Utils\&.get_line (self)"
-
-.PP
-.PP
+get_clean_params method return filtered and processed arguments gathered from command line into argument parser\&. .PP
 .nf
-Get current line of file to handle exception lines
+     Arguments retreived with whitespaces, irregular order and mapped.
+     Therefore it is need to be cleaned, reorganized and regularly mapped to
+     send correct values into argument parser. This method help us to clean
+     and get actual ordered parameters as a list.
 .fi
 .PP
- :param :self :rtype : object :return line number: 
-.SS "def src\&.helper\&.Utils\&.Utils\&.validate (self, source = \fCNone\fP, stype = \fCNone\fP)"
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcls\fP class itself 
+.br
+\fIargs\fP arguments list gathered from command line 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A fully organized and clean argument list 
+.RE
+.PP
+
+.SS "def src\&.helper\&.Utils\&.Utils\&.get_line (cls)"
 
 .PP
-This method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc\&. :param stype: type defines what sort of value will be validated\&. Recently supported keys name, eth & ip :param source: 
+Get current line of file to handle exception lines\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP class itself
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Current number of line where method is called 
+.RE
+.PP
+
+.SS "def src\&.helper\&.Utils\&.Utils\&.validate (cls, source = \fCNone\fP, stype = \fCNone\fP)"
+
+.PP
+This method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP class itself
+.br
+\fIstype\fP type defines what sort of value will be validated\&. Recently supported keys name, eth & ip
+.br
+\fIsource\fP 
+.RE
+.PP
+
 
 .SH "Author"
 .PP 

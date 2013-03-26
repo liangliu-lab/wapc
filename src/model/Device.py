@@ -1,215 +1,210 @@
 # coding=utf-8
 """
-    Device model
+Copyright 2013 Labris Technology.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+@package model
+@date Marh 13, 2013
+@author Fatih Karatana
+@author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
+@copyright Labris Technology
+
 """
+
 from src.model.Config import Config
 
-__author__ = 'fatih'
 
-
-class Device(dict):
+class Device(Config):
     """
-        Device object class to create a runtime instance while adding a new device
+        Device object class to create a runtime
+        instance while adding a new device
+
+        Each device has its own configuration values provided by user via CLI
+        and its configuration is kept on a path defined like:
+        brand/model/firmware under root config path.
+
+        @implements Config
     """
 
     def __init__(self):
+        """
+        Constructer for Device model
+        """
         super(Device, self).__init__()
         self["id"] = None
-        self["ip"] = None
-        self["name"] = None
-        self["username"] = "Cisco"
-        self["password"] = "Cisco"
         self["brand"] = 'cisco'
         self["model"] = 'cisco'
         self["firmware"] = 'cisco'
         self["relation"] = 'slave'
         self["config_id"] = None
         self["config"] = Config()
-        self["description"] = None
-        self["Add Date"] = None
-        self["Last Modified"] = None
 
-    def set_id(self, dID):
+    def __set_id(self, d_id):
         """
-        :param dID:
-        """
-        self["id"] = dID
+        Setter for id variable is a private method
 
-    def get_id(self):
+        @param d_id int gathered from database
         """
+        self["id"] = d_id
 
-        :return:
+    def __get_id(self):
+        """
+        Getter for instance device id
+
+        @return d_id as device id
         """
         return self["id"]
 
-    def set_ip(self, ip):
+    def set_device_brand(self, brand):
         """
+        Setter for brand variable
 
-        :param ip:
-        """
-        self["ip"] = ip
+        Brand parameter is a required parameter. It has to be provided by user
+        and also required configuration .conf file should be under well-formed
+        folder structure to gather configuration file when adding a new device
+        into inventory. Otherwise no configuration will be loaded to the device.
 
-    def get_ip(self):
-        """
+        If brand parameter is provided but model or firmware parameters not then
+        user or system administrator should create path as below:
+        brand/default/default
 
-        :return:
-        """
-        return self["ip"]
+        The software will look the given path if it is provided otherwise it
+        assumes default path already exists.
 
-    def set_username(self, username):
-        """
-
-        :param username:
-        """
-        self["username"] = username
-
-    def get_username(self):
-        """
-        :return:
-        """
-        return self["username"]
-
-    def set_password(self, password):
-        """
-
-        :param password:
-        """
-        self["username"] = password
-
-    def get_password(self):
-        """
-        :return:
-        """
-        return self["username"]
-
-    def set_brand(self, brand):
-        """
-
-        :param brand:
+        @param brand string Variable defines such as Cisco, 3comm, etc.
         """
         self["brand"] = brand
 
     def get_brand(self):
         """
-        :return:
+        Getter for brand variable
+        @return brand variable
         """
         return self["brand"]
 
     def set_model(self, model):
         """
-
-        :param model:
+        Setter for model variable
+        @param model string Regarding provided brand
         """
         self["model"] = model
 
     def get_model(self):
         """
-        :return:
+        Getter for model
+        @return model
         """
         return self["model"]
 
     def set_firmware(self, firmware):
         """
-
-        :param firmware:
+        Setter for Device firmware variable
+        @param firmware string
         """
         self["firmware"] = firmware
 
     def get_firmware(self):
         """
-        :return:
+        Getter for firmware
+        @return instance firmware
         """
         return self["firmware"]
 
     def set_relation(self, relation):
         """
+        Setter for relation variable.
 
-        :param relation:
+        Relation variable is important to define what relation exists between
+        devices in inventory either Master or Slave. Devices configure
+        themselves to work in a master/slave topology therefore this variable
+        has to bet. Otherwise the application will assume the device recently
+        been adding is a slave. There has to be one master to work devices
+        effectively.
+
+        @param relation string master or slave
         """
         self["relation"] = relation
 
     def get_relation(self):
         """
-        :return:
+        Getter for relation variable
+        @return instance relation
         """
         return self["relation"]
 
     def set_name(self, name):
         """
-        :param name:
+        Setter for name parameter
+
+        Name parameter is a variable to define a nickname for device(s). It
+        should be unique.
+
+        @param name string Nickname for device as unique
         """
         self["name"] = name
 
     def get_name(self):
         """
-        :return:
+        Getter for name variable
+
+        @return instance name
         """
         return self["name"]
 
     def set_description(self, description):
         """
-        :param description:
+        Setter for desctiption variable to describe device in detail.
+
+        @param description text Description
         """
         self["description"] = description
 
     def get_description(self):
         """
-        :return:
+        Getter for description
+
+        @return instance description
         """
         return self["description"]
 
-    def set_config_id(self, config):
+    def set_config_id(self, config_id):
         """
+        Setter for config_id
 
-        :param config:
+        @param config_id int Config model instance id at runtime
         """
-        self["config_id"] = config
+        self["config_id"] = config_id
 
     def get_config_id(self):
         """
 
-        :return:
+        @return instance configuration id
         """
         return self["config_id"]
 
     def set_config(self, config):
         """
+        Setter to set a Config model into device instance config
 
-        :param config:
+        @param config dict is a Config model as a dictionary object
         """
         self["config"] = config
 
     def get_config(self):
         """
+        Getter for Device model to get instance Config
 
-        :return:
+        @return Config model
         """
         return self["config"]
-
-    def set_date_add(self, date):
-        """
-
-        :param date:
-        """
-        self["Add Date"] = date
-
-    def get_date_add(self):
-        """
-
-        :return:
-        """
-        return self["Add Date"]
-
-    def set_date_modified(self, date):
-        """
-
-        :param date:
-        """
-        self["Last Modified"] = date
-
-    def get_date_modified(self):
-        """
-
-        :return:
-        """
-        return self["Last Modified"]

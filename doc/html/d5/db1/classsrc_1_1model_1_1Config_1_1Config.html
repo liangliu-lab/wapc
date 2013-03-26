@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="../../d8/d15/classsrc_1_1model_1_1Config_1_1Config-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">src.model.Config.Config Class Reference</div>  </div>
@@ -103,7 +104,7 @@ Inheritance diagram for src.model.Config.Config:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d9/d96/classsrc_1_1model_1_1Config_1_1Config__inherit__graph.png" border="0" usemap="#src_8model_8Config_8Config_inherit__map" alt="Inheritance graph"/></div>
 <map name="src_8model_8Config_8Config_inherit__map" id="src_8model_8Config_8Config_inherit__map">
-<area shape="rect" id="node2" href="../../df/db1/classdict.html" title="dict" alt="" coords="65,5,108,35"/></map>
+<area shape="rect" id="node6" href="../../d3/da6/classsrc_1_1model_1_1Device_1_1Device.html" title="Device object class to create a runtime instance while adding a new device." alt="" coords="5,160,173,189"/><area shape="rect" id="node2" href="../../df/db1/classdict.html" title="dict" alt="" coords="68,5,111,35"/><area shape="rect" id="node8" href="../../d5/de2/classsrc_1_1model_1_1Group_1_1Group.html" title="Group class to create a runtime instance while adding a new device." alt="" coords="11,237,168,267"/></map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for src.model.Config.Config:</div>
@@ -116,111 +117,114 @@ Collaboration diagram for src.model.Config.Config:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ace6414c24c6e24379a22946ed390f186"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#ace6414c24c6e24379a22946ed390f186">__init__</a></td></tr>
+<tr class="memdesc:ace6414c24c6e24379a22946ed390f186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructer for <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> model.  <a href="#ace6414c24c6e24379a22946ed390f186">More...</a><br/></td></tr>
 <tr class="separator:ace6414c24c6e24379a22946ed390f186"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5420b4d7552959211658fc743d17c8e9"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a5420b4d7552959211658fc743d17c8e9">set_id</a></td></tr>
-<tr class="memdesc:a5420b4d7552959211658fc743d17c8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param cID:  <a href="#a5420b4d7552959211658fc743d17c8e9">More...</a><br/></td></tr>
-<tr class="separator:a5420b4d7552959211658fc743d17c8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a670f28f68148bf01a0390db274594a65"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a670f28f68148bf01a0390db274594a65">get_id</a></td></tr>
-<tr class="memdesc:a670f28f68148bf01a0390db274594a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a670f28f68148bf01a0390db274594a65">More...</a><br/></td></tr>
-<tr class="separator:a670f28f68148bf01a0390db274594a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5468ba4ffb5d3495752c54c8be4123d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#ae5468ba4ffb5d3495752c54c8be4123d">set_name</a></td></tr>
-<tr class="memdesc:ae5468ba4ffb5d3495752c54c8be4123d"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param name:  <a href="#ae5468ba4ffb5d3495752c54c8be4123d">More...</a><br/></td></tr>
+<tr class="memdesc:ae5468ba4ffb5d3495752c54c8be4123d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for name variable.  <a href="#ae5468ba4ffb5d3495752c54c8be4123d">More...</a><br/></td></tr>
 <tr class="separator:ae5468ba4ffb5d3495752c54c8be4123d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d1006b130130f0f2921a27bfae79b7"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a52d1006b130130f0f2921a27bfae79b7">get_name</a></td></tr>
-<tr class="memdesc:a52d1006b130130f0f2921a27bfae79b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a52d1006b130130f0f2921a27bfae79b7">More...</a><br/></td></tr>
+<tr class="memdesc:a52d1006b130130f0f2921a27bfae79b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for name variable.  <a href="#a52d1006b130130f0f2921a27bfae79b7">More...</a><br/></td></tr>
 <tr class="separator:a52d1006b130130f0f2921a27bfae79b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3347d8ca576cb2b099185103c38dbb36"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a3347d8ca576cb2b099185103c38dbb36">set_description</a></td></tr>
-<tr class="memdesc:a3347d8ca576cb2b099185103c38dbb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param self: :param description:  <a href="#a3347d8ca576cb2b099185103c38dbb36">More...</a><br/></td></tr>
+<tr class="memdesc:a3347d8ca576cb2b099185103c38dbb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> description.  <a href="#a3347d8ca576cb2b099185103c38dbb36">More...</a><br/></td></tr>
 <tr class="separator:a3347d8ca576cb2b099185103c38dbb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9c205fe454c59c2f209da9bfc38d5b3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#aa9c205fe454c59c2f209da9bfc38d5b3">get_description</a></td></tr>
-<tr class="memdesc:aa9c205fe454c59c2f209da9bfc38d5b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#aa9c205fe454c59c2f209da9bfc38d5b3">More...</a><br/></td></tr>
+<tr class="memdesc:aa9c205fe454c59c2f209da9bfc38d5b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for description.  <a href="#aa9c205fe454c59c2f209da9bfc38d5b3">More...</a><br/></td></tr>
 <tr class="separator:aa9c205fe454c59c2f209da9bfc38d5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a316812019412507123eaa5e832ec76d5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a316812019412507123eaa5e832ec76d5">set_ip</a></td></tr>
-<tr class="memdesc:a316812019412507123eaa5e832ec76d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param ip:  <a href="#a316812019412507123eaa5e832ec76d5">More...</a><br/></td></tr>
+<tr class="memdesc:a316812019412507123eaa5e832ec76d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for ip.  <a href="#a316812019412507123eaa5e832ec76d5">More...</a><br/></td></tr>
 <tr class="separator:a316812019412507123eaa5e832ec76d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9cb5bda130f4212614464139082a8a8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#ac9cb5bda130f4212614464139082a8a8">get_ip</a></td></tr>
-<tr class="memdesc:ac9cb5bda130f4212614464139082a8a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#ac9cb5bda130f4212614464139082a8a8">More...</a><br/></td></tr>
+<tr class="memdesc:ac9cb5bda130f4212614464139082a8a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for ip variable return.  <a href="#ac9cb5bda130f4212614464139082a8a8">More...</a><br/></td></tr>
 <tr class="separator:ac9cb5bda130f4212614464139082a8a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afff75e18676a9f580370a148de8c5b20"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#afff75e18676a9f580370a148de8c5b20">set_username</a></td></tr>
-<tr class="memdesc:afff75e18676a9f580370a148de8c5b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param username:  <a href="#afff75e18676a9f580370a148de8c5b20">More...</a><br/></td></tr>
+<tr class="memdesc:afff75e18676a9f580370a148de8c5b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">This username variable is set to define connection parameters for given device.  <a href="#afff75e18676a9f580370a148de8c5b20">More...</a><br/></td></tr>
 <tr class="separator:afff75e18676a9f580370a148de8c5b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af93bcd1b55eb8f40a05af2d3371cf074"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#af93bcd1b55eb8f40a05af2d3371cf074">get_username</a></td></tr>
-<tr class="memdesc:af93bcd1b55eb8f40a05af2d3371cf074"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#af93bcd1b55eb8f40a05af2d3371cf074">More...</a><br/></td></tr>
 <tr class="separator:af93bcd1b55eb8f40a05af2d3371cf074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d5a0f000b1c619aba7f7dbf41f055a1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a2d5a0f000b1c619aba7f7dbf41f055a1">set_password</a></td></tr>
-<tr class="memdesc:a2d5a0f000b1c619aba7f7dbf41f055a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param password:  <a href="#a2d5a0f000b1c619aba7f7dbf41f055a1">More...</a><br/></td></tr>
+<tr class="memdesc:a2d5a0f000b1c619aba7f7dbf41f055a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This password variable is set to define connection parameters for given device.  <a href="#a2d5a0f000b1c619aba7f7dbf41f055a1">More...</a><br/></td></tr>
 <tr class="separator:a2d5a0f000b1c619aba7f7dbf41f055a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fbac543e7fce610776b7aa7dd718a54"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a1fbac543e7fce610776b7aa7dd718a54">get_password</a></td></tr>
-<tr class="memdesc:a1fbac543e7fce610776b7aa7dd718a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a1fbac543e7fce610776b7aa7dd718a54">More...</a><br/></td></tr>
 <tr class="separator:a1fbac543e7fce610776b7aa7dd718a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5246c46f77b0cd5935017fee2818c137"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a5246c46f77b0cd5935017fee2818c137">set_enable_password</a></td></tr>
-<tr class="memdesc:a5246c46f77b0cd5935017fee2818c137"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param option:  <a href="#a5246c46f77b0cd5935017fee2818c137">More...</a><br/></td></tr>
+<tr class="memdesc:a5246c46f77b0cd5935017fee2818c137"><td class="mdescLeft">&#160;</td><td class="mdescRight">This variable is set to define enable connection parameters for given device.  <a href="#a5246c46f77b0cd5935017fee2818c137">More...</a><br/></td></tr>
 <tr class="separator:a5246c46f77b0cd5935017fee2818c137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61f0ffcb6f2c686999c63db05942c108"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a61f0ffcb6f2c686999c63db05942c108">get_enable_password</a></td></tr>
-<tr class="memdesc:a61f0ffcb6f2c686999c63db05942c108"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a61f0ffcb6f2c686999c63db05942c108">More...</a><br/></td></tr>
+<tr class="memdesc:a61f0ffcb6f2c686999c63db05942c108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for enable password variable.  <a href="#a61f0ffcb6f2c686999c63db05942c108">More...</a><br/></td></tr>
 <tr class="separator:a61f0ffcb6f2c686999c63db05942c108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa12012dcef2d1d563fd4f173ea66046a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#aa12012dcef2d1d563fd4f173ea66046a">set_radius</a></td></tr>
-<tr class="memdesc:aa12012dcef2d1d563fd4f173ea66046a"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param radius_config_id:  <a href="#aa12012dcef2d1d563fd4f173ea66046a">More...</a><br/></td></tr>
+<tr class="memdesc:aa12012dcef2d1d563fd4f173ea66046a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for radius configuration id for recent <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> instance.  <a href="#aa12012dcef2d1d563fd4f173ea66046a">More...</a><br/></td></tr>
 <tr class="separator:aa12012dcef2d1d563fd4f173ea66046a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fb1c81a5a828579fb52f72a19ca95fe"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a1fb1c81a5a828579fb52f72a19ca95fe">get_radius</a></td></tr>
-<tr class="memdesc:a1fb1c81a5a828579fb52f72a19ca95fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a1fb1c81a5a828579fb52f72a19ca95fe">More...</a><br/></td></tr>
+<tr class="memdesc:a1fb1c81a5a828579fb52f72a19ca95fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get radius variable.  <a href="#a1fb1c81a5a828579fb52f72a19ca95fe">More...</a><br/></td></tr>
 <tr class="separator:a1fb1c81a5a828579fb52f72a19ca95fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfe9eb5b930285f11852b4b7b5c92eba"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#abfe9eb5b930285f11852b4b7b5c92eba">set_ssid</a></td></tr>
-<tr class="memdesc:abfe9eb5b930285f11852b4b7b5c92eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param ssid:  <a href="#abfe9eb5b930285f11852b4b7b5c92eba">More...</a><br/></td></tr>
+<tr class="memdesc:abfe9eb5b930285f11852b4b7b5c92eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for ssid variable.  <a href="#abfe9eb5b930285f11852b4b7b5c92eba">More...</a><br/></td></tr>
 <tr class="separator:abfe9eb5b930285f11852b4b7b5c92eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b227667bf63ce8c129c6a69ab37e493"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a2b227667bf63ce8c129c6a69ab37e493">get_ssid</a></td></tr>
-<tr class="memdesc:a2b227667bf63ce8c129c6a69ab37e493"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a2b227667bf63ce8c129c6a69ab37e493">More...</a><br/></td></tr>
+<tr class="memdesc:a2b227667bf63ce8c129c6a69ab37e493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for ssid.  <a href="#a2b227667bf63ce8c129c6a69ab37e493">More...</a><br/></td></tr>
 <tr class="separator:a2b227667bf63ce8c129c6a69ab37e493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a83fece5f744ef76f2e2f977ad4a0d6"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a3a83fece5f744ef76f2e2f977ad4a0d6">set_vlan</a></td></tr>
-<tr class="memdesc:a3a83fece5f744ef76f2e2f977ad4a0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param vlan_id:  <a href="#a3a83fece5f744ef76f2e2f977ad4a0d6">More...</a><br/></td></tr>
+<tr class="memdesc:a3a83fece5f744ef76f2e2f977ad4a0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for vlan variable.  <a href="#a3a83fece5f744ef76f2e2f977ad4a0d6">More...</a><br/></td></tr>
 <tr class="separator:a3a83fece5f744ef76f2e2f977ad4a0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb89e127053772446dfefc1800ca7957"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#acb89e127053772446dfefc1800ca7957">get_vlan</a></td></tr>
-<tr class="memdesc:acb89e127053772446dfefc1800ca7957"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#acb89e127053772446dfefc1800ca7957">More...</a><br/></td></tr>
+<tr class="memdesc:acb89e127053772446dfefc1800ca7957"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for vlan.  <a href="#acb89e127053772446dfefc1800ca7957">More...</a><br/></td></tr>
 <tr class="separator:acb89e127053772446dfefc1800ca7957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad83af0a4947f463a0f28bab393e16012"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#ad83af0a4947f463a0f28bab393e16012">set_channel</a></td></tr>
-<tr class="memdesc:ad83af0a4947f463a0f28bab393e16012"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param channel:  <a href="#ad83af0a4947f463a0f28bab393e16012">More...</a><br/></td></tr>
+<tr class="memdesc:ad83af0a4947f463a0f28bab393e16012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for channel.  <a href="#ad83af0a4947f463a0f28bab393e16012">More...</a><br/></td></tr>
 <tr class="separator:ad83af0a4947f463a0f28bab393e16012"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e9af6786b39b2176be321ad9f83e04"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a28e9af6786b39b2176be321ad9f83e04">get_channel</a></td></tr>
-<tr class="memdesc:a28e9af6786b39b2176be321ad9f83e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a28e9af6786b39b2176be321ad9f83e04">More...</a><br/></td></tr>
+<tr class="memdesc:a28e9af6786b39b2176be321ad9f83e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for channel variables.  <a href="#a28e9af6786b39b2176be321ad9f83e04">More...</a><br/></td></tr>
 <tr class="separator:a28e9af6786b39b2176be321ad9f83e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7767c564f745ae90ba424864eb50539e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a7767c564f745ae90ba424864eb50539e">set_transport_protocol</a></td></tr>
-<tr class="memdesc:a7767c564f745ae90ba424864eb50539e"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param protocol:  <a href="#a7767c564f745ae90ba424864eb50539e">More...</a><br/></td></tr>
+<tr class="memdesc:a7767c564f745ae90ba424864eb50539e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for transport protocol.  <a href="#a7767c564f745ae90ba424864eb50539e">More...</a><br/></td></tr>
 <tr class="separator:a7767c564f745ae90ba424864eb50539e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37afaf20f695d2f7e1f45c41a5d2b9cd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a37afaf20f695d2f7e1f45c41a5d2b9cd">get_transport_protocol</a></td></tr>
-<tr class="memdesc:a37afaf20f695d2f7e1f45c41a5d2b9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a37afaf20f695d2f7e1f45c41a5d2b9cd">More...</a><br/></td></tr>
+<tr class="memdesc:a37afaf20f695d2f7e1f45c41a5d2b9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for transport protocol.  <a href="#a37afaf20f695d2f7e1f45c41a5d2b9cd">More...</a><br/></td></tr>
 <tr class="separator:a37afaf20f695d2f7e1f45c41a5d2b9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085c88d36f18816750f35ceb90184d57"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a085c88d36f18816750f35ceb90184d57">set_personality</a></td></tr>
-<tr class="memdesc:a085c88d36f18816750f35ceb90184d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param personality:  <a href="#a085c88d36f18816750f35ceb90184d57">More...</a><br/></td></tr>
+<tr class="memdesc:a085c88d36f18816750f35ceb90184d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for personality.  <a href="#a085c88d36f18816750f35ceb90184d57">More...</a><br/></td></tr>
 <tr class="separator:a085c88d36f18816750f35ceb90184d57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47db2209f47435b9376c29e822221134"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a47db2209f47435b9376c29e822221134">get_personality</a></td></tr>
-<tr class="memdesc:a47db2209f47435b9376c29e822221134"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return personality:  <a href="#a47db2209f47435b9376c29e822221134">More...</a><br/></td></tr>
+<tr class="memdesc:a47db2209f47435b9376c29e822221134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for personality.  <a href="#a47db2209f47435b9376c29e822221134">More...</a><br/></td></tr>
 <tr class="separator:a47db2209f47435b9376c29e822221134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b3d93038e4cc7e934d5d30c595f4954"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a0b3d93038e4cc7e934d5d30c595f4954">set_maxclient</a></td></tr>
-<tr class="memdesc:a0b3d93038e4cc7e934d5d30c595f4954"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Set request
-</pre><p> :param request:  <a href="#a0b3d93038e4cc7e934d5d30c595f4954">More...</a><br/></td></tr>
+<tr class="memdesc:a0b3d93038e4cc7e934d5d30c595f4954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for maxclient.  <a href="#a0b3d93038e4cc7e934d5d30c595f4954">More...</a><br/></td></tr>
 <tr class="separator:a0b3d93038e4cc7e934d5d30c595f4954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d65aa4861f87b14f890e7e4c45f3f6b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a5d65aa4861f87b14f890e7e4c45f3f6b">get_maxclient</a></td></tr>
-<tr class="memdesc:a5d65aa4861f87b14f890e7e4c45f3f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a5d65aa4861f87b14f890e7e4c45f3f6b">More...</a><br/></td></tr>
+<tr class="memdesc:a5d65aa4861f87b14f890e7e4c45f3f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for maxclient variable.  <a href="#a5d65aa4861f87b14f890e7e4c45f3f6b">More...</a><br/></td></tr>
 <tr class="separator:a5d65aa4861f87b14f890e7e4c45f3f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadb7b9df2211316e62455dffd65e8cd4"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#aadb7b9df2211316e62455dffd65e8cd4">set_request</a></td></tr>
-<tr class="memdesc:aadb7b9df2211316e62455dffd65e8cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Set request
-</pre><p> :param request:  <a href="#aadb7b9df2211316e62455dffd65e8cd4">More...</a><br/></td></tr>
+<tr class="memdesc:aadb7b9df2211316e62455dffd65e8cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set request.  <a href="#aadb7b9df2211316e62455dffd65e8cd4">More...</a><br/></td></tr>
 <tr class="separator:aadb7b9df2211316e62455dffd65e8cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a087d138a82ce9233ace691ff7c2824"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a3a087d138a82ce9233ace691ff7c2824">get_request</a></td></tr>
-<tr class="memdesc:a3a087d138a82ce9233ace691ff7c2824"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a3a087d138a82ce9233ace691ff7c2824">More...</a><br/></td></tr>
+<tr class="memdesc:a3a087d138a82ce9233ace691ff7c2824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for <a class="el" href="../../dc/dae/namespacesrc_1_1model_1_1Request.html">Request</a> model.  <a href="#a3a087d138a82ce9233ace691ff7c2824">More...</a><br/></td></tr>
 <tr class="separator:a3a087d138a82ce9233ace691ff7c2824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a62af30df2bd7aacf1e3f4b234d20d2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a3a62af30df2bd7aacf1e3f4b234d20d2">set_date_add</a></td></tr>
+<tr class="memdesc:a3a62af30df2bd7aacf1e3f4b234d20d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set add date of recent <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> instance.  <a href="#a3a62af30df2bd7aacf1e3f4b234d20d2">More...</a><br/></td></tr>
+<tr class="separator:a3a62af30df2bd7aacf1e3f4b234d20d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50dd1b04b53bae3274d259b829eeed4d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a50dd1b04b53bae3274d259b829eeed4d">get_date_add</a></td></tr>
-<tr class="memdesc:a50dd1b04b53bae3274d259b829eeed4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a50dd1b04b53bae3274d259b829eeed4d">More...</a><br/></td></tr>
+<tr class="memdesc:a50dd1b04b53bae3274d259b829eeed4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add date of <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> instance.  <a href="#a50dd1b04b53bae3274d259b829eeed4d">More...</a><br/></td></tr>
 <tr class="separator:a50dd1b04b53bae3274d259b829eeed4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc3731ca2b7f0d12e9e2bcbf2c4c9918"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#afc3731ca2b7f0d12e9e2bcbf2c4c9918">set_date_modified</a></td></tr>
-<tr class="memdesc:afc3731ca2b7f0d12e9e2bcbf2c4c9918"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param date:  <a href="#afc3731ca2b7f0d12e9e2bcbf2c4c9918">More...</a><br/></td></tr>
+<tr class="memdesc:afc3731ca2b7f0d12e9e2bcbf2c4c9918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set last modified date for recent instance.  <a href="#afc3731ca2b7f0d12e9e2bcbf2c4c9918">More...</a><br/></td></tr>
 <tr class="separator:afc3731ca2b7f0d12e9e2bcbf2c4c9918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a82ad087feaca5509236b61bbf1ef38"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a5a82ad087feaca5509236b61bbf1ef38">get_date_modified</a></td></tr>
-<tr class="memdesc:a5a82ad087feaca5509236b61bbf1ef38"><td class="mdescLeft">&#160;</td><td class="mdescRight">:return:  <a href="#a5a82ad087feaca5509236b61bbf1ef38">More...</a><br/></td></tr>
 <tr class="separator:a5a82ad087feaca5509236b61bbf1ef38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a947663292e56d658b81cfea46fdd66fa"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#a947663292e56d658b81cfea46fdd66fa">__set_id</a></td></tr>
+<tr class="memdesc:a947663292e56d658b81cfea46fdd66fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for id variable.  <a href="#a947663292e56d658b81cfea46fdd66fa">More...</a><br/></td></tr>
+<tr class="separator:a947663292e56d658b81cfea46fdd66fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbef619747697b83bf15c680fe9ac125"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html#acbef619747697b83bf15c680fe9ac125">__get_id</a></td></tr>
+<tr class="memdesc:acbef619747697b83bf15c680fe9ac125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for instance id.  <a href="#acbef619747697b83bf15c680fe9ac125">More...</a><br/></td></tr>
+<tr class="separator:acbef619747697b83bf15c680fe9ac125"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="../../d6/d7b/namespacesrc_1_1model_1_1Device.html">Device</a> configuration model to implement new instance while inserting a new device. </p>
+<p>object </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ace6414c24c6e24379a22946ed390f186"></a>
 <div class="memitem">
@@ -236,9 +240,82 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructer for <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> model. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="acbef619747697b83bf15c680fe9ac125"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.model.Config.Config.__get_id </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Getter for instance id. </p>
+<dl class="section return"><dt>Returns</dt><dd>id instance id </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a947663292e56d658b81cfea46fdd66fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.model.Config.Config.__set_id </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>c_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setter for id variable. </p>
+<pre class="fragment">     __set_id is a private method to set recent instance id gathered from
+     database.
+</pre><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c_id</td><td>instance record id </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a28e9af6786b39b2176be321ad9f83e04"></a>
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +330,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for channel variables. </p>
+<dl class="section return"><dt>Returns</dt><dd>channel </dd></dl>
 
 </div>
 </div>
@@ -271,7 +349,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Add date of <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>date the configuration added into database </dd></dl>
 
 </div>
 </div>
@@ -288,8 +367,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>:return: </p>
+<dl class="section return"><dt>Returns</dt><dd>last modified date </dd></dl>
 
 </div>
 </div>
@@ -307,7 +385,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for description. </p>
+<dl class="section return"><dt>Returns</dt><dd>instance description </dd></dl>
 
 </div>
 </div>
@@ -325,25 +404,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
-
-</div>
-</div>
-<a class="anchor" id="a670f28f68148bf01a0390db274594a65"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def src.model.Config.Config.get_id </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>:return: </p>
+<p>Getter for enable password variable. </p>
+<dl class="section return"><dt>Returns</dt><dd>enable password </dd></dl>
 
 </div>
 </div>
@@ -361,7 +423,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for ip variable return. </p>
 
 </div>
 </div>
@@ -379,7 +441,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for maxclient variable. </p>
+<dl class="section return"><dt>Returns</dt><dd>recent instance maxclient </dd></dl>
 
 </div>
 </div>
@@ -397,7 +460,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for name variable. </p>
+<dl class="section return"><dt>Returns</dt><dd>instance name </dd></dl>
 
 </div>
 </div>
@@ -414,8 +478,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>:return: </p>
+<dl class="section return"><dt>Returns</dt><dd>instance password </dd></dl>
 
 </div>
 </div>
@@ -433,7 +496,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return personality: </p>
+<p>Getter for personality. </p>
+<dl class="section return"><dt>Returns</dt><dd>personality as a string </dd></dl>
 
 </div>
 </div>
@@ -451,7 +515,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Get radius variable. </p>
+<dl class="section return"><dt>Returns</dt><dd>radius server ip </dd></dl>
 
 </div>
 </div>
@@ -469,8 +534,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
-<p>:param date: </p>
+<p>Getter for <a class="el" href="../../dc/dae/namespacesrc_1_1model_1_1Request.html">Request</a> model. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../dc/dae/namespacesrc_1_1model_1_1Request.html">Request</a> model as a child instance of <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> </dd></dl>
 
 </div>
 </div>
@@ -488,7 +553,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for ssid. </p>
+<dl class="section return"><dt>Returns</dt><dd>recent instance ssid </dd></dl>
 
 </div>
 </div>
@@ -506,7 +572,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for transport protocol. </p>
+<dl class="section return"><dt>Returns</dt><dd>transport protocol </dd></dl>
 
 </div>
 </div>
@@ -523,8 +590,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>:return: </p>
+<dl class="section return"><dt>Returns</dt><dd>instance username </dd></dl>
 
 </div>
 </div>
@@ -542,7 +608,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:return: </p>
+<p>Getter for vlan. </p>
+<dl class="section return"><dt>Returns</dt><dd>vlan </dd></dl>
 
 </div>
 </div>
@@ -570,7 +637,47 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param channel: </p>
+<p>Setter for channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a62af30df2bd7aacf1e3f4b234d20d2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.model.Config.Config.set_date_add </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set add date of recent <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">date</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -598,7 +705,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param date: </p>
+<p>Set last modified date for recent instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">date</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -626,7 +739,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param self: :param description: </p>
+<p>Setter for <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> description. </p>
+<pre class="fragment">     A description for recent Config to describe the Config in detail
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">description</td><td>text </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -654,35 +774,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param option: </p>
-
-</div>
-</div>
-<a class="anchor" id="a5420b4d7552959211658fc743d17c8e9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def src.model.Config.Config.set_id </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>cID</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>:param cID: </p>
+<p>This variable is set to define enable connection parameters for given device. </p>
+<p>In order to provide this variable users will be let to get the device in enable mode and make configuration changes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">option</td><td>as a enable password </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -700,7 +799,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>ip</em>&#160;</td>
+          <td class="paramname"><em>inet</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -710,7 +809,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param ip: </p>
+<p>Setter for ip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inet</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -738,8 +843,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Set request
-</pre><p> :param request: </p>
+<p>Setter for maxclient. </p>
+<pre class="fragment">     Maxclient variables aims to define how many client can connect to the
+     device as concurrent.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -767,7 +879,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param name: </p>
+<p>Setter for name variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -795,7 +913,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param password: </p>
+<p>This password variable is set to define connection parameters for given device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">password</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -823,7 +947,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param personality: </p>
+<p>Setter for personality. </p>
+<pre class="fragment">     Personality variable defined to implement personality while connecting
+     a device.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">personality</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -851,7 +983,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param radius_config_id: </p>
+<p>Setter for radius configuration id for recent <a class="el" href="../../d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device.">Config</a> instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">radius_config_id</td><td>radius server ip </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -879,8 +1017,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Set request
-</pre><p> :param request: </p>
+<p>Set request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -908,7 +1051,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param ssid: </p>
+<p>Setter for ssid variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ssid</td><td>for recent config ssid </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -936,7 +1085,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param protocol: </p>
+<p>Setter for transport protocol. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">protocol</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -964,7 +1119,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param username: </p>
+<p>This username variable is set to define connection parameters for given device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -992,7 +1153,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param vlan_id: </p>
+<p>Setter for vlan variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vlan_id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1002,7 +1169,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 12:11:00 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 26 2013 09:18:33 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

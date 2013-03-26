@@ -1,10 +1,10 @@
-.TH "src.controller.main.Main" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.main.Main" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.controller.main.Main \- 
 .PP
-\fBMain\fP class includes all base controller methods of the software\&.  
+\fBMain\fP class handles main requires and distribute them into related subprocesses\&.  
 
 .SH SYNOPSIS
 .br
@@ -28,41 +28,31 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fBlist\fP"
 .br
-.RI "\fIList all record from the inventory by given type and values such as device, group and id to decribe the record :param args: \fP"
+.RI "\fIList all record from the inventory by given type and values such as device, group and id to decribe the record\&. \fP"
 .ti -1c
 .RI "def \fBgroup\fP"
 .br
-.RI "\fI.PP
-.nf
-Add device(s) or given type to group with params
-.fi
-.PP
- :param args: \fP"
+.RI "\fIAdd device(s) or given type to group with params\&. \fP"
 .ti -1c
 .RI "def \fBshow\fP"
 .br
-.RI "\fI.PP
-.nf
-This method show running configuration by given option
-.fi
-.PP
- :param args: \fP"
+.RI "\fIThis method show running configuration by given option\&. \fP"
 .ti -1c
 .RI "def \fBset\fP"
 .br
-.RI "\fIThis method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: \fP"
+.RI "\fIThis method enables to set the device by given variables such as ssid, channel, frequency, maxclient\&. \fP"
 .ti -1c
 .RI "def \fBunset\fP"
 .br
-.RI "\fIThis method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: \fP"
+.RI "\fIThis method enables to unset the device by given variables such as ssid, channel, frequency, maxclient\&. \fP"
 .ti -1c
 .RI "def \fBremove\fP"
 .br
-.RI "\fIRemove any record from the inventory by given type and values such as device, group and id to decribe the record :param args: \fP"
+.RI "\fIRemove any record from the inventory by given type and values such as device, group and id to decribe the record\&. \fP"
 .ti -1c
 .RI "def \fBhelp\fP"
 .br
-.RI "\fI:param args: \fP"
+.RI "\fIPrint help text\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -77,12 +67,21 @@ This method show running configuration by given option
 .RI "\fBnow\fP"
 .br
 .ti -1c
-.RI "\fBdb\fP"
+.RI "\fBdatabase\fP"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBMain\fP class includes all base controller methods of the software\&. 
+\fBMain\fP class handles main requires and distribute them into related subprocesses\&. 
+
+This class is called by ConsoleInterface and communicate with sub-controllers\&. \fBMain\fP class also manipulate commandline arguments, clear them from whitespaces, apply a filter regex and send them into ArgParser\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Fatih Karatana 
+.RE
+.PP
+
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.controller\&.main\&.Main\&.__init__ (self)"
@@ -92,54 +91,91 @@ This method show running configuration by given option
 .SS "def src\&.controller\&.main\&.Main\&.add (self, args)"
 
 .PP
-Add any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. :rtype : object :param args: 
+Add any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.main\&.Main\&.edit (self, args)"
 
 .PP
-Edit any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. :param args: 
+Edit any object to the related tables such as new wireless access point, group, configuration, vlan etc\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.main\&.Main\&.group (self, args)"
 
 .PP
+Add device(s) or given type to group with params\&. \fBParameters:\fP
+.RS 4
+\fIargs,:\fP 
+.RE
 .PP
-.nf
-Add device(s) or given type to group with params
-.fi
-.PP
- :param args: 
-.SS "def src\&.controller\&.main\&.Main\&.help (self, args)"
+
+.SS "def src\&.controller\&.main\&.Main\&.help (cls, args)"
 
 .PP
-:param args: 
+Print help text\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP class itself 
+.br
+\fIargs\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.main\&.Main\&.list (self, args)"
 
 .PP
-List all record from the inventory by given type and values such as device, group and id to decribe the record :param args: 
+List all record from the inventory by given type and values such as device, group and id to decribe the record\&. \fBParameters:\fP
+.RS 4
+\fIargs,:\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.main\&.Main\&.remove (self, args)"
 
 .PP
-Remove any record from the inventory by given type and values such as device, group and id to decribe the record :param args: 
+Remove any record from the inventory by given type and values such as device, group and id to decribe the record\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.main\&.Main\&.set (self, args)"
 
 .PP
-This method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: 
+This method enables to set the device by given variables such as ssid, channel, frequency, maxclient\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.main\&.Main\&.show (self, args)"
 
 .PP
+This method show running configuration by given option\&. \fBParameters:\fP
+.RS 4
+\fIargs,:\fP 
+.RE
 .PP
-.nf
-This method show running configuration by given option
-.fi
-.PP
- :param args: 
+
 .SS "def src\&.controller\&.main\&.Main\&.unset (self, args)"
 
 .PP
-This method enables to set the device by given variables such as ssid, channel, frequency, maxclient :param args: 
+This method enables to unset the device by given variables such as ssid, channel, frequency, maxclient\&. \fBParameters:\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+
 .SH "Member Data Documentation"
 .PP 
 .SS "src\&.controller\&.main\&.Main\&.argparser"
 
-.SS "src\&.controller\&.main\&.Main\&.db"
+.SS "src\&.controller\&.main\&.Main\&.database"
 
 .SS "src\&.controller\&.main\&.Main\&.now"
 

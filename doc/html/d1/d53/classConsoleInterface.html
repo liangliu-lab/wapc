@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,18 +89,24 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="../../db/d4a/classMain.html" title="Group set makes users to set handle group operations for set command.">Main</a> class handles main requires and distribute them into related subprocesses.  
+<p>Command list to implement all required methods pre-defined.  
  <a href="../../d1/d53/classConsoleInterface.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="../../db/d4a/classMain.html" title="Group set makes users to set handle group operations for set command.">Main</a> class handles main requires and distribute them into related subprocesses. </p>
-<p>This class is called by with sub-controllers. <a class="el" href="../../db/d4a/classMain.html" title="Group set makes users to set handle group operations for set command.">Main</a> class also manipulate commandline arguments, clear them from whitespaces, apply a filter regex and send them into </p>
+<div class="textblock"><p>Command list to implement all required methods pre-defined. </p>
+<p>inherited from cmd library to handle commandline interface with user interaction. This class gathers commands from user and declare them into individual methods written in project own classes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>cmd.Cmd is a library object </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/controller/<a class="el" href="../../dc/dba/main_8py.html">main.py</a></li>
+<li>src/cli/<a class="el" href="../../dd/d60/CommunicationInterface_8py.html">CommunicationInterface.py</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 12:11:00 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 26 2013 09:16:39 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

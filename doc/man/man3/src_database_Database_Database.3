@@ -1,0 +1,177 @@
+.TH "src.database.Database.Database" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.database.Database.Database \- 
+.PP
+\fBDatabase\fP class implement a database interface between application and postgresql\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBdb\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fIConstructer for \fBDatabase\fP class\&. \fP"
+.ti -1c
+.RI "def \fBconnect\fP"
+.br
+.RI "\fIConnect database with given parameters\&. \fP"
+.ti -1c
+.RI "def \fBselect\fP"
+.br
+.RI "\fIExecute 'SELECT' commands to retrieve rows from database\&. \fP"
+.ti -1c
+.RI "def \fBinsert\fP"
+.br
+.RI "\fIExecute 'INSERT' SQL statements\&. \fP"
+.ti -1c
+.RI "def \fBupdate\fP"
+.br
+.RI "\fIExecute 'UPDATE' SQL statements\&. \fP"
+.ti -1c
+.RI "def \fBremove\fP"
+.br
+.RI "\fIExecute 'DELETE' SQL statements\&. \fP"
+.ti -1c
+.RI "def \fBclose_conn\fP"
+.br
+.RI "\fIClose database live connection\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB__config__\fP"
+.br
+.ti -1c
+.RI "\fB__section__\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBDatabase\fP class implement a database interface between application and postgresql\&. 
+
+Recently \fBDatabase\fP methods do all samething such executing provided commands\&. But they are all seperated for future planning if it may be needed to implement detailed statements\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.database\&.Database\&.Database\&.__init__ (self)"
+
+.PP
+Constructer for \fBDatabase\fP class\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.database\&.Database\&.Database\&.close_conn (cls, con)"
+
+.PP
+Close database live connection\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP class itself 
+.br
+\fIcon\fP is initiated connection 
+.RE
+.PP
+
+.SS "def src\&.database\&.Database\&.Database\&.connect (self)"
+
+.PP
+Connect database with given parameters\&. \fBReturns:\fP
+.RS 4
+a live connection to keep transactions 
+.RE
+.PP
+
+.SS "def src\&.database\&.Database\&.Database\&.insert (self, cmd)"
+
+.PP
+Execute 'INSERT' SQL statements\&. .PP
+.nf
+     Insert objects to database expected json formats for inserting objects.
+.fi
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+new record id 
+.RE
+.PP
+
+.SS "def src\&.database\&.Database\&.Database\&.remove (self, cmd)"
+
+.PP
+Execute 'DELETE' SQL statements\&. .PP
+.nf
+     Remove records from database objects with given values
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+
+.SS "def src\&.database\&.Database\&.Database\&.select (self, cmd)"
+
+.PP
+Execute 'SELECT' commands to retrieve rows from database\&. \fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+columns header and results 
+.RE
+.PP
+
+.SS "def src\&.database\&.Database\&.Database\&.update (self, cmd)"
+
+.PP
+Execute 'UPDATE' SQL statements\&. .PP
+.nf
+     Update database objects with given values
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True or False 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.database\&.Database\&.Database\&.__config__\fC [private]\fP"
+
+.SS "src\&.database\&.Database\&.Database\&.__section__\fC [private]\fP"
+
+.SS "src\&.database\&.Database\&.Database\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

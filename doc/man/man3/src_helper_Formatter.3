@@ -1,0 +1,124 @@
+.TH "src.helper.Formatter" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.helper.Formatter \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBindent\fP"
+.br
+.RI "\fIIndents a table by column\&. \fP"
+.ti -1c
+.RI "def \fBwrap_onspace\fP"
+.br
+.RI "\fIA word-wrap function that preserves existing line breaks and most spaces in the text\&. \fP"
+.ti -1c
+.RI "def \fBwrap_onspace_strict\fP"
+.br
+.RI "\fISimilar to wrap_onspace, but enforces the width constraint: words longer than width are split\&. \fP"
+.ti -1c
+.RI "def \fBwrap_always\fP"
+.br
+.RI "\fIA simple word-wrap function that wraps text on exactly width characters\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "def src\&.helper\&.Formatter\&.indent (rows, has_header = \fCFalse\fP, header_char = \fC'-'\fP, delim = \fC' | '\fP, justify = \fC'left'\fP, separate_rows = \fCFalse\fP, prefix = \fC''\fP, postfix = \fC''\fP, wrapfunc = \fClambda x: x\fP)"
+
+.PP
+Indents a table by column\&. \fBParameters:\fP
+.RS 4
+\fIpostfix\fP A string appended to each printed row\&. 
+.br
+\fIjustify\fP Determines how are data justified in their column\&. Valid values are 'left','right' and 'center'\&. 
+.br
+\fIwrapfunc\fP A function f(text) for wrapping text; each element in the table is first wrapped by this function\&. 
+.br
+\fIdelim\fP The column delimiter\&. 
+.br
+\fIheader_char\fP Character to be used for the row separator line (if hasHeader==True or separateRows==True)\&. 
+.br
+\fIprefix\fP A string prepended to each printed row\&. 
+.br
+\fIseparate_rows\fP True if rows are to be separated by a line of 'headerChar's\&. 
+.br
+\fIhas_header\fP True if the first row consists of the columns' names\&. 
+.br
+\fIrows\fP A sequence of sequences of items, one sequence per row\&. 
+.PP
+.nf
+     Wrap rows where delim set
+
+     :param row:
+
+.fi
+.PP
+ 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.SS "def src\&.helper\&.Formatter\&.wrap_always (text, width)"
+
+.PP
+A simple word-wrap function that wraps text on exactly width characters\&. .PP
+.nf
+ It doesn't split the text in words.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidth\fP 
+.br
+\fItext\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Always wrapped string to put in a cell for each whitespace 
+.RE
+.PP
+
+.SS "def src\&.helper\&.Formatter\&.wrap_onspace (text, width)"
+
+.PP
+A word-wrap function that preserves existing line breaks and most spaces in the text\&. Expects that existing line breaks are posix newlines (
+.br
+)\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidth\fP 
+.br
+\fItext\fP 
+.RE
+.PP
+
+.SS "def src\&.helper\&.Formatter\&.wrap_onspace_strict (text, width)"
+
+.PP
+Similar to wrap_onspace, but enforces the width constraint: words longer than width are split\&. \fBParameters:\fP
+.RS 4
+\fItext\fP 
+.br
+\fIwidth\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Wrapped string to put in a cell 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

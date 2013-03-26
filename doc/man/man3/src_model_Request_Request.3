@@ -1,4 +1,4 @@
-.TH "src.model.Request.Request" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.Request.Request" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,33 +17,31 @@ Inherits \fBdict\fP\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
+.RI "\fIConstructer for \fBRequest\fP model\&. \fP"
 .ti -1c
-.RI "def \fBsetEnable\fP"
+.RI "def \fBset_enable\fP"
 .br
-.RI "\fI:param status: \fP"
+.RI "\fISetter for enable variable\&. \fP"
 .ti -1c
-.RI "def \fBgetEnable\fP"
+.RI "def \fBget_enable\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for enable variable\&. \fP"
 .ti -1c
-.RI "def \fBsetConfigure\fP"
+.RI "def \fBset_configure\fP"
 .br
-.RI "\fI:param status: \fP"
+.RI "\fISetter for configure variable\&. \fP"
 .ti -1c
-.RI "def \fBgetConfigure\fP"
+.RI "def \fBget_configure\fP"
 .br
-.RI "\fI:return: \fP"
+.RI "\fIGetter for configure variable\&. \fP"
 .ti -1c
-.RI "def \fBsetCommands\fP"
+.RI "def \fBset_commands\fP"
 .br
-.RI "\fI:param commands: \fP"
+.RI "\fISetter for commands\&. \fP"
 .ti -1c
-.RI "def \fBgetCommands\fP"
+.RI "def \fBget_commands\fP"
 .br
-.RI "\fI:return: \fP"
-.ti -1c
-.RI "def \fBaddCommand\fP"
-.br
+.RI "\fIGetter for \fBCommands\fP\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -52,34 +50,86 @@ Inherits \fBdict\fP\&.
 .PP 
 .SS "def src\&.model\&.Request\&.Request\&.__init__ (self)"
 
+.PP
+Constructer for \fBRequest\fP model\&. 
 .SH "Member Function Documentation"
 .PP 
-.SS "def src\&.model\&.Request\&.Request\&.addCommand (self, command)"
-
-.SS "def src\&.model\&.Request\&.Request\&.getCommands (self)"
+.SS "def src\&.model\&.Request\&.Request\&.get_commands (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Request\&.Request\&.getConfigure (self)"
+Getter for \fBCommands\fP\&. \fBReturns:\fP
+.RS 4
+instance \fBCommands\fP model 
+.RE
+.PP
+
+.SS "def src\&.model\&.Request\&.Request\&.get_configure (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Request\&.Request\&.getEnable (self)"
+Getter for configure variable\&. \fBReturns:\fP
+.RS 4
+configure true or false 
+.RE
+.PP
+
+.SS "def src\&.model\&.Request\&.Request\&.get_enable (self)"
 
 .PP
-:return: 
-.SS "def src\&.model\&.Request\&.Request\&.setCommands (self, commands)"
+Getter for enable variable\&. \fBReturns:\fP
+.RS 4
+enable true or false 
+.RE
+.PP
+
+.SS "def src\&.model\&.Request\&.Request\&.set_commands (self, commands)"
 
 .PP
-:param commands: 
-.SS "def src\&.model\&.Request\&.Request\&.setConfigure (self, status)"
+Setter for commands\&. .PP
+.nf
+     This method set Commands model provided by other methods to Request
+     object
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcommands\fP \fBCommands\fP model 
+.RE
+.PP
+
+.SS "def src\&.model\&.Request\&.Request\&.set_configure (self, status)"
 
 .PP
-:param status: 
-.SS "def src\&.model\&.Request\&.Request\&.setEnable (self, status)"
+Setter for configure variable\&. .PP
+.nf
+     Configure variable required by devices to let the user make
+     configuration(s) on the device.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstatus\fP true or false 
+.RE
+.PP
+
+.SS "def src\&.model\&.Request\&.Request\&.set_enable (self, status)"
 
 .PP
-:param status: 
+Setter for enable variable\&. .PP
+.nf
+     Enable variable required by devices to enable configuration mode true
+     or false and then device decides to let the user make configuration(s)
+     on the device.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstatus\fP true or false 
+.RE
+.PP
+
 
 .SH "Author"
 .PP 

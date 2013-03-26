@@ -1,7 +1,27 @@
 # coding=utf-8
-from src.model.Commands import Commands
+"""
+Copyright 2013 Labris Technology.
 
-__author__ = 'fatih'
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+@package model
+@date Marh 13, 2013
+@author Fatih Karatana
+@author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
+@copyright Labris Technology
+
+"""
+from src.model.Commands import Commands
 
 
 class Request(dict):
@@ -16,54 +36,68 @@ class Request(dict):
         ]
     """
     def __init__(self):
+        """
+        Constructer for Request model
+        """
         super(Request, self).__init__()
         self["enable"] = True
         self["configure"] = False
         self["commands"] = Commands()
 
-    def setEnable(self, status):
+    def set_enable(self, status):
         """
+        Setter for enable variable
 
-        :param status:
+        Enable variable required by devices to enable configuration mode true
+        or false and then device decides to let the user make configuration(s)
+        on the device.
+
+        @param status true or false
         """
         self["enable"] = status
 
-    def getEnable(self):
+    def get_enable(self):
         """
+        Getter for enable variable
 
-        :return:
+        @return enable true or false
         """
         return self["enable"]
 
-    def setConfigure(self, status):
+    def set_configure(self, status):
         """
+        Setter for configure variable
 
-        :param status:
+        Configure variable required by devices to let the user make
+        configuration(s) on the device.
+
+        @param status true or false
         """
         self["configure"] = status
 
-    def getConfigure(self):
+    def get_configure(self):
         """
+        Getter for configure variable
 
-
-        :return:
+        @return configure true or false
         """
         return self["configure"]
 
-    def setCommands(self, commands):
+    def set_commands(self, commands):
         """
+        Setter for commands
 
-        :param commands:
+        This method set Commands model provided by other methods to Request
+        object
+
+        @param commands Commands model
         """
         self["commands"] = commands
 
-    def getCommands(self):
+    def get_commands(self):
         """
+        Getter for Commands
 
-
-        :return:
+        @return instance Commands model
         """
         return self["commands"]
-
-    def addCommand(self, command):
-        self["commands"].append(command)

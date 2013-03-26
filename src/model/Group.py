@@ -1,102 +1,41 @@
 # coding=utf-8
 """
-    Group model for create group instance determine database column field
+Copyright 2013 Labris Technology.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+@package model
+@date Marh 13, 2013
+@author Fatih Karatana
+@author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
+@copyright Labris Technology
+
 """
-__author__ = 'fatih'
+from src.model.Device import Device
 
 
-class Group(object):
+class Group(Device):
     """
-        Group class to create a runtime instance while adding a new device
+    Group class to create a runtime instance while adding a new device
+
+    @implements Device
     """
+
     def __init__(self):
-        self.id = None
-        self.name = None
-        self.config_id = 0
-        self.description = None
-        self.added = None
-        self.modified = None
-
-    def set_id(self, gID):
-        """
-            Regular setter for Group model id
-        :param gID:
-        """
-        self.id = gID
-
-    def get_id(self):
-        """
-            Regular getter for Group model
-        :return id:
-        """
-        return self.id
-
-    def set_name(self, name):
-        """
-
-        :param name:
-        """
-        self.name = name
-
-    def get_name(self):
-        """
-
-        :return:
-        """
-        return self.name
-
-    def set_config(self, config):
-        """
-
-        :param config:
-        """
-        self.config_id = config
-
-    def get_config(self):
-        """
-
-        :return:
-        """
-        return self.config_id
-
-    def set_description(self, description):
-        """
-
-        :param description:
-        """
-        self.description = description
-
-    def get_description(self):
-        """
-
-        :return:
-        """
-        return self.description
-
-    def set_date_add(self, date):
-        """
-
-        :param date:
-        """
-        self.added = date
-
-    def get_date_add(self):
-        """
-
-        :return:
-        """
-        return self.added
-
-    def set_date_modified(self, date):
-        """
-
-        :param date:
-        """
-        self.modified = date
-
-    def get_date_modified(self):
-        """
-
-        :return:
-        """
-        return self.modified
+        super(Group, self).__init__()
+        self["id"] = None
+        self["name"] = None
+        self["config_id"] = 0
+        self["description"] = None
+        self["added"] = None
+        self["modified"] = None

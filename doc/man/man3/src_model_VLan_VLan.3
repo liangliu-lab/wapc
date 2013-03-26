@@ -1,4 +1,4 @@
-.TH "src.model.VLan.VLan" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.VLan.VLan" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,91 +15,181 @@ Inherits \fBobject\fP\&.
 
 .in +1c
 .ti -1c
-.RI "def \fBsetName\fP"
+.RI "def \fB__init__\fP"
 .br
+.RI "\fIConstructer for \fBVLan\fP model\&. \fP"
 .ti -1c
-.RI "def \fBgetName\fP"
+.RI "def \fBset_name\fP"
 .br
+.RI "\fISetter for name variable of \fBVLan\fP\&. \fP"
 .ti -1c
-.RI "def \fBsetIP\fP"
+.RI "def \fBget_name\fP"
 .br
+.RI "\fIGetter for name variable of \fBVLan\fP\&. \fP"
 .ti -1c
-.RI "def \fBgetIP\fP"
+.RI "def \fBset_ip\fP"
 .br
+.RI "\fISetter for IP variable of \fBVLan\fP\&. \fP"
 .ti -1c
-.RI "def \fBsetSubnet\fP"
+.RI "def \fBget_ip\fP"
 .br
+.RI "\fIGetter for IP variable of \fBVLan\fP\&. \fP"
 .ti -1c
-.RI "def \fBgetSubnet\fP"
+.RI "def \fBset_subnet\fP"
 .br
+.RI "\fISetter for subnet variable of \fBVLan\fP\&. \fP"
 .ti -1c
-.RI "def \fBsetNumber\fP"
+.RI "def \fBget_subnet\fP"
 .br
+.RI "\fIGetter for subnet\&. \fP"
 .ti -1c
-.RI "def \fBgetNumber\fP"
+.RI "def \fBset_number\fP"
 .br
+.RI "\fISetter for number variable\&. \fP"
 .ti -1c
-.RI "def \fBsetInterface\fP"
+.RI "def \fBget_number\fP"
 .br
+.RI "\fIGetter for number\&. \fP"
 .ti -1c
-.RI "def \fBgetInterface\fP"
+.RI "def \fBset_interface\fP"
 .br
+.RI "\fISetter for interface\&. \fP"
+.ti -1c
+.RI "def \fBget_interface\fP"
+.br
+.RI "\fIGetter for interface such eth0, eth1\&. \fP"
 .in -1c
-.SS "Static Public Attributes"
+.SS "Public Attributes"
 
 .in +1c
 .ti -1c
-.RI "\fBname\fP = None"
+.RI "\fBname\fP"
 .br
 .ti -1c
-.RI "\fBip\fP = None"
+.RI "\fBinet\fP"
 .br
 .ti -1c
-.RI "\fBsubnet\fP = None"
+.RI "\fBsubnet\fP"
 .br
 .ti -1c
-.RI "\fBnumber\fP = None"
+.RI "\fBnumber\fP"
 .br
 .ti -1c
-.RI "\fBinterface\fP = None"
+.RI "\fBinterface\fP"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
 \fBVLan\fP object\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.model\&.VLan\&.VLan\&.__init__ (self)"
+
+.PP
+Constructer for \fBVLan\fP model\&. 
 .SH "Member Function Documentation"
 .PP 
-.SS "def src\&.model\&.VLan\&.VLan\&.getInterface (self)"
+.SS "def src\&.model\&.VLan\&.VLan\&.get_interface (self)"
 
-.SS "def src\&.model\&.VLan\&.VLan\&.getIP (self)"
+.PP
+Getter for interface such eth0, eth1\&. \fBReturns:\fP
+.RS 4
+recent instance interface 
+.RE
+.PP
 
-.SS "def src\&.model\&.VLan\&.VLan\&.getName (self)"
+.SS "def src\&.model\&.VLan\&.VLan\&.get_ip (self)"
 
-.SS "def src\&.model\&.VLan\&.VLan\&.getNumber (self)"
+.PP
+Getter for IP variable of \fBVLan\fP\&. \fBReturns:\fP
+.RS 4
+\fBVLan\fP ip 
+.RE
+.PP
 
-.SS "def src\&.model\&.VLan\&.VLan\&.getSubnet (self)"
+.SS "def src\&.model\&.VLan\&.VLan\&.get_name (self)"
 
-.SS "def src\&.model\&.VLan\&.VLan\&.setInterface (self, interface)"
+.PP
+Getter for name variable of \fBVLan\fP\&. \fBReturns:\fP
+.RS 4
+\fBVLan\fP configuration name 
+.RE
+.PP
 
-.SS "def src\&.model\&.VLan\&.VLan\&.setIP (self, ip)"
+.SS "def src\&.model\&.VLan\&.VLan\&.get_number (self)"
 
-.SS "def src\&.model\&.VLan\&.VLan\&.setName (self, name)"
+.PP
+Getter for number\&. \fBReturns:\fP
+.RS 4
+number 
+.RE
+.PP
 
-.SS "def src\&.model\&.VLan\&.VLan\&.setNumber (self, number)"
+.SS "def src\&.model\&.VLan\&.VLan\&.get_subnet (self)"
 
-.SS "def src\&.model\&.VLan\&.VLan\&.setSubnet (self, subnet)"
+.PP
+Getter for subnet\&. \fBReturns:\fP
+.RS 4
+subnet 
+.RE
+.PP
+
+.SS "def src\&.model\&.VLan\&.VLan\&.set_interface (self, interface)"
+
+.PP
+Setter for interface\&. \fBParameters:\fP
+.RS 4
+\fIinterface\fP 
+.RE
+.PP
+
+.SS "def src\&.model\&.VLan\&.VLan\&.set_ip (self, inet)"
+
+.PP
+Setter for IP variable of \fBVLan\fP\&. \fBParameters:\fP
+.RS 4
+\fIinet\fP 
+.RE
+.PP
+
+.SS "def src\&.model\&.VLan\&.VLan\&.set_name (self, name)"
+
+.PP
+Setter for name variable of \fBVLan\fP\&. \fBParameters:\fP
+.RS 4
+\fIname\fP 
+.RE
+.PP
+
+.SS "def src\&.model\&.VLan\&.VLan\&.set_number (self, number)"
+
+.PP
+Setter for number variable\&. \fBParameters:\fP
+.RS 4
+\fInumber\fP 
+.RE
+.PP
+
+.SS "def src\&.model\&.VLan\&.VLan\&.set_subnet (self, subnet)"
+
+.PP
+Setter for subnet variable of \fBVLan\fP\&. \fBParameters:\fP
+.RS 4
+\fIsubnet\fP 
+.RE
+.PP
 
 .SH "Member Data Documentation"
 .PP 
-.SS "src\&.model\&.VLan\&.VLan\&.interface = None\fC [static]\fP"
+.SS "src\&.model\&.VLan\&.VLan\&.inet"
 
-.SS "src\&.model\&.VLan\&.VLan\&.ip = None\fC [static]\fP"
+.SS "src\&.model\&.VLan\&.VLan\&.interface"
 
-.SS "src\&.model\&.VLan\&.VLan\&.name = None\fC [static]\fP"
+.SS "src\&.model\&.VLan\&.VLan\&.name"
 
-.SS "src\&.model\&.VLan\&.VLan\&.number = None\fC [static]\fP"
+.SS "src\&.model\&.VLan\&.VLan\&.number"
 
-.SS "src\&.model\&.VLan\&.VLan\&.subnet = None\fC [static]\fP"
+.SS "src\&.model\&.VLan\&.VLan\&.subnet"
 
 
 .SH "Author"

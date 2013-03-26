@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html" title="Utils class.">Utils</a> class.  
+<p><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html" title="Utils class implements utility methods to help core methods work fine, independent, reliable and effective.">Utils</a> class implements utility methods to help core methods work fine, independent, reliable and effective.  
  <a href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for src.helper.Utils.Utils:</div>
@@ -116,21 +116,20 @@ Collaboration diagram for src.helper.Utils.Utils:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a167ce539c90d99223bc9183424138950"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#a167ce539c90d99223bc9183424138950">get_clean_params</a></td></tr>
-<tr class="memdesc:a167ce539c90d99223bc9183424138950"><td class="mdescLeft">&#160;</td><td class="mdescRight">:param args: :return:  <a href="#a167ce539c90d99223bc9183424138950">More...</a><br/></td></tr>
+<tr class="memdesc:a167ce539c90d99223bc9183424138950"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_clean_params method return filtered and processed arguments gathered from command line into argument parser.  <a href="#a167ce539c90d99223bc9183424138950">More...</a><br/></td></tr>
 <tr class="separator:a167ce539c90d99223bc9183424138950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf78560786b47475b28059ae8ea7057"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#a5bf78560786b47475b28059ae8ea7057">formatter</a></td></tr>
 <tr class="memdesc:a5bf78560786b47475b28059ae8ea7057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format output text as a human readable style.  <a href="#a5bf78560786b47475b28059ae8ea7057">More...</a><br/></td></tr>
 <tr class="separator:a5bf78560786b47475b28059ae8ea7057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61b761b508c857e2d4cf3d7f41e96729"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#a61b761b508c857e2d4cf3d7f41e96729">get_line</a></td></tr>
-<tr class="memdesc:a61b761b508c857e2d4cf3d7f41e96729"><td class="mdescLeft">&#160;</td><td class="mdescRight"><pre class="fragment">Get current line of file to handle exception lines
-</pre><p> :param :self :rtype : object :return line number:  <a href="#a61b761b508c857e2d4cf3d7f41e96729">More...</a><br/></td></tr>
+<tr class="memdesc:a61b761b508c857e2d4cf3d7f41e96729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current line of file to handle exception lines.  <a href="#a61b761b508c857e2d4cf3d7f41e96729">More...</a><br/></td></tr>
 <tr class="separator:a61b761b508c857e2d4cf3d7f41e96729"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45960ea79411bdb096886af3098a4e0d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#a45960ea79411bdb096886af3098a4e0d">validate</a></td></tr>
 <tr class="memdesc:a45960ea79411bdb096886af3098a4e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc.  <a href="#a45960ea79411bdb096886af3098a4e0d">More...</a><br/></td></tr>
 <tr class="separator:a45960ea79411bdb096886af3098a4e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html" title="Utils class.">Utils</a> class. </p>
+<div class="textblock"><p><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html" title="Utils class implements utility methods to help core methods work fine, independent, reliable and effective.">Utils</a> class implements utility methods to help core methods work fine, independent, reliable and effective. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a5bf78560786b47475b28059ae8ea7057"></a>
 <div class="memitem">
@@ -140,7 +139,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">def src.helper.Utils.Utils.formatter </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramname"><em>cls</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -163,7 +162,14 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Format output text as a human readable style. </p>
-<p>:param heading is a list object comes from other methods to create a pretty table to be printed :param source is a tuple list aims to create pretty table rows </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cls</td><td>is class itself </td></tr>
+    <tr><td class="paramname">heading</td><td>is a list object comes from other methods to create a pretty table to be printed</td></tr>
+    <tr><td class="paramname">source</td><td>is a tuple list aims to create pretty table rows </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -175,7 +181,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">def src.helper.Utils.Utils.get_clean_params </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramname"><em>cls</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -191,7 +197,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>:param args: :return: </p>
+<p>get_clean_params method return filtered and processed arguments gathered from command line into argument parser. </p>
+<pre class="fragment">     Arguments retreived with whitespaces, irregular order and mapped.
+     Therefore it is need to be cleaned, reorganized and regularly mapped to
+     send correct values into argument parser. This method help us to clean
+     and get actual ordered parameters as a list.
+</pre><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cls</td><td>class itself </td></tr>
+    <tr><td class="paramname">args</td><td>arguments list gathered from command line </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A fully organized and clean argument list </dd></dl>
 
 </div>
 </div>
@@ -203,14 +221,20 @@ Public Member Functions</h2></td></tr>
           <td class="memname">def src.helper.Utils.Utils.get_line </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramname"><em>cls</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p><pre class="fragment">Get current line of file to handle exception lines
-</pre><p> :param :self :rtype : object :return line number: </p>
+<p>Get current line of file to handle exception lines. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cls</td><td>class itself</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Current number of line where method is called </dd></dl>
 
 </div>
 </div>
@@ -222,7 +246,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">def src.helper.Utils.Utils.validate </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
+          <td class="paramname"><em>cls</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -245,7 +269,14 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc. </p>
-<p>:param stype: type defines what sort of value will be validated. Recently supported keys name, eth &amp; ip :param source: </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cls</td><td>class itself</td></tr>
+    <tr><td class="paramname">stype</td><td>type defines what sort of value will be validated. Recently supported keys name, eth &amp; ip</td></tr>
+    <tr><td class="paramname">source</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -255,7 +286,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 12:11:00 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 26 2013 09:18:33 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

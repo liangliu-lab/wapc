@@ -1,10 +1,10 @@
-.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Thu Mar 21 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.controller.ConfigMethods.ConfigMethods \- 
 .PP
-\fBConfigMethods\fP\&.  
+\fBConfigMethods\fP class aims to provide required metdhos to requester class or methods to read, update Config object\&.  
 
 .SH SYNOPSIS
 .br
@@ -17,10 +17,11 @@ Inherits Thread\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
+.RI "\fIConstructer of \fBConfigMethods\fP\&. \fP"
 .ti -1c
 .RI "def \fBcreate\fP"
 .br
-.RI "\fI:param params: \fP"
+.RI "\fIThis method is used to create a config independently :param params: \fP"
 .ti -1c
 .RI "def \fBread\fP"
 .br
@@ -46,19 +47,19 @@ Inherits Thread\&.
 .br
 .RI "\fI:param params: \fP"
 .ti -1c
-.RI "def \fBsetConfig\fP"
+.RI "def \fBset_config\fP"
 .br
 .RI "\fI\fBConfigMethods\fP controller class config setter\&. \fP"
 .ti -1c
-.RI "def \fBgetConfig\fP"
+.RI "def \fBget_config\fP"
 .br
 .RI "\fI\fBConfigMethods\fP controller class config getter\&. \fP"
 .ti -1c
-.RI "def \fBsetParams\fP"
+.RI "def \fBset_params\fP"
 .br
 .RI "\fI\fBConfigMethods\fP controller class config setter\&. \fP"
 .ti -1c
-.RI "def \fBgetParams\fP"
+.RI "def \fBget_params\fP"
 .br
 .RI "\fI\fBConfigMethods\fP controller class config getter\&. \fP"
 .in -1c
@@ -69,10 +70,10 @@ Inherits Thread\&.
 .RI "\fButils\fP"
 .br
 .ti -1c
-.RI "\fBdb\fP"
+.RI "\fBdatabase\fP"
 .br
 .ti -1c
-.RI "\fBci\fP"
+.RI "\fBcommunication_interface\fP"
 .br
 .ti -1c
 .RI "\fBscript\fP"
@@ -92,22 +93,31 @@ Inherits Thread\&.
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBConfigMethods\fP\&. 
+\fBConfigMethods\fP class aims to provide required metdhos to requester class or methods to read, update Config object\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.__init__ (self, new_config, params)"
+
+.PP
+Constructer of \fBConfigMethods\fP\&. \fBParameters:\fP
+.RS 4
+\fInew_config\fP Is a new config tuple object to update self\&.config 
+.br
+\fIparams\fP Is used to set new parameters to recent instance 
+.RE
+.PP
 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.create (self, params)"
 
 .PP
-:param params: 
+This method is used to create a config independently :param params: 
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.delete (self, params)"
 
 .PP
 :param params: 
-.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.getConfig (self)"
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.get_config (self)"
 
 .PP
 \fBConfigMethods\fP controller class config getter\&. \fBReturns:\fP
@@ -116,7 +126,7 @@ config is a Config object
 .RE
 .PP
 
-.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.getParams (self)"
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.get_params (self)"
 
 .PP
 \fBConfigMethods\fP controller class config getter\&. \fBReturns:\fP
@@ -142,7 +152,7 @@ Set method will update given config by parameter\&. \fBParameters:\fP
 .RE
 .PP
 
-.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.setConfig (self, config)"
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.set_config (self, config)"
 
 .PP
 \fBConfigMethods\fP controller class config setter\&. \fBParameters:\fP
@@ -151,7 +161,7 @@ Set method will update given config by parameter\&. \fBParameters:\fP
 .RE
 .PP
 
-.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.setParams (self, params)"
+.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.set_params (self, params)"
 
 .PP
 \fBConfigMethods\fP controller class config setter\&. \fBParameters:\fP
@@ -167,11 +177,16 @@ Set method will update given config by parameter\&. \fBParameters:\fP
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.update (self, params)"
 
 .PP
-Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This methods only inherit update database records by no touching physical device config\&.
+Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. .PP
+.nf
+     This methods only inherit update database
+     records by no touching physical device config.
+.fi
+.PP
 .PP
 \fBParameters:\fP
 .RS 4
-\fIparams,:\fP 
+\fIparams\fP 
 .RE
 .PP
 
@@ -179,11 +194,11 @@ Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This me
 .PP 
 .SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.cfg_device"
 
-.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.ci"
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.communication_interface"
 
 .SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.config"
 
-.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.db"
+.SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.database"
 
 .SS "src\&.controller\&.ConfigMethods\&.ConfigMethods\&.now"
 

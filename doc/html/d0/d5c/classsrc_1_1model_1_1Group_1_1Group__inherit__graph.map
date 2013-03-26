@@ -1,3 +1,5 @@
 <map id="src.model.Group.Group" name="src.model.Group.Group">
-<area shape="rect" id="node2" href="$dc/dd8/classobject.html" title="object" alt="" coords="56,5,112,35"/>
+<area shape="rect" id="node2" href="$d3/da6/classsrc_1_1model_1_1Device_1_1Device.html" title="Device object class to create a runtime instance while adding a new device." alt="" coords="5,160,173,189"/>
+<area shape="rect" id="node4" href="$d5/db1/classsrc_1_1model_1_1Config_1_1Config.html" title="Device configuration model to implement new instance while inserting a new device." alt="" coords="8,83,171,112"/>
+<area shape="rect" id="node6" href="$df/db1/classdict.html" title="dict" alt="" coords="68,5,111,35"/>
 </map>

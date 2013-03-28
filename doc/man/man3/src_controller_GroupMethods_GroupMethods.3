@@ -1,10 +1,10 @@
-.TH "src.controller.GroupMethods.GroupMethods" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.controller.GroupMethods.GroupMethods \- 
 .PP
-\fBGroupMethods\fP\&.  
+\fBGroupMethods\fP class includes group oriented methods such group set, group unset, group show operations\&.  
 
 .SH SYNOPSIS
 .br
@@ -20,28 +20,19 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fBcreate\fP"
 .br
-.RI "\fI.PP
-.nf
-add new group with params
-.fi
-.PP
- :rtype : object :param params: \fP"
+.RI "\fICreate a new group with given details in inventory\&. \fP"
 .ti -1c
 .RI "def \fBread\fP"
 .br
-.RI "\fI:param gID: \fP"
+.RI "\fIRead group detail from Groups table by given id\&. \fP"
 .ti -1c
-.RI "def \fBgetGroupConfig\fP"
+.RI "def \fBget_group_config\fP"
 .br
-.RI "\fI:param gID: \fP"
+.RI "\fIThis method gets configuration details from config table belong to given group\&. \fP"
 .ti -1c
 .RI "def \fBupdate\fP"
 .br
-.RI "\fI:param params: \fP"
-.ti -1c
-.RI "def \fBdelete\fP"
-.br
-.RI "\fI:param params: \fP"
+.RI "\fIUpdate the group by given id\&. \fP"
 .ti -1c
 .RI "def \fBset\fP"
 .br
@@ -62,10 +53,10 @@ add new group with params
 .RI "\fButils\fP"
 .br
 .ti -1c
-.RI "\fBdb\fP"
+.RI "\fBdatabase\fP"
 .br
 .ti -1c
-.RI "\fBci\fP"
+.RI "\fBcommunication_interface\fP"
 .br
 .ti -1c
 .RI "\fBscript\fP"
@@ -79,7 +70,9 @@ add new group with params
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBGroupMethods\fP\&. 
+\fBGroupMethods\fP class includes group oriented methods such group set, group unset, group show operations\&. 
+
+Methods covered by \fBGroupMethods\fP and other controller methods in other might be similar each other but in deep they have their own custom attributes and variables to determine each process is focused to the target\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.__init__ (self)"
@@ -89,24 +82,30 @@ add new group with params
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.create (self, params)"
 
 .PP
+Create a new group with given details in inventory\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
 .PP
-.nf
-add new group with params
-.fi
-.PP
- :rtype : object :param params: 
-.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.delete (self, params)"
+
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.get_group_config (self, group_id)"
 
 .PP
-:param params: 
-.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.getGroupConfig (self, gID)"
+This method gets configuration details from config table belong to given group\&. \fBParameters:\fP
+.RS 4
+\fIgroup_id\fP 
+.RE
+.PP
+
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.read (self, group_id)"
 
 .PP
-:param gID: 
-.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.read (self, gID)"
-
+Read group detail from Groups table by given id\&. \fBParameters:\fP
+.RS 4
+\fIgroup_id\fP 
+.RE
 .PP
-:param gID: 
+
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.set (self, params)"
 
 .PP
@@ -151,14 +150,19 @@ This methods handle options and connect throug group devices by given name or gi
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.update (self, params)"
 
 .PP
-:param params: 
+Update the group by given id\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
+
 .SH "Member Data Documentation"
 .PP 
 .SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.cfg_device"
 
-.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.ci"
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.communication_interface"
 
-.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.db"
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.database"
 
 .SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.now"
 

@@ -127,10 +127,55 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a45960ea79411bdb096886af3098a4e0d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#a45960ea79411bdb096886af3098a4e0d">validate</a></td></tr>
 <tr class="memdesc:a45960ea79411bdb096886af3098a4e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc.  <a href="#a45960ea79411bdb096886af3098a4e0d">More...</a><br/></td></tr>
 <tr class="separator:a45960ea79411bdb096886af3098a4e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36fd7538ce27bbb78838b1f1a510ea7d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#a36fd7538ce27bbb78838b1f1a510ea7d">fix_date</a></td></tr>
+<tr class="memdesc:a36fd7538ce27bbb78838b1f1a510ea7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method aims to fix date format gathered from database.  <a href="#a36fd7538ce27bbb78838b1f1a510ea7d">More...</a><br/></td></tr>
+<tr class="separator:a36fd7538ce27bbb78838b1f1a510ea7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b96a858b232854c0e593847844563a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html#ac1b96a858b232854c0e593847844563a">wellform_dict</a></td></tr>
+<tr class="memdesc:ac1b96a858b232854c0e593847844563a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method aims to wellform the given source into a zipped dictionary from keys and values.  <a href="#ac1b96a858b232854c0e593847844563a">More...</a><br/></td></tr>
+<tr class="separator:ac1b96a858b232854c0e593847844563a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="../../d6/dde/classsrc_1_1helper_1_1Utils_1_1Utils.html" title="Utils class implements utility methods to help core methods work fine, independent, reliable and effective.">Utils</a> class implements utility methods to help core methods work fine, independent, reliable and effective. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a36fd7538ce27bbb78838b1f1a510ea7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.helper.Utils.Utils.fix_date </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>cls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method aims to fix date format gathered from database. </p>
+<pre class="fragment">     Database record comes from datetime.datetime formatted and this makes
+     operations failes because of malformed data. So, it should be formatted
+     to the regular datetime format.
+</pre><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cls</td><td></td></tr>
+    <tr><td class="paramname">source</td><td>is a dictionary </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>formatted dictionary </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a5bf78560786b47475b28059ae8ea7057"></a>
 <div class="memitem">
 <div class="memproto">
@@ -280,13 +325,63 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac1b96a858b232854c0e593847844563a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.helper.Utils.Utils.wellform_dict </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>cls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method aims to wellform the given source into a zipped dictionary from keys and values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cls</td><td></td></tr>
+    <tr><td class="paramname">source</td><td>dictionary source </td></tr>
+    <tr><td class="paramname">keys</td><td>will be keys of new dictionary </td></tr>
+    <tr><td class="paramname">values</td><td>will be values for regarding keys </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/helper/<a class="el" href="../../d3/d7d/Utils_8py.html">Utils.py</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 26 2013 09:18:33 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 28 2013 12:01:07 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1-20130209
 </small></address>

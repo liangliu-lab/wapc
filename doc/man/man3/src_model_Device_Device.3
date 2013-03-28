@@ -1,4 +1,4 @@
-.TH "src.model.Device.Device" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.Device.Device" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -20,6 +20,14 @@ Inherited by \fBsrc\&.model\&.Group\&.Group\fP, and \fBsrc\&.model\&.Group\&.Gro
 .RI "def \fB__init__\fP"
 .br
 .RI "\fIConstructer for \fBDevice\fP model\&. \fP"
+.ti -1c
+.RI "def \fBset_id\fP"
+.br
+.RI "\fISetter for id variable is a private method\&. \fP"
+.ti -1c
+.RI "def \fBget_id\fP"
+.br
+.RI "\fIGetter for instance device id\&. \fP"
 .ti -1c
 .RI "def \fBset_device_brand\fP"
 .br
@@ -84,18 +92,6 @@ Inherited by \fBsrc\&.model\&.Group\&.Group\fP, and \fBsrc\&.model\&.Group\&.Gro
 .br
 .RI "\fIGetter for \fBDevice\fP model to get instance \fBConfig\fP\&. \fP"
 .in -1c
-.SS "Private Member Functions"
-
-.in +1c
-.ti -1c
-.RI "def \fB__set_id\fP"
-.br
-.RI "\fISetter for id variable is a private method\&. \fP"
-.ti -1c
-.RI "def \fB__get_id\fP"
-.br
-.RI "\fIGetter for instance device id\&. \fP"
-.in -1c
 .SH "Detailed Description"
 .PP 
 \fBDevice\fP object class to create a runtime instance while adding a new device\&. 
@@ -109,24 +105,6 @@ Each device has its own configuration values provided by user via CLI and its co
 Constructer for \fBDevice\fP model\&. 
 .SH "Member Function Documentation"
 .PP 
-.SS "def src\&.model\&.Device\&.Device\&.__get_id (self)\fC [private]\fP"
-
-.PP
-Getter for instance device id\&. \fBReturns:\fP
-.RS 4
-d_id as device id 
-.RE
-.PP
-
-.SS "def src\&.model\&.Device\&.Device\&.__set_id (self, d_id)\fC [private]\fP"
-
-.PP
-Setter for id variable is a private method\&. \fBParameters:\fP
-.RS 4
-\fId_id\fP int gathered from database 
-.RE
-.PP
-
 .SS "def src\&.model\&.Device\&.Device\&.get_brand (self)"
 
 .PP
@@ -167,6 +145,15 @@ instance description
 Getter for firmware\&. \fBReturns:\fP
 .RS 4
 instance firmware 
+.RE
+.PP
+
+.SS "def src\&.model\&.Device\&.Device\&.get_id (self)"
+
+.PP
+Getter for instance device id\&. \fBReturns:\fP
+.RS 4
+d_id as device id 
 .RE
 .PP
 
@@ -255,6 +242,15 @@ Setter for brand variable\&. .PP
 Setter for \fBDevice\fP firmware variable\&. \fBParameters:\fP
 .RS 4
 \fIfirmware\fP string 
+.RE
+.PP
+
+.SS "def src\&.model\&.Device\&.Device\&.set_id (self, d_id)"
+
+.PP
+Setter for id variable is a private method\&. \fBParameters:\fP
+.RS 4
+\fId_id\fP int gathered from database 
 .RE
 .PP
 

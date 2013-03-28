@@ -1,4 +1,4 @@
-.TH "src.language.Language.Language" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.language.Language.Language" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -140,13 +140,13 @@ Inherits \fBobject\fP\&.
 .RI "string \fBMSG_ADD_FIRMWARE_HELP\fP = '\\t-F, --firmware\\t\\tProvide device firmware to '"
 .br
 .ti -1c
-.RI "string \fBMSG_ADD_NEW\fP = 'A new {0} added with record id {1} and with name {2}'"
-.br
-.ti -1c
 .RI "string \fBMSG_UPDATE_RECORD\fP = 'Recorded {0} updated with record id {1} and with '"
 .br
 .ti -1c
 .RI "string \fBMSG_ERR_PARSER_EXCEPTION\fP = 'Error occurred on parsing arguments ({0})'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_EMPTY_ID\fP = 'Please provide an ID for the {0}:'"
 .br
 .ti -1c
 .RI "string \fBMSG_ERR_EMPTY_IP\fP = 'Please provide an IP for the {0} you would like to add'"
@@ -167,9 +167,6 @@ Inherits \fBobject\fP\&.
 .RI "string \fBMSG_ERR_EMPTY_CONFIG\fP = 'Please provide an CONFIG id for the {0}'"
 .br
 .ti -1c
-.RI "string \fBMSG_ERR_EMPTY_ID\fP = 'There is no ID has been provided for the {0}'"
-.br
-.ti -1c
 .RI "string \fBMSG_ERR_EMPTY_OPTION\fP = 'There is no Option has been provided for '"
 .br
 .ti -1c
@@ -188,16 +185,22 @@ Inherits \fBobject\fP\&.
 .RI "string \fBMSG_ERR_FILE_BACKUP_FAILED\fP = 'Error occurred while backing up '"
 .br
 .ti -1c
+.RI "string \fBMSG_ERR_FILE_READ\fP = 'Error %(error)s occured when reading %(file)s'"
+.br
+.ti -1c
 .RI "string \fBMSG_ERR_DATABASE_ERROR\fP = 'Unknown error occurred on {0} line while '"
 .br
 .ti -1c
 .RI "string \fBMSG_ERR_DATABASE_INSERT\fP = 'New record could not be inserted into '"
 .br
 .ti -1c
-.RI "string \fBMSG_ERR_DB_CONNECT\fP = 'An unknown error occurred while connecting '"
+.RI "string \fBMSG_ERR_DATABASE_CONNECT\fP = 'An unknown error occurred while connecting '"
 .br
 .ti -1c
-.RI "string \fBMSG_ERR_DB_CLOSE\fP = 'Connection could not close because of ({0})'"
+.RI "string \fBMSG_ERR_DATABASE_CLOSE\fP = 'Connection could not close because of ({0})'"
+.br
+.ti -1c
+.RI "string \fBMSG_ERR_DATABASE_NORECORD\fP = 'There is no device record found on table'"
 .br
 .ti -1c
 .RI "string \fBMSG_SUCCESS_SELECT\fP = 'Getting records from database please wait\&.\&.\&.'"
@@ -210,6 +213,21 @@ Inherits \fBobject\fP\&.
 .br
 .ti -1c
 .RI "string \fBMSG_SUCCESS_UPDATE\fP = 'Record(s) successfully updated by given values\&. '"
+.br
+.ti -1c
+.RI "string \fBMSG_INPUT_CUSTOM\fP = 'Enter parameter for %(custom)s of required device:'"
+.br
+.ti -1c
+.RI "string \fBMSG_INPUT_OPTION\fP = 'Enter parameter for %(type)s this command of device:'"
+.br
+.ti -1c
+.RI "string \fBMSG_INPUT_PARAM_OPTION\fP = 'Please enter any %(param)s you would like to set:'"
+.br
+.ti -1c
+.RI "string \fBMSG_EXE_REQUEST\fP = 'Your command(s) will be executing\&.\&.\&. '"
+.br
+.ti -1c
+.RI "string \fBMSG_STATUS_ADD_SUCCESS\fP = 'New %(type)s added:\\n ID: %(id)s\\nName:%(name)s'"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -246,8 +264,6 @@ Constructer of \fBLanguage\fP class\&.
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_MODEL_HELP = '\\t-m, --model\\t\\tProvide device model to '\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_NAME_HELP = '\\t-n,--name\\t\\tProvide name for the newly '\fC [static]\fP"
-
-.SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_NEW = 'A new {0} added with record id {1} and with name {2}'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ADD_OPTION_HELP = '\\t-o,--option\\t\\tProvide type of '\fC [static]\fP"
 
@@ -301,13 +317,15 @@ Constructer of \fBLanguage\fP class\&.
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_COMM_INTERFACE_FAILED = 'Unknown error occurred while connecting '\fC [static]\fP"
 
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_CLOSE = 'Connection could not close because of ({0})'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_CONNECT = 'An unknown error occurred while connecting '\fC [static]\fP"
+
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on {0} line while '\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_INSERT = 'New record could not be inserted into '\fC [static]\fP"
 
-.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DB_CLOSE = 'Connection could not close because of ({0})'\fC [static]\fP"
-
-.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DB_CONNECT = 'An unknown error occurred while connecting '\fC [static]\fP"
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_DATABASE_NORECORD = 'There is no device record found on table'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_CONFIG = 'Please provide an CONFIG id for the {0}'\fC [static]\fP"
 
@@ -315,7 +333,7 @@ Constructer of \fBLanguage\fP class\&.
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_GROUP = 'Please provide a group id with usage -g, --group '\fC [static]\fP"
 
-.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_ID = 'There is no ID has been provided for the {0}'\fC [static]\fP"
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_ID = 'Please provide an ID for the {0}:'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_EMPTY_IP = 'Please provide an IP for the {0} you would like to add'\fC [static]\fP"
 
@@ -331,6 +349,8 @@ Constructer of \fBLanguage\fP class\&.
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_FILE_BACKUP_FAILED = 'Error occurred while backing up '\fC [static]\fP"
 
+.SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_FILE_READ = 'Error %(error)s occured when reading %(file)s'\fC [static]\fP"
+
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_GENERIC = 'Unknown error occurred on line {0} with error:\\n{1}'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_IO_ERROR = 'Error occurred while connecting database '\fC [static]\fP"
@@ -338,6 +358,16 @@ Constructer of \fBLanguage\fP class\&.
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_NO_CONFIG_SECTION = 'No section found in config file'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_PARSER_EXCEPTION = 'Error occurred on parsing arguments ({0})'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_EXE_REQUEST = 'Your command(s) will be executing\&.\&.\&. '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_INPUT_CUSTOM = 'Enter parameter for %(custom)s of required device:'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_INPUT_OPTION = 'Enter parameter for %(type)s this command of device:'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_INPUT_PARAM_OPTION = 'Please enter any %(param)s you would like to set:'\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.MSG_STATUS_ADD_SUCCESS = 'New %(type)s added:\\n ID: %(id)s\\nName:%(name)s'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_ADD = 'Given values inserted to the database successfully '\fC [static]\fP"
 

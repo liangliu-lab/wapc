@@ -1,10 +1,10 @@
-.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.controller.DeviceMethods.DeviceMethods \- 
 .PP
-\fBDeviceMethods\fP +Marka bağımsız temel WAP yönetim uygulaması  
+\fBDeviceMethods\fP class includes device oriented methods such CRUD operations\&.  
 
 .SH SYNOPSIS
 .br
@@ -17,10 +17,11 @@ Inherits Thread\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
+.RI "\fIConstructer for \fBDeviceMethods\fP\&. \fP"
 .ti -1c
 .RI "def \fBcreate\fP"
 .br
-.RI "\fIAdd function to implement a thread at background responds to Web or CLI request :param params: \fP"
+.RI "\fICreate method aims to create a new device insert it into database and apply the config regarding given brand, model and firmware\&. \fP"
 .ti -1c
 .RI "def \fBread\fP"
 .br
@@ -29,9 +30,6 @@ Inherits Thread\&.
 .RI "def \fBupdate\fP"
 .br
 .RI "\fIUpdate methods certainly moderated by $ edit [OPTIONS] command by CLI\&. \fP"
-.ti -1c
-.RI "def \fBdelete\fP"
-.br
 .ti -1c
 .RI "def \fBset\fP"
 .br
@@ -53,6 +51,7 @@ This methods handle options and connect throug device by given name
 .ti -1c
 .RI "def \fBshow\fP"
 .br
+.RI "\fIShow methods submit returns where sh commands came from\&. \fP"
 .ti -1c
 .RI "def \fBgroup_set\fP"
 .br
@@ -64,10 +63,10 @@ This methods handle options and connect throug device by given name
 .RI "\fButils\fP"
 .br
 .ti -1c
-.RI "\fBdb\fP"
+.RI "\fBdatabase\fP"
 .br
 .ti -1c
-.RI "\fBci\fP"
+.RI "\fBcommunication_interface\fP"
 .br
 .ti -1c
 .RI "\fBscript\fP"
@@ -84,36 +83,58 @@ This methods handle options and connect throug device by given name
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBDeviceMethods\fP +Marka bağımsız temel WAP yönetim uygulaması 
+\fBDeviceMethods\fP class includes device oriented methods such CRUD operations\&. 
 
-.PP
-.nf
-- SSID Ayarları
-- IP ve Network Ayarları
-- Kimlik Doğrulama Ayarları
-
-- WAP Discovery
-- Kanal Yönetimi
-- Roaming
-- Load Balancing
-.fi
-.PP
-.PP
-.IP "\(bu" 2
-WAP ların 802,1x yetkilendirmesi 
-.PP
-
+Methods covered by \fBDeviceMethods\fP and other controller methods in other might be similar each other but in deep they have their own custom attributes and variables to determine each process is focused to the target\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.__init__ (self, params)"
 
+.PP
+Constructer for \fBDeviceMethods\fP\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.create (self, params)"
 
 .PP
-Add function to implement a thread at background responds to Web or CLI request :param params: 
-.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.delete (self, params)"
+Create method aims to create a new device insert it into database and apply the config regarding given brand, model and firmware\&. .PP
+.nf
+     Create method is called by Main.add method by given type. Type should be
+     provided as 'device'. Also when adding a new device arguments listed
+     below have to be provided:
+
+     <h3>Usage: $ add [OPTIONS]</h3>
+     Add device, group, vlan, config etc with given parameters
+     <ul>
+     <li>[-t],[--type] Define type device, group, vlan, config</li>
+     <li>[-I],[--ip] Use this params when adding some new variables which 
+     needs an ip such as device, config, etc.</li>
+     <li>[-n],[--name] To set a name to related type variable</li>
+     <li>[-b],[--brand] To set device brand to relate with its model and/or 
+     firmware</li>
+     <li>[-m],[--model] To set device model to relate with its config file
+     </li>
+     <li>[-F],[--firmware] To set device firmware to relate with its config
+     file</li>
+     <li>[-R],[--relation] To set device relation one of MASTER of SLAVE</li>
+     <li>[-D],[--description] To set a description to related type variable
+     </li>
+     <li>[-u],[--username] Provide a username which will be used to connect
+     device</li>
+     <li>[-p],[--password] Provide a password which will be used to connect 
+     and configure device</li>
+     </ul>
+
+     If there is no parameter provided every required parameter will be
+     gathered by asking the user to provide every single parameter.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.group_set (self, config, params)"
 
@@ -132,6 +153,21 @@ This methods handle options and connect throug device by given name
  :param params: 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.show (self, params)"
 
+.PP
+Show methods submit returns where sh commands came from\&. .PP
+.nf
+     Show methods gathers parameter, read commands file regarding device
+     brand, model etc and then generate a JSON file and execute this file
+     with CommunicationInterface
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.unset (self, params)"
 
 .PP
@@ -144,14 +180,16 @@ This methods handle options and connect throug device by given name
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.update (self, params)"
 
 .PP
-Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This methods only inherit update database records by no touching physical device config\&.  Params comes from main class 
+Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This methods only inherit update database records by no touching physical device config\&.
+.PP
+params comes from main class 
 .SH "Member Data Documentation"
 .PP 
 .SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.cfg_device"
 
-.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.ci"
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.communication_interface"
 
-.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.db"
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.database"
 
 .SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.now"
 

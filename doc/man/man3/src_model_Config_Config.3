@@ -1,4 +1,4 @@
-.TH "src.model.Config.Config" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.Config.Config" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -20,6 +20,14 @@ Inherited by \fBsrc\&.model\&.Device\&.Device\fP, and \fBsrc\&.model\&.Device\&.
 .RI "def \fB__init__\fP"
 .br
 .RI "\fIConstructer for \fBConfig\fP model\&. \fP"
+.ti -1c
+.RI "def \fBset_id\fP"
+.br
+.RI "\fISetter for id variable\&. \fP"
+.ti -1c
+.RI "def \fBget_id\fP"
+.br
+.RI "\fIGetter for instance id\&. \fP"
 .ti -1c
 .RI "def \fBset_name\fP"
 .br
@@ -146,18 +154,6 @@ Inherited by \fBsrc\&.model\&.Device\&.Device\fP, and \fBsrc\&.model\&.Device\&.
 .RI "def \fBget_date_modified\fP"
 .br
 .in -1c
-.SS "Private Member Functions"
-
-.in +1c
-.ti -1c
-.RI "def \fB__set_id\fP"
-.br
-.RI "\fISetter for id variable\&. \fP"
-.ti -1c
-.RI "def \fB__get_id\fP"
-.br
-.RI "\fIGetter for instance id\&. \fP"
-.in -1c
 .SH "Detailed Description"
 .PP 
 \fBDevice\fP configuration model to implement new instance while inserting a new device\&. 
@@ -171,31 +167,6 @@ object
 Constructer for \fBConfig\fP model\&. 
 .SH "Member Function Documentation"
 .PP 
-.SS "def src\&.model\&.Config\&.Config\&.__get_id (self)\fC [private]\fP"
-
-.PP
-Getter for instance id\&. \fBReturns:\fP
-.RS 4
-id instance id 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.__set_id (self, c_id)\fC [private]\fP"
-
-.PP
-Setter for id variable\&. .PP
-.nf
-     __set_id is a private method to set recent instance id gathered from
-     database.
-.fi
-.PP
-.PP
-\fBParameters:\fP
-.RS 4
-\fIc_id\fP instance record id 
-.RE
-.PP
-
 .SS "def src\&.model\&.Config\&.Config\&.get_channel (self)"
 
 .PP
@@ -236,6 +207,15 @@ instance description
 Getter for enable password variable\&. \fBReturns:\fP
 .RS 4
 enable password 
+.RE
+.PP
+
+.SS "def src\&.model\&.Config\&.Config\&.get_id (self)"
+
+.PP
+Getter for instance id\&. \fBReturns:\fP
+.RS 4
+id instance id 
 .RE
 .PP
 
@@ -380,6 +360,22 @@ This variable is set to define enable connection parameters for given device\&. 
 \fBParameters:\fP
 .RS 4
 \fIoption\fP as a enable password 
+.RE
+.PP
+
+.SS "def src\&.model\&.Config\&.Config\&.set_id (self, c_id)"
+
+.PP
+Setter for id variable\&. .PP
+.nf
+     __set_id is a private method to set recent instance id gathered from
+     database.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIc_id\fP instance record id 
 .RE
 .PP
 

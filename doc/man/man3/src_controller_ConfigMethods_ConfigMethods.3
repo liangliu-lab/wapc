@@ -1,4 +1,4 @@
-.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -21,11 +21,11 @@ Inherits Thread\&.
 .ti -1c
 .RI "def \fBcreate\fP"
 .br
-.RI "\fIThis method is used to create a config independently :param params: \fP"
+.RI "\fIThis method is used to create a config independently\&. \fP"
 .ti -1c
 .RI "def \fBread\fP"
 .br
-.RI "\fI:param config_id: \fP"
+.RI "\fIread method aims to read given config id details from database and return them into a result set list\&. \fP"
 .ti -1c
 .RI "def \fBset\fP"
 .br
@@ -112,7 +112,12 @@ Constructer of \fBConfigMethods\fP\&. \fBParameters:\fP
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.create (self, params)"
 
 .PP
-This method is used to create a config independently :param params: 
+This method is used to create a config independently\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
+.PP
+
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.delete (self, params)"
 
 .PP
@@ -138,7 +143,17 @@ params is a Config object
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.read (self, config_id)"
 
 .PP
-:param config_id: 
+read method aims to read given config id details from database and return them into a result set list\&. \fBParameters:\fP
+.RS 4
+\fIconfig_id\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+result set list includes column names and rows 
+.RE
+.PP
+
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.run (self)"
 
 .PP

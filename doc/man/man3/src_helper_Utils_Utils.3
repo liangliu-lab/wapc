@@ -1,4 +1,4 @@
-.TH "src.helper.Utils.Utils" 3 "Tue Mar 26 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.helper.Utils.Utils" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -30,12 +30,44 @@ Inherits \fBobject\fP\&.
 .RI "def \fBvalidate\fP"
 .br
 .RI "\fIThis method is used to validate given input source by type format such as IP, email, whitespace-fress strings, etc\&. \fP"
+.ti -1c
+.RI "def \fBfix_date\fP"
+.br
+.RI "\fIThis method aims to fix date format gathered from database\&. \fP"
+.ti -1c
+.RI "def \fBwellform_dict\fP"
+.br
+.RI "\fIThis method aims to wellform the given source into a zipped dictionary from keys and values\&. \fP"
 .in -1c
 .SH "Detailed Description"
 .PP 
 \fBUtils\fP class implements utility methods to help core methods work fine, independent, reliable and effective\&. 
 .SH "Member Function Documentation"
 .PP 
+.SS "def src\&.helper\&.Utils\&.Utils\&.fix_date (cls, source)"
+
+.PP
+This method aims to fix date format gathered from database\&. .PP
+.nf
+     Database record comes from datetime.datetime formatted and this makes
+     operations failes because of malformed data. So, it should be formatted
+     to the regular datetime format.
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcls\fP 
+.br
+\fIsource\fP is a dictionary 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+formatted dictionary 
+.RE
+.PP
+
 .SS "def src\&.helper\&.Utils\&.Utils\&.formatter (cls, heading, source)"
 
 .PP
@@ -98,6 +130,25 @@ This method is used to validate given input source by type format such as IP, em
 \fIstype\fP type defines what sort of value will be validated\&. Recently supported keys name, eth & ip
 .br
 \fIsource\fP 
+.RE
+.PP
+
+.SS "def src\&.helper\&.Utils\&.Utils\&.wellform_dict (cls, source, keys, values)"
+
+.PP
+This method aims to wellform the given source into a zipped dictionary from keys and values\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP 
+.br
+\fIsource\fP dictionary source 
+.br
+\fIkeys\fP will be keys of new dictionary 
+.br
+\fIvalues\fP will be values for regarding keys 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
 .RE
 .PP
 

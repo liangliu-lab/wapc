@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node3" href="$d0/dab/classsrc_1_1cli_1_1ConsoleInterface_1_1ConsoleInterface.html" title="Command list to implement all required methods pre&#45;defined." alt="" coords="105,5,268,51"/>
+<area shape="rect" id="node3" href="$d2/dce/classsrc_1_1controller_1_1ConfigMethods_1_1ConfigMethods.html" title="ConfigMethods class aims to provide required metdhos to requester class or methods to read..." alt="" coords="120,5,312,51"/>
+<area shape="rect" id="node5" href="$d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html" title="DeviceMethods class includes device oriented methods such CRUD operations." alt="" coords="119,74,313,121"/>
+<area shape="rect" id="node7" href="$d6/de2/classsrc_1_1controller_1_1VLanMethods_1_1VLanMethods.html" title="Implements VLan methods to configure, create, assign, remove vlan(s)" alt="" coords="124,143,308,190"/>
 </map>

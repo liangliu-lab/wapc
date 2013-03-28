@@ -244,12 +244,7 @@ class Main(object):
                         self.utils.get_line(),
                         'No [type] argument provided')
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_ADD_HELP
         except TypeError as exception:
             print exception.message
 
@@ -286,12 +281,7 @@ class Main(object):
                     print Language.MSG_ERR_GENERIC.format(
                         self.utils.get_line(), 'No [type] argument provided')
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_EDIT_HELP
         except TypeError as exception:
             print exception.message
 
@@ -335,20 +325,15 @@ class Main(object):
                 if fields and results:
                     self.utils.formatter(fields, results)
                 else:
-                    raise Database.DatabaseError(
+                    raise self.database.DatabaseError(
                         Language.MSG_ERR_GENERIC.format(
                             self.utils.get_line(),
                             "There is no record found on table"))
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_LIST_HELP
         except TypeError as exception:
             print exception.message
-        except Database.DatabaseError as exception:
+        except self.database.DatabaseError as exception:
             print exception.message
 
     def group(self, args):
@@ -391,12 +376,7 @@ class Main(object):
                         )
                     )
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_GROUP_HELP
         except TypeError as exception:
             print exception.message
 
@@ -437,12 +417,7 @@ class Main(object):
                         )
                     )
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_SHOW_HELP
         except TypeError as exception:
             print exception.message
 
@@ -484,12 +459,7 @@ class Main(object):
                         )
                     )
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_SET_HELP
         except TypeError as exception:
             print exception.message
 
@@ -524,12 +494,7 @@ class Main(object):
                         )
                     )
             else:
-                raise TypeError(
-                    Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'Arguments could not be gathered correctly'
-                    )
-                )
+                print Language.MSG_CMD_UNSET_HELP
         except TypeError as exception:
             print exception.message
 
@@ -592,6 +557,7 @@ class Main(object):
                             'No [type] argument provided')
             else:
                 print Language.MSG_CMD_REMOVE_HELP
+
             if cmd:
                 self.database.remove(cmd)
             else:

@@ -50,7 +50,7 @@ class Device(Config):
         self["config_id"] = None
         self["config"] = Config()
 
-    def __set_id(self, d_id):
+    def set_id(self, d_id):
         """
         Setter for id variable is a private method
 
@@ -58,7 +58,7 @@ class Device(Config):
         """
         self["id"] = d_id
 
-    def __get_id(self):
+    def get_id(self):
         """
         Getter for instance device id
 

@@ -18,7 +18,7 @@ __author__ = 'fatih'
 
 class VLanMethods(threading.Thread):
     """
-        VLan methods
+    Implements VLan methods to configure, create, assign, remove vlan(s)
     """
 
     def __init__(self):
@@ -35,7 +35,8 @@ class VLanMethods(threading.Thread):
 
     def create(self, params):
         """
-            Add function to implement a thread at background responds to Web or CLI request
+            Add function to implement a thread at background responds to
+            Web or CLI request
         :param params:
         """
         pass
@@ -45,25 +46,6 @@ class VLanMethods(threading.Thread):
 
         :param vid:
         """
-        try:
-            #check namespace variables if set
-
-            #moderate type value to determine the statement
-            cmd = SQL.SQL_SELECT_VLAN_DETAIL % {'id': int(vid)}
-            fields, results = self.db.select(cmd)
-            if fields and results:
-                try:
-                    rset = {"fields": fields, "results": [list(f) for f in results][0]}
-                    return rset
-                except Exception as e:
-                    print e.message
-                    pass
-            else:
-                raise Exception(
-                    Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "There is no device record found on table"))
-        except Exception as e:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
-            pass
 
     def update(self, params):
         """
@@ -85,7 +67,8 @@ class VLanMethods(threading.Thread):
 
     def group(self, params):
         """
-            This methods groups given device id. Before this method to be implemented user should execute ls command
+            This methods groups given device id. Before this method to be
+            implemented user should execute ls command
             to see what device(s) recorded in database.
             :param params:
         """

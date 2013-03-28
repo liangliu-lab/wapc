@@ -108,3 +108,44 @@ class Utils(object):
         regex = re.compile(Resources.REGEX[stype], re.IGNORECASE)
         arg = ''.join(regex.findall(src))
         return arg
+
+    @classmethod
+    def fix_date(cls, source):
+        """
+        This method aims to fix date format gathered from database.
+
+        Database record comes from datetime.datetime formatted and this makes
+        operations failes because of malformed data. So, it should be formatted
+        to the regular datetime format.
+
+        @param cls
+        @param source is a dictionary
+        @return formatted dictionary
+        """
+        try:
+            source["Add Date"] = source["Add Date"]\
+                .strftime(Resources.time_format)
+            source["Last Modified"] = source["Last Modified"]\
+                .strftime(Resources.time_format)
+            return source
+        except ValueError as exception:
+            #Logging
+            pass
+
+    @classmethod
+    def wellform_dict(cls, source, keys, values):
+        """
+        This method aims to wellform the given source into a zipped dictionary
+        from keys and values
+
+        @param cls
+        @param source dictionary source
+        @param keys will be keys of new dictionary
+        @param values will be values for regarding keys
+        @return
+        """
+        wellformed_dict = dict(
+            map(
+                list,
+                zip(source[keys], source[values])))
+        return wellformed_dict

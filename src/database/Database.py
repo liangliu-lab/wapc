@@ -31,7 +31,7 @@ from src.resources.Resources import Resources
 __author__ = 'fatih'
 
 
-class Database(db):
+class Database(object):
     """
     Database class implement a database interface between
     application and postgresql.
@@ -48,6 +48,7 @@ class Database(db):
         self.__config__ = Resources.__db__config__
         self.__section__ = Resources.cfg_section_postgre
         self.utils = Utils()
+        self.DatabaseError = db.DatabaseError
 
     def connect(self):
         """
@@ -76,7 +77,7 @@ class Database(db):
             print Language.MSG_ERR_IO_ERROR.format(
                 exception.errno, exception.strerror)
         except BaseException as exception:
-            print Language.MSG_ERR_DB_CONNECT.format(exception.message)
+            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
 
     def select(self, cmd):
         """
@@ -99,7 +100,7 @@ class Database(db):
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'selecting', exception.message)
         except BaseException as exception:
-            print Language.MSG_ERR_DB_CONNECT.format(exception.message)
+            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
         finally:
             self.close_conn(conn)
 
@@ -124,7 +125,7 @@ class Database(db):
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'inserting', exception.message)
         except RuntimeError as exception:
-            print Language.MSG_ERR_DB_CONNECT.format(exception.message)
+            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
         finally:
             self.close_conn(conn)
 
@@ -149,7 +150,7 @@ class Database(db):
                 self.utils.get_line(), 'updating', exception.message)
             return False
         except RuntimeError as exception:
-            print Language.MSG_ERR_DB_CONNECT.format(exception.message)
+            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
             return False
         finally:
             self.close_conn(conn)
@@ -173,7 +174,7 @@ class Database(db):
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'removing', exception.message)
         except RuntimeError as exception:
-            print Language.MSG_ERR_DB_CONNECT.format(exception.message)
+            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
         finally:
             self.close_conn(conn)
 
@@ -189,7 +190,7 @@ class Database(db):
             if con:
                 con.close()
         except cls.DatabaseError as exception:
-            print Language.MSG_ERR_DB_CLOSE.format(exception.message)
+            print Language.MSG_ERR_DATABASE_CLOSE.format(exception.message)
 
 
 

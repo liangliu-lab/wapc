@@ -257,12 +257,12 @@ class Language(object):
                             'to initialize the device in inventory'
 
     #newly added variables
-    MSG_ADD_NEW = 'A new {0} added with record id {1} and with name {2}'
     MSG_UPDATE_RECORD = 'Recorded {0} updated with record id {1} and with ' \
                         'name {2}'
 
     #argument parsing exception error messages
     MSG_ERR_PARSER_EXCEPTION = 'Error occurred on parsing arguments ({0})'
+    MSG_ERR_EMPTY_ID = 'Please provide an ID for the {0}:'
     MSG_ERR_EMPTY_IP = 'Please provide an IP for the {0} you would like to add'
     MSG_ERR_EMPTY_NAME = 'Please provide an NAME for the {0} ' \
                          'you would like to add'
@@ -300,15 +300,18 @@ class Language(object):
                        "exception ({0}): {1}"
     MSG_ERR_FILE_BACKUP_FAILED = "Error occurred while backing up " \
                                  "file with exception({0})"
+    MSG_ERR_FILE_READ = "Error %(error)s occured when reading %(file)s"
 
     #database statement messages
     MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on {0} line while ' \
                              '{1} database with error: ({2})'
     MSG_ERR_DATABASE_INSERT = 'New record could not be inserted into ' \
                               'database. Please try again your command.'
-    MSG_ERR_DB_CONNECT = "An unknown error occurred while connecting " \
-                         "database ({0})"
-    MSG_ERR_DB_CLOSE = "Connection could not close because of ({0})"
+    MSG_ERR_DATABASE_CONNECT = "An unknown error occurred while connecting " \
+                               "database ({0})"
+    MSG_ERR_DATABASE_CLOSE = "Connection could not close because of ({0})"
+
+    MSG_ERR_DATABASE_NORECORD = "There is no device record found on table"
 
     #success statement messages
     MSG_SUCCESS_SELECT = "Getting records from database please wait..."
@@ -318,4 +321,19 @@ class Language(object):
                          "Continue..."
     MSG_SUCCESS_UPDATE = "Record(s) successfully updated by given values. " \
                          "Continue..."
+
+    #input prompt messages
+    MSG_INPUT_CUSTOM = "Enter parameter for %(custom)s of required device:"
+    MSG_INPUT_OPTION = "Enter parameter for %(type)s this command of device:"
+    MSG_INPUT_PARAM_OPTION = "Please enter any %(param)s you would like to set:"
+
+    #execution messages
+    MSG_EXE_REQUEST = "Your command(s) will be executing... " \
+
+    #status messages
+    MSG_STATUS_ADD_SUCCESS = "New %(type)s added:\n ID: %(id)s\nName:%(name)s"
+
+
+
+
 

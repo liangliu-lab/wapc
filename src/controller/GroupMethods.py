@@ -1,4 +1,27 @@
 # coding=utf-8
+"""
+Copyright 2013 Labris Technology.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+@package ctonroller
+@date Marh 13, 2013
+@author Fatih Karatana
+@author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
+@copyright Labris Technology
+
+"""
+
 from time import strftime, gmtime
 from src.resources.SQL import SQL
 from src.cli.CommunicationInterface import CommunicationInterface
@@ -8,27 +31,31 @@ from src.language.Language import Language
 from src.model.Group import Group
 from src.resources.Resources import Resources
 
-__author__ = 'fatih'
-
 
 class GroupMethods(object):
     """
-        GroupMethods
+        GroupMethods class includes group oriented methods such group set, group
+        unset, group show operations.
+
+        Methods covered by GroupMethods and other controller methods in other
+        might be similar each other but in deep they have their own custom
+        attributes and variables to determine each process is focused to the
+        target.
     """
 
     def __init__(self):
         self.utils = Utils()
-        self.db = Database()
-        self.ci = CommunicationInterface()
+        self.database = Database()
+        self.communication_interface = CommunicationInterface()
         self.script = Resources.ci_script
         self.cfg_device = Resources.cfg_device_resource
         self.now = strftime(Resources.time_format, gmtime())
 
     def create(self, params):
         """
-            add new group with params
-        :rtype : object
-        :param params:
+        Create a new group with given details in inventory
+
+        @param params
         """
         group = Group()
         try:
@@ -36,7 +63,8 @@ class GroupMethods(object):
             if params.name:
                 group.set_name(params.name.strip())
             else:
-                group.set_name(raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'),":"))
+                group.set_name(
+                    raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'),":"))
 
             if params.description:
                 group.set_description(params.description.strip())
@@ -55,68 +83,82 @@ class GroupMethods(object):
                 self.now,
                 self.now
             )
-            gID = self.db.insert(cmd)
-            if gID:
-                print Language.MSG_ADD_NEW.format('group', gID[0], group.get_name())
+            group_id = self.database.insert(cmd)
+            if group_id:
+                print Language.MSG_STATUS_ADD_SUCCESS % \
+                      {
+                          'type': 'config',
+                          'id': group_id[0],
+                          'name': group.get_name()
+                      }
             else:
-                print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'inserting new group', gID[0])
-        except Exception as e:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
-            pass
+                print Language.MSG_ERR_DATABASE_ERROR\
+                    .format(self.utils.get_line()
+                    , 'inserting new group', group_id[0])
+        except RuntimeError as exception:
+            print Language.MSG_ERR_GENERIC\
+                .format(self.utils.get_line(), exception.message)
 
-    def read(self, gID):
+    def read(self, group_id):
         """
+        Read group detail from Groups table by given id.
 
-        :param gID:
+        @param group_id
         """
         try:
             #check namespace variables if set
 
             #moderate type value to determine the statement
-            cmd = SQL.SQL_SELECT_GROUP_DETAIL.format(gID)
-            fields, results = self.db.select(cmd)
+            cmd = SQL.SQL_SELECT_GROUP_DETAIL.format(group_id)
+            fields, results = self.database.select(cmd)
             if fields and results:
-                try:
-                    rset = {"fields": fields, "results": [list(f) for f in results][0]}
-                    return rset
-                except Exception as e:
-                    print e.message
-                    pass
+                rset = {
+                    "fields": fields,
+                    "results": [list(f) for f in results][0]
+                }
+                return rset
             else:
-                raise Exception(
-                    Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "There is no group record found on table"))
-        except Exception as e:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
-            pass
+                raise RuntimeError(
+                    Language.MSG_ERR_GENERIC
+                    .format(self.utils.get_line(),
+                            "There is no group record found on table"))
+        except RuntimeError as exception:
+            print Language.MSG_ERR_GENERIC\
+                .format(self.utils.get_line(), exception.message)
 
-    def getGroupConfig(self, gID):
+    def get_group_config(self, group_id):
         """
+        This method gets configuration details from config table belong to
+        given group.
 
-        :param gID:
+        @param group_id
         """
         try:
             #check namespace variables if set
 
             #moderate type value to determine the statement
-            cmd = SQL.SQL_SELECT_GROUP_CONFIG % {'group_id': int(gID)}
-            fields, results = self.db.select(cmd)
+            cmd = SQL.SQL_SELECT_GROUP_CONFIG % {'group_id': int(group_id)}
+            fields, results = self.database.select(cmd)
             if fields and results:
-                try:
-                    rset = {"fields": fields, "results": [list(f) for f in results]}
-                    return rset
-                except Exception as e:
-                    print e.message
-                    pass
+                rset = {
+                    "fields": fields,
+                    "results": [list(f) for f in results][0]
+                }
+                return rset
             else:
-                raise Exception(
-                    Language.MSG_ERR_GENERIC.format(self.utils.get_line(), "There is no group record found on table"))
-        except Exception as e:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(), e.message)
-            pass
+                raise RuntimeError(
+                    Language.MSG_ERR_GENERIC
+                    .format(self.utils.get_line(),
+                            "There is no group record found on table"))
+        except RuntimeError as exception:
+            print Language.MSG_ERR_GENERIC \
+                .format(self.utils.get_line(), exception.message)
 
     def update(self, params):
         """
-        :param params:
+        Update the group by given id.
+
+        @param params
         """
         group = Group()
         try:
@@ -142,20 +184,19 @@ class GroupMethods(object):
                           "id": int(did)
                       }
 
-                if self.db.update(cmd):
-                    print Language.MSG_UPDATE_RECORD.format('group', params.id, group.get_name())
+                if self.database.update(cmd):
+                    print Language.MSG_UPDATE_RECORD\
+                        .format('group', params.id, group.get_name())
                 else:
-                    print Language.MSG_ERR_DATABASE_ERROR.format(self.utils.get_line(), 'updating recorded group', did)
+                    print Language.MSG_ERR_DATABASE_ERROR\
+                        .format(self.utils.get_line(),
+                                'updating recorded group', did)
             else:
                 print Language.MSG_ERR_EMPTY_ID
-        except Exception as e:
-            print e.message
-
-    def delete(self, params):
-        """
-
-        :param params:
-        """
+                params.id = raw_input(Language.MSG_ERR_EMPTY_ID.format('group'))
+                self.update(params)
+        except RuntimeError as exception:
+            print exception.message
 
     def set(self, params):
         """
@@ -166,11 +207,8 @@ class GroupMethods(object):
         @param params
         """
         from src.controller.ConfigMethods import ConfigMethods
-        from src.model.Config import Config
 
         group = Group()
-        config = Config()
-        config_methods = ConfigMethods(config, params)
         try:
 
             if params.option:
@@ -192,79 +230,12 @@ class GroupMethods(object):
                     "Enter parameter for %(type)s this command of device:"
                                          % {'type': params.option}).strip()
 
-                configSet = self.getGroupConfig(group.get_id())
-                """
-                    This line gather an object like below:
-                    {   'fields':
-                            [
-                            'Config', 'Device', 'Device Name',
-                            'Config Name', 'description', 'ip', 'radius',
-                            'ssid', 'vlan', 'channel', 'frequency',
-                            'maxclients', 'username', 'password',
-                            'enable_password', 'transport_protocol',
-                            'personality', 'date_added', 'date_modified'
-                            ],
-                        'results': [
-                            [
-                            23, 45, 'New test2 for demo',
-                            'New test2 for demo', 'Default desc for device',
-                            '192.168.0.100',13, '0', 0, 4, 'None', None,
-                            'Cisco', 'Cisco', 'Cisco', 'Telnet', 'ios',
-                            datetime.datetime(2013, 3, 6, 13, 52, 14),
-                            datetime.datetime(2013, 3, 7, 14, 27, 39)
-                            ],
-                            [
-                            23, 47, 'Test after a couple hours',
-                            'New test2 for demo', 'Default desc for device',
-                            '192.168.0.100', 13, '0', 0, 4, 'None', None,
-                            'Cisco', 'Cisco', 'Cisco', 'Telnet', 'ios',
-                            datetime.datetime(2013, 3, 6, 13, 52, 14),
-                            datetime.datetime(2013, 3, 7, 14, 27, 39)
-                            ]
-                        ]
-                    }
-                """
-                """
-                    Now convert this object into this
-                    [
-                    {'username': 'Cisco', 'transport_protocol': 'Telnet',
-                    'Device Name': 'With a fresh breath',
-                    'description': 'Default desc for device',
-                    'date_added': datetime.datetime(2013, 3, 8, 9, 32, 13),
-                    'date_modified': datetime.datetime(2013, 3, 8, 9, 32, 13),
-                    'ip': '192.168.0.100', 'vlan': 0,
-                    'enable_password': 'Cisco',
-                    'Config Name': 'With a fresh breath', 'frequency': '0',
-                    'radius': 0, 'personality': 'ios', 'Device': 49,
-                    'maxclients': 0, 'password': 'Cisco', 'Config': 27,
-                    'channel': 0, 'ssid': 'LBREAP'},
-                    {'username': 'Cisco', 'transport_protocol': 'Telnet',
-                    'Device Name': 'With a fresh breath for
-                    second device', 'description': 'Default desc for device',
-                    'date_added': datetime.datetime(2013, 3, 8, 9, 33, 57),
-                    'date_modified': datetime.datetime(2013, 3, 8, 11, 23, 1),
-                    'ip': '192.168.0.35', 'vlan': 0, 'enable_password': 'Cisco',
-                    'Config Name': 'With a fresh breath for second device',
-                    'frequency': '0', 'radius': 0, 'personality': 'ios',
-                    'Device': 50, 'maxclients': 0, 'password': 'Cisco',
-                    'Config': 28, 'channel': 4, 'ssid': 'LBREAP'
-                    }
-                    ]
-                """
+                config_set = self.get_group_config(group.get_id())
                 # results cover
-                results = [dict(zip(configSet['fields'], result))
-                           for result in configSet['results']]
+                results = [dict(zip(config_set['fields'], result))
+                           for result in config_set['results']]
 
-                for row in results:
-                    if 'Add Date' in row:
-                        row['Add Date'] = row['Add Date'].strftime(
-                            Resources.time_format)
-                    if 'Last Modified' in row:
-                        row['Last Modified'] = row['Last Modified'].strftime(
-                            Resources.time_format)
-                    else:
-                        raise RuntimeError("Related option you provided could "
-                                           "not be found in object definition.")
+                results = self.utils.fix_date(results)
 
                 pool = []
                 for conf in results:
@@ -281,6 +252,15 @@ class GroupMethods(object):
                     'value' : params.param,
                     'group_id': int(group.get_id())
                 }
+
+                if self.database.update(cmd):
+                    print Language.MSG_UPDATE_RECORD \
+                        .format('group', params.id, group.get_name())
+                else:
+                    print Language.MSG_ERR_DATABASE_ERROR \
+                        .format(self.utils.get_line(),
+                                'updating recorded group', group.get_id())
+
         except RuntimeError as exception:
             print exception.message
 
@@ -293,11 +273,8 @@ class GroupMethods(object):
         @param params
         """
         from src.controller.ConfigMethods import ConfigMethods
-        from src.model.Config import Config
 
         group = Group()
-        config = Config()
-        config_methods = ConfigMethods(config, params)
         try:
 
             if params.option:
@@ -319,79 +296,13 @@ class GroupMethods(object):
                     "Enter parameter for %(type)s this command of device:"
                     % {'type': params.option}).strip()
 
-                configSet = self.getGroupConfig(group.get_id())
-                """
-                    This line gather an object like below:
-                    {   'fields':
-                            [
-                            'Config', 'Device', 'Device Name',
-                            'Config Name', 'description', 'ip', 'radius',
-                            'ssid', 'vlan', 'channel', 'frequency',
-                            'maxclients', 'username', 'password',
-                            'enable_password', 'transport_protocol',
-                            'personality', 'date_added', 'date_modified'
-                            ],
-                        'results': [
-                            [
-                            23, 45, 'New test2 for demo',
-                            'New test2 for demo', 'Default desc for device',
-                            '192.168.0.100',13, '0', 0, 4, 'None', None,
-                            'Cisco', 'Cisco', 'Cisco', 'Telnet', 'ios',
-                            datetime.datetime(2013, 3, 6, 13, 52, 14),
-                            datetime.datetime(2013, 3, 7, 14, 27, 39)
-                            ],
-                            [
-                            23, 47, 'Test after a couple hours',
-                            'New test2 for demo', 'Default desc for device',
-                            '192.168.0.100', 13, '0', 0, 4, 'None', None,
-                            'Cisco', 'Cisco', 'Cisco', 'Telnet', 'ios',
-                            datetime.datetime(2013, 3, 6, 13, 52, 14),
-                            datetime.datetime(2013, 3, 7, 14, 27, 39)
-                            ]
-                        ]
-                    }
-                """
-                """
-                    Now convert this object into this
-                    [
-                    {'username': 'Cisco', 'transport_protocol': 'Telnet',
-                    'Device Name': 'With a fresh breath',
-                    'description': 'Default desc for device',
-                    'date_added': datetime.datetime(2013, 3, 8, 9, 32, 13),
-                    'date_modified': datetime.datetime(2013, 3, 8, 9, 32, 13),
-                    'ip': '192.168.0.100', 'vlan': 0,
-                    'enable_password': 'Cisco',
-                    'Config Name': 'With a fresh breath', 'frequency': '0',
-                    'radius': 0, 'personality': 'ios', 'Device': 49,
-                    'maxclients': 0, 'password': 'Cisco', 'Config': 27,
-                    'channel': 0, 'ssid': 'LBREAP'},
-                    {'username': 'Cisco', 'transport_protocol': 'Telnet',
-                    'Device Name': 'With a fresh breath for
-                    second device', 'description': 'Default desc for device',
-                    'date_added': datetime.datetime(2013, 3, 8, 9, 33, 57),
-                    'date_modified': datetime.datetime(2013, 3, 8, 11, 23, 1),
-                    'ip': '192.168.0.35', 'vlan': 0, 'enable_password': 'Cisco',
-                    'Config Name': 'With a fresh breath for second device',
-                    'frequency': '0', 'radius': 0, 'personality': 'ios',
-                    'Device': 50, 'maxclients': 0, 'password': 'Cisco',
-                    'Config': 28, 'channel': 4, 'ssid': 'LBREAP'
-                    }
-                    ]
-                """
-                # results cover
-                results = [dict(zip(configSet['fields'], result))
-                           for result in configSet['results']]
+                config_set = self.get_group_config(group.get_id())
 
-                for row in results:
-                    if 'Add Date' in row:
-                        row['Add Date'] = row['Add Date'].strftime(
-                            Resources.time_format)
-                    if 'Last Modified' in row:
-                        row['Last Modified'] = row['Last Modified'].strftime(
-                            Resources.time_format)
-                    else:
-                        raise RuntimeError("Related option you provided could "
-                                           "not be found in object definition.")
+                # results cover
+                results = [dict(zip(config_set['fields'], result))
+                           for result in config_set['results']]
+
+                results = self.utils.fix_date(results)
 
                 pool = []
                 for conf in results:
@@ -408,6 +319,14 @@ class GroupMethods(object):
                     'value' : params.param,
                     'group_id': int(group.get_id())
                 }
+
+                if self.database.update(cmd):
+                    print Language.MSG_UPDATE_RECORD \
+                        .format('group', params.id, group.get_name())
+                else:
+                    print Language.MSG_ERR_DATABASE_ERROR \
+                        .format(self.utils.get_line(),
+                                'updating recorded group', group.get_id())
         except RuntimeError as exception:
             print exception.message
 

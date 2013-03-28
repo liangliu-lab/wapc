@@ -21,12 +21,9 @@ limitations under the License.
 @copyright Labris Technology
 
 """
-import json
-import os
 import threading
 from time import strftime, gmtime
 from src.cli.CommunicationInterface import CommunicationInterface
-from src.model.Device import Device
 from src.resources.SQL import SQL
 from src.controller.DeviceMethods import DeviceMethods
 from src.database.Database import Database
@@ -66,87 +63,16 @@ class ConfigMethods(threading.Thread):
     def create(self, params):
         """
         This method is used to create a config independently
-        :param params:
+        @param params
         """
-        config = Config()
-        device = Device()
-
-        try:
-            #===================================
-            # check namespace variables if set then set
-            # them into device model variables
-            #===================================
-
-            # set device ip to connect to the device
-            if params.ip:
-                device.set_ip(params.ip.strip())
-            else:
-                print Language.MSG_ERR_EMPTY_IP.format('device')
-                device.set_ip(raw_input("Please enter an IP address:"))
-
-            # set device name to connect to the device
-            if params.name:
-                device.set_name(params.name.strip())
-            else:
-                print Language.MSG_ERR_EMPTY_NAME.format('device')
-                device.set_name(raw_input("Please enter an nick name:"))
-
-            # set device description to connect to the device
-            if params.description:
-                device.set_description(params.description.strip())
-            else:
-                print Language.MSG_ERR_EMPTY_DESC.format('device')
-
-            # set device username to connect to the device
-            if params.username:
-                device.set_username(params.username.strip())
-            else:
-                print Language.MSG_ERR_EMPTY_USERNAME.format('device')
-                device.set_username(raw_input("Please enter an username:"))
-
-            # set device password to connect to the device
-            if params.password:
-                device.set_password(params.password.strip())
-            else:
-                print Language.MSG_ERR_EMPTY_PASSWORD.format('device')
-                device.set_password(raw_input("Please enter a password:"))
-
-            #set config parameters to relate with device
-            config.set_name(device.get_name())
-            config.set_username(device.get_username())
-            config.set_password(device.get_password())
-            config.set_ip(device.get_ip())
-            config.set_enable_password(config.get_password())
-            config.set_transport_protocol(
-                device.get_config().get_transport_protocol())
-            config.set_personality(device.get_config().get_personality())
-
-            #check if rpc is responded
-
-            cmd = SQL.SQL_INSERT_CONFIG % {
-                "name": config.get_name(),
-                "description": config.get_description(),
-                "ip": config.get_ip(),
-                "radius_config_id": config.get_radius(),
-                "ssid": config.get_ssid(),
-                "vlan_id": config.get_vlan(),
-                "channel": config.get_channel(),
-                "maxclients": config.get_maxclient(),
-                "username": config.get_username(),
-                "password": config.get_password(),
-                "enable_password": config.get_enable_password(),
-                "transport_protocol": config.get_transport_protocol(),
-                "personality": config.get_personality(),
-                "date_added": self.now,
-                "date_modified": self.now
-            }
-        except RuntimeError as exception:
-            print exception.message
 
     def read(self, config_id):
         """
+        read method aims to read given config id details from database and
+        return them into a result set list.
 
-        :param config_id:
+        @param config_id
+        @return result set list includes column names and rows
         """
         try:
             #check namespace variables if set
@@ -159,11 +85,11 @@ class ConfigMethods(threading.Thread):
                         "results": [list(f) for f in results][0]}
                 return rset
             else:
-                raise Exception(
+                raise self.database.DatabaseError(
                     Language.MSG_ERR_GENERIC.format(
                         self.utils.get_line(),
                         "There is no config record found on table"))
-        except ValueError as exception:
+        except self.database.DatabaseError as exception:
             print exception.message
 
     def set(self, config):

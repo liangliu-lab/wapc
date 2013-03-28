@@ -56,7 +56,7 @@ class Config(dict):
         self["Add Date"] = None
         self["Last Modified"] = None
 
-    def __set_id(self, c_id):
+    def set_id(self, c_id):
         """
         Setter for id variable
 
@@ -67,7 +67,7 @@ class Config(dict):
         """
         self["id"] = c_id
 
-    def __get_id(self):
+    def get_id(self):
         """
         Getter for instance id
         @return id instance id

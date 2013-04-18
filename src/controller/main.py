@@ -181,8 +181,8 @@ from time import strftime, gmtime
 from src.resources.SQL import SQL
 from src.database.Database import Database
 from src.controller.VLanMethods import VLanMethods
-from src.helper.ArgParser import ArgParser
-from src.helper.Utils import Utils
+from src.helpers.ArgParser import ArgParser
+from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.model.Config import Config
 from src.resources.Resources import Resources

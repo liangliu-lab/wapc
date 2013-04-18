@@ -24,7 +24,11 @@ limitations under the License.
 import inspect
 import re
 from src.resources.Resources import Resources
-import src.helper.Formatter as Formatter
+import src.helpers.Formatter as Formatter
+from src.model.Device import Device
+from src.model.Config import Config
+from time import strftime, gmtime
+import ConfigParser
 
 
 class Utils(object):
@@ -33,13 +37,28 @@ class Utils(object):
     independent, reliable and effective.
 
     """
+    now = None
+    environment = None
+
+    def init_globals(self):
+        """
+
+        @return
+        """
+        self.now = strftime(Resources.time_format, gmtime())
+
+        # Get system environment from system configuration file
+        config_parser = ConfigParser.RawConfigParser()
+        config_parser.read(Resources.__config__system__)
+        self.environment = config_parser.get("system", "environment")
+
     @classmethod
     def get_clean_params(cls, args):
         """
         get_clean_params method return filtered and processed arguments gathered
         from command line into argument parser.
 
-        Arguments retreived with whitespaces, irregular order and mapped.
+        Arguments retrieved with whitespaces, irregular order and mapped.
         Therefore it is need to be cleaned, reorganized and regularly mapped to
         send correct values into argument parser. This method help us to clean
         and get actual ordered parameters as a list.
@@ -49,8 +68,8 @@ class Utils(object):
         @return A fully organized and clean argument list
         """
         regex = re.compile(r"\-\S*[^\-]*", re.IGNORECASE)
-        arglist = regex.findall(args)
-        return arglist
+        arg_list = regex.findall(args)
+        return arg_list
 
     @classmethod
     def formatter(cls, heading, source):
@@ -65,14 +84,14 @@ class Utils(object):
         """
         try:
             width = 30
-            head = [str(i).replace("_"," ").upper() for i in heading]
+            head = [str(i).replace("_", " ").upper() for i in heading]
             print Formatter.indent(
-                [head]+source,
+                [head] + source,
                 has_header=True,
                 separate_rows=True,
                 prefix='| ',
                 postfix=' |',
-                wrapfunc=lambda x: Formatter.wrap_onspace(x,width)
+                wrapfunc=lambda x: Formatter.wrap_onspace(x, width)
             )
         except RuntimeError as exception:
             print exception.message
@@ -95,11 +114,11 @@ class Utils(object):
         """
         This method is used to validate given input source by type
         format such as IP,
-        email, whitespace-fress strings, etc.
+        email, whitespace-free strings, etc.
 
         @param cls class itself
 
-        @param stype type defines what sort of value will be validated.
+        @param type defines what sort of value will be validated.
         Recently supported keys name, eth & ip
 
         @param source
@@ -115,7 +134,7 @@ class Utils(object):
         This method aims to fix date format gathered from database.
 
         Database record comes from datetime.datetime formatted and this makes
-        operations failes because of malformed data. So, it should be formatted
+        operations fails because of malformed data. So, it should be formatted
         to the regular datetime format.
 
         @param cls
@@ -123,10 +142,17 @@ class Utils(object):
         @return formatted dictionary
         """
         try:
-            source["Add Date"] = source["Add Date"]\
-                .strftime(Resources.time_format)
-            source["Last Modified"] = source["Last Modified"]\
-                .strftime(Resources.time_format)
+            if type(source) is list:
+                for row in source:
+                    row["Add Date"] = row["Add Date"] \
+                        .strftime(Resources.time_format)
+                    row["Last Modified"] = row["Last Modified"] \
+                        .strftime(Resources.time_format)
+            else:
+                source["Add Date"] = source["Add Date"] \
+                    .strftime(Resources.time_format)
+                source["Last Modified"] = source["Last Modified"] \
+                    .strftime(Resources.time_format)
             return source
         except ValueError as exception:
             #Logging
@@ -149,3 +175,26 @@ class Utils(object):
                 list,
                 zip(source[keys], source[values])))
         return wellformed_dict
+
+    def get_request_config(self, device=Device(), config=Config()):
+        """
+
+        @param device
+        @param config
+        @return target file to implement in perl script
+        """
+        file_name = self.now + "-" + device.get_id()
+        target_file = Resources.input_source % {'file': file_name}
+        request_config = dict
+        request_config["ip"] = device.get_ip()
+        request_config["username"] = config.get_username()
+        request_config["transport_protocol"] = config.get_transport_protocol()
+        request_config["enable_password"] = config.get_enable_password()
+        request_config["personality"] = config.get_personality()
+        request_config["request"] = config.get_request()
+
+        from src.cli.CommunicationInterface import CommunicationInterface
+        communication_interface = CommunicationInterface()
+        communication_interface.write_source_file(request_config, target_file)
+
+        return target_file

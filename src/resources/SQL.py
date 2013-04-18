@@ -220,7 +220,6 @@ class SQL(object):
                         "apc_config(" \
                         "name, " \
                         "description, " \
-                        "ip, " \
                         "radius, " \
                         "ssid, " \
                         "vlan, " \

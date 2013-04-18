@@ -30,7 +30,7 @@ class Language(object):
     """
     def __init__(self):
         """
-        Constructer of Language class
+        Constructor of Language class
         """
 
     #generic statement messages for whole structure

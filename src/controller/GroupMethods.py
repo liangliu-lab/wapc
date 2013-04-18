@@ -21,12 +21,15 @@ limitations under the License.
 @copyright Labris Technology
 
 """
+import threading
+import Queue
 
 from time import strftime, gmtime
+from src.controller.DeviceMethods import DeviceMethods
 from src.resources.SQL import SQL
 from src.cli.CommunicationInterface import CommunicationInterface
 from src.database.Database import Database
-from src.helper.Utils import Utils
+from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.model.Group import Group
 from src.resources.Resources import Resources
@@ -206,20 +209,21 @@ class GroupMethods(object):
         Sample command: set -t group -o ssid -i [GROUPID]
         @param params
         """
-        from src.controller.ConfigMethods import ConfigMethods
 
         group = Group()
         try:
-
             if params.option:
                 option = params.option.strip()
             else:
-                print Language.MSG_ERR_EMPTY_OPTION.format('device')
+                print Language.MSG_ERR_EMPTY_OPTION.format('group')
+                option = raw_input("Please enter an option to be set:")
 
             if params.id:
                 group.set_id(params.id.strip())
             else:
                 print Language.MSG_ERR_EMPTY_ID.format('device')
+                group.set_id(
+                    raw_input("Please enter id for device will be set:"))
 
             if group.get_id() and option:
 
@@ -237,15 +241,24 @@ class GroupMethods(object):
 
                 results = self.utils.fix_date(results)
 
+                device_methods = DeviceMethods(params)
                 pool = []
+                queue = Queue.Queue
+                heading = ["id", "name","ip", "request", "status", "response"]
                 for conf in results:
-                    thread_config = ConfigMethods(conf, params)
+                    thread_config = threading.Thread(
+                        target=device_methods.group,
+                        name=conf["Device"],
+                        args=[conf, params, queue]
+                    )
                     pool.append(thread_config)
 
                 for thread in pool:
                     thread.start()
                     thread.join()
 
+                thread_result = queue.get()
+                print self.utils.formatter(heading, thread_result)
                 # Generate update command
                 cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
                     'key' : option,

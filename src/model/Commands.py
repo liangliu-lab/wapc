@@ -34,7 +34,7 @@ class Commands(list):
 
     def __init__(self):
         """
-        Constructer of Commands model
+        Constructor of Commands model
         """
         super(Commands, self).__init__()
         self.command = None

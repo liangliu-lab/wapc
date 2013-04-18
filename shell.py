@@ -1,5 +1,3 @@
-#!/opt/python/bin/python
-
 # coding=utf-8
 """
     Commandline interface to handle user interaction commands between WAP

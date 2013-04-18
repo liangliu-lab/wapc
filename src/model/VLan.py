@@ -30,7 +30,7 @@ class VLan(object):
 
     def __init__(self):
         """
-        Constructer for VLan model
+        Constructor for VLan model
         """
         self.name = None
         self.inet = None

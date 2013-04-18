@@ -26,7 +26,7 @@ limitations under the License.
 class Resources(object):
     """
     Resources file covers all required global variables,
-    pathnames, filenames, etc.
+    path names, file names, etc.
 
     You need to configure only this file anytime you need to change variables
     """
@@ -59,6 +59,9 @@ class Resources(object):
     #database config file
     __db__config__ = CONFIG_PATH + "database.cfg"
 
+    # system environment configuration
+    __config__system__ = CONFIG_PATH + "config.cfg"
+
     #backup file name
     back_name = "backup-{0}.bak"
 
@@ -69,7 +72,8 @@ class Resources(object):
     time_format = "%Y-%m-%d %H:%M:%S"
 
     #config file variables for postgresql
-    cfg_section_postgre = "postgre"
+    cfg_section_postgre = "postgresql"
+    cfg_section_couchdb = "couchdb"
 
     #config file variables for mysql
     cfg_section_mysql = "mysql"

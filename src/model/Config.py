@@ -35,7 +35,7 @@ class Config(dict):
 
     def __init__(self):
         """
-        Constructer for Config model
+        Constructor for Config model
         """
         super(Config, self).__init__()
         self["id"] = None

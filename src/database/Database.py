@@ -23,7 +23,7 @@ limitations under the License.
 """
 import ConfigParser
 import psycopg2 as db
-from src.helper.Utils import Utils
+from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.resources.Resources import Resources
 
@@ -36,14 +36,14 @@ class Database(object):
     Database class implement a database interface between
     application and postgresql.
 
-    Recently Database methods do all samething such executing provided commands.
-    But they are all seperated for future planning if it may be needed to
+    Recently Database methods do all same thing such executing provided commands
+    But they are all separated for future planning if it may be needed to
     implement detailed statements.
     """
 
     def __init__(self):
         """
-        Constructer for Database class
+        Constructor for Database class
         """
         self.__config__ = Resources.__db__config__
         self.__section__ = Resources.cfg_section_postgre

@@ -37,7 +37,7 @@ class Request(dict):
     """
     def __init__(self):
         """
-        Constructer for Request model
+        Constructor for Request model
         """
         super(Request, self).__init__()
         self["enable"] = True

@@ -35,13 +35,13 @@ from src.model.Config import Config
 
 class ConfigMethods(threading.Thread):
     """
-    ConfigMethods class aims to provide required metdhos to requester class
+    ConfigMethods class aims to provide required methods to requester class
     or methods to read, update Config object.
     """
 
     def __init__(self, new_config, params):
         """
-        Constructer of ConfigMethods
+        Constructor of ConfigMethods
 
         @param new_config Is a new config tuple object to update self.config
         @param params Is used to set new parameters to recent instance
@@ -149,22 +149,6 @@ class ConfigMethods(threading.Thread):
                     "device 'id', option, and param")
         except BufferError as exception:
             print exception.message
-
-    def run(self):
-        """
-        This methods runs a thread to update pyshical devices by
-        given parameters gathered from database
-        """
-        while True:
-            try:
-                device_methods = DeviceMethods(self.get_config())
-                if device_methods.group_set(
-                        self.get_config(), self.get_params()
-                ):
-                    break
-            except RuntimeError as exception:
-                print exception.message
-                break
 
     def delete(self, params):
         """

@@ -39,10 +39,11 @@ class Device(Config):
 
     def __init__(self):
         """
-        Constructer for Device model
+        Constructor for Device model
         """
         super(Device, self).__init__()
         self["id"] = None
+        self["ip"] = None
         self["brand"] = 'cisco'
         self["model"] = 'cisco'
         self["firmware"] = 'cisco'
@@ -60,11 +61,27 @@ class Device(Config):
 
     def get_id(self):
         """
-        Getter for instance device id
+        Getter for instance device ip
 
-        @return d_id as device id
+        @return d_ip as device ip
         """
         return self["id"]
+
+    def set_ip(self, d_ip):
+        """
+        Setter for id variable is a private method
+
+        @param d_ip int gathered from database
+        """
+        self["ip"] = d_ip
+
+    def get_ip(self):
+        """
+        Getter for instance device id
+
+        @return d_ip as device id
+        """
+        return self["ip"]
 
     def set_device_brand(self, brand):
         """
@@ -164,7 +181,7 @@ class Device(Config):
 
     def set_description(self, description):
         """
-        Setter for desctiption variable to describe device in detail.
+        Setter for description variable to describe device in detail.
 
         @param description text Description
         """

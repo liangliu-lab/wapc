@@ -29,7 +29,7 @@ import os
 import subprocess
 from src.language.Language import Language
 from src.resources.Resources import Resources
-from src.helper.Utils import Utils
+from src.helpers.Utils import Utils
 
 __author__ = 'fatih'
 

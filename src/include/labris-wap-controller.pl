@@ -109,14 +109,15 @@ my $current_command;         # The command being executed in the loop
 my $session;
 try {
     ## Opening a session to remote device
-    $session = Net::Appliance::Session->new(
-        Host      => $_device_ip,
-        Timeout   => $SESSION_TIMEOUT,
-        Transport => $_transport_p
-    );
-    $session->max_buffer_length($MAX_BUFFER_LENGTH);
+    $session = Net::Appliance::Session->new({
+        host      => $_device_ip,
+        timeout   => $SESSION_TIMEOUT,
+        transport => $_transport_p,
+        personality => $_personality
+    });
+    #$session->max_buffer_length($MAX_BUFFER_LENGTH);
     $session->do_privileged_mode(1);
-    $session->connect( Name => $_ios_username, Password => $_ios_password );
+    $session->connect({ username => $_ios_username, password => $_ios_password });
     my $result = execute_in_remote($session);
     print $result;
     try {
@@ -142,7 +143,7 @@ sub execute_in_remote {
       ;    # The output message from the remote device is held in this variable
     my $message;
     if ($_enable_mode) {
-        $session->begin_privileged($_enable_password);    #Enable mode
+        $session->begin_privileged({username => $_ios_username, password => $_enable_password });    #Enable mode
     }
 
     if ($_configure_mode) {
@@ -166,13 +167,13 @@ sub execute_in_remote {
 # this is handled here
         if ( $cmd->{'match'} ) {
             my $current_match = $cmd->{'match'};
-            @out = $session->cmd(
+            @out = $session->cmd({
                 String => $current_command,
                 Match  => [$current_match]
-            );
+            });
         }
         else {
-            @out = $session->cmd( String => $current_command );
+            @out = $session->cmd( $current_command );
         }
         my $output = join q{}, @out;
 
@@ -191,8 +192,7 @@ sub execute_in_remote {
 # standard subroutine used to extract failure info when
 # interactive session fails
 sub error_report {
-    my $err         = shift or croak('No err !');
-    #my $device_name = shift or croak('No device name !');
+    my $err = shift or croak('No err !');
     my $message;    # The variable which will hold the error message
 
     if ( eval { $err->isa('Net::Appliance::Session::Exception') } ) {

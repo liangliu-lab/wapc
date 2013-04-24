@@ -26,6 +26,7 @@ import psycopg2 as db
 from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.resources.Resources import Resources
+from src.resources.SQL import SQL
 
 
 __author__ = 'fatih'
@@ -49,6 +50,9 @@ class Database(object):
         self.__section__ = Resources.cfg_section_postgre
         self.utils = Utils()
         self.DatabaseError = db.DatabaseError
+        self.config = ConfigParser.RawConfigParser()
+        self.config.read(self.__config__)
+        self.table_prefix = self.config.get(self.__section__, 'table_prefix')
 
     def connect(self):
         """
@@ -57,13 +61,12 @@ class Database(object):
         """
 
         try:
-            config = ConfigParser.RawConfigParser()
-            config.read(self.__config__)
+
             #gather connection parameters from database config file
-            db_name = config.get(self.__section__, 'db_name')
-            user = config.get(self.__section__, 'username')
-            password = config.get(self.__section__, 'password')
-            host = config.get(self.__section__, 'host')
+            db_name = self.config.get(self.__section__, 'db_name')
+            user = self.config.get(self.__section__, 'username')
+            password = self.config.get(self.__section__, 'password')
+            host = self.config.get(self.__section__, 'host')
             conn_str = "dbname=" + db_name + " user=" + user + \
                        " password=" + password + " host=" + host
             conn = db.connect(conn_str)
@@ -90,6 +93,42 @@ class Database(object):
         try:
             conn = self.connect()
             cur = conn.cursor()
+            cur.execute(cmd)
+            fields = [i[0] for i in cur.description]
+            results = cur.fetchall()
+            conn.commit()
+            #print Language.MSG_SUCCESS_SELECT
+            return fields, results
+        except self.DatabaseError as exception:
+            print Language.MSG_ERR_DATABASE_ERROR.format(
+                self.utils.get_line(), 'selecting', exception.message)
+        except BaseException as exception:
+            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+        finally:
+            self.close_conn(conn)
+
+    def get(self, key, id, table_postfix="device"):
+        """
+        Execute "SELECT" commands to retrieve rows from database.
+
+        @param key is an SQL statement
+        @param id defines the primary key as id
+        @param table_postfix is a value to determine the table with table prefix
+        @return columns header and results
+        """
+        conn = None
+        try:
+            conn = self.connect()
+            cur = conn.cursor()
+
+            # generate table with table prefix and postfix
+            table = self.table_prefix + "_" + table_postfix
+            cmd = SQL.SQL_SELECT_BY_KEY % \
+                  {
+                      'key': key,
+                      'table': table,
+                      'id': id
+                  }
             cur.execute(cmd)
             fields = [i[0] for i in cur.description]
             results = cur.fetchall()

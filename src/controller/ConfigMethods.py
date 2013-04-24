@@ -25,9 +25,8 @@ import threading
 from time import strftime, gmtime
 from src.cli.CommunicationInterface import CommunicationInterface
 from src.resources.SQL import SQL
-from src.controller.DeviceMethods import DeviceMethods
 from src.database.Database import Database
-from src.helper.Utils import Utils
+from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.resources.Resources import Resources
 from src.model.Config import Config

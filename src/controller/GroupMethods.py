@@ -67,7 +67,7 @@ class GroupMethods(object):
                 group.set_name(params.name.strip())
             else:
                 group.set_name(
-                    raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'),":"))
+                    raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'), ":"))
 
             if params.description:
                 group.set_description(params.description.strip())
@@ -95,11 +95,11 @@ class GroupMethods(object):
                           'name': group.get_name()
                       }
             else:
-                print Language.MSG_ERR_DATABASE_ERROR\
+                print Language.MSG_ERR_DATABASE_ERROR \
                     .format(self.utils.get_line()
                     , 'inserting new group', group_id[0])
         except RuntimeError as exception:
-            print Language.MSG_ERR_GENERIC\
+            print Language.MSG_ERR_GENERIC \
                 .format(self.utils.get_line(), exception.message)
 
     def read(self, group_id):
@@ -126,7 +126,7 @@ class GroupMethods(object):
                     .format(self.utils.get_line(),
                             "There is no group record found on table"))
         except RuntimeError as exception:
-            print Language.MSG_ERR_GENERIC\
+            print Language.MSG_ERR_GENERIC \
                 .format(self.utils.get_line(), exception.message)
 
     def get_group_config(self, group_id):
@@ -145,7 +145,7 @@ class GroupMethods(object):
             if fields and results:
                 rset = {
                     "fields": fields,
-                    "results": [list(f) for f in results][0]
+                    "results": [list(f) for f in results]
                 }
                 return rset
             else:
@@ -188,10 +188,10 @@ class GroupMethods(object):
                       }
 
                 if self.database.update(cmd):
-                    print Language.MSG_UPDATE_RECORD\
+                    print Language.MSG_UPDATE_RECORD \
                         .format('group', params.id, group.get_name())
                 else:
-                    print Language.MSG_ERR_DATABASE_ERROR\
+                    print Language.MSG_ERR_DATABASE_ERROR \
                         .format(self.utils.get_line(),
                                 'updating recorded group', did)
             else:
@@ -210,6 +210,44 @@ class GroupMethods(object):
         @param params
         """
 
+        try:
+            params.command = "set"
+            self.exec_group(params)
+        except RuntimeError as exception:
+            print exception.message
+
+    def unset(self, params):
+        """
+        This methods handle options and connect throug group devices by
+        given name or given id.
+
+        Sample command: set -t group -o ssid -i [GROUPID]
+        @param params
+        """
+        try:
+            params.command = "unset"
+            self.exec_group(params)
+        except RuntimeError as exception:
+            print exception.message
+
+    def show(self, params):
+        """
+            Show methods for devices in given group id
+            @param params
+        """
+        try:
+            params.command = "show"
+            self.exec_group(params)
+        except RuntimeError as exception:
+            print exception.message
+
+    def exec_group(self, params):
+        """
+        Execute group commands
+        @param params:
+        @param group:
+        @return:
+        """
         group = Group()
         try:
             if params.option:
@@ -230,9 +268,10 @@ class GroupMethods(object):
                 print "Your command(s) will be executing... " \
                       "Please enter required command params below:\n"
                 params.interface = "0"
-                params.param = raw_input(
-                    "Enter parameter for %(type)s this command of device:"
-                                         % {'type': params.option}).strip()
+                if params.command != "show":
+                    params.param = raw_input(
+                        "Enter parameter for %(type)s this command of device:"
+                        % {'type': params.option}).strip()
 
                 config_set = self.get_group_config(group.get_id())
                 # results cover
@@ -243,108 +282,39 @@ class GroupMethods(object):
 
                 device_methods = DeviceMethods(params)
                 pool = []
-                queue = Queue.Queue
-                heading = ["id", "name","ip", "request", "status", "response"]
+                thread_results = []
+                heading = ["id", "name", "ip", "request", "status", "response"]
+
+                queue = Queue.Queue()
                 for conf in results:
+                    # device_methods.group(params, queue, conf)
                     thread_config = threading.Thread(
                         target=device_methods.group,
                         name=conf["Device"],
-                        args=[conf, params, queue]
+                        args=[params, queue, conf],
                     )
                     pool.append(thread_config)
 
                 for thread in pool:
                     thread.start()
                     thread.join()
+                    response = queue.get()
+                    thread_results.append(response)
 
-                thread_result = queue.get()
-                print self.utils.formatter(heading, thread_result)
+                print self.utils.formatter(heading, thread_results)
                 # Generate update command
-                cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
-                    'key' : option,
-                    'value' : params.param,
-                    'group_id': int(group.get_id())
-                }
-
-                if self.database.update(cmd):
-                    print Language.MSG_UPDATE_RECORD \
-                        .format('group', params.id, group.get_name())
-                else:
-                    print Language.MSG_ERR_DATABASE_ERROR \
-                        .format(self.utils.get_line(),
-                                'updating recorded group', group.get_id())
-
+                if params.command is not "show":
+                    cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
+                        'key': option,
+                        'value': params.param,
+                        'group_id': int(group.get_id())
+                    }
+                    if self.database.update(cmd):
+                        print Language.MSG_UPDATE_RECORD \
+                            .format('group', params.id, group.get_name())
+                    else:
+                        print Language.MSG_ERR_DATABASE_ERROR \
+                            .format(self.utils.get_line(),
+                                    'updating recorded group', group.get_id())
         except RuntimeError as exception:
             print exception.message
-
-    def unset(self, params):
-        """
-        This methods handle options and connect throug group devices by
-        given name or given id.
-
-        Sample command: set -t group -o ssid -i [GROUPID]
-        @param params
-        """
-        from src.controller.ConfigMethods import ConfigMethods
-
-        group = Group()
-        try:
-
-            if params.option:
-                option = params.option.strip()
-            else:
-                print Language.MSG_ERR_EMPTY_OPTION.format('device')
-
-            if params.id:
-                group.set_id(params.id.strip())
-            else:
-                print Language.MSG_ERR_EMPTY_ID.format('device')
-
-            if group.get_id() and option:
-
-                print "Your command(s) will be executing... " \
-                      "Please enter required command params below:\n"
-                params.interface = "0"
-                params.param = raw_input(
-                    "Enter parameter for %(type)s this command of device:"
-                    % {'type': params.option}).strip()
-
-                config_set = self.get_group_config(group.get_id())
-
-                # results cover
-                results = [dict(zip(config_set['fields'], result))
-                           for result in config_set['results']]
-
-                results = self.utils.fix_date(results)
-
-                pool = []
-                for conf in results:
-                    thread_config = ConfigMethods(conf, params)
-                    pool.append(thread_config)
-
-                for thread in pool:
-                    thread.start()
-                    thread.join()
-
-                # Generate update command
-                cmd = SQL.SQL_UPDATE_GROUP_CONFIG % {
-                    'key' : option,
-                    'value' : params.param,
-                    'group_id': int(group.get_id())
-                }
-
-                if self.database.update(cmd):
-                    print Language.MSG_UPDATE_RECORD \
-                        .format('group', params.id, group.get_name())
-                else:
-                    print Language.MSG_ERR_DATABASE_ERROR \
-                        .format(self.utils.get_line(),
-                                'updating recorded group', group.get_id())
-        except RuntimeError as exception:
-            print exception.message
-
-    def show(self, params):
-        """
-            Show methods for devices in given group id
-            @param params
-        """

@@ -67,6 +67,12 @@ class SQL(object):
                                "LEFT JOIN apc_config c ON d.config_id = c.id " \
                                "WHERE d.id = {0};"
 
+    SQL_SELECT_BY_KEY = "SELECT %(key)s " \
+                        "FROM %(table)s ad " \
+                        "LEFT JOIN apc_config ac " \
+                        "ON ad.config_id = ac.id " \
+                        "WHERE ad.id = %(id)d;"
+
     SQL_SELECT_DEVICE_ALL = "SELECT ad.id, " \
                             "ad.name, " \
                             "ad.description, " \

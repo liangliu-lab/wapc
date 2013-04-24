@@ -53,7 +53,7 @@
             }
         ]
     },
-    "set_maxclients":{
+    "set_maxclient":{
         "enable":true,
         "configure":true,
         "commands":[
@@ -141,6 +141,16 @@
         "commands" : [
             {
                 "command" : "show processes | include CPU utilization "
+            }
+        ]
+    },
+
+    "show_maxclient":{
+        "enable": true,
+        "configure": false,
+        "commands": [
+            {
+                "command": "show run | Include max-associations"
             }
         ]
     },

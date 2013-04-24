@@ -33,6 +33,7 @@ from src.database.Database import Database
 from src.language.Language import Language
 from src.model.Device import Device
 from src.model.Config import Config
+from src.model.Request import Request
 from src.resources.Resources import Resources
 
 __author__ = 'fatih'
@@ -101,7 +102,6 @@ class DeviceMethods(threading.Thread):
         device = Device()
         config = device.get_config()
         request = config.get_request()
-        commands = request.get_commands()
 
         try:
             #===================================
@@ -171,14 +171,13 @@ class DeviceMethods(threading.Thread):
                 if params.firmware:
                     device.set_firmware(
                         str(params.firmware.strip()).lower())
-                    path = device.get_brand() + "/" + \
-                           device.get_model() + "/" + \
-                           device.get_firmware()
+                    path = "%s/%s/%s".format(device.get_brand(),
+                                             device.get_model(),
+                                             device.get_firmware())
                 else:
-                    path = device.get_brand() + "/" + \
-                           device.get_model() + "/default"
+                    path = "%s/%s/default".format(device.get_brand(),
+                                                  device.get_model())
             else:
-                # path = params.model.rstript().lstrip()
                 path = device.get_brand() + "/default/default"
 
             if params.relation:
@@ -510,6 +509,12 @@ class DeviceMethods(threading.Thread):
                     #turn into dictionary from json
                     commands = json.loads(unicode(config_source))
 
+                if str(params.command + '_' + option) not in commands:
+                    raise BaseException(
+                        "There is no command found on your device "
+                        "commands file '%s'" % option
+                    )
+
                 #set request
                 print "Request generating..."
 
@@ -520,66 +525,16 @@ class DeviceMethods(threading.Thread):
                                       "required device:")
                 new_param = raw_input("Enter parameter for %(type)s this "
                                       "command of device:" %
-                                      {'type': params.option})
+                                      {'type': option})
 
                 # set new value to given variable where option is its attribute
                 #config[option] = new_param
 
-                if 'pre' in commands[str(params.command + '_' + option)]:
-                    pre = commands[str(params.command + '_' + option)]['pre']
-                    print "Pre-request command(s) being executed. " \
-                          "Please wait...\n"
-                    request.set_commands(commands[str(pre + '_' + option)]
-                    ['commands'])
-                    request.set_enable(commands[str(pre + '_' + option)]
-                    ['enable'])
-                    request.set_configure(commands[str(pre + '_' + option)]
-                    ['configure'])
+                if params.command is "set":
+                    self.execute_precommand(device, commands, config, interface,
+                                            request, params, option)
 
-                    for command in request['commands']:
-                        if 'param' in command:
-                            #new param has been approved??
-                            if command["type"]:
-                                if command["type"] == "interface":
-                                    command["command"] += interface.strip()
-                                elif command["type"] == params.option.strip():
-                                    command["command"] += config.get_ssid()
-                                else:
-                                    command["command"] += config.get_ssid()
-                                    #print p["command"]
-
-                    #set config request to generate input.json file
-                    config.set_request(request)
-
-                    #write config model into input.json file
-                    target_file = self.utils.get_request_config(device, config)
-                    #self.communication_interface.write_source_file(
-                    #    config, Resources.ci_source, 'JSON')
-
-                    #call communication interface script and gather
-                    # response - RPC
-                    print "Executing device commands please wait..."
-                    resp = json.loads(
-                        unicode(
-                            self.communication_interface
-                            .call_communication_interface(target_file)
-                        )
-                        .replace('\n', ''),
-                        encoding='utf-8'
-                    )
-
-                    #remove input.json
-                    os.remove(target_file)
-
-                    # check if rpc is responded and shows that pre-request
-                    # command
-                    # successfully executed
-                    if resp:
-                        #check if wap is connected and returned with success
-                        # status message 110
-                        if resp['status'] == 110:
-                            print "Pre-request command(s) successfully executed"
-
+                # set config option value
                 config[option] = new_param.strip()
 
                 request.set_commands(commands[str(params.command + '_' +
@@ -594,7 +549,9 @@ class DeviceMethods(threading.Thread):
                         if command["type"]:
                             if command["type"] == "interface":
                                 command["command"] += interface.strip()
-                            elif command["type"] == params.option.strip():
+                            elif command["type"] != option:
+                                command["command"] += config[command["type"]]
+                            elif command["type"] == option:
                                 command["command"] += new_param.strip()
                             else:
                                 command["command"] += new_param.strip()
@@ -627,12 +584,20 @@ class DeviceMethods(threading.Thread):
                     #check if wap is connected and returned with success
                     # status message 110
                     if resp['status'] == 110:
-                        cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
-                            'key': option,
-                            'value': new_param,
-                            'modified': self.now,
-                            'id': int(device.get_id())
-                        }
+                        if params.command is "set":
+                            cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
+                                'key': option,
+                                'value': new_param,
+                                'modified': self.now,
+                                'id': int(device.get_id())
+                            }
+                        elif params.command is "unset":
+                            cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
+                                'key': option,
+                                'value': "",
+                                'modified': self.now,
+                                'id': int(device.get_id())
+                            }
 
                         #insert updated config and gather inserted record id
                         self.database.update(cmd)
@@ -708,30 +673,38 @@ class DeviceMethods(threading.Thread):
                 #set request
                 print "Request generating..."
 
-                request.set_commands(commands[str('show_' + option)]
-                ['commands'])
-                request.set_enable(commands[str('show_' + option)]
-                ['enable'])
-                request.set_configure(commands[str('show_' + option)]
-                ['configure'])
+                if not commands[str('show_' + option)]:
+                    raise BaseException(
+                        "There is no command found on your device "
+                        "commands file '%s'" % option
+                    )
+
+                request.set_commands(
+                    commands[str('show_' + option)]['commands'])
+                request.set_enable(
+                    commands[str('show_' + option)]['enable'])
+                request.set_configure(
+                    commands[str('show_' + option)]['configure'])
 
                 #set config request to generate input.json file
                 config.set_request(request)
 
-                #write config model into input.json file
-                self.communication_interface \
-                    .write_source_file(config, Resources.ci_source, 'JSON')
+                target_file = self.utils.get_request_config(device, config)
+                #self.communication_interface.write_source_file(
+                #    config, Resources.ci_source, 'JSON')
 
                 #call communication interface script and gather response - RPC
-                print "Executing device commands please wait..."
+                print Language.MSG_EXE_REQUEST
                 resp = json.loads(
                     unicode(
-                        self.communication_interface
-                        .call_communication_interface(Resources.ci_source)
+                        self.communication_interface.
+                        call_communication_interface(target_file)
                     )
                     .replace('\n', ''),
                     encoding='utf-8'
                 )
+                #remove input.json
+                os.remove(target_file)
 
                 #check if rpc is responded
                 if resp:
@@ -752,8 +725,10 @@ class DeviceMethods(threading.Thread):
                     print Language.MSG_ERR_COMM_INTERFACE_FAILED
         except RuntimeError as exception:
             print exception.message
+        except TypeError as exception:
+            print exception.message
 
-    def group(self, config, params, queue):
+    def group(self, params, queue, config=Config()):
         """
         Group set makes users to set handle group operations for set command.
         It can be done by user such as ssid, channel, associations, etc.
@@ -777,10 +752,18 @@ class DeviceMethods(threading.Thread):
 
             # get interface and param
             interface = params.interface.strip()
-            new_param = params.param.strip()
+            if params.param:
+                new_param = params.param.strip()
+
+            # check if command exist in command list
+            if str(params.command + '_' + option) not in commands:
+                raise BaseException(
+                    "There is no command found on your device "
+                    "commands file '%s'" % option
+                )
 
             #set request
-            request = config.get_request()
+            request = Request()
 
             #execute pre requested commands if exists
             if 'pre' in commands[str(params.command + '_' + option)]:
@@ -806,11 +789,11 @@ class DeviceMethods(threading.Thread):
                                 #print p["command"]
 
                 #set config request to generate input.json file
-                config.set_request(request)
+                config["request"] = request
 
                 #write config model into input.json file
                 device = Device()
-                device.set_id(config[""])
+                device.set_id(config["Device"])
                 target_file = self.utils.get_request_config(device, config)
                 self.communication_interface \
                     .write_source_file(config, Resources.ci_source, 'JSON')
@@ -832,28 +815,39 @@ class DeviceMethods(threading.Thread):
                 # check if rpc is responded and shows that pre-request command
                 # successfully executed
                 if resp:
+                    pass
                     # check if wap is connected and returned with success status
                     # message 110
-                    if resp['status'] == 110:
-                        print "Pre-request command(s) successfully executed"
+                #    if resp['status'] == 110:
+                #        print "Pre-request command(s) successfully executed"
 
-            request.set_commands(commands[str('set_' + option)]['commands'])
-            request.set_enable(commands[str('set_' + option)]['enable'])
-            request.set_configure(commands[str('set_' + option)]['configure'])
+            request.set_commands(
+                commands[
+                    str(params.command + '_' + option)
+                ]['commands'])
+            request.set_enable(
+                commands[
+                    str(params.command + '_' + option)
+                ]['enable'])
+            request.set_configure(
+                commands[
+                    str(params.command + '_' + option)
+                ]['configure'])
 
-            for command in request['commands']:
-                if 'param' in command:
-                    if command["type"]:
-                        if command["type"] == "interface":
-                            command["command"] += interface.strip()
-                        elif command["type"] == params.option.strip():
-                            command["command"] += new_param.strip()
-                        else:
-                            command["command"] += new_param.strip()
-                            #print p["command"]
+            if params.param:
+                for command in request['commands']:
+                    if 'param' in command:
+                        if command["type"]:
+                            if command["type"] == "interface":
+                                command["command"] += interface.strip()
+                            elif command["type"] == params.option.strip():
+                                command["command"] += new_param.strip()
+                            else:
+                                command["command"] += new_param.strip()
+                                #print p["command"]
 
-                            #set config request to generate input.json file
-            config.set_request(request)
+                                #set config request to generate input.json file
+            config["request"] = request
 
             #write config model into input.json file
             source_input = Resources.input_source % {'file': config['Device']}
@@ -876,43 +870,113 @@ class DeviceMethods(threading.Thread):
 
             #check if rpc is responded
             if resp:
-                response = None
                 # check if wap is connected and returned with success status
+                response = None
                 # message 110
                 if resp['status'] == 110:
-                    cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
-                        'key': option,
-                        'value': new_param,
-                        'modified': self.now,
-                        'id': int(config['Device'])
-                    }
-
                     #insert updated config and gather inserted record id
-                    if self.database.update(cmd):
-                        #resp['message']
-                        response = (config["Device"],
-                                    config["Device Name"],
-                                    option,
-                                    "Connected",
-                                    resp['message'])
-                        return response
-                    else:
-                        self.group(config, params, queue)
+                    if params.command != "show":
+                        cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
+                            'key': option,
+                            'value': new_param,
+                            'modified': self.now,
+                            'id': int(config['Device'])
+                        }
+                        self.database.update(cmd)
+
+                    response = (config["Device"],
+                                config["Device Name"],
+                                config["ip"],
+                                option,
+                                "Connected",
+                                resp['message'])
                 else:
                     response = (config["Device"],
                                 config["Device Name"],
+                                config["ip"],
                                 option,
                                 "Not Connected",
                                 resp['message'])
-                return response
+                    #self.group(params, queue, config)
+                queue.put(response)
             else:
                 raise SystemError(Language.MSG_ERR_COMM_INTERFACE_FAILED)
         except RuntimeError as exception:
-            print exception.message
-        except IOError as exception:
-            raise RuntimeError(
+            raise BaseException(
                 Language.MSG_ERR_FILE_READ % {
                     'error': exception.message,
                     'file': str(Resources.cfg_device_resource)
                 }
             )
+        except IOError as exception:
+            raise BaseException(
+                Language.MSG_ERR_FILE_READ % {
+                    'error': exception.message,
+                    'file': str(Resources.cfg_device_resource)
+                }
+            )
+
+    def execute_precommand(self, device,
+                           commands, config,
+                           interface, request,
+                           params, option):
+        """
+        Execute pre-requested device commands
+        @param params
+        @param option
+        @return
+        """
+
+        if 'pre' in commands[str(params.command + '_' + option)]:
+            pre = commands[str(params.command + '_' + option)]['pre']
+            request.set_commands(
+                commands[str(pre + '_' + option)]['commands'])
+            request.set_enable(
+                commands[str(pre + '_' + option)]['enable'])
+            request.set_configure(
+                commands[str(pre + '_' + option)]['configure'])
+
+            for command in request['commands']:
+                if 'param' in command:
+                    #new param has been approved??
+                    if command["type"]:
+                        if command["type"] == "interface":
+                            command["command"] += interface.strip()
+                        elif command["type"] == params.option.strip():
+                            command["command"] += config.get_ssid()
+                        else:
+                            command["command"] += config.get_ssid()
+                            #print p["command"]
+
+            #set config request to generate input.json file
+            config.set_request(request)
+
+            #write config model into input.json file
+            target_file = self.utils.get_request_config(device, config)
+            #self.communication_interface.write_source_file(
+            #    config, Resources.ci_source, 'JSON')
+
+            #call communication interface script and gather
+            # response - RPC
+            #print "Executing device commands please wait..."
+            resp = json.loads(
+                unicode(
+                    self.communication_interface
+                    .call_communication_interface(target_file)
+                )
+                .replace('\n', ''),
+                encoding='utf-8'
+            )
+
+            #remove input.json
+            os.remove(target_file)
+
+            # check if rpc is responded and shows that pre-request
+            # command
+            # successfully executed
+            if resp:
+                #check if wap is connected and returned with success
+                # status message 110
+                if resp['status'] == 110:
+                    #print "Pre-request command(s) successfully executed"
+                    pass

@@ -70,6 +70,7 @@ class Resources(object):
 
     #global recent time format
     time_format = "%Y-%m-%d %H:%M:%S"
+    string_time = "%Y%m%d_%H%M%S"
 
     #config file variables for postgresql
     cfg_section_postgre = "postgresql"

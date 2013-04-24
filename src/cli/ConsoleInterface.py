@@ -221,19 +221,6 @@ class ConsoleInterface(cmd.Cmd):
         except BaseException as exception:
             print exception.message
 
-    def do_exit(self, args):
-        """
-        Exit command to terminate command line script
-
-        @param args
-        """
-        try:
-            sys.exit()
-        except KeyboardInterrupt as exception:
-            print exception.message
-        except BaseException as exception:
-            print exception.message
-
     def cmdloop_with_keyboard_interrupt(self):
         """
         Keyboard interruption method
@@ -255,4 +242,4 @@ class ConsoleInterface(cmd.Cmd):
         @param args
         @return Exits from application
         """
-        return self.do_exit(args)
+        return True

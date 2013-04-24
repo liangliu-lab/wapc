@@ -410,7 +410,7 @@ class Main(object):
                 elif str(param_type).lower() == 'vlan':
                     vlan_methods.show(params)
                 else:
-                    raise TypeError(
+                    raise BaseException(
                         Language.MSG_ERR_GENERIC.format(
                             self.utils.get_line(),
                             'No [type] argument provided'
@@ -442,6 +442,7 @@ class Main(object):
                 # noinspection PyArgumentList
                 if str(param_type).lower() == 'device':
                     # noinspection PyArgumentList
+                    params.command = "set"
                     device_methods.set(params)
                 elif str(param_type).lower() == 'group':
                     # noinspection PyArgumentList
@@ -482,7 +483,8 @@ class Main(object):
                 # noinspection PyArgumentList
                 if str(param_type).lower() == 'device':
                     # noinspection PyArgumentList
-                    device_methods.unset(params)
+                    params.command = "unset"
+                    device_methods.set(params)
                 elif str(param_type).lower() == 'group':
                     # noinspection PyArgumentList
                     group_methods.unset(params)

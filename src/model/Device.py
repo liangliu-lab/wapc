@@ -61,7 +61,7 @@ class Device(Config):
 
     def get_id(self):
         """
-        Getter for instance device ip
+        Getter for instance device ipcut
 
         @return d_ip as device ip
         """

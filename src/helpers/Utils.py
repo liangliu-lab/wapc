@@ -39,13 +39,17 @@ class Utils(object):
     """
     now = None
     environment = None
+    postfix = None
+
+    def __init__(self):
+        self.init_globals()
 
     def init_globals(self):
         """
 
         @return
         """
-        self.now = strftime(Resources.time_format, gmtime())
+        self.now = strftime(Resources.string_time, gmtime())
 
         # Get system environment from system configuration file
         config_parser = ConfigParser.RawConfigParser()
@@ -183,15 +187,16 @@ class Utils(object):
         @param config
         @return target file to implement in perl script
         """
-        file_name = self.now + "-" + device.get_id()
+        file_name = self.now + "-" + str(device.get_id())
         target_file = Resources.input_source % {'file': file_name}
-        request_config = dict
-        request_config["ip"] = device.get_ip()
-        request_config["username"] = config.get_username()
-        request_config["transport_protocol"] = config.get_transport_protocol()
-        request_config["enable_password"] = config.get_enable_password()
-        request_config["personality"] = config.get_personality()
-        request_config["request"] = config.get_request()
+
+        request_config = {"ip": device.get_ip(),
+                          "username": config["username"],
+                          "transport_protocol": config["transport_protocol"],
+                          "enable_password": config["enable_password"],
+                          "password": config["password"],
+                          "personality": config["personality"],
+                          "request": config["request"]}
 
         from src.cli.CommunicationInterface import CommunicationInterface
         communication_interface = CommunicationInterface()

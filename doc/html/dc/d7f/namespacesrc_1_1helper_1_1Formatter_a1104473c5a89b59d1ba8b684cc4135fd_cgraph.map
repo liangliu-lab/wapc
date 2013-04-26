@@ -1,4 +1,0 @@
-<map id="src.helper.Formatter.wrap_onspace_strict" name="src.helper.Formatter.wrap_onspace_strict">
-<area shape="rect" id="node3" href="$dc/d7f/namespacesrc_1_1helper_1_1Formatter.html#a92c0843e55d27fa3cf5e2f893835daf9" title="A word&#45;wrap function that preserves existing line breaks and most spaces in the text." alt="" coords="224,5,395,51"/>
-<area shape="rect" id="node5" href="$dc/d7f/namespacesrc_1_1helper_1_1Formatter.html#aaef3c6afcd5554d2764f1e05d2a5af1c" title="A simple word&#45;wrap function that wraps text on exactly width characters." alt="" coords="224,74,395,121"/>
-</map>

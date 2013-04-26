@@ -1,4 +1,4 @@
-.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -45,6 +45,10 @@ Inherits \fBobject\fP\&.
 .RI "def \fBshow\fP"
 .br
 .RI "\fIShow methods for devices in given group id\&. \fP"
+.ti -1c
+.RI "def \fBexec_group\fP"
+.br
+.RI "\fIExecute group commands\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -88,6 +92,22 @@ Create a new group with given details in inventory\&. \fBParameters:\fP
 .RE
 .PP
 
+.SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.exec_group (self, params)"
+
+.PP
+Execute group commands\&. \fBParameters:\fP
+.RS 4
+\fIparams,:\fP 
+.br
+\fIgroup,:\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+: 
+.RE
+.PP
+
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.get_group_config (self, group_id)"
 
 .PP
@@ -109,12 +129,7 @@ Read group detail from Groups table by given id\&. \fBParameters:\fP
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.set (self, params)"
 
 .PP
-This methods handle options and connect throug group devices by given name or given id\&. .PP
-.nf
-     Sample command: set -t group -o ssid -i [GROUPID]
-.fi
-.PP
- 
+This methods handle options and connect throug group devices by given name or given id\&. Sample command: set -t group -o ssid -i [GROUPID] 
 .PP
 \fBParameters:\fP
 .RS 4
@@ -134,12 +149,7 @@ Show methods for devices in given group id\&. \fBParameters:\fP
 .SS "def src\&.controller\&.GroupMethods\&.GroupMethods\&.unset (self, params)"
 
 .PP
-This methods handle options and connect throug group devices by given name or given id\&. .PP
-.nf
-     Sample command: set -t group -o ssid -i [GROUPID]
-.fi
-.PP
- 
+This methods handle options and connect throug group devices by given name or given id\&. Sample command: set -t group -o ssid -i [GROUPID] 
 .PP
 \fBParameters:\fP
 .RS 4

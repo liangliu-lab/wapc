@@ -1,4 +1,6 @@
 <map id="src.database.Database.Database.insert" name="src.database.Database.Database.insert">
-<area shape="rect" id="node3" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a54348f89752b537b3bace1242302b0a4" title="Connect database with given parameters." alt="" coords="317,5,584,35"/>
-<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a76e41bf494a17a89afd49d176f78af72" title="Close database live connection." alt="" coords="308,59,593,88"/>
+<area shape="rect" id="node3" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a85f63dae4506d07b0d61b533ac81660b" title="Connect database with given parameters." alt="" coords="361,5,540,51"/>
+<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a54348f89752b537b3bace1242302b0a4" title="Connect database with given parameters." alt="" coords="317,75,584,104"/>
+<area shape="rect" id="node7" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a417b401f3bbe6b4d55ab9d33929e2802" title="Close database live connection." alt="" coords="361,127,540,174"/>
+<area shape="rect" id="node9" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a76e41bf494a17a89afd49d176f78af72" title="Close database live connection." alt="" coords="308,197,593,227"/>
 </map>

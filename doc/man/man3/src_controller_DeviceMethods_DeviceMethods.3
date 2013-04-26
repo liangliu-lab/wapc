@@ -1,4 +1,4 @@
-.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,14 +10,14 @@ src.controller.DeviceMethods.DeviceMethods \-
 .br
 .PP
 .PP
-Inherits Thread\&.
+Inherits \fBThread\fP\&.
 .SS "Public Member Functions"
 
 .in +1c
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
-.RI "\fIConstructer for \fBDeviceMethods\fP\&. \fP"
+.RI "\fIConstructor for \fBDeviceMethods\fP\&. \fP"
 .ti -1c
 .RI "def \fBcreate\fP"
 .br
@@ -33,28 +33,18 @@ Inherits Thread\&.
 .ti -1c
 .RI "def \fBset\fP"
 .br
-.RI "\fI.PP
-.nf
-This methods handle options and connect throug device by given name
-.fi
-.PP
- :param params: \fP"
-.ti -1c
-.RI "def \fBunset\fP"
-.br
-.RI "\fI.PP
-.nf
-This methods handle options and connect throug device by given name
-.fi
-.PP
- :param params: \fP"
+.RI "\fIThis methods handle options and connect through device by given name\&. \fP"
 .ti -1c
 .RI "def \fBshow\fP"
 .br
 .RI "\fIShow methods submit returns where sh commands came from\&. \fP"
 .ti -1c
-.RI "def \fBgroup_set\fP"
+.RI "def \fBgroup\fP"
 .br
+.ti -1c
+.RI "def \fBexecute_precommand\fP"
+.br
+.RI "\fIExecute pre-requested device commands\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -91,44 +81,42 @@ Methods covered by \fBDeviceMethods\fP and other controller methods in other mig
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.__init__ (self, params)"
 
 .PP
-Constructer for \fBDeviceMethods\fP\&. 
+Constructor for \fBDeviceMethods\fP\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.create (self, params)"
 
 .PP
-Create method aims to create a new device insert it into database and apply the config regarding given brand, model and firmware\&. .PP
-.nf
-     Create method is called by Main.add method by given type. Type should be
-     provided as 'device'. Also when adding a new device arguments listed
-     below have to be provided:
-
-     <h3>Usage: $ add [OPTIONS]</h3>
-     Add device, group, vlan, config etc with given parameters
-     <ul>
-     <li>[-t],[--type] Define type device, group, vlan, config</li>
-     <li>[-I],[--ip] Use this params when adding some new variables which 
-     needs an ip such as device, config, etc.</li>
-     <li>[-n],[--name] To set a name to related type variable</li>
-     <li>[-b],[--brand] To set device brand to relate with its model and/or 
-     firmware</li>
-     <li>[-m],[--model] To set device model to relate with its config file
-     </li>
-     <li>[-F],[--firmware] To set device firmware to relate with its config
-     file</li>
-     <li>[-R],[--relation] To set device relation one of MASTER of SLAVE</li>
-     <li>[-D],[--description] To set a description to related type variable
-     </li>
-     <li>[-u],[--username] Provide a username which will be used to connect
-     device</li>
-     <li>[-p],[--password] Provide a password which will be used to connect 
-     and configure device</li>
-     </ul>
-
-     If there is no parameter provided every required parameter will be
-     gathered by asking the user to provide every single parameter.
-.fi
+Create method aims to create a new device insert it into database and apply the config regarding given brand, model and firmware\&. Create method is called by Main\&.add method by given type\&. Type should be provided as 'device'\&. Also when adding a new device arguments listed below have to be provided:
 .PP
+.SS "Usage: $ add [OPTIONS]"
+.PP
+Add device, group, vlan, config etc with given parameters 
+.PD 0
+
+.IP "\(bu" 2
+[-t],[--type] Define type device, group, vlan, config 
+.IP "\(bu" 2
+[-I],[--ip] Use this params when adding some new variables which  needs an ip such as device, config, etc\&. 
+.IP "\(bu" 2
+[-n],[--name] To set a name to related type variable 
+.IP "\(bu" 2
+[-b],[--brand] To set device brand to relate with its model and/or  firmware 
+.IP "\(bu" 2
+[-m],[--model] To set device model to relate with its config file  
+.IP "\(bu" 2
+[-F],[--firmware] To set device firmware to relate with its config file 
+.IP "\(bu" 2
+[-R],[--relation] To set device relation one of MASTER of SLAVE 
+.IP "\(bu" 2
+[-D],[--description] To set a description to related type variable  
+.IP "\(bu" 2
+[-u],[--username] Provide a username which will be used to connect device 
+.IP "\(bu" 2
+[-p],[--password] Provide a password which will be used to connect  and configure device 
+.PP
+.PP
+If there is no parameter provided every required parameter will be gathered by asking the user to provide every single parameter\&.
 .PP
 \fBParameters:\fP
 .RS 4
@@ -136,7 +124,22 @@ Create method aims to create a new device insert it into database and apply the 
 .RE
 .PP
 
-.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.group_set (self, config, params)"
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.execute_precommand (self, device, commands, config, interface, request, params, option)"
+
+.PP
+Execute pre-requested device commands\&. \fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.br
+\fIoption\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.group (self, params, queue, config = \fC\fBConfig\fP()\fP)"
 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.read (self, cid)"
 
@@ -145,22 +148,7 @@ Create method aims to create a new device insert it into database and apply the 
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.set (self, params)"
 
 .PP
-.PP
-.nf
-This methods handle options and connect throug device by given name
-.fi
-.PP
- :param params: 
-.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.show (self, params)"
-
-.PP
-Show methods submit returns where sh commands came from\&. .PP
-.nf
-     Show methods gathers parameter, read commands file regarding device
-     brand, model etc and then generate a JSON file and execute this file
-     with CommunicationInterface
-.fi
-.PP
+This methods handle options and connect through device by given name\&. Params contains a command option either one of set or unset\&. Regarding this params\&.command option method decides what operation will be implemented\&.
 .PP
 \fBParameters:\fP
 .RS 4
@@ -168,15 +156,17 @@ Show methods submit returns where sh commands came from\&. .PP
 .RE
 .PP
 
-.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.unset (self, params)"
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.show (self, params)"
 
 .PP
+Show methods submit returns where sh commands came from\&. Show methods gathers parameter, read commands file regarding device brand, model etc and then generate a JSON file and execute this file with CommunicationInterface
 .PP
-.nf
-This methods handle options and connect throug device by given name
-.fi
+\fBParameters:\fP
+.RS 4
+\fIparams\fP 
+.RE
 .PP
- :param params: 
+
 .SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.update (self, params)"
 
 .PP

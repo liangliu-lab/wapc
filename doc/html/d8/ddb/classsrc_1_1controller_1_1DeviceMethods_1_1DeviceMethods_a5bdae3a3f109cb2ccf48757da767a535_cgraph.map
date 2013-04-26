@@ -1,3 +1,5 @@
 <map id="src.controller.DeviceMethods.DeviceMethods.set" name="src.controller.DeviceMethods.DeviceMethods.set">
-<area shape="rect" id="node3" href="$d2/dce/classsrc_1_1controller_1_1ConfigMethods_1_1ConfigMethods.html#ae3c27b5c05033eed2864127159f26824" title="read method aims to read given config id details from database and return them into a result set list..." alt="" coords="252,5,444,51"/>
+<area shape="rect" id="node3" href="$d2/dce/classsrc_1_1controller_1_1ConfigMethods_1_1ConfigMethods.html#ae3c27b5c05033eed2864127159f26824" title="read method aims to read given config id details from database and return them into a result set list..." alt="" coords="277,5,469,51"/>
+<area shape="rect" id="node5" href="$d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a2485b63cc9020d857030070d2600d497" title=":param id:" alt="" coords="276,74,471,121"/>
+<area shape="rect" id="node7" href="$d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a1c68455e4c02daf00831679f27a5a8fc" title="Execute pre&#45;requested device commands." alt="" coords="251,143,496,190"/>
 </map>

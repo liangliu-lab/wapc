@@ -1,4 +1,4 @@
-.TH "src.model.Config.Config" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.model.Config.Config" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,7 +19,7 @@ Inherited by \fBsrc\&.model\&.Device\&.Device\fP, and \fBsrc\&.model\&.Device\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
-.RI "\fIConstructer for \fBConfig\fP model\&. \fP"
+.RI "\fIConstructor for \fBConfig\fP model\&. \fP"
 .ti -1c
 .RI "def \fBset_id\fP"
 .br
@@ -154,347 +154,90 @@ Inherited by \fBsrc\&.model\&.Device\&.Device\fP, and \fBsrc\&.model\&.Device\&.
 .RI "def \fBget_date_modified\fP"
 .br
 .in -1c
-.SH "Detailed Description"
-.PP 
-\fBDevice\fP configuration model to implement new instance while inserting a new device\&. 
-
-object 
-.SH "Constructor & Destructor Documentation"
-.PP 
-.SS "def src\&.model\&.Config\&.Config\&.__init__ (self)"
-
-.PP
-Constructer for \fBConfig\fP model\&. 
-.SH "Member Function Documentation"
-.PP 
-.SS "def src\&.model\&.Config\&.Config\&.get_channel (self)"
-
-.PP
-Getter for channel variables\&. \fBReturns:\fP
-.RS 4
-channel 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_date_add (self)"
-
-.PP
-Add date of \fBConfig\fP instance\&. \fBReturns:\fP
-.RS 4
-date the configuration added into database 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_date_modified (self)"
-\fBReturns:\fP
-.RS 4
-last modified date 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_description (self)"
-
-.PP
-Getter for description\&. \fBReturns:\fP
-.RS 4
-instance description 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_enable_password (self)"
-
-.PP
-Getter for enable password variable\&. \fBReturns:\fP
-.RS 4
-enable password 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_id (self)"
-
-.PP
-Getter for instance id\&. \fBReturns:\fP
-.RS 4
-id instance id 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_ip (self)"
-
-.PP
-Getter for ip variable return\&. 
-.SS "def src\&.model\&.Config\&.Config\&.get_maxclient (self)"
-
-.PP
-Getter for maxclient variable\&. \fBReturns:\fP
-.RS 4
-recent instance maxclient 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_name (self)"
-
-.PP
-Getter for name variable\&. \fBReturns:\fP
-.RS 4
-instance name 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_password (self)"
-\fBReturns:\fP
-.RS 4
-instance password 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_personality (self)"
-
-.PP
-Getter for personality\&. \fBReturns:\fP
-.RS 4
-personality as a string 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_radius (self)"
-
-.PP
-Get radius variable\&. \fBReturns:\fP
-.RS 4
-radius server ip 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_request (self)"
-
-.PP
-Getter for \fBRequest\fP model\&. \fBReturns:\fP
-.RS 4
-\fBRequest\fP model as a child instance of \fBConfig\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_ssid (self)"
-
-.PP
-Getter for ssid\&. \fBReturns:\fP
-.RS 4
-recent instance ssid 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_transport_protocol (self)"
-
-.PP
-Getter for transport protocol\&. \fBReturns:\fP
-.RS 4
-transport protocol 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_username (self)"
-\fBReturns:\fP
-.RS 4
-instance username 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.get_vlan (self)"
-
-.PP
-Getter for vlan\&. \fBReturns:\fP
-.RS 4
-vlan 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_channel (self, channel)"
-
-.PP
-Setter for channel\&. \fBParameters:\fP
-.RS 4
-\fIchannel\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_date_add (self, date)"
-
-.PP
-Set add date of recent \fBConfig\fP instance\&. \fBParameters:\fP
-.RS 4
-\fIdate\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_date_modified (self, date)"
-
-.PP
-Set last modified date for recent instance\&. \fBParameters:\fP
-.RS 4
-\fIdate\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_description (self, description)"
-
-.PP
-Setter for \fBConfig\fP description\&. .PP
-.nf
-     A description for recent Config to describe the Config in detail
-.fi
-.PP
- 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIdescription\fP text 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_enable_password (self, option)"
-
-.PP
-This variable is set to define enable connection parameters for given device\&. In order to provide this variable users will be let to get the device in enable mode and make configuration changes\&.
-.PP
-\fBParameters:\fP
-.RS 4
-\fIoption\fP as a enable password 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_id (self, c_id)"
-
-.PP
-Setter for id variable\&. .PP
-.nf
-     __set_id is a private method to set recent instance id gathered from
-     database.
-.fi
-.PP
-.PP
-\fBParameters:\fP
-.RS 4
-\fIc_id\fP instance record id 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_ip (self, inet)"
-
-.PP
-Setter for ip\&. \fBParameters:\fP
-.RS 4
-\fIinet\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_maxclient (self, request)"
-
-.PP
-Setter for maxclient\&. .PP
-.nf
-     Maxclient variables aims to define how many client can connect to the
-     device as concurrent.
-.fi
-.PP
- 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIrequest\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_name (self, name)"
-
-.PP
-Setter for name variable\&. \fBParameters:\fP
-.RS 4
-\fIname\fP string 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_password (self, password)"
-
-.PP
-This password variable is set to define connection parameters for given device\&. \fBParameters:\fP
-.RS 4
-\fIpassword\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_personality (self, personality)"
-
-.PP
-Setter for personality\&. .PP
-.nf
-     Personality variable defined to implement personality while connecting
-     a device.
-.fi
-.PP
- 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIpersonality\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_radius (self, radius_config_id)"
-
-.PP
-Setter for radius configuration id for recent \fBConfig\fP instance\&. \fBParameters:\fP
-.RS 4
-\fIradius_config_id\fP radius server ip 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_request (self, request)"
-
-.PP
-Set request\&. \fBParameters:\fP
-.RS 4
-\fIrequest\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_ssid (self, ssid)"
-
-.PP
-Setter for ssid variable\&. \fBParameters:\fP
-.RS 4
-\fIssid\fP for recent config ssid 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_transport_protocol (self, protocol)"
-
-.PP
-Setter for transport protocol\&. \fBParameters:\fP
-.RS 4
-\fIprotocol\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_username (self, username)"
-
-.PP
-This username variable is set to define connection parameters for given device\&. \fBParameters:\fP
-.RS 4
-\fIusername\fP 
-.RE
-.PP
-
-.SS "def src\&.model\&.Config\&.Config\&.set_vlan (self, vlan_id)"
-
-.PP
-Setter for vlan variable\&. \fBParameters:\fP
-.RS 4
-\fIvlan_id\fP 
-.RE
-.PP
-
-
-.SH "Author"
-.PP 
-Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fIConstructor for \fBDevice\fP model\&. \fP"
+.ti -1c
+.RI "def \fBset_id\fP"
+.br
+.RI "\fISetter for id variable is a private method\&. \fP"
+.ti -1c
+.RI "def \fBget_id\fP"
+.br
+.RI "\fIGetter for instance device ipcut\&. \fP"
+.ti -1c
+.RI "def \fBset_ip\fP"
+.br
+.RI "\fISetter for id variable is a private method\&. \fP"
+.ti -1c
+.RI "def \fBget_ip\fP"
+.br
+.RI "\fIGetter for instance device id\&. \fP"
+.ti -1c
+.RI "def \fBset_device_brand\fP"
+.br
+.RI "\fISetter for brand variable\&. \fP"
+.ti -1c
+.RI "def \fBget_brand\fP"
+.br
+.RI "\fIGetter for brand variable\&. \fP"
+.ti -1c
+.RI "def \fBset_model\fP"
+.br
+.RI "\fISetter for model variable\&. \fP"
+.ti -1c
+.RI "def \fBget_model\fP"
+.br
+.RI "\fIGetter for model\&. \fP"
+.ti -1c
+.RI "def \fBset_firmware\fP"
+.br
+.RI "\fISetter for \fBDevice\fP firmware variable\&. \fP"
+.ti -1c
+.RI "def \fBget_firmware\fP"
+.br
+.RI "\fIGetter for firmware\&. \fP"
+.ti -1c
+.RI "def \fBset_relation\fP"
+.br
+.RI "\fISetter for relation variable\&. \fP"
+.ti -1c
+.RI "def \fBget_relation\fP"
+.br
+.RI "\fIGetter for relation variable\&. \fP"
+.ti -1c
+.RI "def \fBset_name\fP"
+.br
+.RI "\fISetter for name parameter\&. \fP"
+.ti -1c
+.RI "def \fBget_name\fP"
+.br
+.RI "\fIGetter for name variable\&. \fP"
+.ti -1c
+.RI "def \fBset_description\fP"
+.br
+.RI "\fISetter for description variable to describe device in detail\&. \fP"
+.ti -1c
+.RI "def \fBget_description\fP"
+.br
+.RI "\fIGetter for description\&. \fP"
+.ti -1c
+.RI "def \fBset_config_id\fP"
+.br
+.RI "\fISetter for config_id\&. \fP"
+.ti -1c
+.RI "def \fBget_config_id\fP"
+.br
+.ti -1c
+.RI "def \fBset_config\fP"
+.br
+.RI "\fISetter to set a \fBConfig\fP model into device instance config\&. \fP"
+.ti -1c
+.RI "def \fBget_config\fP"
+.br
+.RI "\fIGetter for \fBDevice\fP model to get instance \fBConfig\fP\&. \fP"
+.in -1c

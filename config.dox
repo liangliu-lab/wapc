@@ -32,7 +32,7 @@ PROJECT_NAME           = "Labris Wireless Access Point Controller"
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER         = v1.0
+PROJECT_NUMBER         = v1.1.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer
@@ -648,7 +648,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = src/
+INPUT                  = src/ shell.py
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -739,7 +739,7 @@ IMAGE_PATH             = \img
 # If FILTER_PATTERNS is specified, this tag will be
 # ignored.
 
-INPUT_FILTER           = "/usr/local/bin/doxypy.py"
+INPUT_FILTER           = "/usr/bin/doxypy"
 
 # The FILTER_PATTERNS tag can be used to specify filters on a per file pattern
 # basis.

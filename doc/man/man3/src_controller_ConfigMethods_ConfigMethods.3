@@ -1,23 +1,23 @@
-.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.ConfigMethods.ConfigMethods" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 src.controller.ConfigMethods.ConfigMethods \- 
 .PP
-\fBConfigMethods\fP class aims to provide required metdhos to requester class or methods to read, update Config object\&.  
+\fBConfigMethods\fP class aims to provide required methods to requester class or methods to read, update Config object\&.  
 
 .SH SYNOPSIS
 .br
 .PP
 .PP
-Inherits Thread\&.
+Inherits \fBThread\fP\&.
 .SS "Public Member Functions"
 
 .in +1c
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
-.RI "\fIConstructer of \fBConfigMethods\fP\&. \fP"
+.RI "\fIConstructor of \fBConfigMethods\fP\&. \fP"
 .ti -1c
 .RI "def \fBcreate\fP"
 .br
@@ -34,10 +34,6 @@ Inherits Thread\&.
 .RI "def \fBupdate\fP"
 .br
 .RI "\fIUpdate methods certainly moderated by $ edit [OPTIONS] command by CLI\&. \fP"
-.ti -1c
-.RI "def \fBrun\fP"
-.br
-.RI "\fIThis methods runs a thread to update pyshical devices by given parameters gathered from database\&. \fP"
 .ti -1c
 .RI "def \fBdelete\fP"
 .br
@@ -93,13 +89,13 @@ Inherits Thread\&.
 .in -1c
 .SH "Detailed Description"
 .PP 
-\fBConfigMethods\fP class aims to provide required metdhos to requester class or methods to read, update Config object\&. 
+\fBConfigMethods\fP class aims to provide required methods to requester class or methods to read, update Config object\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.__init__ (self, new_config, params)"
 
 .PP
-Constructer of \fBConfigMethods\fP\&. \fBParameters:\fP
+Constructor of \fBConfigMethods\fP\&. \fBParameters:\fP
 .RS 4
 \fInew_config\fP Is a new config tuple object to update self\&.config 
 .br
@@ -154,10 +150,6 @@ result set list includes column names and rows
 .RE
 .PP
 
-.SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.run (self)"
-
-.PP
-This methods runs a thread to update pyshical devices by given parameters gathered from database\&. 
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.set (self, config)"
 
 .PP
@@ -192,12 +184,7 @@ Set method will update given config by parameter\&. \fBParameters:\fP
 .SS "def src\&.controller\&.ConfigMethods\&.ConfigMethods\&.update (self, params)"
 
 .PP
-Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. .PP
-.nf
-     This methods only inherit update database
-     records by no touching physical device config.
-.fi
-.PP
+Update methods certainly moderated by $ edit [OPTIONS] command by CLI\&. This methods only inherit update database records by no touching physical device config\&.
 .PP
 \fBParameters:\fP
 .RS 4

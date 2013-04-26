@@ -1,4 +1,4 @@
-.TH "src.database.Database.Database" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.database.Database.Database" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,13 +17,17 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "def \fB__init__\fP"
 .br
-.RI "\fIConstructer for \fBDatabase\fP class\&. \fP"
+.RI "\fIConstructor for \fBDatabase\fP class\&. \fP"
 .ti -1c
 .RI "def \fBconnect\fP"
 .br
 .RI "\fIConnect database with given parameters\&. \fP"
 .ti -1c
 .RI "def \fBselect\fP"
+.br
+.RI "\fIExecute 'SELECT' commands to retrieve rows from database\&. \fP"
+.ti -1c
+.RI "def \fBget\fP"
 .br
 .RI "\fIExecute 'SELECT' commands to retrieve rows from database\&. \fP"
 .ti -1c
@@ -52,12 +56,30 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "\fBDatabaseError\fP"
 .br
+.ti -1c
+.RI "\fBconfig\fP"
+.br
+.ti -1c
+.RI "\fBdb_config\fP"
+.br
+.ti -1c
+.RI "\fBtable_prefix\fP"
+.br
+.ti -1c
+.RI "\fBtype\fP"
+.br
 .in -1c
 .SS "Private Attributes"
 
 .in +1c
 .ti -1c
-.RI "\fB__config__\fP"
+.RI "\fB__db_config__\fP"
+.br
+.ti -1c
+.RI "\fB__system_config__\fP"
+.br
+.ti -1c
+.RI "\fB__system_section__\fP"
 .br
 .ti -1c
 .RI "\fB__section__\fP"
@@ -67,13 +89,13 @@ Inherits \fBobject\fP\&.
 .PP 
 \fBDatabase\fP class implement a database interface between application and postgresql\&. 
 
-Recently \fBDatabase\fP methods do all samething such executing provided commands\&. But they are all seperated for future planning if it may be needed to implement detailed statements\&. 
+Recently \fBDatabase\fP methods do all same thing such executing provided commands But they are all separated for future planning if it may be needed to implement detailed statements\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "def src\&.database\&.Database\&.Database\&.__init__ (self)"
+.SS "def src\&.database\&.Database\&.Database\&.__init__ (self, type)"
 
 .PP
-Constructer for \fBDatabase\fP class\&. 
+Constructor for \fBDatabase\fP class\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "def src\&.database\&.Database\&.Database\&.close_conn (cls, con)"
@@ -96,15 +118,28 @@ a live connection to keep transactions
 .RE
 .PP
 
+.SS "def src\&.database\&.Database\&.Database\&.get (self, key, id, table_postfix = \fC'device'\fP)"
+
+.PP
+Execute 'SELECT' commands to retrieve rows from database\&. \fBParameters:\fP
+.RS 4
+\fIkey\fP is an SQL statement 
+.br
+\fIid\fP defines the primary key as id 
+.br
+\fItable_postfix\fP is a value to determine the table with table prefix 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+columns header and results 
+.RE
+.PP
+
 .SS "def src\&.database\&.Database\&.Database\&.insert (self, cmd)"
 
 .PP
-Execute 'INSERT' SQL statements\&. .PP
-.nf
-     Insert objects to database expected json formats for inserting objects.
-.fi
-.PP
- 
+Execute 'INSERT' SQL statements\&. Insert objects to database expected json formats for inserting objects\&. 
 .PP
 \fBParameters:\fP
 .RS 4
@@ -120,11 +155,7 @@ new record id
 .SS "def src\&.database\&.Database\&.Database\&.remove (self, cmd)"
 
 .PP
-Execute 'DELETE' SQL statements\&. .PP
-.nf
-     Remove records from database objects with given values
-.fi
-.PP
+Execute 'DELETE' SQL statements\&. Remove records from database objects with given values
 .PP
 \fBParameters:\fP
 .RS 4
@@ -149,11 +180,7 @@ columns header and results
 .SS "def src\&.database\&.Database\&.Database\&.update (self, cmd)"
 
 .PP
-Execute 'UPDATE' SQL statements\&. .PP
-.nf
-     Update database objects with given values
-.fi
-.PP
+Execute 'UPDATE' SQL statements\&. Update database objects with given values
 .PP
 \fBParameters:\fP
 .RS 4
@@ -168,11 +195,23 @@ True or False
 
 .SH "Member Data Documentation"
 .PP 
-.SS "src\&.database\&.Database\&.Database\&.__config__\fC [private]\fP"
+.SS "src\&.database\&.Database\&.Database\&.__db_config__\fC [private]\fP"
 
 .SS "src\&.database\&.Database\&.Database\&.__section__\fC [private]\fP"
 
+.SS "src\&.database\&.Database\&.Database\&.__system_config__\fC [private]\fP"
+
+.SS "src\&.database\&.Database\&.Database\&.__system_section__\fC [private]\fP"
+
+.SS "src\&.database\&.Database\&.Database\&.config"
+
 .SS "src\&.database\&.Database\&.Database\&.DatabaseError"
+
+.SS "src\&.database\&.Database\&.Database\&.db_config"
+
+.SS "src\&.database\&.Database\&.Database\&.table_prefix"
+
+.SS "src\&.database\&.Database\&.Database\&.type"
 
 .SS "src\&.database\&.Database\&.Database\&.utils"
 

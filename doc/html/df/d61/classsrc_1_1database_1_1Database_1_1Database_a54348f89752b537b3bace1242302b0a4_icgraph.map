@@ -1,6 +1,12 @@
 <map id="src.database.Database.Database.connect" name="src.database.Database.Database.connect">
 <area shape="rect" id="node3" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a23898745a07583db57fe01280f83146a" title="Execute &quot;SELECT&quot; commands to retrieve rows from database." alt="" coords="324,5,580,35"/>
-<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a427dddd161a705ab7506e6810e340f64" title="Execute &quot;INSERT&quot; SQL statements." alt="" coords="325,59,579,88"/>
-<area shape="rect" id="node7" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a13f9733bb45596d8a43cdabed95df2c6" title="Execute &quot;UPDATE&quot; SQL statements." alt="" coords="323,112,581,141"/>
-<area shape="rect" id="node9" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a598f23684b04c27c42fd29b6e194e2c4" title="Execute &quot;DELETE&quot; SQL statements." alt="" coords="320,165,584,195"/>
+<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a348960298830183908f5a86b9b5a912b" title="Execute &quot;SELECT&quot; commands to retrieve rows from database." alt="" coords="333,59,571,88"/>
+<area shape="rect" id="node7" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a427dddd161a705ab7506e6810e340f64" title="Execute &quot;INSERT&quot; SQL statements." alt="" coords="325,112,579,141"/>
+<area shape="rect" id="node9" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a13f9733bb45596d8a43cdabed95df2c6" title="Execute &quot;UPDATE&quot; SQL statements." alt="" coords="323,165,581,195"/>
+<area shape="rect" id="node11" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a598f23684b04c27c42fd29b6e194e2c4" title="Execute &quot;DELETE&quot; SQL statements." alt="" coords="320,219,584,248"/>
+<area shape="rect" id="node13" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#a76f40b3be88c4a5b2ee8d53757806578" title="Execute &quot;SELECT&quot; commands to retrieve rows from database." alt="" coords="360,271,544,318"/>
+<area shape="rect" id="node15" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#a303148a57864dec6308c8b1eb293f192" title="Execute &quot;SELECT&quot; commands to retrieve rows from database." alt="" coords="360,341,544,387"/>
+<area shape="rect" id="node17" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#ae727486fd46c89a2946f1455bc3ca3db" title="Execute &quot;INSERT&quot; SQL statements." alt="" coords="360,410,544,457"/>
+<area shape="rect" id="node19" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#ae62335eb378e75d5ec00cfe8b55bcce2" title="Execute &quot;UPDATE&quot; SQL statements." alt="" coords="360,479,544,526"/>
+<area shape="rect" id="node21" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#a9c9cba908ff616533499eeb5d59c0fa7" title="Execute &quot;DELETE&quot; SQL statements." alt="" coords="360,549,544,595"/>
 </map>

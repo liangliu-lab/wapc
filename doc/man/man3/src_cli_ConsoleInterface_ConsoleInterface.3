@@ -1,4 +1,4 @@
-.TH "src.cli.ConsoleInterface.ConsoleInterface" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.cli.ConsoleInterface.ConsoleInterface" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,7 +10,7 @@ Command list to implement all required methods pre-defined\&.
 .br
 .PP
 .PP
-Inherits Cmd\&.
+Inherits \fBCmd\fP\&.
 .SS "Public Member Functions"
 
 .in +1c
@@ -59,10 +59,6 @@ Inherits Cmd\&.
 .br
 .RI "\fIPrints help message\&. \fP"
 .ti -1c
-.RI "def \fBdo_exit\fP"
-.br
-.RI "\fIExit command to terminate command line script\&. \fP"
-.ti -1c
 .RI "def \fBcmdloop_with_keyboard_interrupt\fP"
 .br
 .RI "\fIKeyboard interruption method\&. \fP"
@@ -103,13 +99,7 @@ Keyboard interruption method\&.
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_add (self, args)"
 
 .PP
-add command insert a new device with its suddenly created configuration into inventory\&. .PP
-.nf
-     Add methods push a default configuration by updating only IP value in
-     configuration file with given IP and it insert a database record if
-     device response is successfull with status code 110.
-.fi
-.PP
+add command insert a new device with its suddenly created configuration into inventory\&. Add methods push a default configuration by updating only IP value in configuration file with given IP and it insert a database record if device response is successfull with status code 110\&.
 .PP
 \fBParameters:\fP
 .RS 4
@@ -129,23 +119,10 @@ Exits from application
 .RE
 .PP
 
-.SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_exit (self, args)"
-
-.PP
-Exit command to terminate command line script\&. \fBParameters:\fP
-.RS 4
-\fIargs\fP 
-.RE
-.PP
-
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_group (self, args)"
 
 .PP
-group command groups provided devices into given group one by one\&. .PP
-.nf
-     Group devices with given parameters.
-.fi
-.PP
+group command groups provided devices into given group one by one\&. Group devices with given parameters\&.
 .PP
 \fBSee Also:\fP
 .RS 4
@@ -175,11 +152,7 @@ help Detailed help message
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_ls (self, args)"
 
 .PP
-ls command implements a list method to get recent records from database by provided type .PP
-.nf
-     Show device, group, vlan, config etc with given parameters
-.fi
-.PP
+ls command implements a list method to get recent records from database by provided type Show device, group, vlan, config etc with given parameters
 .PP
 \fBSee Also:\fP
 .RS 4
@@ -195,14 +168,7 @@ Main()\&.list()
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_rm (self, args)"
 
 .PP
-rm command removes given device, config or group from database .PP
-.nf
-     Remove command removes given type from only database and the recent
-     configuration on the device will still remains as it is. It is should be
-     added again and then the default configuration file will be pushed into
-     device again.
-.fi
-.PP
+rm command removes given device, config or group from database Remove command removes given type from only database and the recent configuration on the device will still remains as it is\&. It is should be added again and then the default configuration file will be pushed into device again\&.
 .PP
 \fBSee Also:\fP
 .RS 4
@@ -227,11 +193,7 @@ This method will implement a self testing with pre-defined parameters and values
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_set (self, args)"
 
 .PP
-set command set device recent configuration to given values value and update recent records in database by provided type .PP
-.nf
-     Unset device or group with given parameters
-.fi
-.PP
+set command set device recent configuration to given values value and update recent records in database by provided type Unset device or group with given parameters
 .PP
 \fBSee Also:\fP
 .RS 4
@@ -247,14 +209,7 @@ Main()\&.set()
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_sh (self, args)"
 
 .PP
-sh command implements a show method to get recent device config options .PP
-.nf
-     Show device or group with given parameters
-     Options can be one of: ssid, channel, ip, cpu, memory, channel, conf,
-     firmware, model, serial, clients, run or any "show_" commands provided
-     in wapc_condif.json
-.fi
-.PP
+sh command implements a show method to get recent device config options Show device or group with given parameters Options can be one of: ssid, channel, ip, cpu, memory, channel, conf, firmware, model, serial, clients, run or any 'show_' commands provided in wapc_condif\&.json
 .PP
 \fBSee Also:\fP
 .RS 4
@@ -270,11 +225,7 @@ Main()\&.show()
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_unset (self, args)"
 
 .PP
-unset command unset device recent configuration to a default or none value and update recent records in database by provided type .PP
-.nf
-     Unset device or group with given parameters
-.fi
-.PP
+unset command unset device recent configuration to a default or none value and update recent records in database by provided type Unset device or group with given parameters
 .PP
 \fBSee Also:\fP
 .RS 4
@@ -290,12 +241,7 @@ Main()\&.unset()
 .SS "def src\&.cli\&.ConsoleInterface\&.ConsoleInterface\&.do_up (self, args)"
 
 .PP
-up commands updates keys given with provided parameters in database\&. .PP
-.nf
-     Edit methods update only database records by not touching recent device
-     configuration. It is supposed that this operation is a soft update.
-.fi
-.PP
+up commands updates keys given with provided parameters in database\&. Edit methods update only database records by not touching recent device configuration\&. It is supposed that this operation is a soft update\&.
 .PP
 \fBSee Also:\fP
 .RS 4

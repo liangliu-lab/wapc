@@ -21,7 +21,6 @@ limitations under the License.
 @copyright Labris Technology
 
 """
-from Queue import Empty
 import argparse
 from src.language.Language import Language
 
@@ -43,7 +42,7 @@ class ArgParser(object):
 
     def __init__(self):
         """
-            Constructuer of ArgParser
+            Constructor of ArgParser
         """
         try:
             self.set_parser()
@@ -200,7 +199,7 @@ class ArgParser(object):
         @return parsed arguments as a namespace list
         """
         try:
-            if self.parser._get_args() is Empty:
+            if not self.parser._get_args():
                 self.params = self.parser.parse_known_args(args.split())
             else:
                 self.params = self.parser.parse_args(args)

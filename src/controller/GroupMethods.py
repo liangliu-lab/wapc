@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-@package ctonroller
+@package controller
 @date Marh 13, 2013
 @author Fatih Karatana
 @author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
@@ -297,9 +297,11 @@ class GroupMethods(object):
 
                 for thread in pool:
                     thread.start()
-                    thread.join()
                     response = queue.get()
                     thread_results.append(response)
+
+                for thread in pool:
+                    thread.join()
 
                 print self.utils.formatter(heading, thread_results)
                 # Generate update command

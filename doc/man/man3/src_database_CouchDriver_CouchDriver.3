@@ -1,0 +1,201 @@
+.TH "src.database.CouchDriver.CouchDriver" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.database.CouchDriver.CouchDriver \- 
+.PP
+\fBCouchDriver\fP class implement a database interface between application database class and CouchDB\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBobject\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.RI "\fIConstructor for \fBCouchDriver\fP class\&. \fP"
+.ti -1c
+.RI "def \fBconnect\fP"
+.br
+.RI "\fIConnect database with given parameters\&. \fP"
+.ti -1c
+.RI "def \fBselect\fP"
+.br
+.RI "\fIExecute 'SELECT' commands to retrieve rows from database\&. \fP"
+.ti -1c
+.RI "def \fBget\fP"
+.br
+.RI "\fIExecute 'SELECT' commands to retrieve rows from database\&. \fP"
+.ti -1c
+.RI "def \fBinsert\fP"
+.br
+.RI "\fIExecute 'INSERT' SQL statements\&. \fP"
+.ti -1c
+.RI "def \fBupdate\fP"
+.br
+.RI "\fIExecute 'UPDATE' SQL statements\&. \fP"
+.ti -1c
+.RI "def \fBremove\fP"
+.br
+.RI "\fIExecute 'DELETE' SQL statements\&. \fP"
+.ti -1c
+.RI "def \fBclose_conn\fP"
+.br
+.RI "\fIClose database live connection\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fButils\fP"
+.br
+.ti -1c
+.RI "\fBDatabaseError\fP"
+.br
+.ti -1c
+.RI "\fBconfig\fP"
+.br
+.ti -1c
+.RI "\fBtable_prefix\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB__config__\fP"
+.br
+.ti -1c
+.RI "\fB__section__\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBCouchDriver\fP class implement a database interface between application database class and CouchDB\&. 
+
+Recently \fBDatabase\fP methods do all same thing such executing provided commands But they are all separated for future planning if it may be needed to implement detailed statements\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.__init__ (self)"
+
+.PP
+Constructor for \fBCouchDriver\fP class\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.close_conn (cls, con)"
+
+.PP
+Close database live connection\&. \fBParameters:\fP
+.RS 4
+\fIcls\fP class itself 
+.br
+\fIcon\fP is initiated connection 
+.RE
+.PP
+
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.connect (self)"
+
+.PP
+Connect database with given parameters\&. \fBReturns:\fP
+.RS 4
+a live connection to keep transactions 
+.RE
+.PP
+
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.get (self, key, id, table_postfix = \fC'device'\fP)"
+
+.PP
+Execute 'SELECT' commands to retrieve rows from database\&. \fBParameters:\fP
+.RS 4
+\fIkey\fP is an SQL statement 
+.br
+\fIid\fP defines the primary key as id 
+.br
+\fItable_postfix\fP is a value to determine the table with table prefix 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+columns header and results 
+.RE
+.PP
+
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.insert (self, cmd)"
+
+.PP
+Execute 'INSERT' SQL statements\&. Insert objects to database expected json formats for inserting objects\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+new record id 
+.RE
+.PP
+
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.remove (self, cmd)"
+
+.PP
+Execute 'DELETE' SQL statements\&. Remove records from database objects with given values
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.select (self, cmd)"
+
+.PP
+Execute 'SELECT' commands to retrieve rows from database\&. \fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+columns header and results 
+.RE
+.PP
+
+.SS "def src\&.database\&.CouchDriver\&.CouchDriver\&.update (self, cmd)"
+
+.PP
+Execute 'UPDATE' SQL statements\&. Update database objects with given values
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcmd\fP is an SQL statement 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True or False 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.database\&.CouchDriver\&.CouchDriver\&.__config__\fC [private]\fP"
+
+.SS "src\&.database\&.CouchDriver\&.CouchDriver\&.__section__\fC [private]\fP"
+
+.SS "src\&.database\&.CouchDriver\&.CouchDriver\&.config"
+
+.SS "src\&.database\&.CouchDriver\&.CouchDriver\&.DatabaseError"
+
+.SS "src\&.database\&.CouchDriver\&.CouchDriver\&.table_prefix"
+
+.SS "src\&.database\&.CouchDriver\&.CouchDriver\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.

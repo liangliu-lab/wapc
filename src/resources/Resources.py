@@ -75,6 +75,7 @@ class Resources(object):
     #config file variables for postgresql
     cfg_section_postgre = "postgresql"
     cfg_section_couchdb = "couchdb"
+    cfg_section_system = "system"
 
     #config file variables for mysql
     cfg_section_mysql = "mysql"

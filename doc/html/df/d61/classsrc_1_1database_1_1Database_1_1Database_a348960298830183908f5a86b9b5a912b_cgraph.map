@@ -1,0 +1,6 @@
+<map id="src.database.Database.Database.get" name="src.database.Database.Database.get">
+<area shape="rect" id="node3" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a85f63dae4506d07b0d61b533ac81660b" title="Connect database with given parameters." alt="" coords="348,5,527,51"/>
+<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a54348f89752b537b3bace1242302b0a4" title="Connect database with given parameters." alt="" coords="304,75,571,104"/>
+<area shape="rect" id="node7" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a417b401f3bbe6b4d55ab9d33929e2802" title="Close database live connection." alt="" coords="348,127,527,174"/>
+<area shape="rect" id="node9" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a76e41bf494a17a89afd49d176f78af72" title="Close database live connection." alt="" coords="295,197,580,227"/>
+</map>

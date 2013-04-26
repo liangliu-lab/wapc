@@ -32,6 +32,8 @@ class Language(object):
         """
         Constructor of Language class
         """
+    #prompt messages
+    YES = "yes"
 
     #generic statement messages for whole structure
     MSG_APP_WELCOME = "Welcome to Labris Wireless Access Point Controller"
@@ -332,6 +334,18 @@ class Language(object):
 
     #status messages
     MSG_STATUS_ADD_SUCCESS = "New %(type)s added:\n ID: %(id)s\nName:%(name)s"
+
+    #Log server messages
+    MSG_LOG_SERVER_CONNECTION_ABORTED = \
+        "Connection to Log server has been aborted." \
+        "Please check your settings then restart shell"
+
+    MSG_ERR_LOG_SERVER_CONNECTION = \
+        "Error occurred while %(command) Log server: %(exception)s"
+
+    MSG_LOG_SERVER_CONNECT_TRY = "Would you like to try to connect again?(yes):"
+
+
 
 
 

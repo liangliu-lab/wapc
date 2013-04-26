@@ -1,4 +1,4 @@
-.TH "src.cli.CommunicationInterface.CommunicationInterface" 3 "Thu Mar 28 2013" "Version v1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.cli.CommunicationInterface.CommunicationInterface" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -80,38 +80,25 @@ backup method create a backup inside a folder created with device name and inclu
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.call_communication_interface (self, source)"
 
 .PP
-call_communication_interface method call perl script to communicate with devices\&. The Perl script located under 'include' folder
+call_communication_interface method call perl script to communicate with devices\&. The Perl script located under 'include' folder 
 .PP
-\fBExceptions:\fP
-.RS 4
-\fIIOError\fP exception 
-.br
-\fIBufferError\fP exception 
-.RE
-.PP
-\fBParameters:\fP
-.RS 4
-\fIsource\fP source is a input file includes a JSON content as commands and connection parameters\&.
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-response as a output of subprocessed execution as JSON possible return responses may be one of below: 
-.PP
-NO_ERROR => 110; 
-.PP
-NET_APPLIANCE_ERROR => 100; 
-.PP
-NET_APPLIANCE_EXCEPTION => 101; 
-.PP
-FILE_OPEN_ERROR => 102; 
-.PP
-FILE_CLOSE_ERROR => 103; 
-.PP
-UNKNOWN_ERROR => 104; 
-.RE
-.PP
+.nf
+    @throw IOError exception
+    @throw BufferError exception
+    @param source source is a input file includes a JSON content as commands
+    and connection parameters.
 
+    @return response as a output of subprocessed execution as JSON
+    possible return responses may be one of below:
+    @return NO_ERROR => 110;
+    @return NET_APPLIANCE_ERROR => 100;
+    @return NET_APPLIANCE_EXCEPTION => 101;
+    @return FILE_OPEN_ERROR => 102;
+    @return FILE_CLOSE_ERROR => 103;
+    @return UNKNOWN_ERROR => 104;
+.fi
+.PP
+ 
 .SS "def src\&.cli\&.CommunicationInterface\&.CommunicationInterface\&.get_source_config (self, source_file)"
 
 .PP

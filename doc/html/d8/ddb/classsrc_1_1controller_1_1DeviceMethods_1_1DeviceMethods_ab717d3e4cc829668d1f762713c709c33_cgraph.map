@@ -1,3 +1,4 @@
 <map id="src.controller.DeviceMethods.DeviceMethods.show" name="src.controller.DeviceMethods.DeviceMethods.show">
-<area shape="rect" id="node3" href="$d2/dce/classsrc_1_1controller_1_1ConfigMethods_1_1ConfigMethods.html#ae3c27b5c05033eed2864127159f26824" title="read method aims to read given config id details from database and return them into a result set list..." alt="" coords="252,5,444,51"/>
+<area shape="rect" id="node3" href="$d2/dce/classsrc_1_1controller_1_1ConfigMethods_1_1ConfigMethods.html#ae3c27b5c05033eed2864127159f26824" title="read method aims to read given config id details from database and return them into a result set list..." alt="" coords="253,5,445,51"/>
+<area shape="rect" id="node5" href="$d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a2485b63cc9020d857030070d2600d497" title=":param id:" alt="" coords="252,74,447,121"/>
 </map>

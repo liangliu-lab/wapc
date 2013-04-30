@@ -47,7 +47,7 @@ class PostgreDriver(object):
         Constructor for Database class
         """
         self.__config__ = Resources.__db__config__
-        self.__section__ = Resources.cfg_section_postgre
+        self.__section__ = Resources.cfg_section_master_db
         self.utils = Utils()
         self.DatabaseError = db.DatabaseError
         self.config = ConfigParser.RawConfigParser()

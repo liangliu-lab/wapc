@@ -48,7 +48,8 @@ class GroupMethods(object):
 
     def __init__(self):
         self.utils = Utils()
-        self.database = Database()
+        self.database = Database(Resources.cfg_section_master_db)
+        self.log_database = Database(Resources.cfg_section_log_db)
         self.communication_interface = CommunicationInterface()
         self.script = Resources.ci_script
         self.cfg_device = Resources.cfg_device_resource

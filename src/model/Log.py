@@ -24,156 +24,154 @@ retrieve options and details and connect to device execute commands.
 @copyright Labris Teknoloji
 
 """
-import datetime
 from enum import Enum
-from src.helpers.Utils import Utils
-from couchdb.mapping import *
+from time import strftime, gmtime
+from src.resources.Resources import Resources
 
 __author__ = 'fatih'
 
 
-class Log(Document):
+class Log(dict):
     """
     Log class is used to define log model data structure and
     """
     severity = Enum('CRITICAL', 'DEBUG', 'ERROR',
                     'WARNING', 'FATAL', 'INFO')
 
-    def __init__(self, timestamp=DateTimeField(default=datetime.now),
-                 name=TextField,
-                 severity=TextField(
-                     default=severity.INFO),
+    def __init__(self,
+                 name="Default Log",
+                 severity=str(severity.INFO),
                  line=None,
-                 message=TextField,
-                 method=TextField,
-                 facility=TextField,
-                 host=TextField):
+                 message="Log Message",
+                 method="Method name",
+                 facility="Default Facility",
+                 host="192.168.0.1"):
         """
         Constructor for Log model
         @return:
         """
         super(Log, self).__init__()
-        self.utils = Utils()
-        self.timestamp = timestamp
-        self.name = name
-        self.severity = severity         # set default severity info
-        self.line = line
-        self.message = message
-        self.method = method
-        self.facility = facility
-        self.host = host
+        self.now = strftime(Resources.time_format, gmtime())
+        self["timestamp"] = self.now
+        self["name"] = name
+        self["severity"] = str(severity)         # set default severity info
+        self["line"] = line
+        self["message"] = message
+        self["method"] = method
+        self["facility"] = facility
+        self["host"] = host
 
     def set_timestamp(self, timestamp):
         """
         Setter for timestamp
         @param timestamp
         """
-        self.timestamp = timestamp
+        self["timestamp"] = timestamp
 
     def get_timestamp(self):
         """
         Getter for timestamp
         @return timestamp
         """
-        return self.timestamp
+        return self["timestamp"]
 
     def set_name(self, name):
         """
         Setter for name
         @param name
         """
-        self.name = name
+        self["name"] = name
 
     def get_name(self):
         """
         Getter for name
         @return name
         """
-        return self.name
+        return self["name"]
 
     def set_severity(self, severity):
         """
         Setter for severity
         @param severity
         """
-        self.severity = severity
+        self["severity"] = severity
 
     def get_severity(self):
         """
         Getter for severity
         @return severity
         """
-        return self.severity
+        return self["severity"]
 
     def set_line(self, line):
         """
         Setter for line
         @param line
         """
-        self.line = line
+        self["line"] = line
 
     def get_line(self):
         """
         Getter for line
         @return line
         """
-        return self.line
+        return self["line"]
 
     def set_message(self, message):
         """
         Setter for message
         @param message
         """
-        self.message = message
+        self["message"] = message
 
     def get_message(self):
         """
         Getter for message
         @return message
         """
-        return self.message
+        return self["message"]
 
     def set_method(self, method):
         """
         Setter for method
         @param method
         """
-        self.method = method
+        self["method"] = method
 
     def get_method(self):
         """
         Getter for message
         @return message
         """
-        return self.method
+        return self["method"]
 
     def set_facility(self, facility):
         """
         Setter for facility
         @param facility
         """
-        self.facility = facility
+        self["facility"] = facility
 
     def get_facility(self):
         """
         Getter for facility
         @return facility
         """
-        return self.facility
+        return self["facility"]
 
     def set_host(self, host):
         """
         Setter for host
         @param host
         """
-        self.host = host
+        self["host"] = host
 
     def get_host(self):
         """
         Getter for host
         @return host
         """
-        return self.host
+        return self["host"]
 
 
 

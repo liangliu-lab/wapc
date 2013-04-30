@@ -27,6 +27,7 @@ import os
 import threading
 from time import strftime, gmtime
 from src.cli.CommunicationInterface import CommunicationInterface
+from src.controller.Logger import Logger
 from src.resources.SQL import SQL
 from src.helpers.Utils import Utils
 from src.database.Database import Database
@@ -56,7 +57,9 @@ class DeviceMethods(threading.Thread):
         """
         super(DeviceMethods, self).__init__()
         self.utils = Utils()
-        self.database = Database()
+        self.logger = Logger()
+        self.database = Database(Resources.cfg_section_master_db)
+        self.log_database = Database(Resources.cfg_section_log_db)
         self.communication_interface = CommunicationInterface()
         self.script = Resources.ci_script
         self.cfg_device = Resources.cfg_device_resource

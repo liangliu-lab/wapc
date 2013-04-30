@@ -23,6 +23,7 @@ limitations under the License.
 """
 import argparse
 from src.language.Language import Language
+from Queue import Empty
 
 
 class ArgParser(object):
@@ -100,21 +101,21 @@ class ArgParser(object):
                                  dest='brand',
                                  help=Language.MSG_ADD_BRAND_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-c', '--config',
                                  dest='config',
                                  help=Language.MSG_ADD_CONFIG,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-D', '--desc',
                                  dest='description',
                                  help=Language.MSG_ADD_DESC_HELP
-        )
+                                 )
         self.parser.add_argument('-e', '--inet',
                                  dest='interface',
                                  help=Language.MSG_ADD_INTERFACE_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-F', '--firmware',
                                  dest='firmware',
                                  help=Language.MSG_ADD_FIRMWARE_HELP,
@@ -124,67 +125,67 @@ class ArgParser(object):
                                  dest='group',
                                  help=Language.MSG_ADD_GROUP_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-i', '--id',
                                  dest='id',
                                  help=Language.MSG_ADD_ID_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-I', '--ip',
                                  dest='ip',
                                  help=Language.MSG_ADD_IP_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-m', '--model',
                                  dest='model',
                                  help=Language.MSG_ADD_MODEL_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-n', '--name',
                                  dest='name',
                                  help=Language.MSG_ADD_NAME_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-o', '--option',
                                  dest='option',
                                  help=Language.MSG_ADD_OPTION_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-p', '--password',
                                  dest='password',
                                  help=Language.MSG_ADD_PASSWORD_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-P', '--param',
                                  dest='param',
                                  help=Language.MSG_ADD_PARAM_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-R', '--relation',
                                  dest='relation',
                                  help=Language.MSG_ADD_RELATION_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-s', '--subnet',
                                  dest='subnet',
                                  help=Language.MSG_ADD_SUBNET_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-t', '--type',
                                  dest='type',
                                  help=Language.MSG_ADD_TYPE_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-u', '--username',
                                  dest='username',
                                  help=Language.MSG_ADD_USERNAME_HELP,
                                  action='store'
-        )
+                                 )
         self.parser.add_argument('-V', '--vlan',
                                  dest='vlan',
                                  help=Language.MSG_ADD_VLAN_HELP,
                                  action='store'
-        )
+                                 )
 
     def get_args(self, args):
         """
@@ -199,7 +200,7 @@ class ArgParser(object):
         @return parsed arguments as a namespace list
         """
         try:
-            if not self.parser._get_args():
+            if self.parser._get_args() is Empty:
                 self.params = self.parser.parse_known_args(args.split())
             else:
                 self.params = self.parser.parse_args(args)

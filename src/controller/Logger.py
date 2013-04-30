@@ -25,10 +25,10 @@ limitations under the License.
 import logging
 from src.model.Log import Log
 from src.helpers.Utils import Utils
-from src.database import Database
+from src.database.Database import Database
 
 
-class Logger(logging):
+class Logger(logging.getLoggerClass()):
     """
     Logger class is an logging implementation uses CouchDB to record logs.
 
@@ -38,19 +38,19 @@ class Logger(logging):
 
     """
 
-    def __init__(self, ):
+    def __init__(self):
         """
         Logger initializer
         @return:
         """
         self.utils = Utils()
-        self.database = Database(self.utils.logdb)
+        self.database = Database(self.utils.log_db)
 
-    def create_log(self, timestamp, name, severity, line, message, method,
+    def create_log(self, name, severity, line, message, method,
                    facility, host):
         """
         Create Log by given parameters
-        @param timestamp is a Log model to handle log data and its own variables
+
         @param name
         @param severity
         @param line
@@ -60,10 +60,28 @@ class Logger(logging):
         @param host
         @return log id gathered from log database
         """
-        log = Log(timestamp, name, severity, line, message, method, facility,
+        log = Log(name, severity, line, message, method, facility,
                   host)
         try:
-            self.database.insert(log)
-
-        except:
+            # write new log into log database
+            log_id = self.database.insert(log)
+            return log_id
+        except BaseException as exception:
+            print "some" + exception.message
             pass
+
+    def gather_logs(self, params, opt='_all_docs'):
+        """
+        Gather logs by given params
+        @param params to create query by given dict objects
+        @return:
+        """
+        try:
+            if opt == '_all_docs':
+                cmd = opt
+            else:
+                cmd = params
+            fields, results = self.database.select(cmd)
+            return self.utils.formatter(fields, results)
+        except BaseException as exception:
+            print exception.message

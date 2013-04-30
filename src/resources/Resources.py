@@ -72,9 +72,9 @@ class Resources(object):
     time_format = "%Y-%m-%d %H:%M:%S"
     string_time = "%Y%m%d_%H%M%S"
 
-    #config file variables for postgresql
-    cfg_section_postgre = "postgresql"
-    cfg_section_couchdb = "couchdb"
+    #config file variables for system databases
+    cfg_section_master_db = "master_db"
+    cfg_section_log_db = "log_db"
     cfg_section_system = "system"
 
     #config file variables for mysql

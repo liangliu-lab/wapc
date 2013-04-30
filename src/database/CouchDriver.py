@@ -26,7 +26,6 @@ import couchdb
 from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.resources.Resources import Resources
-from src.resources.SQL import SQL
 
 
 __author__ = 'fatih'
@@ -47,13 +46,15 @@ class CouchDriver(object):
         Constructor for CouchDriver class
         """
         self.__config__ = Resources.__db__config__
-        self.__section__ = Resources.cfg_section_couchdb
+        self.__section__ = Resources.cfg_section_log_db
         self.utils = Utils()
         self.DatabaseError = Exception("Error occurred on CouchDB operations")
         self.config = ConfigParser.RawConfigParser()
         self.config.read(self.__config__)
-        self.table_prefix = self.config.get(self.__section__, 'table_prefix')
         self.server_location = self.config.get(self.__section__, 'host')
+        self.db_name = self.config.get(self.__section__, 'db_name')
+        self.db_username = self.config.get(self.__section__, 'username')
+        self.db_password = self.config.get(self.__section__, 'password')
 
     def connect(self):
         """
@@ -62,10 +63,17 @@ class CouchDriver(object):
         """
 
         try:
-
             #gather connection parameters from database config file
             server = couchdb.Server(self.server_location)
-            return server
+            server.resource.credentials = (self.db_username, self.db_password)
+            # check if log database exists otherwise create one
+            try:
+                database = server[self.db_name]
+            except BaseException as exception:
+                print exception.message
+                server.create(self.db_name)
+                database = server[self.db_name]
+            return database
         except couchdb.ServerError as exception:
             print Language.MSG_ERR_LOG_SERVER_CONNECTION % exception.message
             default = Language.YES
@@ -75,118 +83,71 @@ class CouchDriver(object):
             else:
                 raise Exception(Language.MSG_LOG_SERVER_CONNECTION_ABORTED)
 
-    def select(self, cmd, database):
+    def select(self, cmd):
         """
         Execute "SELECT" commands to retrieve rows from database.
 
-        @param cmd is an SQL statement
-        @param database provided to be used
+        @param cmd is an Nosql statement
         @return columns header and results
         """
         try:
-            server = self.connect()
+            database = self.connect()
             try:
-                log_db = server[database]
-            except CouchDriver.DatabaseError as exception:
+                rows = database.view(cmd)
+                fields = ['name', 'facility', 'timestamp', 'log revision',
+                          'line number', 'host', 'long message', 'log id',
+                          'method name', 'method']
+                results = []
+                for row in rows:
+                    results.append(
+                        [v for k, v in dict(database[row.id]).items()]
+                    )
+                return fields, results
+            except self.DatabaseError as exception:
                 print Language.MSG_ERR_LOG_SERVER_CONNECTION % \
                       {
                           'command': "selecting database",
                           'exception': exception.message
                       }
-                create = raw_input("Would you like to create one?(yes) yes/no")
-                default = Language.YES
-                if create == default:
-                    log_db.create(database)
-
-            fields = [i[0] for i in cur.description]
-            results = cur.fetchall()
-            conn.commit()
-            #print Language.MSG_SUCCESS_SELECT
-            return fields, results
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'selecting', exception.message)
         except BaseException as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
 
-    def get(self, key, id, table_postfix="device"):
+    def insert(self, doc):
         """
-        Execute "SELECT" commands to retrieve rows from database.
-
-        @param key is an SQL statement
-        @param id defines the primary key as id
-        @param table_postfix is a value to determine the table with table prefix
-        @return columns header and results
-        """
-        conn = None
-        try:
-            conn = self.connect()
-            cur = conn.cursor()
-
-            # generate table with table prefix and postfix
-            table = self.table_prefix + "_" + table_postfix
-            cmd = SQL.SQL_SELECT_BY_KEY % \
-                  {
-                      'key': key,
-                      'table': table,
-                      'id': id
-                  }
-            cur.execute(cmd)
-            fields = [i[0] for i in cur.description]
-            results = cur.fetchall()
-            conn.commit()
-            #print Language.MSG_SUCCESS_SELECT
-            return fields, results
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'selecting', exception.message)
-        except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
-
-    def insert(self, cmd):
-        """
-        Execute "INSERT" SQL statements.
+        Execute "INSERT" Nosql statements.
 
         Insert objects to database expected json formats for inserting objects.
         @param cmd is an SQL statement
         @return new record id
         """
-        conn = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            rid = cur.fetchone()
-            conn.commit()
+            database = self.connect()
+            rid, rev = database.save(doc)
+            database.commit()
             if rid:
                 return rid
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'inserting', exception.message)
-        except RuntimeError as exception:
+        except BaseException as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
 
     def update(self, cmd):
         """
-        Execute "UPDATE" SQL statements.
+        Execute "UPDATE" Nosql statements.
 
         Update database objects with given values
 
         @param cmd is an SQL statement
         @return True or False
         """
-        conn = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            conn.commit()
+            database = self.connect()
+            database.update(cmd)
+            database.commit()
             return True
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
@@ -195,31 +156,25 @@ class CouchDriver(object):
         except RuntimeError as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
             return False
-        finally:
-            self.close_conn(conn)
 
-    def remove(self, cmd):
+    def remove(self, doc):
         """
         Execute "DELETE" SQL statements.
 
         Remove records from database objects with given values
 
-        @param cmd is an SQL statement
+        @param doc is a Couchdb document
         """
-        conn = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            conn.commit()
+            database = self.connect()
+            database.delete(doc)
+            database.commit()
             print Language.MSG_SUCCESS_REMOVE
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'removing', exception.message)
         except RuntimeError as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
 
     @classmethod
     def close_conn(cls, con):

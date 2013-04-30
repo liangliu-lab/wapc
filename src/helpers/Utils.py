@@ -55,7 +55,10 @@ class Utils(object):
         config_parser = ConfigParser.RawConfigParser()
         config_parser.read(Resources.__config__system__)
         self.environment = config_parser.get("system", "environment")
-        self.logdb = config_parser.getr("system", "logdb")
+        self.log_db = config_parser.get("system", "log_db")
+        self.master_db = config_parser.get("system", "master_db")
+        Resources.cfg_section_log_db = self.log_db
+        Resources.cfg_section_master_db = self.master_db
 
     @classmethod
     def get_clean_params(cls, args):

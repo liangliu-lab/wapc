@@ -52,9 +52,9 @@ class Main(object):
     #test and production
     def __init__(self):
         self.utils = Utils()
-        self.argparser = ArgParser()
+        self.arg_parser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
-        self.database = Database()
+        self.master_database = Database(self.utils.master_db)
 
     #this methods works fine do not touch it!!!
     def add(self, args):
@@ -67,8 +67,8 @@ class Main(object):
         try:
 
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 device_methods = DeviceMethods(params)
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
@@ -105,8 +105,8 @@ class Main(object):
         """
         try:
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 device_methods = DeviceMethods(params)
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
@@ -142,8 +142,8 @@ class Main(object):
         """
         try:
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 #check namespace variables if set
                 param_type = params.type.split()[0]
                 #moderate type value to determine the statement
@@ -168,11 +168,11 @@ class Main(object):
                             'No or wrong [type] argument provided')
                     )
 
-                fields, results = self.database.select(cmd)
+                fields, results = self.master_database.select(cmd)
                 if fields and results:
                     self.utils.formatter(fields, results)
                 else:
-                    raise self.database.DatabaseError(
+                    raise self.master_database.DatabaseError(
                         Language.MSG_ERR_GENERIC.format(
                             self.utils.get_line(),
                             "There is no record found on table"))
@@ -180,7 +180,7 @@ class Main(object):
                 print Language.MSG_CMD_LIST_HELP
         except TypeError as exception:
             print exception.message
-        except self.database.DatabaseError as exception:
+        except self.master_database.DatabaseError as exception:
             print exception.message
 
     def group(self, args):
@@ -193,8 +193,8 @@ class Main(object):
         group_id = None
         try:
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 if params.id and params.group:
                     device_id = params.id
                     group_id = params.group
@@ -212,7 +212,7 @@ class Main(object):
                         'added': self.now,
                         'modified': self.now
                     }
-                    self.database.insert(cmd)
+                    self.master_database.insert(cmd)
                     print Language.MSG_SUCCESS_ADD
                 else:
                     raise TypeError(
@@ -237,8 +237,8 @@ class Main(object):
         try:
             #moderate type value to determine the statement
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 device_methods = DeviceMethods(params)
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
@@ -279,8 +279,8 @@ class Main(object):
         try:
             #moderate type value to determine the statement
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 device_methods = DeviceMethods(params)
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
@@ -322,8 +322,8 @@ class Main(object):
         try:
             #moderate type value to determine the statement
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 device_methods = DeviceMethods(params)
                 group_methods = GroupMethods()
                 param_type = params.type.split()[0]
@@ -361,8 +361,8 @@ class Main(object):
 
         try:
             if args:
-                arglist = self.utils.get_clean_params(args)
-                params = self.argparser.get_args(arglist)
+                arg_list = self.utils.get_clean_params(args)
+                params = self.arg_parser.get_args(arg_list)
                 param_type = params.type.split()[0]
                 #set gathered id params to be used
                 if params.id:
@@ -408,7 +408,7 @@ class Main(object):
                 print Language.MSG_CMD_REMOVE_HELP
 
             if cmd:
-                self.database.remove(cmd)
+                self.master_database.remove(cmd)
             else:
                 raise RuntimeError("SQL command could not be created")
         except RuntimeError as exception:

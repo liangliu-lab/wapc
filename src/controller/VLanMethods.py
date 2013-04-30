@@ -24,7 +24,8 @@ class VLanMethods(threading.Thread):
             """
         super(VLanMethods, self).__init__()
         self.utils = Utils()
-        self.db = Database()
+        self.database = Database(Resources.cfg_section_master_db)
+        self.log_db = Database(Resources.cfg_section_log_db)
         self.ci = CommunicationInterface()
         self.script = Resources.ci_script
         self.cfg_device = Resources.cfg_device_resource

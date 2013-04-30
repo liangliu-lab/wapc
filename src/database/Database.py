@@ -51,13 +51,13 @@ class Database(object):
         self.__db_config__ = Resources.__db__config__
         self.__system_config__ = Resources.__config__system__
         self.__system_section__ = Resources.cfg_section_system
-        self.__section__ = Resources.cfg_section_postgre
+        self.__section__ = Resources.cfg_section_master_db
         self.utils = Utils()
         self.DatabaseError = db.DatabaseError
 
         # gather overall system configurations
         self.config = ConfigParser.RawConfigParser()
-        self.config.read(self.__system_section__)
+        self.config.read(self.__system_config__)
 
         # gather overall database configurations
         self.db_config = ConfigParser.RawConfigParser()
@@ -68,7 +68,7 @@ class Database(object):
         # with this instance
         self.type = type
         self.master_driver = PostgreDriver()
-        self.logdb_driver = CouchDriver()
+        self.log_db_driver = CouchDriver()
 
     def connect(self):
         """
@@ -80,11 +80,11 @@ class Database(object):
 
             #gather connection parameters from database config file
             if self.type == self.config.get(
-                    self.__system_section__, "masterdb"):
+                    self.__system_section__, "master_db"):
                 server = self.master_driver.connect()
             elif self.type == self.config.get(
-                    self.__system_section__, "couchdb"):
-                server = self.logdb_driver.connect()
+                    self.__system_section__, "log_db"):
+                server = self.log_db_driver.connect()
             return server
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
@@ -104,23 +104,19 @@ class Database(object):
         @param cmd is an SQL statement
         @return columns header and results
         """
-        conn = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            fields = [i[0] for i in cur.description]
-            results = cur.fetchall()
-            conn.commit()
-            #print Language.MSG_SUCCESS_SELECT
+            if self.type == self.config.get(
+                    self.__system_section__, "master_db"):
+                fields, results = self.master_driver.select(cmd)
+            elif self.type == self.config.get(
+                    self.__system_section__, "log_db"):
+                fields, results = self.log_db_driver.select(cmd)
             return fields, results
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
                 self.utils.get_line(), 'selecting', exception.message)
         except BaseException as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
 
     def get(self, key, id, table_postfix="device"):
         """
@@ -131,7 +127,6 @@ class Database(object):
         @param table_postfix is a value to determine the table with table prefix
         @return columns header and results
         """
-        conn = None
         try:
             conn = self.connect()
             cur = conn.cursor()
@@ -166,13 +161,14 @@ class Database(object):
         @param cmd is an SQL statement
         @return new record id
         """
-        conn = None
+        rid = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            rid = cur.fetchone()
-            conn.commit()
+            if self.type == self.config.get(
+                    self.__system_section__, "master_db"):
+                rid = self.master_driver.insert(cmd)
+            elif self.type == self.config.get(
+                    self.__system_section__, "log_db"):
+                rid = self.log_db_driver.insert(cmd)
             if rid:
                 return rid
         except self.DatabaseError as exception:
@@ -180,8 +176,6 @@ class Database(object):
                 self.utils.get_line(), 'inserting', exception.message)
         except RuntimeError as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
 
     def update(self, cmd):
         """
@@ -192,12 +186,13 @@ class Database(object):
         @param cmd is an SQL statement
         @return True or False
         """
-        conn = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            conn.commit()
+            if self.type == self.config.get(
+                    self.__system_section__, "master_db"):
+                self.master_driver.update(cmd)
+            elif self.type == self.config.get(
+                    self.__system_section__, "log_db"):
+                self.log_db_driver.update(cmd)
             return True
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
@@ -206,8 +201,6 @@ class Database(object):
         except RuntimeError as exception:
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
             return False
-        finally:
-            self.close_conn(conn)
 
     def remove(self, cmd):
         """
@@ -219,10 +212,12 @@ class Database(object):
         """
         conn = None
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-            cur.execute(cmd)
-            conn.commit()
+            if self.type == self.config.get(
+                    self.__system_section__, "master_db"):
+                self.master_driver.remove(cmd)
+            elif self.type == self.config.get(
+                    self.__system_section__, "log_db"):
+                self.log_db_driver.remove(cmd)
             print Language.MSG_SUCCESS_REMOVE
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
@@ -231,20 +226,6 @@ class Database(object):
             print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
         finally:
             self.close_conn(conn)
-
-    @classmethod
-    def close_conn(cls, con):
-        """
-        Close database live connection
-
-        @param cls class itself
-        @param con is initiated connection
-        """
-        try:
-            if con:
-                con.close()
-        except cls.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_CLOSE.format(exception.message)
 
 
 

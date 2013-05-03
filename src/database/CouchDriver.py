@@ -55,6 +55,7 @@ class CouchDriver(object):
         self.db_name = self.config.get(self.__section__, 'db_name')
         self.db_username = self.config.get(self.__section__, 'username')
         self.db_password = self.config.get(self.__section__, 'password')
+        self.database = self.connect()
 
     def connect(self):
         """
@@ -91,16 +92,15 @@ class CouchDriver(object):
         @return columns header and results
         """
         try:
-            database = self.connect()
             try:
-                rows = database.view(cmd)
+                rows = self.database.view(cmd)
                 fields = ['name', 'facility', 'timestamp', 'log revision',
                           'line number', 'host', 'long message', 'log id',
                           'method name', 'method']
                 results = []
                 for row in rows:
                     results.append(
-                        [v for k, v in dict(database[row.id]).items()]
+                        [v for k, v in dict(self.database[row.id]).items()]
                     )
                 return fields, results
             except self.DatabaseError as exception:
@@ -120,13 +120,12 @@ class CouchDriver(object):
         Execute "INSERT" Nosql statements.
 
         Insert objects to database expected json formats for inserting objects.
-        @param cmd is an SQL statement
+        @param doc is a couchdb document
         @return new record id
         """
         try:
-            database = self.connect()
-            rid, rev = database.save(doc)
-            database.commit()
+            rid, rev = self.database.save(doc)
+            self.database.commit()
             if rid:
                 return rid
         except self.DatabaseError as exception:
@@ -141,13 +140,12 @@ class CouchDriver(object):
 
         Update database objects with given values
 
-        @param cmd is an SQL statement
+        @param cmd is an Nosql statement
         @return True or False
         """
         try:
-            database = self.connect()
-            database.update(cmd)
-            database.commit()
+            self.database.update(cmd)
+            self.database.commit()
             return True
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(
@@ -166,9 +164,8 @@ class CouchDriver(object):
         @param doc is a Couchdb document
         """
         try:
-            database = self.connect()
-            database.delete(doc)
-            database.commit()
+            self.database.delete(doc)
+            self.database.commit()
             print Language.MSG_SUCCESS_REMOVE
         except self.DatabaseError as exception:
             print Language.MSG_ERR_DATABASE_ERROR.format(

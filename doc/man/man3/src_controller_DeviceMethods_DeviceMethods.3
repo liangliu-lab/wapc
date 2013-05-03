@@ -1,4 +1,4 @@
-.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.DeviceMethods.DeviceMethods" 3 "Thu May 2 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -45,6 +45,10 @@ Inherits \fBThread\fP\&.
 .RI "def \fBexecute_precommand\fP"
 .br
 .RI "\fIExecute pre-requested device commands\&. \fP"
+.ti -1c
+.RI "def \fBget_device_list\fP"
+.br
+.RI "\fIThis method gather all devices from inventory and return a list\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -53,7 +57,13 @@ Inherits \fBThread\fP\&.
 .RI "\fButils\fP"
 .br
 .ti -1c
+.RI "\fBlogger\fP"
+.br
+.ti -1c
 .RI "\fBdatabase\fP"
+.br
+.ti -1c
+.RI "\fBlog_database\fP"
 .br
 .ti -1c
 .RI "\fBcommunication_interface\fP"
@@ -129,6 +139,16 @@ If there is no parameter provided every required parameter will be gathered by a
 .PP
 Execute pre-requested device commands\&. \fBParameters:\fP
 .RS 4
+\fIdevice\fP 
+.br
+\fIcommands\fP 
+.br
+\fIconfig\fP 
+.br
+\fIinterface\fP 
+.br
+\fIrequest\fP 
+.br
 \fIparams\fP 
 .br
 \fIoption\fP 
@@ -136,6 +156,15 @@ Execute pre-requested device commands\&. \fBParameters:\fP
 .PP
 \fBReturns:\fP
 .RS 4
+.RE
+.PP
+
+.SS "def src\&.controller\&.DeviceMethods\&.DeviceMethods\&.get_device_list (self)"
+
+.PP
+This method gather all devices from inventory and return a list\&. \fBReturns:\fP
+.RS 4
+: 
 .RE
 .PP
 
@@ -161,6 +190,8 @@ This methods handle options and connect through device by given name\&. Params c
 .PP
 Show methods submit returns where sh commands came from\&. Show methods gathers parameter, read commands file regarding device brand, model etc and then generate a JSON file and execute this file with CommunicationInterface
 .PP
+: object 
+.PP
 \fBParameters:\fP
 .RS 4
 \fIparams\fP 
@@ -180,6 +211,10 @@ params comes from main class
 .SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.communication_interface"
 
 .SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.database"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.log_database"
+
+.SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.logger"
 
 .SS "src\&.controller\&.DeviceMethods\&.DeviceMethods\&.now"
 

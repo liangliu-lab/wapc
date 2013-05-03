@@ -22,6 +22,7 @@ limitations under the License.
 
 """
 import inspect
+import json
 import re
 from src.resources.Resources import Resources
 import src.helpers.Formatter as Formatter
@@ -57,6 +58,7 @@ class Utils(object):
         self.environment = config_parser.get("system", "environment")
         self.log_db = config_parser.get("system", "log_db")
         self.master_db = config_parser.get("system", "master_db")
+        self.daemon_timeout = config_parser.get("system", "daemon_timeout")
         Resources.cfg_section_log_db = self.log_db
         Resources.cfg_section_master_db = self.master_db
 
@@ -126,7 +128,7 @@ class Utils(object):
 
         @param cls class itself
 
-        @param type defines what sort of value will be validated.
+        @param stype defines what sort of value will be validated.
         Recently supported keys name, eth & ip
 
         @param source
@@ -163,7 +165,7 @@ class Utils(object):
                     .strftime(Resources.time_format)
             return source
         except ValueError as exception:
-            #Logging
+
             pass
 
     @classmethod
@@ -207,3 +209,26 @@ class Utils(object):
         communication_interface.write_source_file(request_config, target_file)
 
         return target_file
+
+    def command_exists(self, params):
+        """
+        Check if provided command exists or not
+        @param params:
+        @return:
+        """
+        from src.cli.CommunicationInterface import CommunicationInterface
+        communication_interface = CommunicationInterface()
+        config_source = communication_interface \
+            .get_source_config(Resources.cfg_device_resource)
+        #turn into dictionary from json
+        commands = json.loads(unicode(config_source))
+
+        # get/set option
+        if params.option:
+            option = params.option.strip()
+
+        # check if command exist in command list
+        if str(params.command + '_' + option) in commands:
+            return True
+        else:
+            return False

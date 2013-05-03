@@ -23,6 +23,7 @@ retrieve options and details and connect to device execute commands.
 @author <a href="mailto: fatih@karatana.com">fatih@karatana.com</a>
 @copyright Labris Technology
 """
+import socket
 
 from time import strftime, gmtime
 from src.resources.SQL import SQL
@@ -55,6 +56,7 @@ class Main(object):
         self.arg_parser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
         self.master_database = Database(self.utils.master_db)
+        #self.daemon.start()
 
     #this methods works fine do not touch it!!!
     def add(self, args):
@@ -93,7 +95,15 @@ class Main(object):
             else:
                 print Language.MSG_CMD_ADD_HELP
         except TypeError as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_set",
+                facility="ConsoleInterface.do_set",
+                host=socket.gethostname()
+            )
 
     #this methods works fine do not touch it!!!
     def edit(self, args):
@@ -239,6 +249,7 @@ class Main(object):
             if args:
                 arg_list = self.utils.get_clean_params(args)
                 params = self.arg_parser.get_args(arg_list)
+                params.command = "show"
                 device_methods = DeviceMethods(params)
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
@@ -247,10 +258,20 @@ class Main(object):
                 # noinspection PyArgumentList
                 if str(param_type).lower() == 'device':
                     # noinspection PyArgumentList
-                    device_methods.show(params)
+                    if self.utils.command_exists(params):
+                        print device_methods.show(params)
+                    else:
+                        print "You provided a command which is not in device "\
+                              "command json file.\nPlease check the option " \
+                              "'%s' then try again your command" % params.option
                 elif str(param_type).lower() == 'group':
                     # noinspection PyArgumentList
-                    group_methods.show(params)
+                    if self.utils.command_exists(params):
+                        print group_methods.show(params)
+                    else:
+                        print "You provided a command which is not in device "\
+                              "command json file.\nPlease check the option " \
+                              "'%s' then try again your command" % params.option
                 elif str(param_type).lower() == 'config':
                     # noinspection PyArgumentList
                     config_methods.show(params)
@@ -281,6 +302,7 @@ class Main(object):
             if args:
                 arg_list = self.utils.get_clean_params(args)
                 params = self.arg_parser.get_args(arg_list)
+                params.command = "set"
                 device_methods = DeviceMethods(params)
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
@@ -289,7 +311,6 @@ class Main(object):
                 # noinspection PyArgumentList
                 if str(param_type).lower() == 'device':
                     # noinspection PyArgumentList
-                    params.command = "set"
                     device_methods.set(params)
                 elif str(param_type).lower() == 'group':
                     # noinspection PyArgumentList
@@ -324,6 +345,7 @@ class Main(object):
             if args:
                 arg_list = self.utils.get_clean_params(args)
                 params = self.arg_parser.get_args(arg_list)
+                params.command = "unset"
                 device_methods = DeviceMethods(params)
                 group_methods = GroupMethods()
                 param_type = params.type.split()[0]

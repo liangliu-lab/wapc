@@ -130,11 +130,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aebef141b861958d68a7070e73a61207a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#aebef141b861958d68a7070e73a61207a">group</a></td></tr>
 <tr class="memitem:a1c68455e4c02daf00831679f27a5a8fc"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a1c68455e4c02daf00831679f27a5a8fc">execute_precommand</a></td></tr>
 <tr class="memdesc:a1c68455e4c02daf00831679f27a5a8fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute pre-requested device commands.  <a href="#a1c68455e4c02daf00831679f27a5a8fc"></a><br/></td></tr>
+<tr class="memitem:a0097cbfabd1e1daae38835752f1a8966"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a0097cbfabd1e1daae38835752f1a8966">get_device_list</a></td></tr>
+<tr class="memdesc:a0097cbfabd1e1daae38835752f1a8966"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method gather all devices from inventory and return a list.  <a href="#a0097cbfabd1e1daae38835752f1a8966"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac42fbdfabb616318c6370edf4aed01d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#ac42fbdfabb616318c6370edf4aed01d7">utils</a></td></tr>
+<tr class="memitem:a5cc4b821fe80db8ce8c1d42d7e58e601"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a5cc4b821fe80db8ce8c1d42d7e58e601">logger</a></td></tr>
 <tr class="memitem:a433d5f6c3d79cf852c04b81f8ffcc40b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a433d5f6c3d79cf852c04b81f8ffcc40b">database</a></td></tr>
+<tr class="memitem:ad277a0acfbc9575c1332dda701ea3515"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#ad277a0acfbc9575c1332dda701ea3515">log_database</a></td></tr>
 <tr class="memitem:a3c9a6dd5ab9af75a90545ec85ceb57d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a3c9a6dd5ab9af75a90545ec85ceb57d1">communication_interface</a></td></tr>
 <tr class="memitem:abb8c5132ab867199cb1fe32a5ce42e48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#abb8c5132ab867199cb1fe32a5ce42e48">script</a></td></tr>
 <tr class="memitem:ae641ca25530261013f543b59fea9e65f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#ae641ca25530261013f543b59fea9e65f">cfg_device</a></td></tr>
@@ -297,6 +301,11 @@ Public Attributes</h2></td></tr>
 <p>Execute pre-requested device commands. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">device</td><td></td></tr>
+    <tr><td class="paramname">commands</td><td></td></tr>
+    <tr><td class="paramname">config</td><td></td></tr>
+    <tr><td class="paramname">interface</td><td></td></tr>
+    <tr><td class="paramname">request</td><td></td></tr>
     <tr><td class="paramname">params</td><td></td></tr>
     <tr><td class="paramname">option</td><td></td></tr>
   </table>
@@ -312,6 +321,25 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node3" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#a5bdae3a3f109cb2ccf48757da767a535" title="This methods handle options and connect through device by given name." alt="" coords="300,5,495,51"/><area shape="rect" id="node5" href="../../d8/ddb/classsrc_1_1controller_1_1DeviceMethods_1_1DeviceMethods.html#aebef141b861958d68a7070e73a61207a" title="src.controller.DeviceMethods.\lDeviceMethods.group" alt="" coords="300,74,495,121"/></map>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a0097cbfabd1e1daae38835752f1a8966"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def src.controller.DeviceMethods.DeviceMethods.get_device_list </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method gather all devices from inventory and return a list. </p>
+<dl class="section return"><dt>Returns</dt><dd>: </dd></dl>
 
 </div>
 </div>
@@ -469,6 +497,7 @@ Here is the call graph for this function:</div>
 
 <p>Show methods submit returns where sh commands came from. </p>
 <p>Show methods gathers parameter, read commands file regarding device brand, model etc and then generate a JSON file and execute this file with CommunicationInterface</p>
+<p>: object </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">params</td><td></td></tr>
@@ -563,6 +592,30 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="ad277a0acfbc9575c1332dda701ea3515"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">src.controller.DeviceMethods.DeviceMethods.log_database</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5cc4b821fe80db8ce8c1d42d7e58e601"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">src.controller.DeviceMethods.DeviceMethods.logger</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a01d1ed9acaa08303ca0c278e4510a6a6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -617,7 +670,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 25 2013 09:50:25 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 2 2013 11:19:07 for Labris Wireless Access Point Controller by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

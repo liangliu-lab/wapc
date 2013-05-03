@@ -1,8 +1,7 @@
 <map id="src.database.PostgreDriver.PostgreDriver.insert" name="src.database.PostgreDriver.PostgreDriver.insert">
-<area shape="rect" id="node3" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a85f63dae4506d07b0d61b533ac81660b" title="Connect database with given parameters." alt="" coords="295,5,473,51"/>
-<area shape="rect" id="node5" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a54348f89752b537b3bace1242302b0a4" title="Connect database with given parameters." alt="" coords="251,75,517,104"/>
-<area shape="rect" id="node7" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#a3a0aa0fb980ba59c78c1451a1dde8adb" title="Connect database with given parameters." alt="" coords="292,127,476,174"/>
-<area shape="rect" id="node9" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a417b401f3bbe6b4d55ab9d33929e2802" title="Close database live connection." alt="" coords="295,197,473,243"/>
-<area shape="rect" id="node11" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a76e41bf494a17a89afd49d176f78af72" title="Close database live connection." alt="" coords="241,267,527,296"/>
-<area shape="rect" id="node13" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#af9bf9e1b422c46bf74a3d1a5a5d6ada0" title="Close database live connection." alt="" coords="292,319,476,366"/>
+<area shape="rect" id="node3" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a85f63dae4506d07b0d61b533ac81660b" title="Connect database with given parameters." alt="" coords="284,29,463,75"/>
+<area shape="rect" id="node6" href="$df/d61/classsrc_1_1database_1_1Database_1_1Database.html#a54348f89752b537b3bace1242302b0a4" title="Connect database with given parameters." alt="" coords="240,99,507,128"/>
+<area shape="rect" id="node8" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#a3a0aa0fb980ba59c78c1451a1dde8adb" title="Connect database with given parameters." alt="" coords="281,151,465,198"/>
+<area shape="rect" id="node10" href="$d8/d95/classsrc_1_1database_1_1CouchDriver_1_1CouchDriver.html#a417b401f3bbe6b4d55ab9d33929e2802" title="Close database live connection." alt="" coords="284,221,463,267"/>
+<area shape="rect" id="node12" href="$d1/d0d/classsrc_1_1database_1_1PostgreDriver_1_1PostgreDriver.html#af9bf9e1b422c46bf74a3d1a5a5d6ada0" title="Close database live connection." alt="" coords="281,290,465,337"/>
 </map>

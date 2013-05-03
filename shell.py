@@ -1,3 +1,4 @@
+#!/opt/python/bin/python
 # coding=utf-8
 
 """
@@ -152,27 +153,57 @@ usage group/device/config/vlan</li>
 </ul>
 
 <h1>REQUIREMENTS</h1>
-<h4>Databases</h4>
+<p><u>Database</u>:</p>
 <ul>
-<li>PostgreSQL 9.x</li>
-<li>CouchDB 1.2.x <br />
-Please see details http://pythonhosted.org/CouchDB/getting-started.html</li>
+<li>PostgreSQL</li>
+<li>CouchDB
+<ul>
+<li>/bin/sh</li>
+<li>/bin/sh</li>
+<li><a href="http://pkgs.org/download/chkconfig" class="external-link" rel="nofollow">chkconfig</a></li>
+<li><a href="http://pkgs.org/download/erlang-crypto" class="external-link" rel="nofollow">erlang-crypto</a></li>
+<li><a href="http://pkgs.org/download/erlang-erts" class="external-link" rel="nofollow">erlang-erts</a></li>
+<li><a href="http://pkgs.org/download/erlang-ibrowse" class="external-link" rel="nofollow">erlang-ibrowse &gt;= 2.2.0</a></li>
+<li><a href="http://pkgs.org/download/erlang-inets" class="external-link" rel="nofollow">erlang-inets</a></li>
+<li><a href="http://pkgs.org/download/erlang-kernel" class="external-link" rel="nofollow">erlang-kernel</a></li>
+<li><a href="http://pkgs.org/download/erlang-mochiweb" class="external-link" rel="nofollow">erlang-mochiweb</a></li>
+<li><a href="http://pkgs.org/download/erlang-oauth" class="external-link" rel="nofollow">erlang-oauth</a></li>
+<li><a href="http://pkgs.org/download/erlang-sasl" class="external-link" rel="nofollow">erlang-sasl</a></li>
+<li><a href="http://pkgs.org/download/erlang-stdlib" class="external-link" rel="nofollow">erlang-stdlib</a></li>
+<li><a href="http://pkgs.org/download/erlang-tools" class="external-link" rel="nofollow">erlang-tools</a></li>
+<li><a href="http://pkgs.org/download/initscripts" class="external-link" rel="nofollow">initscripts</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6" class="external-link" rel="nofollow">libc.so.6</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.0%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.0)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.1%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.1)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.1.3%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.1.3)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.3.4%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.3.4)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.4%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.4)</a></li>
+<li><a href="http://pkgs.org/download/libcrypt.so.1" class="external-link" rel="nofollow">libcrypt.so.1</a></li>
+<li><a href="http://pkgs.org/download/libcurl.so.3" class="external-link" rel="nofollow">libcurl.so.3</a></li>
+<li><a href="http://pkgs.org/download/libicudata.so.36" class="external-link" rel="nofollow">libicudata.so.36</a></li>
+<li><a href="http://pkgs.org/download/libicui18n.so.36" class="external-link" rel="nofollow">libicui18n.so.36</a></li>
+<li><a href="http://pkgs.org/download/libicuuc.so.36" class="external-link" rel="nofollow">libicuuc.so.36</a></li>
+<li><a href="http://pkgs.org/download/libjs.so.1" class="external-link" rel="nofollow">libjs.so.1</a></li>
+<li><a href="http://pkgs.org/download/libm.so.6" class="external-link" rel="nofollow">libm.so.6</a></li>
+<li><a href="http://pkgs.org/download/libpthread.so.0" class="external-link" rel="nofollow">libpthread.so.0</a></li>
+<li><a href="http://pkgs.org/download/rtld%28GNU_HASH%29" class="external-link" rel="nofollow">rtld(GNU_HASH)</a></li>
+<li><a href="http://pkgs.org/download/shadow-utils" class="external-link" rel="nofollow">shadow-utils</a></li></ul></li>
+</ul><p>&nbsp;</p><p><u>Python Libraries:</u></p><ul><li>argparse - built in</li>
+<li>enum - <a href="https://pypi.python.org/packages/source/e/enum/enum-0.4.4.tar.gz#md5=ce75c7c3c86741175a84456cc5bd531e" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/e/enum/enum-0.4.4.tar.gz#md5=ce75c7c3c86741175a84456cc5bd531e</a></li>
+<li>setuptools - <a href="https://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz#md5=7df2a529a074f613b509fb44feefe74e" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz#md5=7df2a529a074f613b509fb44feefe74e</a></li>
+<li>psycopg2 - <a href="https://pypi.python.org/packages/source/p/psycopg2/psycopg2-2.5.tar.gz#md5=facd82faa067e99b80146a0ee2f842f6" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/p/psycopg2/psycopg2-2.5.tar.gz#md5=facd82faa067e99b80146a0ee2f842f6</a></li>
+<li>couchdb - <a href="https://pypi.python.org/packages/source/C/CouchDB/CouchDB-0.9.tar.gz#md5=67afd226fed4c641eeb13a9930d334f7" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/C/CouchDB/CouchDB-0.9.tar.gz#md5=67afd226fed4c641eeb13a9930d334f7</a></li><li>ConfigParser - built in</li><li>json - built in</li>
 </ul>
-<h4>Libraries</h4>
-<h5>For Perl script</h5>
+<p>&nbsp;</p>
+<p><u>Perl Libraries:</u></p>
 <ul>
-<li>Readonly</li>
 <li>Try::Tiny</li>
 <li>Net::Telnet</li>
 <li>Net::Appliance::Session</li>
 <li>JSON</li>
-<li>Data::Dumper</li>
+<li>Data:: Dumper</li>
 </ul>
-<h5>For WAPC</h5>
-<ul>
-<li>ArgParse 1.x</li>
-<li>json</li>
-</li>
+
 
 <h1>LICENSE</h1>
 Copyright 2013 Labris Technology.
@@ -213,18 +244,32 @@ limitations under the License.
 </ul>
 """
 from src.cli.ConsoleInterface import ConsoleInterface
+from src.helpers.Utils import Utils
 from src.language.Language import Language
+from src.controller.Logger import Logger
+import socket
+
 
 __author__ = 'fatih'
 
 
 def __main__():
+    logger = Logger()
+    utils = Utils()
     try:
         print Language.MSG_APP_WELCOME
         print Language.MSG_APP_CMD_INIT
         ConsoleInterface().cmdloop_with_keyboard_interrupt()
     except BaseException as exception:
-        print exception.message
+        logger.create_log(
+            name="Shell.py Exception",
+            severity=logger.severity.ERROR,
+            line=utils.get_line(),
+            message=str(exception.message),
+            method="__main__",
+            facility="shell.main",
+            host=socket.gethostname()
+        )
     finally:
         ConsoleInterface().cmdloop_with_keyboard_interrupt()
 

@@ -1,4 +1,4 @@
-.TH "src.helpers.Utils.Utils" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.helpers.Utils.Utils" 3 "Thu May 2 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -46,6 +46,19 @@ Inherits \fBobject\fP\&.
 .RI "\fIThis method aims to wellform the given source into a zipped dictionary from keys and values\&. \fP"
 .ti -1c
 .RI "def \fBget_request_config\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBlog_db\fP"
+.br
+.ti -1c
+.RI "\fBmaster_db\fP"
+.br
+.ti -1c
+.RI "\fBdaemon_timeout\fP"
 .br
 .in -1c
 .SS "Static Public Attributes"
@@ -160,7 +173,7 @@ This method is used to validate given input source by type format such as IP, em
 .RS 4
 \fIcls\fP class itself
 .br
-\fItype\fP defines what sort of value will be validated\&. Recently supported keys name, eth & ip
+\fIstype\fP defines what sort of value will be validated\&. Recently supported keys name, eth & ip
 .br
 \fIsource\fP 
 .RE
@@ -187,7 +200,13 @@ This method aims to wellform the given source into a zipped dictionary from keys
 
 .SH "Member Data Documentation"
 .PP 
+.SS "src\&.helpers\&.Utils\&.Utils\&.daemon_timeout"
+
 .SS "src\&.helpers\&.Utils\&.Utils\&.environment = None\fC [static]\fP"
+
+.SS "src\&.helpers\&.Utils\&.Utils\&.log_db"
+
+.SS "src\&.helpers\&.Utils\&.Utils\&.master_db"
 
 .SS "src\&.helpers\&.Utils\&.Utils\&.now = None\fC [static]\fP"
 

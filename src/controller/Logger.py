@@ -45,6 +45,7 @@ class Logger(logging.getLoggerClass()):
         """
         self.utils = Utils()
         self.database = Database(self.utils.log_db)
+        self.severity = Log.severity
 
     def create_log(self, name, severity, line, message, method,
                    facility, host):
@@ -74,6 +75,7 @@ class Logger(logging.getLoggerClass()):
         """
         Gather logs by given params
         @param params to create query by given dict objects
+        @param opt to define which log documents will be gathered
         @return:
         """
         try:
@@ -82,6 +84,23 @@ class Logger(logging.getLoggerClass()):
             else:
                 cmd = params
             fields, results = self.database.select(cmd)
+            return self.utils.formatter(fields, results)
+        except BaseException as exception:
+            print exception.message
+
+    def delete_logs(self, params, opt='_all_docs'):
+        """
+        Delete log docs by given params
+        @param params to create query by given dict objects
+        @param opt to define which log documents will be gathered
+        @return:
+        """
+        try:
+            if opt == '_all_docs':
+                cmd = opt
+            else:
+                cmd = params
+            fields, results = self.database.remove(cmd)
             return self.utils.formatter(fields, results)
         except BaseException as exception:
             print exception.message

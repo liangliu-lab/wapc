@@ -8,5 +8,7 @@ var searchData=
   ['resources',['Resources',['../df/df6/classsrc_1_1resources_1_1Resources_1_1Resources.html',1,'src::resources::Resources']]],
   ['resources',['resources',['../d1/dc0/namespaceresources.html',1,'']]],
   ['resources_2epy',['Resources.py',['../df/d7a/Resources_8py.html',1,'']]],
-  ['root_5fpath',['ROOT_PATH',['../df/df6/classsrc_1_1resources_1_1Resources_1_1Resources.html#a438a2b0acdc5bee70f989d226532f2fd',1,'src::resources::Resources::Resources']]]
+  ['restart',['restart',['../d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#a6c1981ae651cf535894aaee3894683e4',1,'src::controller::Daemon::Daemon']]],
+  ['root_5fpath',['ROOT_PATH',['../df/df6/classsrc_1_1resources_1_1Resources_1_1Resources.html#a438a2b0acdc5bee70f989d226532f2fd',1,'src::resources::Resources::Resources']]],
+  ['run',['run',['../d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#a21f9970f0348f68693838857b557d8dd',1,'src::controller::Daemon::Daemon']]]
 ];

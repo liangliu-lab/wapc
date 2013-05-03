@@ -52,6 +52,8 @@ class Resources(object):
     device_load_command = INCLUDE_PATH + "load.json"
     device_tftp_file = '%(relation)s-config.conf'
     device_tftp_path = "/var/tftpboot/" + device_tftp_file
+    daemon_file = ROOT_PATH + "wapc.pid"
+    daemon_commands = ["ssid", "cpu", "memory", "clients"]
 
     #global device config file resource
     cfg_device_resource = CONFIG_PATH + "wapc_config.json"

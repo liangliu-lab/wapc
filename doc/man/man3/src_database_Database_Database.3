@@ -1,4 +1,4 @@
-.TH "src.database.Database.Database" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.database.Database.Database" 3 "Thu May 2 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -42,10 +42,6 @@ Inherits \fBobject\fP\&.
 .RI "def \fBremove\fP"
 .br
 .RI "\fIExecute 'DELETE' SQL statements\&. \fP"
-.ti -1c
-.RI "def \fBclose_conn\fP"
-.br
-.RI "\fIClose database live connection\&. \fP"
 .in -1c
 .SS "Public Attributes"
 
@@ -67,6 +63,12 @@ Inherits \fBobject\fP\&.
 .br
 .ti -1c
 .RI "\fBtype\fP"
+.br
+.ti -1c
+.RI "\fBmaster_driver\fP"
+.br
+.ti -1c
+.RI "\fBlog_db_driver\fP"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -98,17 +100,6 @@ Recently \fBDatabase\fP methods do all same thing such executing provided comman
 Constructor for \fBDatabase\fP class\&. 
 .SH "Member Function Documentation"
 .PP 
-.SS "def src\&.database\&.Database\&.Database\&.close_conn (cls, con)"
-
-.PP
-Close database live connection\&. \fBParameters:\fP
-.RS 4
-\fIcls\fP class itself 
-.br
-\fIcon\fP is initiated connection 
-.RE
-.PP
-
 .SS "def src\&.database\&.Database\&.Database\&.connect (self)"
 
 .PP
@@ -208,6 +199,10 @@ True or False
 .SS "src\&.database\&.Database\&.Database\&.DatabaseError"
 
 .SS "src\&.database\&.Database\&.Database\&.db_config"
+
+.SS "src\&.database\&.Database\&.Database\&.log_db_driver"
+
+.SS "src\&.database\&.Database\&.Database\&.master_driver"
 
 .SS "src\&.database\&.Database\&.Database\&.table_prefix"
 

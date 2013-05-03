@@ -1,4 +1,4 @@
-.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.controller.GroupMethods.GroupMethods" 3 "Thu May 2 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -60,6 +60,9 @@ Inherits \fBobject\fP\&.
 .RI "\fBdatabase\fP"
 .br
 .ti -1c
+.RI "\fBlog_database\fP"
+.br
+.ti -1c
 .RI "\fBcommunication_interface\fP"
 .br
 .ti -1c
@@ -97,14 +100,11 @@ Create a new group with given details in inventory\&. \fBParameters:\fP
 .PP
 Execute group commands\&. \fBParameters:\fP
 .RS 4
-\fIparams,:\fP 
-.br
-\fIgroup,:\fP 
+\fIparams\fP gathered params by command line arguments 
 .RE
 .PP
 \fBReturns:\fP
 .RS 4
-: 
 .RE
 .PP
 
@@ -173,6 +173,8 @@ Update the group by given id\&. \fBParameters:\fP
 .SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.communication_interface"
 
 .SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.database"
+
+.SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.log_database"
 
 .SS "src\&.controller\&.GroupMethods\&.GroupMethods\&.now"
 

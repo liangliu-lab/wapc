@@ -26,9 +26,12 @@ retrieve options and details and connect to device execute commands.
 """
 
 import cmd
+import socket
 import sys
+from src.controller.Logger import Logger
 from src.controller.main import Main
 from time import gmtime, strftime
+from src.helpers.Utils import Utils
 from src.resources.Resources import Resources
 
 
@@ -55,6 +58,8 @@ class ConsoleInterface(cmd.Cmd):
 
         # main class instance to handle  gathered command
         self.main = Main()
+        self.logger = Logger()
+        self.utils = Utils()
 
     def do_add(self, args):
         """
@@ -76,13 +81,21 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.add(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="add [args]",
+                facility="ConsoleInterface.do_add",
+                host=socket.gethostname()
+            )
 
-    def do_up(self, args):
+    def do_edit(self, args):
         """
-        up commands updates keys given with provided parameters in database.
+        edit command updates keys given with provided parameters in database.
 
-        Edit methods update only database records by not touching recent device
+        Edit method updates only database records by not touching recent device
         configuration. It is supposed that this operation is a soft update.
 
         @see Main.edit
@@ -93,7 +106,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.edit(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_edit",
+                facility="ConsoleInterface.do_up",
+                host=socket.gethostname()
+            )
 
     def do_group(self, args):
         """
@@ -109,7 +130,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.group(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_group",
+                facility="ConsoleInterface.do_group",
+                host=socket.gethostname()
+            )
 
     def do_set(self, args):
         """
@@ -126,7 +155,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.set(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_set",
+                facility="ConsoleInterface.do_set",
+                host=socket.gethostname()
+            )
 
     def do_unset(self, args):
         """
@@ -143,7 +180,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.unset(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_unset",
+                facility="ConsoleInterface.do_unset",
+                host=socket.gethostname()
+            )
 
     def do_ls(self, args):
         """
@@ -160,7 +205,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.list(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_ls",
+                facility="ConsoleInterface.do_ls",
+                host=socket.gethostname()
+            )
 
     def do_sh(self, args):
         """
@@ -180,7 +233,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.show(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_sh",
+                facility="ConsoleInterface.do_sh",
+                host=socket.gethostname()
+            )
 
     def do_rm(self, args):
         """
@@ -199,7 +260,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.remove(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_rm",
+                facility="ConsoleInterface.do_rm",
+                host=socket.gethostname()
+            )
 
     def do_selftest(self, args):
         """
@@ -208,6 +277,18 @@ class ConsoleInterface(cmd.Cmd):
 
         @param args
         """
+        try:
+            self.main.selftest(args)
+        except BaseException as exception:
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_selftest",
+                facility="ConsoleInterface.do_selftest",
+                host=socket.gethostname()
+            )
 
     def do_help(self, args):
         """
@@ -219,7 +300,15 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.help(args)
         except BaseException as exception:
-            print exception.message
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_help",
+                facility="ConsoleInterface.do_help",
+                host=socket.gethostname()
+            )
 
     def cmdloop_with_keyboard_interrupt(self):
         """

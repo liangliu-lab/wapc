@@ -24,8 +24,10 @@ limitations under the License.
 
 import json
 import os
+import socket
 import threading
 from time import strftime, gmtime
+import sys
 from src.cli.CommunicationInterface import CommunicationInterface
 from src.controller.Logger import Logger
 from src.resources.SQL import SQL
@@ -241,7 +243,6 @@ class DeviceMethods(threading.Thread):
             config.set_name(device.get_name())
             config.set_username(device.get_username())
             config.set_password(device.get_password())
-            config.set_ip(device.get_ip())
             config.set_enable_password(config.get_password())
             config.set_transport_protocol(
                 device.get_config().get_transport_protocol())
@@ -279,7 +280,7 @@ class DeviceMethods(threading.Thread):
             #    config, Resources.ci_source, 'JSON')
 
             #call communication interface script and gather response - RPC
-            print Language.MSG_EXE_REQUEST
+            #print Language.MSG_EXE_REQUEST
             resp = json.loads(
                 unicode(
                     self.communication_interface.
@@ -366,7 +367,7 @@ class DeviceMethods(threading.Thread):
             else:
                 print Language.MSG_ERR_COMM_INTERFACE_FAILED
         except RuntimeError as exception:
-            print exception.message
+            raise exception.message
 
     def read(self, cid):
         """
@@ -622,6 +623,7 @@ class DeviceMethods(threading.Thread):
         brand, model etc and then generate a JSON file and execute this file
         with CommunicationInterface
 
+        @rtype : object
         @param params
         """
         from src.controller.ConfigMethods import ConfigMethods
@@ -710,33 +712,51 @@ class DeviceMethods(threading.Thread):
                 os.remove(target_file)
 
                 #check if rpc is responded
+                response = None
                 if resp:
                     # check if wap is connected and returned with success
                     # status message 110
                     if resp['status'] == 110:
                         if not resp['message'] and resp['message'] is None:
-                            print "There is no active %(option)s" \
-                                  % {'option': option}
+                            response = "There is no active %(option)s" \
+                                       % {'option': option}
                         elif resp['message'] or resp['message'] is not None:
-                            print resp['message']
+                            response = resp['message']
                             #os.remove(Resources.ci_source)
                     else:
-                        print Language \
+                        response = Language \
                             .MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED \
                             .format(resp['message'])
                 else:
-                    print Language.MSG_ERR_COMM_INTERFACE_FAILED
+                    response = Language.MSG_ERR_COMM_INTERFACE_FAILED
+                return response
         except RuntimeError as exception:
-            print exception.message
-        except TypeError as exception:
-            print exception.message
+            self.logger.create_log(
+                name="DeviceMethods RuntimeError",
+                severity=self.logger.severity.WARNING,
+                line=self.utils.get_line(),
+                message=exception.message,
+                method="group",
+                facility="DeviceMethods.group",
+                host=socket.gethostname()
+            )
+        except BaseException as exception:
+            self.logger.create_log(
+                name="DeviceMethods BaseException",
+                severity=self.logger.severity.WARNING,
+                line=self.utils.get_line(),
+                message=exception.message,
+                method="group",
+                facility="DeviceMethods.group",
+                host=socket.gethostname()
+            )
 
     def group(self, params, queue, config=Config()):
         """
         Group set makes users to set handle group operations for set command.
         It can be done by user such as ssid, channel, associations, etc.
 
-        Group set moderated by @class Main and @method set by seperating type
+        Group set moderated by @class Main and @method set by separating type
         arguments such as group.
 
         Sample usage to reach this method is below:
@@ -751,7 +771,8 @@ class DeviceMethods(threading.Thread):
             #turn into dictionary from json
             commands = json.loads(unicode(config_source))
             # get/set option
-            option = params.option.strip()
+            if params.option:
+                option = params.option.strip()
 
             # get interface and param
             interface = params.interface.strip()
@@ -760,9 +781,15 @@ class DeviceMethods(threading.Thread):
 
             # check if command exist in command list
             if str(params.command + '_' + option) not in commands:
-                raise BaseException(
-                    "There is no command found on your device "
-                    "commands file '%s'" % option
+                self.logger.create_log(
+                    name="DeviceMethods Exception",
+                    severity=self.logger.severity.WARNING,
+                    line=self.utils.get_line(),
+                    message="There is no command found on your device "
+                            "commands file '%s'" % option,
+                    method="group",
+                    facility="DeviceMethods.group",
+                    host=socket.gethostname()
                 )
 
             #set request
@@ -821,8 +848,8 @@ class DeviceMethods(threading.Thread):
                     pass
                     # check if wap is connected and returned with success status
                     # message 110
-                #    if resp['status'] == 110:
-                #        print "Pre-request command(s) successfully executed"
+                    #    if resp['status'] == 110:
+                    #        print "Pre-request command(s) successfully executed"
 
             request.set_commands(
                 commands[
@@ -903,20 +930,50 @@ class DeviceMethods(threading.Thread):
                     #self.group(params, queue, config)
                 queue.put(response)
             else:
-                raise SystemError(Language.MSG_ERR_COMM_INTERFACE_FAILED)
-        except RuntimeError as exception:
-            raise BaseException(
-                Language.MSG_ERR_FILE_READ % {
+                self.logger.create_log(
+                    name="DeviceMethods Exception",
+                    severity=self.logger.severity.WARNING,
+                    line=self.utils.get_line(),
+                    message=Language.MSG_ERR_COMM_INTERFACE_FAILED,
+                    method="group",
+                    facility="DeviceMethods.group",
+                    host=socket.gethostname()
+                )
+        except UnboundLocalError as exception:
+            self.logger.create_log(
+                name="DeviceMethods UnboundLocalError",
+                severity=self.logger.severity.FATAL,
+                line=self.utils.get_line(),
+                message=Language.MSG_ERR_FILE_READ % {
                     'error': exception.message,
                     'file': str(Resources.cfg_device_resource)
-                }
+                },
+                method="group",
+                facility="DeviceMethods.group",
+                host=socket.gethostname()
             )
         except IOError as exception:
-            raise BaseException(
-                Language.MSG_ERR_FILE_READ % {
+            self.logger.create_log(
+                name="DeviceMethods IOError",
+                severity=self.logger.severity.FATAL,
+                line=self.utils.get_line(),
+                message=Language.MSG_ERR_FILE_READ % {
                     'error': exception.message,
                     'file': str(Resources.cfg_device_resource)
-                }
+                },
+                method="group",
+                facility="DeviceMethods.group",
+                host=socket.gethostname()
+            )
+        except BaseException as exception:
+            self.logger.create_log(
+                name="DeviceMethods BaseException",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="group",
+                facility="DeviceMethods.group",
+                host=socket.gethostname()
             )
 
     def execute_precommand(self, device,
@@ -925,6 +982,11 @@ class DeviceMethods(threading.Thread):
                            params, option):
         """
         Execute pre-requested device commands
+        @param device
+        @param commands
+        @param config
+        @param interface
+        @param request
         @param params
         @param option
         @return
@@ -983,3 +1045,13 @@ class DeviceMethods(threading.Thread):
                 if resp['status'] == 110:
                     #print "Pre-request command(s) successfully executed"
                     pass
+
+    def get_device_list(self):
+        """
+        This method gather all devices from inventory and return a list
+        @return:
+        """
+        cmd = SQL.SQL_SELECT_DEVICE_ALL
+        fields, results = self.database.select(cmd)
+        del fields
+        return results

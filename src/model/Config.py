@@ -41,7 +41,6 @@ class Config(dict):
         self["id"] = None
         self["name"] = 'Default Device'
         self["description"] = 'Default desc for device'
-        self["ip"] = "10.6.1.200"
         self["username"] = 'Cisco'
         self["password"] = 'Cisco'
         self["enable_password"] = 'Cisco'
@@ -106,21 +105,6 @@ class Config(dict):
         @return instance description
         """
         return self["description"]
-
-    def set_ip(self, inet):
-        """
-        Setter for ip
-
-        @param inet
-        """
-        self["ip"] = inet
-
-    def get_ip(self):
-        """
-        Getter for ip variable
-        return
-        """
-        return self["ip"]
 
     def set_username(self, username):
         """

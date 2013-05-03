@@ -1,4 +1,4 @@
-.TH "src.language.Language.Language" 3 "Thu Apr 25 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.TH "src.language.Language.Language" 3 "Thu May 2 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -22,6 +22,9 @@ Inherits \fBobject\fP\&.
 .SS "Static Public Attributes"
 
 .in +1c
+.ti -1c
+.RI "string \fBYES\fP = 'yes'"
+.br
 .ti -1c
 .RI "string \fBMSG_APP_WELCOME\fP = 'Welcome to Labris Wireless Access Point Controller'"
 .br
@@ -229,6 +232,15 @@ Inherits \fBobject\fP\&.
 .ti -1c
 .RI "string \fBMSG_STATUS_ADD_SUCCESS\fP = 'New %(type)s added:\\n ID: %(id)s\\nName:%(name)s'"
 .br
+.ti -1c
+.RI "\fBMSG_LOG_SERVER_CONNECTION_ABORTED\fP = \\"
+.br
+.ti -1c
+.RI "\fBMSG_ERR_LOG_SERVER_CONNECTION\fP = \\"
+.br
+.ti -1c
+.RI "string \fBMSG_LOG_SERVER_CONNECT_TRY\fP = 'Would you like to try to connect again?(yes):'"
+.br
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -355,6 +367,8 @@ Constructor of \fBLanguage\fP class\&.
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_IO_ERROR = 'Error occurred while connecting database '\fC [static]\fP"
 
+.SS "src\&.language\&.Language\&.Language\&.MSG_ERR_LOG_SERVER_CONNECTION = \\\fC [static]\fP"
+
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_NO_CONFIG_SECTION = 'No section found in config file'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_ERR_PARSER_EXCEPTION = 'Error occurred on parsing arguments ({0})'\fC [static]\fP"
@@ -367,6 +381,10 @@ Constructor of \fBLanguage\fP class\&.
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_INPUT_PARAM_OPTION = 'Please enter any %(param)s you would like to set:'\fC [static]\fP"
 
+.SS "string src\&.language\&.Language\&.Language\&.MSG_LOG_SERVER_CONNECT_TRY = 'Would you like to try to connect again?(yes):'\fC [static]\fP"
+
+.SS "src\&.language\&.Language\&.Language\&.MSG_LOG_SERVER_CONNECTION_ABORTED = \\\fC [static]\fP"
+
 .SS "string src\&.language\&.Language\&.Language\&.MSG_STATUS_ADD_SUCCESS = 'New %(type)s added:\\n ID: %(id)s\\nName:%(name)s'\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_ADD = 'Given values inserted to the database successfully '\fC [static]\fP"
@@ -378,6 +396,8 @@ Constructor of \fBLanguage\fP class\&.
 .SS "string src\&.language\&.Language\&.Language\&.MSG_SUCCESS_UPDATE = 'Record(s) successfully updated by given values\&. '\fC [static]\fP"
 
 .SS "string src\&.language\&.Language\&.Language\&.MSG_UPDATE_RECORD = 'Recorded {0} updated with record id {1} and with '\fC [static]\fP"
+
+.SS "string src\&.language\&.Language\&.Language\&.YES = 'yes'\fC [static]\fP"
 
 
 .SH "Author"

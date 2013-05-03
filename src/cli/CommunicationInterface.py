@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 CommunicationInterface class aims to handle files to provide
-a processed output for inherited metdhos running in application
+a processed output for inherited methods running in application
 
 @package cli
 @date Marh 13, 2013

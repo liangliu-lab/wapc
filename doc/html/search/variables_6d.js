@@ -1,6 +1,9 @@
 var searchData=
 [
   ['main',['main',['../d0/dab/classsrc_1_1cli_1_1ConsoleInterface_1_1ConsoleInterface.html#a718d145ff79395c7e93acfdb2a39d889',1,'src::cli::ConsoleInterface::ConsoleInterface']]],
+  ['master_5fdatabase',['master_database',['../d4/d2b/classsrc_1_1controller_1_1main_1_1Main.html#a60268e2819894193d062cd9724b0b592',1,'src::controller::main::Main']]],
+  ['master_5fdb',['master_db',['../d2/d76/classsrc_1_1helpers_1_1Utils_1_1Utils.html#a7f56095375e7436f1b197bad84edbde6',1,'src::helpers::Utils::Utils']]],
+  ['master_5fdriver',['master_driver',['../df/d61/classsrc_1_1database_1_1Database_1_1Database.html#aaaea5ad3b19f5a61b174827310d8ac1c',1,'src::database::Database::Database']]],
   ['msg_5fadd_5fbrand_5fhelp',['MSG_ADD_BRAND_HELP',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a691ef6b2fcd3f32c0242113e406a42e5',1,'src::language::Language::Language']]],
   ['msg_5fadd_5fchannel_5fhelp',['MSG_ADD_CHANNEL_HELP',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#ade80db547d3b72f2cbb25e8716a9fe50',1,'src::language::Language::Language']]],
   ['msg_5fadd_5fconfig',['MSG_ADD_CONFIG',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a880533dcf6b42fc4d287a7b7eddc8784',1,'src::language::Language::Language']]],
@@ -58,16 +61,20 @@ var searchData=
   ['msg_5ferr_5ffile_5fread',['MSG_ERR_FILE_READ',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a91579bf2f385039f2e6660de37cf8eb7',1,'src::language::Language::Language']]],
   ['msg_5ferr_5fgeneric',['MSG_ERR_GENERIC',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#af2916ea4593083c692cb90fda0a2310a',1,'src::language::Language::Language']]],
   ['msg_5ferr_5fio_5ferror',['MSG_ERR_IO_ERROR',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a04a4631f58391a9bc3c4060cf041d9f8',1,'src::language::Language::Language']]],
+  ['msg_5ferr_5flog_5fserver_5fconnection',['MSG_ERR_LOG_SERVER_CONNECTION',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a36e632e932cbdb4657674a12f3a492b5',1,'src::language::Language::Language']]],
   ['msg_5ferr_5fno_5fconfig_5fsection',['MSG_ERR_NO_CONFIG_SECTION',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#aa44a286685cccd915fa7186866b8cfd4',1,'src::language::Language::Language']]],
   ['msg_5ferr_5fparser_5fexception',['MSG_ERR_PARSER_EXCEPTION',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a2d89590b6d0132b85c19cc561ea9de34',1,'src::language::Language::Language']]],
   ['msg_5fexe_5frequest',['MSG_EXE_REQUEST',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a9801430f79e0a8519e48528192afc526',1,'src::language::Language::Language']]],
   ['msg_5finput_5fcustom',['MSG_INPUT_CUSTOM',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a7da2a0d07df7d58b4e6b4794a93b1f8c',1,'src::language::Language::Language']]],
   ['msg_5finput_5foption',['MSG_INPUT_OPTION',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a477d758f1b06e47fe4eb05c97cedfcad',1,'src::language::Language::Language']]],
   ['msg_5finput_5fparam_5foption',['MSG_INPUT_PARAM_OPTION',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a4641f6461a8ac1b08b7ef8b98280e3e6',1,'src::language::Language::Language']]],
+  ['msg_5flog_5fserver_5fconnect_5ftry',['MSG_LOG_SERVER_CONNECT_TRY',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a45ce04aefe48e205a3b3e069606004ae',1,'src::language::Language::Language']]],
+  ['msg_5flog_5fserver_5fconnection_5faborted',['MSG_LOG_SERVER_CONNECTION_ABORTED',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a602e4a3e240cc3bc5045fd90f72b8e56',1,'src::language::Language::Language']]],
   ['msg_5fstatus_5fadd_5fsuccess',['MSG_STATUS_ADD_SUCCESS',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a5f6a9c01aa0af79154baf7117acdab8b',1,'src::language::Language::Language']]],
   ['msg_5fsuccess_5fadd',['MSG_SUCCESS_ADD',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#acb518f2e74a33cc45ae427ef9bb2be61',1,'src::language::Language::Language']]],
   ['msg_5fsuccess_5fremove',['MSG_SUCCESS_REMOVE',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#abb38a1262425260f47f604f2107cc860',1,'src::language::Language::Language']]],
   ['msg_5fsuccess_5fselect',['MSG_SUCCESS_SELECT',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#ae407584978da28c441618392ca66ae3c',1,'src::language::Language::Language']]],
   ['msg_5fsuccess_5fupdate',['MSG_SUCCESS_UPDATE',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#a5824ca9aae1d4068cd1bb9c8e856daa5',1,'src::language::Language::Language']]],
-  ['msg_5fupdate_5frecord',['MSG_UPDATE_RECORD',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#ab4f4f39c172daa88e13ed00eab30043f',1,'src::language::Language::Language']]]
+  ['msg_5fupdate_5frecord',['MSG_UPDATE_RECORD',['../d1/d2a/classsrc_1_1language_1_1Language_1_1Language.html#ab4f4f39c172daa88e13ed00eab30043f',1,'src::language::Language::Language']]],
+  ['my_5fdaemon',['my_daemon',['../dc/d4f/namespacesrc_1_1controller_1_1Daemon.html#afeb56ccc8779a70fb9aae5bb36ddabcb',1,'src::controller::Daemon']]]
 ];

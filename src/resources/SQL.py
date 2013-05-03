@@ -185,7 +185,7 @@ class SQL(object):
                               "ad.name AS \"Device Name\"," \
                               "ac.name AS \"Config Name\", " \
                               "ac.description," \
-                              "ac.ip, " \
+                              "ad.ip, " \
                               "ac.radius," \
                               "ac.ssid," \
                               "ac.vlan," \
@@ -241,7 +241,6 @@ class SQL(object):
                         "VALUES(" \
                         "'%(name)s', " \
                         "'%(description)s', " \
-                        "'%(ip)s', " \
                         "'%(radius_config_id)s', " \
                         "'%(ssid)s', " \
                         "'%(vlan_id)s', " \

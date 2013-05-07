@@ -26,6 +26,7 @@ retrieve options and details and connect to device execute commands.
 import socket
 
 from time import strftime, gmtime
+from src.controller.Logger import Logger
 from src.resources.SQL import SQL
 from src.database.Database import Database
 from src.controller.VLanMethods import VLanMethods
@@ -56,6 +57,7 @@ class Main(object):
         self.arg_parser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
         self.master_database = Database(self.utils.master_db)
+        self.logger = Logger()
         #self.daemon.start()
 
     #this methods works fine do not touch it!!!
@@ -139,8 +141,17 @@ class Main(object):
                         self.utils.get_line(), 'No [type] argument provided')
             else:
                 print Language.MSG_CMD_EDIT_HELP
-        except TypeError as exception:
-            print exception.message
+        except BaseException as exception:
+            print Language.MSG_CMD_EDIT_HELP
+            self.logger.create_log(
+                name="Base Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="edit",
+                facility="Main.edit",
+                host=socket.gethostname()
+            )
 
     #this method works fine do not touch it!!!
     def list(self, args):
@@ -182,14 +193,31 @@ class Main(object):
                 if fields and results:
                     self.utils.formatter(fields, results)
                 else:
-                    raise self.master_database.DatabaseError(
-                        Language.MSG_ERR_GENERIC.format(
+                    print "There is no record found on table"
+                    self.logger.create_log(
+                        name="Base Exception",
+                        severity=self.logger.severity.INFO,
+                        line=self.utils.get_line(),
+                        message=Language.MSG_ERR_GENERIC.format(
                             self.utils.get_line(),
-                            "There is no record found on table"))
+                            "There is no record found on table"),
+                        method="edit",
+                        facility="Main.edit",
+                        host=socket.gethostname()
+                    )
             else:
                 print Language.MSG_CMD_LIST_HELP
-        except TypeError as exception:
-            print exception.message
+        except BaseException as exception:
+            print Language.MSG_CMD_LIST_HELP
+            self.logger.create_log(
+                name="Base Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=exception.message,
+                method="edit",
+                facility="Main.list",
+                host=socket.gethostname()
+            )
         except self.master_database.DatabaseError as exception:
             print exception.message
 
@@ -235,7 +263,16 @@ class Main(object):
             else:
                 print Language.MSG_CMD_GROUP_HELP
         except TypeError as exception:
-            print exception.message
+            print Language.MSG_CMD_GROUP_HELP
+            self.logger.create_log(
+                name="Base Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=exception.message,
+                method="edit",
+                facility="Main.group",
+                host=socket.gethostname()
+            )
 
     #this method works fine do not touch it!!!
     def show(self, args):
@@ -287,7 +324,16 @@ class Main(object):
             else:
                 print Language.MSG_CMD_SHOW_HELP
         except TypeError as exception:
-            print exception.message
+            print Language.MSG_CMD_SHOW_HELP
+            self.logger.create_log(
+                name="Base Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=exception.message,
+                method="edit",
+                facility="Main.show",
+                host=socket.gethostname()
+            )
 
     #this method works fine do not touch it!!!
     def set(self, args):
@@ -330,7 +376,16 @@ class Main(object):
             else:
                 print Language.MSG_CMD_SET_HELP
         except TypeError as exception:
-            print exception.message
+            print Language.MSG_CMD_SET_HELP
+            self.logger.create_log(
+                name="Base Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=exception.message,
+                method="edit",
+                facility="Main.set",
+                host=socket.gethostname()
+            )
 
     #this method works fine do not touch it!!!
     def unset(self, args):
@@ -426,13 +481,12 @@ class Main(object):
                         print Language.MSG_ERR_GENERIC.format(
                             self.utils.get_line(),
                             'No [type] argument provided')
+                if cmd:
+                    self.master_database.remove(cmd)
+                else:
+                    raise RuntimeError("SQL command could not be created")
             else:
                 print Language.MSG_CMD_REMOVE_HELP
-
-            if cmd:
-                self.master_database.remove(cmd)
-            else:
-                raise RuntimeError("SQL command could not be created")
         except RuntimeError as exception:
             print Language.MSG_ERR_GENERIC.format(self.utils.get_line(),
                                                   exception.message)

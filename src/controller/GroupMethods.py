@@ -101,9 +101,9 @@ class GroupMethods(object):
                     .format(self.utils.get_line(),
                             'inserting new group', group_id[0])
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=Language.MSG_ERR_GENERIC
                 .format(self.utils.get_line(), exception.message),
@@ -136,9 +136,9 @@ class GroupMethods(object):
                     .format(self.utils.get_line(),
                             "There is no group record found on table"))
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=Language.MSG_ERR_GENERIC
                 .format(self.utils.get_line(), exception.message),
@@ -172,9 +172,9 @@ class GroupMethods(object):
                     .format(self.utils.get_line(),
                             "There is no group record found on table"))
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=Language.MSG_ERR_GENERIC
                 .format(self.utils.get_line(), exception.message),
@@ -225,9 +225,9 @@ class GroupMethods(object):
                 params.id = raw_input(Language.MSG_ERR_EMPTY_ID.format('group'))
                 self.update(params)
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="update",
@@ -248,9 +248,9 @@ class GroupMethods(object):
             params.command = "set"
             self.exec_group(params)
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="set",
@@ -270,9 +270,9 @@ class GroupMethods(object):
             params.command = "unset"
             self.exec_group(params)
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="execute_commands",
@@ -289,9 +289,9 @@ class GroupMethods(object):
             params.command = "show"
             self.exec_group(params)
         except RuntimeError as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="show",
@@ -377,9 +377,9 @@ class GroupMethods(object):
                                     'updating recorded group', group.get_id())
             return return_response
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="GroupMethods Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="execute_commands",

@@ -28,7 +28,6 @@ retrieve options and details and connect to device execute commands.
 import cmd
 import socket
 import sys
-from src.controller.Logger import Logger
 from src.controller.main import Main
 from time import gmtime, strftime
 from src.helpers.Utils import Utils
@@ -58,7 +57,6 @@ class ConsoleInterface(cmd.Cmd):
 
         # main class instance to handle  gathered command
         self.main = Main()
-        self.logger = Logger()
         self.utils = Utils()
 
     def do_add(self, args):
@@ -81,9 +79,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.add(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="add [args]",
@@ -106,9 +104,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.edit(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_edit",
@@ -130,9 +128,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.group(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_group",
@@ -155,9 +153,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.set(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_set",
@@ -180,9 +178,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.unset(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_unset",
@@ -205,9 +203,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.list(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_ls",
@@ -233,9 +231,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.show(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_sh",
@@ -260,9 +258,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.remove(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_rm",
@@ -280,9 +278,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.selftest(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_selftest",
@@ -300,9 +298,9 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.help(args)
         except BaseException as exception:
-            self.logger.create_log(
+            self.utils.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
+                severity=self.utils.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_help",

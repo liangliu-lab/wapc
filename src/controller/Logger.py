@@ -23,9 +23,11 @@ limitations under the License.
 """
 
 import logging
+import time
 from src.model.Log import Log
 from src.helpers.Utils import Utils
 from src.database.Database import Database
+from src.resources.Resources import Resources
 
 
 class Logger(logging.getLoggerClass()):
@@ -46,6 +48,14 @@ class Logger(logging.getLoggerClass()):
         self.utils = Utils()
         self.database = Database(self.utils.log_db)
         self.severity = Log.severity
+        try:
+            # try to connect log db server
+            self.database.connect()
+            self.type = self.utils.log_db
+        except BaseException:
+            print "WARNING:\tLog server could not be reached. " \
+                  "System logs will be use as default."
+            self.type = "logging"
 
     def create_log(self, name, severity, line, message, method,
                    facility, host):
@@ -65,11 +75,23 @@ class Logger(logging.getLoggerClass()):
                   host)
         try:
             # write new log into log database
-            log_id = self.database.insert(log)
-            return log_id
+            if self.type == self.utils.log_db:
+                log_id = self.database.insert(log)
+                return log_id
+            else:
+                # send log into log file
+                logger = logging.getLogger('debug-log')
+                fh = logging.FileHandler(
+                    Resources.LOG_PATH % {'time': self.utils.day}
+                )
+                fh.setLevel(logging.DEBUG)
+                logger.addHandler(fh)
+                logger.error(log)
         except BaseException as exception:
-            print "some" + exception.message
-            pass
+            print "Error (%s) occurred on creating log method. " \
+                  "Trying to fix..." % {exception.message}
+            time.sleep(5000)
+            self.database.connect()
 
     def gather_logs(self, params, opt='_all_docs'):
         """

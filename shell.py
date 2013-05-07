@@ -254,13 +254,13 @@ __author__ = 'fatih'
 
 
 def __main__():
-    logger = Logger()
-    utils = Utils()
     try:
         print Language.MSG_APP_WELCOME
         print Language.MSG_APP_CMD_INIT
         ConsoleInterface().cmdloop_with_keyboard_interrupt()
     except BaseException as exception:
+        logger = Logger()
+        utils = Utils()
         logger.create_log(
             name="Shell.py Exception",
             severity=logger.severity.ERROR,

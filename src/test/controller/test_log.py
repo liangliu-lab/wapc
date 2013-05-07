@@ -31,8 +31,7 @@ __author__ = 'fatih'
 
 class LogTestCase(unittest.TestCase):
     def test_logger(self):
-        self.assertEqual(True, False)
-        self.asser
+        self.assertIn()
         my_logger = Logger()
         log_id = my_logger.create_log(
             'Test Log',

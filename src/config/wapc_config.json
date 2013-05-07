@@ -53,7 +53,7 @@
             }
         ]
     },
-    "set_maxclients":{
+    "set_maxclient":{
         "enable":true,
         "configure":true,
         "commands":[
@@ -145,7 +145,7 @@
         ]
     },
 
-    "show_maxclients":{
+    "show_maxclient":{
         "enable": true,
         "configure": false,
         "commands": [

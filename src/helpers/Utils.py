@@ -51,6 +51,7 @@ class Utils(object):
         @return
         """
         self.now = strftime(Resources.string_time, gmtime())
+        self.day = strftime(Resources.string_day, gmtime())
 
         # Get system environment from system configuration file
         config_parser = ConfigParser.RawConfigParser()

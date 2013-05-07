@@ -55,7 +55,7 @@ class CouchDriver(object):
         self.db_name = self.config.get(self.__section__, 'db_name')
         self.db_username = self.config.get(self.__section__, 'username')
         self.db_password = self.config.get(self.__section__, 'password')
-        self.database = self.connect()
+        self.database = None
 
     def connect(self):
         """
@@ -69,20 +69,18 @@ class CouchDriver(object):
             server.resource.credentials = (self.db_username, self.db_password)
             # check if log database exists otherwise create one
             try:
-                database = server[self.db_name]
-            except BaseException as exception:
-                print exception.message
+                self.database = server[self.db_name]
+            except BaseException:
                 server.create(self.db_name)
-                database = server[self.db_name]
-            return database
-        except couchdb.ServerError as exception:
-            print Language.MSG_ERR_LOG_SERVER_CONNECTION % exception.message
-            default = Language.YES
-            repeat = raw_input(Language.MSG_LOG_SERVER_CONNECT_TRY)
-            if repeat == default:
-                self.connect()
-            else:
-                raise Exception(Language.MSG_LOG_SERVER_CONNECTION_ABORTED)
+                self.database = server[self.db_name]
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_LOG_SERVER_CONNECTION %
+                {
+                    'command': 'connecting',
+                    'exception': exception.message
+                }
+            )
 
     def select(self, cmd):
         """
@@ -92,28 +90,24 @@ class CouchDriver(object):
         @return columns header and results
         """
         try:
-            try:
-                rows = self.database.view(cmd)
-                fields = ['name', 'facility', 'timestamp', 'log revision',
-                          'line number', 'host', 'long message', 'log id',
-                          'method name', 'method']
-                results = []
-                for row in rows:
-                    results.append(
-                        [v for k, v in dict(self.database[row.id]).items()]
-                    )
-                return fields, results
-            except self.DatabaseError as exception:
-                print Language.MSG_ERR_LOG_SERVER_CONNECTION % \
-                      {
-                          'command': "selecting database",
-                          'exception': exception.message
-                      }
+            rows = self.database.view(cmd)
+            fields = ['name', 'facility', 'timestamp', 'log revision',
+                      'line number', 'host', 'long message', 'log id',
+                      'method name', 'method']
+            results = []
+            for row in rows:
+                results.append(
+                    [v for k, v in dict(self.database[row.id]).items()]
+                )
+            return fields, results
         except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'selecting', exception.message)
-        except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            raise BaseException(
+                Language.MSG_ERR_LOG_SERVER_CONNECTION %
+                {
+                    'command': "selecting database",
+                    'exception': exception.message
+                }
+            )
 
     def insert(self, doc):
         """
@@ -128,11 +122,11 @@ class CouchDriver(object):
             self.database.commit()
             if rid:
                 return rid
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'inserting', exception.message)
         except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR.format(
+                    self.utils.get_line(), 'inserting', exception.message)
+            )
 
     def update(self, cmd):
         """
@@ -147,13 +141,11 @@ class CouchDriver(object):
             self.database.update(cmd)
             self.database.commit()
             return True
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'updating', exception.message)
-            return False
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-            return False
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR.format(
+                    self.utils.get_line(), 'updating', exception.message)
+            )
 
     def remove(self, doc):
         """
@@ -167,25 +159,11 @@ class CouchDriver(object):
             self.database.delete(doc)
             self.database.commit()
             print Language.MSG_SUCCESS_REMOVE
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'removing', exception.message)
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-
-    @classmethod
-    def close_conn(cls, con):
-        """
-        Close database live connection
-
-        @param cls class itself
-        @param con is initiated connection
-        """
-        try:
-            if con:
-                con.close()
-        except cls.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_CLOSE.format(exception.message)
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR.format(
+                    self.utils.get_line(), 'removing', exception.message)
+            )
 
 
 

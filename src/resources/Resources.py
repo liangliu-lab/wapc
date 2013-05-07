@@ -36,6 +36,7 @@ class Resources(object):
     INCLUDE_PATH = SOURCE_PATH + "include/"
     CONFIG_PATH = SOURCE_PATH + "config/"
     BACKUP_PATH = SOURCE_PATH + "backup/"
+    LOG_PATH = "/var/log/labris/wapc_%(time)s.log"
 
     #communication interface script
     ci_script = INCLUDE_PATH + "labris-wap-controller.pl"
@@ -73,6 +74,7 @@ class Resources(object):
     #global recent time format
     time_format = "%Y-%m-%d %H:%M:%S"
     string_time = "%Y%m%d_%H%M%S"
+    string_day = "%Y%m%d"
 
     #config file variables for system databases
     cfg_section_master_db = "master_db"

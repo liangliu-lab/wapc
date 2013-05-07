@@ -88,7 +88,7 @@ class Language(object):
                         "\n\t[-t],[--type]\tDefine type device, group, " \
                         "vlan, config " \
                         "\n\t[-o],[--option]\tProvide option must be one of " \
-                        "related type database fields\n\t" \
+                        "related type database fields" \
                         "\n\t[-P],[--param]\tProvide parameter to be " \
                         "update value"
 
@@ -341,7 +341,7 @@ class Language(object):
         "Please check your settings then restart shell"
 
     MSG_ERR_LOG_SERVER_CONNECTION = \
-        "Error occurred while %(command) Log server: %(exception)s"
+        "Error occurred while %(command)s Log server: %(exception)s"
 
     MSG_LOG_SERVER_CONNECT_TRY = "Would you like to try to connect again?(yes):"
 

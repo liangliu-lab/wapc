@@ -27,7 +27,6 @@ import os
 import socket
 import threading
 from time import strftime, gmtime
-import sys
 from src.cli.CommunicationInterface import CommunicationInterface
 from src.controller.Logger import Logger
 from src.resources.SQL import SQL
@@ -362,7 +361,7 @@ class DeviceMethods(threading.Thread):
                             Language.MSG_ERR_DATABASE_INSERT
                         )
                 else:
-                    print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED. \
+                    print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.\
                         format(resp['message'])
             else:
                 print Language.MSG_ERR_COMM_INTERFACE_FAILED

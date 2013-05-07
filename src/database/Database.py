@@ -81,21 +81,13 @@ class Database(object):
             #gather connection parameters from database config file
             if self.type == self.config.get(
                     self.__system_section__, "master_db"):
-                server = self.master_driver.connect()
+                        self.master_driver.connect()
             elif self.type == self.config.get(
                     self.__system_section__, "log_db"):
-                server = self.log_db_driver.connect()
-            return server
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'connecting', exception.message)
-        except ConfigParser.NoSectionError as exception:
-            print Language.MSG_ERR_NO_CONFIG_SECTION.format(exception.message)
-        except IOError as exception:
-            print Language.MSG_ERR_IO_ERROR.format(
-                exception.errno, exception.strerror)
+                        self.log_db_driver.connect()
+            return True
         except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            raise Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
 
     def select(self, cmd):
         """
@@ -112,11 +104,10 @@ class Database(object):
                     self.__system_section__, "log_db"):
                 fields, results = self.log_db_driver.select(cmd)
             return fields, results
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'selecting', exception.message)
         except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            )
 
     def get(self, key, id, table_postfix="device"):
         """

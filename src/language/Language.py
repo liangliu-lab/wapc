@@ -32,6 +32,34 @@ class Language(object):
         """
         Constructor of Language class
         """
+        self.MSG_ARG_DESC = self.MSG_ARG_DESC.format(
+            Language.MSG_CMD_ADD_HELP,
+            Language.MSG_CMD_EDIT_HELP,
+            Language.MSG_CMD_GROUP_HELP,
+            Language.MSG_CMD_SET_HELP,
+            Language.MSG_CMD_UNSET_HELP,
+            Language.MSG_CMD_LIST_HELP,
+            Language.MSG_CMD_SHOW_HELP,
+            Language.MSG_CMD_REMOVE_HELP,
+            Language.MSG_CMD_SELFTEST_HELP,
+            Language.MSG_ADD_ID_HELP,
+            Language.MSG_ADD_IP_HELP,
+            Language.MSG_ADD_NAME_HELP,
+            Language.MSG_ADD_USERNAME_HELP,
+            Language.MSG_ADD_PASSWORD_HELP,
+            Language.MSG_ADD_PARAM_HELP,
+            Language.MSG_ADD_GROUP_HELP,
+            Language.MSG_ADD_CONFIG,
+            Language.MSG_ADD_SUBNET_HELP,
+            Language.MSG_ADD_DEVICE_HELP,
+            Language.MSG_ADD_DESC_HELP,
+            Language.MSG_ADD_RADIUS_HELP,
+            Language.MSG_ADD_SSID_HELP,
+            Language.MSG_ADD_VLAN_HELP,
+            Language.MSG_ADD_CHANNEL_HELP,
+            Language.MSG_ADD_TYPE_HELP,
+            Language.MSG_ADD_OPTION_HELP
+        )
     #prompt messages
     YES = "yes"
 
@@ -47,7 +75,7 @@ class Language(object):
                                                   "occurred while " \
                                                   "executing command : {0}"
     MSG_ERR_ARG_PARSE_GET = "Get_args stopped with an error ({o})"
-    MSG_ERR_GENERIC = "Unknown error occurred on line {0} with error:\n{1}"
+    MSG_ERR_GENERIC = "An error occurred on line {0} with error:\n{1}"
 
     #argument parsing while cli statement messages
     MSG_ARG_DESC = 'Use methods below to add, remove, update and ' \
@@ -60,8 +88,8 @@ class Language(object):
     MSG_CMD_ADD_HELP = "\nUsage:\t$ add [OPTIONS]"\
                        "\n\tAdd device, group, vlan, config etc " \
                        "with given parameters " \
-                       "\n\t[-t],[--type]\tDefine type device, group, " \
-                       "vlan, config " \
+                       "\n\t[-t],[--type]\tDefine \"type\" that should be " \
+                       "one of \"device, group, vlan, config\" " \
                        "\n\t[-I],[--ip]\tUse this params when adding " \
                        "some new variables " \
                        "which needs an ip such as device, config, etc." \
@@ -276,17 +304,14 @@ class Language(object):
                              ' you would like to add'
     MSG_ERR_EMPTY_CONFIG = 'Please provide an CONFIG id for the {0}' \
                            ' you would like to add'
-    MSG_ERR_EMPTY_ID = 'There is no ID has been provided for the {0}' \
-                       ' you would like to connect.' \
+    MSG_ERR_EMPTY_ID = 'There is no ID has been provided' \
                        'Please make sure you provide an id' \
                        ' with -i, --id usage '
     MSG_ERR_EMPTY_OPTION = 'There is no Option has been provided for ' \
-                           'the {0} you would like to set.' \
                            'Please make sure you provide an option ' \
                            'with -o, --option usage '
 
     MSG_ERR_EMPTY_PARAMETER = 'There is no Parameter has been provided ' \
-                              'for the {0} you would like to set.' \
                               'Please make sure you provide an option ' \
                               'with -P, --param usage '
 
@@ -302,15 +327,18 @@ class Language(object):
                        "exception ({0}): {1}"
     MSG_ERR_FILE_BACKUP_FAILED = "Error occurred while backing up " \
                                  "file with exception({0})"
-    MSG_ERR_FILE_READ = "Error %(error)s occured when reading %(file)s"
+    MSG_ERR_FILE_READ = "Error %(error)s occurred when reading %(file)s"
 
     #database statement messages
-    MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on {0} line while ' \
-                             '{1} database with error: ({2})'
+    MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on database commands '\
+                             'with error: (%s)'
     MSG_ERR_DATABASE_INSERT = 'New record could not be inserted into ' \
                               'database. Please try again your command.'
+
+    MSG_ERR_DATABASE_UPDATE = 'Existing record could not be updated'
+
     MSG_ERR_DATABASE_CONNECT = "An unknown error occurred while connecting " \
-                               "database ({0})"
+                               "database (%s)"
     MSG_ERR_DATABASE_CLOSE = "Connection could not close because of ({0})"
 
     MSG_ERR_DATABASE_NORECORD = "There is no device record found on table"
@@ -344,6 +372,12 @@ class Language(object):
         "Error occurred while %(command)s Log server: %(exception)s"
 
     MSG_LOG_SERVER_CONNECT_TRY = "Would you like to try to connect again?(yes):"
+
+    MSG_ERR_ARGUMENT_PROVIDED = "No argument provided to execute command"
+
+    MSG_ERR_TYPE_ARGUMENT_PROVIDED = "No \"type\" provided to execute command"
+
+
 
 
 

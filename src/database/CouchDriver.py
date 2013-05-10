@@ -124,8 +124,7 @@ class CouchDriver(object):
                 return rid
         except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_ERROR.format(
-                    self.utils.get_line(), 'inserting', exception.message)
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
             )
 
     def update(self, cmd):
@@ -143,8 +142,7 @@ class CouchDriver(object):
             return True
         except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_ERROR.format(
-                    self.utils.get_line(), 'updating', exception.message)
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
             )
 
     def remove(self, doc):
@@ -161,8 +159,7 @@ class CouchDriver(object):
             print Language.MSG_SUCCESS_REMOVE
         except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_ERROR.format(
-                    self.utils.get_line(), 'removing', exception.message)
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
             )
 
 

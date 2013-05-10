@@ -71,16 +71,10 @@ class PostgreDriver(object):
                        " password=" + password + " host=" + host
             conn = db.connect(conn_str)
             return conn
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'connecting', exception.message)
-        except ConfigParser.NoSectionError as exception:
-            print Language.MSG_ERR_NO_CONFIG_SECTION.format(exception.message)
-        except IOError as exception:
-            print Language.MSG_ERR_IO_ERROR.format(
-                exception.errno, exception.strerror)
         except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_CONNECT % {exception.message}
+            )
 
     def select(self, cmd):
         """
@@ -99,11 +93,10 @@ class PostgreDriver(object):
             conn.commit()
             #print Language.MSG_SUCCESS_SELECT
             return fields, results
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'selecting', exception.message)
-        except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+        except BaseException:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_NORECORD
+            )
         finally:
             self.close_conn(conn)
 
@@ -135,11 +128,10 @@ class PostgreDriver(object):
             conn.commit()
             #print Language.MSG_SUCCESS_SELECT
             return fields, results
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'selecting', exception.message)
         except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
+            )
         finally:
             self.close_conn(conn)
 
@@ -160,11 +152,10 @@ class PostgreDriver(object):
             conn.commit()
             if rid:
                 return rid
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'inserting', exception.message)
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
+            )
         finally:
             self.close_conn(conn)
 
@@ -184,12 +175,10 @@ class PostgreDriver(object):
             cur.execute(cmd)
             conn.commit()
             return True
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'updating', exception.message)
-            return False
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
+            )
             return False
         finally:
             self.close_conn(conn)
@@ -209,11 +198,10 @@ class PostgreDriver(object):
             cur.execute(cmd)
             conn.commit()
             print Language.MSG_SUCCESS_REMOVE
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'removing', exception.message)
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
+            )
         finally:
             self.close_conn(conn)
 

@@ -96,11 +96,7 @@ class GroupMethods(object):
                           'id': group_id[0],
                           'name': group.get_name()
                       }
-            else:
-                print Language.MSG_ERR_DATABASE_ERROR \
-                    .format(self.utils.get_line(),
-                            'inserting new group', group_id[0])
-        except RuntimeError as exception:
+        except BaseException as exception:
             self.utils.logger.create_log(
                 name="GroupMethods Exception",
                 severity=self.utils.logger.severity.ERROR,
@@ -213,13 +209,7 @@ class GroupMethods(object):
                           "id": int(did)
                       }
 
-                if self.database.update(cmd):
-                    print Language.MSG_UPDATE_RECORD \
-                        .format('group', params.id, group.get_name())
-                else:
-                    print Language.MSG_ERR_DATABASE_ERROR \
-                        .format(self.utils.get_line(),
-                                'updating recorded group', did)
+                self.database.update(cmd)
             else:
                 print Language.MSG_ERR_EMPTY_ID
                 params.id = raw_input(Language.MSG_ERR_EMPTY_ID.format('group'))
@@ -368,13 +358,7 @@ class GroupMethods(object):
                         'value': params.param,
                         'group_id': int(group.get_id())
                     }
-                    if self.database.update(cmd):
-                        print Language.MSG_UPDATE_RECORD \
-                            .format('group', params.id, group.get_name())
-                    else:
-                        print Language.MSG_ERR_DATABASE_ERROR \
-                            .format(self.utils.get_line(),
-                                    'updating recorded group', group.get_id())
+                    self.database.update(cmd)
             return return_response
         except BaseException as exception:
             self.utils.logger.create_log(

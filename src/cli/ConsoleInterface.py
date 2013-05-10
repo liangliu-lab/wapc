@@ -28,9 +28,11 @@ retrieve options and details and connect to device execute commands.
 import cmd
 import socket
 import sys
+
 from src.controller.main import Main
 from time import gmtime, strftime
 from src.helpers.Utils import Utils
+from src.language.Language import Language
 from src.resources.Resources import Resources
 
 
@@ -58,6 +60,7 @@ class ConsoleInterface(cmd.Cmd):
         # main class instance to handle  gathered command
         self.main = Main()
         self.utils = Utils()
+        self.logger = self.main.logger
 
     def do_add(self, args):
         """
@@ -79,15 +82,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.add(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="add [args]",
                 facility="ConsoleInterface.do_add",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_ADD_HELP
 
     def do_edit(self, args):
         """
@@ -104,15 +108,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.edit(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_edit",
                 facility="ConsoleInterface.do_up",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_EDIT_HELP
 
     def do_group(self, args):
         """
@@ -128,15 +133,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.group(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_group",
                 facility="ConsoleInterface.do_group",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_GROUP_HELP
 
     def do_set(self, args):
         """
@@ -153,15 +159,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.set(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_set",
                 facility="ConsoleInterface.do_set",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_SET_HELP
 
     def do_unset(self, args):
         """
@@ -178,15 +185,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.unset(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_unset",
                 facility="ConsoleInterface.do_unset",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_UNSET_HELP
 
     def do_ls(self, args):
         """
@@ -203,15 +211,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.list(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_ls",
                 facility="ConsoleInterface.do_ls",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_LIST_HELP
 
     def do_sh(self, args):
         """
@@ -221,7 +230,7 @@ class ConsoleInterface(cmd.Cmd):
         Show device or group with given parameters
         Options can be one of: ssid, channel, ip, cpu, memory, channel, conf,
         firmware, model, serial, clients, run or any "show_" commands provided
-        in wapc_condif.json
+        in wapc_config.json
 
         @see Main().show()
         @param args [-t],[--type] Type of device or group
@@ -231,15 +240,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.show(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_sh",
                 facility="ConsoleInterface.do_sh",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_SHOW_HELP
 
     def do_rm(self, args):
         """
@@ -258,15 +268,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.remove(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_rm",
                 facility="ConsoleInterface.do_rm",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_REMOVE_HELP
 
     def do_selftest(self, args):
         """
@@ -278,15 +289,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.selftest(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_selftest",
                 facility="ConsoleInterface.do_selftest",
                 host=socket.gethostname()
             )
+            print Language.MSG_CMD_SELFTEST_HELP
 
     def do_help(self, args):
         """
@@ -298,15 +310,16 @@ class ConsoleInterface(cmd.Cmd):
         try:
             self.main.help(args)
         except BaseException as exception:
-            self.utils.logger.create_log(
+            self.logger.create_log(
                 name="ConsoleInterface Exception",
-                severity=self.utils.logger.severity.ERROR,
+                severity=self.logger.severity.ERROR,
                 line=self.utils.get_line(),
                 message=str(exception.message),
                 method="do_help",
                 facility="ConsoleInterface.do_help",
                 host=socket.gethostname()
             )
+            print Language.MSG_ARG_DESC
 
     def cmdloop_with_keyboard_interrupt(self):
         """
@@ -330,3 +343,14 @@ class ConsoleInterface(cmd.Cmd):
         @return Exits from application
         """
         return True
+
+    def emptyline(self):
+        """Called when an empty line is entered in response to the prompt.
+
+        If this method is not overridden, it repeats the last nonempty
+        command entered.
+
+        """
+        if self.lastcmd:
+            self.lastcmd = ""
+            return self.onecmd('\n')

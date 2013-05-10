@@ -118,14 +118,14 @@ class DeviceMethods(threading.Thread):
                 device.set_ip(params.ip.strip())
             else:
                 print Language.MSG_ERR_EMPTY_IP.format('device')
-                device.set_ip(raw_input("Please enter an IP address:"))
+                device.set_ip(raw_input("Please enter an IP address:").strip())
 
             # set device name to connect to the device
             if params.name:
                 device.set_name(params.name.strip())
             else:
                 print Language.MSG_ERR_EMPTY_NAME.format('device')
-                device.set_name(raw_input("Please enter an nick name:"))
+                device.set_name(raw_input("Please enter an nick name:").strip())
 
             # set device description to connect to the device
             if params.description:
@@ -138,14 +138,16 @@ class DeviceMethods(threading.Thread):
                 device.set_username(params.username.strip())
             else:
                 print Language.MSG_ERR_EMPTY_USERNAME.format('device')
-                device.set_username(raw_input("Please enter an username:"))
+                device.set_username(
+                    raw_input("Please enter an username:").strip())
 
             # set device password to connect to the device
             if params.password:
                 device.set_password(params.password.strip())
             else:
                 print Language.MSG_ERR_EMPTY_PASSWORD.format('device')
-                device.set_password(raw_input("Please enter a password:"))
+                device.set_password(
+                    raw_input("Please enter a password:").strip())
 
             # define config file path to initial a new device
             # ==============================================
@@ -442,18 +444,13 @@ class DeviceMethods(threading.Thread):
                               "id": int(did)
                           }
 
-                if self.database.update(cmd):
-                    print Language.MSG_UPDATE_RECORD.format(
-                        'device', did, device.get_name())
-                else:
-                    print Language.MSG_ERR_DATABASE_ERROR.format(
-                        self.utils.get_line(), 'updating recorded group', did)
+                self.database.update(cmd)
             else:
                 raise Exception(
                     "Error occured while getting required parameters "
                     "device 'id', option, and param")
-        except RuntimeError as exception:
-            print exception.message
+        except BaseException as exception:
+            raise exception.message
 
     # this method works fine do not touch it!!!
     def set(self, params):
@@ -610,8 +607,8 @@ class DeviceMethods(threading.Thread):
                             .format(resp['message'])
                 else:
                     print Language.MSG_ERR_COMM_INTERFACE_FAILED
-        except RuntimeError as exception:
-            print exception.message
+        except BaseException as exception:
+            raise exception.message
 
     # this method works fine do not touch it!!!
     def show(self, params):
@@ -729,16 +726,6 @@ class DeviceMethods(threading.Thread):
                 else:
                     response = Language.MSG_ERR_COMM_INTERFACE_FAILED
                 return response
-        except RuntimeError as exception:
-            self.logger.create_log(
-                name="DeviceMethods RuntimeError",
-                severity=self.logger.severity.WARNING,
-                line=self.utils.get_line(),
-                message=exception.message,
-                method="group",
-                facility="DeviceMethods.group",
-                host=socket.gethostname()
-            )
         except BaseException as exception:
             self.logger.create_log(
                 name="DeviceMethods BaseException",

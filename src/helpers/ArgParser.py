@@ -24,9 +24,10 @@ limitations under the License.
 import argparse
 from src.language.Language import Language
 from Queue import Empty
+from gettext import gettext as _
 
 
-class ArgParser(object):
+class ArgParser(argparse.ArgumentParser):
     """
     AgrParser is a class aims to parse arguments gathered from command line
     actually ConsoleInterface class.
@@ -35,16 +36,18 @@ class ArgParser(object):
     from Main controller and procssed by Utils.get_clean_params.
     """
 
-    parser = argparse.ArgumentParser(
-        description=Language.MSG_ARG_DESC,
-        version='v1.0.0',
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-    params = ''
-
     def __init__(self):
         """
             Constructor of ArgParser
         """
+        super(ArgParser, self).__init__()
+        language = Language()
+        self.description = language.MSG_ARG_DESC
+        self.version = 'v1.0.0'
+        self.formatter_class = argparse.RawDescriptionHelpFormatter
+        self.add_help = False
+
+        self.params = ''
         try:
             self.set_parser()
         except BaseException as exception:
@@ -97,95 +100,95 @@ class ArgParser(object):
         </ul>
         """
 
-        self.parser.add_argument('-b', '--brand',
-                                 dest='brand',
-                                 help=Language.MSG_ADD_BRAND_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-c', '--config',
-                                 dest='config',
-                                 help=Language.MSG_ADD_CONFIG,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-D', '--desc',
-                                 dest='description',
-                                 help=Language.MSG_ADD_DESC_HELP
-                                 )
-        self.parser.add_argument('-e', '--inet',
-                                 dest='interface',
-                                 help=Language.MSG_ADD_INTERFACE_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-F', '--firmware',
-                                 dest='firmware',
-                                 help=Language.MSG_ADD_FIRMWARE_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-g', '--group',
-                                 dest='group',
-                                 help=Language.MSG_ADD_GROUP_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-i', '--id',
-                                 dest='id',
-                                 help=Language.MSG_ADD_ID_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-I', '--ip',
-                                 dest='ip',
-                                 help=Language.MSG_ADD_IP_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-m', '--model',
-                                 dest='model',
-                                 help=Language.MSG_ADD_MODEL_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-n', '--name',
-                                 dest='name',
-                                 help=Language.MSG_ADD_NAME_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-o', '--option',
-                                 dest='option',
-                                 help=Language.MSG_ADD_OPTION_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-p', '--password',
-                                 dest='password',
-                                 help=Language.MSG_ADD_PASSWORD_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-P', '--param',
-                                 dest='param',
-                                 help=Language.MSG_ADD_PARAM_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-R', '--relation',
-                                 dest='relation',
-                                 help=Language.MSG_ADD_RELATION_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-s', '--subnet',
-                                 dest='subnet',
-                                 help=Language.MSG_ADD_SUBNET_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-t', '--type',
-                                 dest='type',
-                                 help=Language.MSG_ADD_TYPE_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-u', '--username',
-                                 dest='username',
-                                 help=Language.MSG_ADD_USERNAME_HELP,
-                                 action='store'
-                                 )
-        self.parser.add_argument('-V', '--vlan',
-                                 dest='vlan',
-                                 help=Language.MSG_ADD_VLAN_HELP,
-                                 action='store'
-                                 )
+        self.add_argument('-b', '--brand',
+                          dest='brand',
+                          help=Language.MSG_ADD_BRAND_HELP,
+                          action='store'
+        )
+        self.add_argument('-c', '--config',
+                          dest='config',
+                          help=Language.MSG_ADD_CONFIG,
+                          action='store'
+        )
+        self.add_argument('-D', '--desc',
+                          dest='description',
+                          help=Language.MSG_ADD_DESC_HELP
+        )
+        self.add_argument('-e', '--inet',
+                          dest='interface',
+                          help=Language.MSG_ADD_INTERFACE_HELP,
+                          action='store'
+        )
+        self.add_argument('-F', '--firmware',
+                          dest='firmware',
+                          help=Language.MSG_ADD_FIRMWARE_HELP,
+                          action='store'
+        )
+        self.add_argument('-g', '--group',
+                          dest='group',
+                          help=Language.MSG_ADD_GROUP_HELP,
+                          action='store'
+        )
+        self.add_argument('-i', '--id',
+                          dest='id',
+                          help=Language.MSG_ADD_ID_HELP,
+                          action='store'
+        )
+        self.add_argument('-I', '--ip',
+                          dest='ip',
+                          help=Language.MSG_ADD_IP_HELP,
+                          action='store'
+        )
+        self.add_argument('-m', '--model',
+                          dest='model',
+                          help=Language.MSG_ADD_MODEL_HELP,
+                          action='store'
+        )
+        self.add_argument('-n', '--name',
+                          dest='name',
+                          help=Language.MSG_ADD_NAME_HELP,
+                          action='store'
+        )
+        self.add_argument('-o', '--option',
+                          dest='option',
+                          help=Language.MSG_ADD_OPTION_HELP,
+                          action='store'
+        )
+        self.add_argument('-p', '--password',
+                          dest='password',
+                          help=Language.MSG_ADD_PASSWORD_HELP,
+                          action='store'
+        )
+        self.add_argument('-P', '--param',
+                          dest='param',
+                          help=Language.MSG_ADD_PARAM_HELP,
+                          action='store'
+        )
+        self.add_argument('-R', '--relation',
+                          dest='relation',
+                          help=Language.MSG_ADD_RELATION_HELP,
+                          action='store'
+        )
+        self.add_argument('-s', '--subnet',
+                          dest='subnet',
+                          help=Language.MSG_ADD_SUBNET_HELP,
+                          action='store'
+        )
+        self.add_argument('-t', '--type',
+                          dest='type',
+                          help=Language.MSG_ADD_TYPE_HELP,
+                          action='store'
+        )
+        self.add_argument('-u', '--username',
+                          dest='username',
+                          help=Language.MSG_ADD_USERNAME_HELP,
+                          action='store'
+        )
+        self.add_argument('-V', '--vlan',
+                          dest='vlan',
+                          help=Language.MSG_ADD_VLAN_HELP,
+                          action='store'
+        )
 
     def get_args(self, args):
         """
@@ -200,13 +203,34 @@ class ArgParser(object):
         @return parsed arguments as a namespace list
         """
         try:
-            if self.parser._get_args() is Empty:
-                self.params = self.parser.parse_known_args(args.split())
+            if self._get_args() is Empty:
+                self.params = self.parse_known_args(args.split())
             else:
-                self.params = self.parser.parse_args(args)
+                self.params = self.parse_args(args)
             return self.params
-        except RuntimeError as exception:
-            print Exception(
+        except BaseException as exception:
+            raise BaseException(
                 Language.MSG_ERR_ARG_PARSE_GET.format(exception.message)
             )
+
+    def parse_args(self, args=None, namespace=None):
+        args, argv = self.parse_known_args(args, namespace)
+        if argv:
+            msg = _('unrecognized arguments: %s')
+            self.error(msg % ' '.join(argv))
+        return args
+
+    def error(self, message):
+        """error(message: string)
+
+        Prints a usage message incorporating the message to stderr and
+        exits.
+
+        If you override this in a subclass, it should not return -- it
+        should either exit or raise an exception.
+        """
+        # self.print_usage(_sys.stderr)
+        # self.exit(2, _('%s: error: %s\n') % (self.prog, message))
+        raise BaseException('%s: error: %s\n') % (self.prog, message)
+
 

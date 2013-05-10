@@ -77,35 +77,29 @@ class Main(object):
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
                 vlan_methods = VLanMethods()
-                param_type = params.type.split()[0]
+
+                if params.type:
+                    param_type = params.type.split()[0]
+                    param_type = str(param_type).lower()
+
                 # noinspection PyArgumentList
-                if str(param_type).lower() == 'device':
+                if param_type == 'device':
                     # noinspection PyArgumentList
                     device_methods.create(params)
-                elif str(param_type).lower() == 'group':
+                elif param_type == 'group':
                     # noinspection PyArgumentList
                     group_methods.create(params)
-                elif str(param_type).lower() == 'config':
+                elif param_type == 'config':
                     # noinspection PyArgumentList
                     config_methods.create(params)
-                elif str(param_type).lower() == 'vlan':
+                elif param_type == 'vlan':
                     vlan_methods.create(params)
                 else:
-                    print Language.MSG_ERR_GENERIC.format(
-                        self.utils.get_line(),
-                        'No [type] argument provided')
+                    raise BaseException(Language.MSG_ERR_TYPE_ARGUMENT_PROVIDED)
             else:
-                print Language.MSG_CMD_ADD_HELP
-        except TypeError as exception:
-            self.logger.create_log(
-                name="ConsoleInterface Exception",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="do_set",
-                facility="ConsoleInterface.do_set",
-                host=socket.gethostname()
-            )
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     #this methods works fine do not touch it!!!
     def edit(self, args):
@@ -125,33 +119,24 @@ class Main(object):
                 vlan_methods = VLanMethods()
                 param_type = params.type.split()[0]
                 # noinspection PyArgumentList
-                if str(param_type).lower() == 'device':
+                if param_type == 'device':
                     # noinspection PyArgumentList
                     device_methods.update(params)
-                elif str(param_type).lower() == 'group':
+                elif param_type == 'group':
                     # noinspection PyArgumentList
                     group_methods.update(params)
-                elif str(param_type).lower() == 'config':
+                elif param_type == 'config':
                     # noinspection PyArgumentList
                     config_methods.update(params)
-                elif str(param_type).lower() == 'vlan':
+                elif param_type == 'vlan':
                     vlan_methods.update(params)
                 else:
                     print Language.MSG_ERR_GENERIC.format(
                         self.utils.get_line(), 'No [type] argument provided')
             else:
-                print Language.MSG_CMD_EDIT_HELP
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
         except BaseException as exception:
-            print Language.MSG_CMD_EDIT_HELP
-            self.logger.create_log(
-                name="Base Exception",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="edit",
-                facility="Main.edit",
-                host=socket.gethostname()
-            )
+            raise BaseException(exception.message)
 
     #this method works fine do not touch it!!!
     def list(self, args):
@@ -168,9 +153,9 @@ class Main(object):
                 #check namespace variables if set
                 param_type = params.type.split()[0]
                 #moderate type value to determine the statement
-                if str(param_type).lower() == 'group':
+                if param_type == 'group':
                     cmd = SQL.SQL_SELECT_GROUP_ALL
-                elif str(param_type).lower() == 'device':
+                elif param_type == 'device':
                     if params.group:
                         cmd = SQL.SQL_SELECT_DEVICE_FROM_GROUP % {
                             'group_id': int(params.group.strip())}
@@ -178,9 +163,9 @@ class Main(object):
                         cmd = SQL.SQL_SELECT_DEVICE % {'id': int(params.id)}
                     else:
                         cmd = SQL.SQL_SELECT_DEVICE_ALL
-                elif str(param_type).lower() == 'config':
+                elif param_type == 'config':
                     cmd = SQL.SQL_SELECT_CONFIG
-                elif str(param_type).lower() == 'vlan':
+                elif param_type == 'vlan':
                     cmd = SQL.SQL_SELECT_VLAN
                 else:
                     raise TypeError(
@@ -206,20 +191,9 @@ class Main(object):
                         host=socket.gethostname()
                     )
             else:
-                print Language.MSG_CMD_LIST_HELP
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
         except BaseException as exception:
-            print Language.MSG_CMD_LIST_HELP
-            self.logger.create_log(
-                name="Base Exception",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=exception.message,
-                method="edit",
-                facility="Main.list",
-                host=socket.gethostname()
-            )
-        except self.master_database.DatabaseError as exception:
-            print exception.message
+            raise BaseException(exception.message)
 
     def group(self, args):
         """
@@ -261,18 +235,9 @@ class Main(object):
                         )
                     )
             else:
-                print Language.MSG_CMD_GROUP_HELP
-        except TypeError as exception:
-            print Language.MSG_CMD_GROUP_HELP
-            self.logger.create_log(
-                name="Base Exception",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=exception.message,
-                method="edit",
-                facility="Main.group",
-                host=socket.gethostname()
-            )
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     #this method works fine do not touch it!!!
     def show(self, args):
@@ -293,26 +258,26 @@ class Main(object):
                 vlan_methods = VLanMethods()
                 param_type = params.type.split()[0]
                 # noinspection PyArgumentList
-                if str(param_type).lower() == 'device':
+                if param_type == 'device':
                     # noinspection PyArgumentList
                     if self.utils.command_exists(params):
                         print device_methods.show(params)
                     else:
-                        print "You provided a command which is not in device "\
+                        print "You provided a command which is not in device " \
                               "command json file.\nPlease check the option " \
                               "'%s' then try again your command" % params.option
-                elif str(param_type).lower() == 'group':
+                elif param_type == 'group':
                     # noinspection PyArgumentList
                     if self.utils.command_exists(params):
                         print group_methods.show(params)
                     else:
-                        print "You provided a command which is not in device "\
+                        print "You provided a command which is not in device " \
                               "command json file.\nPlease check the option " \
                               "'%s' then try again your command" % params.option
-                elif str(param_type).lower() == 'config':
+                elif param_type == 'config':
                     # noinspection PyArgumentList
                     config_methods.show(params)
-                elif str(param_type).lower() == 'vlan':
+                elif param_type == 'vlan':
                     vlan_methods.show(params)
                 else:
                     raise BaseException(
@@ -322,18 +287,9 @@ class Main(object):
                         )
                     )
             else:
-                print Language.MSG_CMD_SHOW_HELP
-        except TypeError as exception:
-            print Language.MSG_CMD_SHOW_HELP
-            self.logger.create_log(
-                name="Base Exception",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=exception.message,
-                method="edit",
-                facility="Main.show",
-                host=socket.gethostname()
-            )
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     #this method works fine do not touch it!!!
     def set(self, args):
@@ -355,16 +311,16 @@ class Main(object):
                 vlan_methods = VLanMethods()
                 param_type = params.type.split()[0]
                 # noinspection PyArgumentList
-                if str(param_type).lower() == 'device':
+                if param_type == 'device':
                     # noinspection PyArgumentList
                     device_methods.set(params)
-                elif str(param_type).lower() == 'group':
+                elif param_type == 'group':
                     # noinspection PyArgumentList
                     group_methods.set(params)
-                elif str(param_type).lower() == 'config':
+                elif param_type == 'config':
                     # noinspection PyArgumentList
                     config_methods.create(params)
-                elif str(param_type).lower() == 'vlan':
+                elif param_type == 'vlan':
                     vlan_methods.create(params)
                 else:
                     raise TypeError(
@@ -374,18 +330,9 @@ class Main(object):
                         )
                     )
             else:
-                print Language.MSG_CMD_SET_HELP
-        except TypeError as exception:
-            print Language.MSG_CMD_SET_HELP
-            self.logger.create_log(
-                name="Base Exception",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=exception.message,
-                method="edit",
-                facility="Main.set",
-                host=socket.gethostname()
-            )
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     #this method works fine do not touch it!!!
     def unset(self, args):
@@ -405,11 +352,11 @@ class Main(object):
                 group_methods = GroupMethods()
                 param_type = params.type.split()[0]
                 # noinspection PyArgumentList
-                if str(param_type).lower() == 'device':
+                if param_type == 'device':
                     # noinspection PyArgumentList
                     params.command = "unset"
                     device_methods.set(params)
-                elif str(param_type).lower() == 'group':
+                elif param_type == 'group':
                     # noinspection PyArgumentList
                     group_methods.unset(params)
                 else:
@@ -420,9 +367,9 @@ class Main(object):
                         )
                     )
             else:
-                print Language.MSG_CMD_UNSET_HELP
-        except TypeError as exception:
-            print exception.message
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     #this method works fine do not touch it!!!
     def remove(self, args):
@@ -440,31 +387,40 @@ class Main(object):
             if args:
                 arg_list = self.utils.get_clean_params(args)
                 params = self.arg_parser.get_args(arg_list)
-                param_type = params.type.split()[0]
+
                 #set gathered id params to be used
+                if params.type:
+                    param_type = params.type.split()[0]
+                    param_type = str(param_type).lower()
+                else:
+                    param_type = raw_input("Please provide a type:")\
+                        .strip()
+                    param_type = str(param_type).lower()
+
                 if params.id:
-                    param_id = params.id.rstrip().lstrip()
+                    param_id = params.id.strip()
                 elif params.name:
-                    param_name = params.name.rstrip().lstrip()
+                    param_name = params.name.strip()
                 else:
                     print Language.MSG_ERR_EMPTY_ID + \
-                        '\n' + Language.MSG_ERR_EMPTY_NAME
+                          '\n' + Language.MSG_ERR_EMPTY_NAME
 
                 if param_type and param_id or param_name:
-                    if str(param_type).lower() == 'group':
+                    if param_type == 'group':
                         cmd = SQL.SQL_REMOVE_GROUP % {'id': int(param_id)}
 
                     #check if type is device to remove the group
                     # belong to given id and name
-                    elif str(param_type).lower() == 'device':
+                    elif param_type == 'device':
                         cmd = SQL.SQL_REMOVE_DEVICE % {'id': int(param_id)}
 
                     #check if type is config to remove the group
                     # belong to given id and name
-                    elif str(param_type).lower() == 'config':
+                    elif param_type == 'config':
                         cmd = SQL.SQL_REMOVE_CONFIG % {'id': int(param_id)}
+
                     #remove from given device from given group
-                    elif str(param_type).lower() == 'from':
+                    elif param_type == 'from':
                         if params.group:
                             group_id = params.group.rstrip().lstrip()
                             cmd = SQL.SQL_REMOVE_DEVICE_FROM_GROUP % {
@@ -475,21 +431,29 @@ class Main(object):
                             )
 
                     #remove vlan record from database
-                    elif str(param_type).lower() == 'vlan':
+                    elif param_type == 'vlan':
                         cmd = SQL.SQL_REMOVE_VLAN % {'id': int(param_id)}
                     else:
-                        print Language.MSG_ERR_GENERIC.format(
-                            self.utils.get_line(),
-                            'No [type] argument provided')
+                        raise BaseException("No [type] argument provided")
+
                 if cmd:
                     self.master_database.remove(cmd)
+                    self.logger.create_log(
+                        name="Shell.py Exception",
+                        severity=self.logger.severity.INFO,
+                        line=self.utils.get_line(),
+                        message="Given %(type)s",
+                        method="__main__",
+                        facility="shell.main",
+                        host=socket.gethostname()
+                    )
                 else:
-                    raise RuntimeError("SQL command could not be created")
+                    raise BaseException("SQL command could not be created")
+
             else:
-                print Language.MSG_CMD_REMOVE_HELP
-        except RuntimeError as exception:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(),
-                                                  exception.message)
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     #this method works fine do not touch it!!!
     @classmethod

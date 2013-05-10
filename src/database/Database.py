@@ -104,9 +104,9 @@ class Database(object):
                     self.__system_section__, "log_db"):
                 fields, results = self.log_db_driver.select(cmd)
             return fields, results
-        except BaseException as exception:
+        except BaseException:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+                Language.MSG_ERR_DATABASE_NORECORD
             )
 
     def get(self, key, id, table_postfix="device"):
@@ -136,13 +136,10 @@ class Database(object):
             conn.commit()
             #print Language.MSG_SUCCESS_SELECT
             return fields, results
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'selecting', exception.message)
-        except BaseException as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
+        except BaseException:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_NORECORD
+            )
 
     def insert(self, cmd):
         """
@@ -162,11 +159,10 @@ class Database(object):
                 rid = self.log_db_driver.insert(cmd)
             if rid:
                 return rid
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'inserting', exception.message)
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
+        except BaseException:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_INSERT
+            )
 
     def update(self, cmd):
         """
@@ -185,13 +181,10 @@ class Database(object):
                     self.__system_section__, "log_db"):
                 self.log_db_driver.update(cmd)
             return True
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'updating', exception.message)
-            return False
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-            return False
+        except BaseException:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_UPDATE
+            )
 
     def remove(self, cmd):
         """
@@ -201,7 +194,6 @@ class Database(object):
 
         @param cmd is an SQL statement
         """
-        conn = None
         try:
             if self.type == self.config.get(
                     self.__system_section__, "master_db"):
@@ -210,13 +202,10 @@ class Database(object):
                     self.__system_section__, "log_db"):
                 self.log_db_driver.remove(cmd)
             print Language.MSG_SUCCESS_REMOVE
-        except self.DatabaseError as exception:
-            print Language.MSG_ERR_DATABASE_ERROR.format(
-                self.utils.get_line(), 'removing', exception.message)
-        except RuntimeError as exception:
-            print Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
-        finally:
-            self.close_conn(conn)
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_DATABASE_ERROR % {exception.message}
+            )
 
 
 

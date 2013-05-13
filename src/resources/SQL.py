@@ -53,24 +53,24 @@ class SQL(object):
                         "ac.vlan," \
                         "ac.channel," \
                         "ac.frequency," \
-                        "ac.maxclients," \
+                        "ac.maxclient," \
                         "ac.id AS \"Configuration\", " \
                         "ad.date_added \"Add Date\", " \
                         "ad.date_modified AS \"Last Modified\" " \
                         "FROM apc_device AS ad " \
-                        "INNER JOIN apc_config AS ac ON ad.config_id = ac.id " \
+                        "INNER JOIN apc_config AS ac ON ad.id = ac.belong_to " \
                         "WHERE ad.name IS NOT NULL AND ad.id = %(id)d" \
                         "ORDER BY DATE(ad.date_added);"
 
     SQL_SELECT_DEVICE_CONFIG = "SELECT * " \
                                "FROM apc_device d " \
-                               "LEFT JOIN apc_config c ON d.config_id = c.id " \
+                               "LEFT JOIN apc_config c ON d.id = c.belong_to " \
                                "WHERE d.id = {0};"
 
     SQL_SELECT_BY_KEY = "SELECT %(key)s " \
                         "FROM %(table)s ad " \
                         "LEFT JOIN apc_config ac " \
-                        "ON ad.config_id = ac.id " \
+                        "ON ad.id = ac.belong_to " \
                         "WHERE ad.id = %(id)d;"
 
     SQL_SELECT_DEVICE_ALL = "SELECT ad.id, " \
@@ -83,32 +83,38 @@ class SQL(object):
                             "ad.model," \
                             "ad.firmware," \
                             "ad.relation," \
+                            "ac.id AS \"CONFIGURATION\", " \
                             "ac.radius," \
                             "ac.ssid," \
                             "ac.vlan," \
                             "ac.channel," \
                             "ac.frequency," \
-                            "ac.maxclients," \
+                            "ac.maxclient," \
                             "ad.date_added \"Add Date\", " \
                             "ad.date_modified AS \"Last Modified\" " \
                             "FROM apc_device AS ad " \
                             "INNER JOIN apc_config AS ac ON " \
-                            "ad.config_id = ac.id " \
+                            "ad.id = ac.belong_to " \
                             "WHERE ad.name IS NOT NULL " \
                             "ORDER BY DATE(ad.date_added);"
 
-    SQL_SELECT_DEVICE_FROM_GROUP = "SELECT " \
-                                   "ad.id , " \
+    SQL_SELECT_DEVICE_FROM_GROUP = "SELECT ad.id, " \
                                    "ad.name, " \
-                                   "ad. description, " \
+                                   "ad.description, " \
                                    "ad.ip, " \
                                    "ad.username, " \
-                                   "ad.password, " \
+                                   "ad.password," \
                                    "ad.brand," \
                                    "ad.model," \
                                    "ad.firmware," \
                                    "ad.relation," \
-                                   "ad.config_id AS \"Configuration\"," \
+                                   "ac.id AS \"CONFIGURATION\", " \
+                                   "ac.radius," \
+                                   "ac.ssid," \
+                                   "ac.vlan," \
+                                   "ac.channel," \
+                                   "ac.frequency," \
+                                   "ac.maxclient," \
                                    "ad.date_added \"Add Date\", " \
                                    "ad.date_modified AS \"Last Modified\" " \
                                    "FROM apc_device AS ad " \
@@ -116,19 +122,21 @@ class SQL(object):
                                    "ad.id = adg.device_id " \
                                    "RIGHT JOIN apc_groups AS ag ON " \
                                    "ag.id = adg.group_id " \
+                                   "INNER JOIN apc_config AS ac ON " \
+                                   "ad.id = ac.belong_to " \
                                    "WHERE ag.id = %(group_id)d;"
 
     # select config records
     SQL_SELECT_CONFIG = "SELECT ac.id AS \"ID\"," \
                         "ac.name AS \"Name\", " \
+                        "ac.belong_to AS \"Belong\"," \
                         "ac.description," \
-                        "ac.ip, " \
                         "ac.radius," \
                         "ac.ssid," \
                         "ac.vlan," \
                         "ac.channel," \
                         "ac.frequency," \
-                        "ac.maxclients," \
+                        "ac.maxclient," \
                         "ac.username," \
                         "ac.password," \
                         "ac.enable_password," \
@@ -142,13 +150,12 @@ class SQL(object):
     SQL_SELECT_CONFIG_DETAIL = "SELECT ac.id AS \"ID\"," \
                                "ac.name AS \"Name\", " \
                                "ac.description," \
-                               "ac.ip, " \
                                "ac.radius," \
                                "ac.ssid," \
                                "ac.vlan," \
                                "ac.channel," \
                                "ac.frequency," \
-                               "ac.maxclients," \
+                               "ac.maxclient," \
                                "ac.username," \
                                "ac.password," \
                                "ac.enable_password," \
@@ -163,7 +170,6 @@ class SQL(object):
     SQL_SELECT_GROUP_DETAIL = "SELECT id AS ID, " \
                               "name, " \
                               "description, " \
-                              "config_id AS \"Configuration\", " \
                               "date_added AS \"Add Date\", " \
                               "date_modified AS \"Last Modified\"" \
                               "FROM apc_groups g " \
@@ -173,7 +179,6 @@ class SQL(object):
     SQL_SELECT_GROUP_ALL = "SELECT id AS ID, " \
                            "name, " \
                            "description, " \
-                           "config_id AS \"Configuration\", " \
                            "date_added AS \"Add Date\", " \
                            "date_modified AS \"Last Modified\"" \
                            "FROM apc_groups d " \
@@ -191,7 +196,7 @@ class SQL(object):
                               "ac.vlan," \
                               "ac.channel," \
                               "ac.frequency," \
-                              "ac.maxclients," \
+                              "ac.maxclient," \
                               "ac.username," \
                               "ac.password," \
                               "ac.enable_password," \
@@ -201,16 +206,12 @@ class SQL(object):
                               "ac.date_modified AS \"Last Modified\"" \
                               "FROM apc_config AS ac " \
                               "LEFT JOIN apc_device AS ad ON " \
-                              "ad.config_id = ac.id " \
+                              "ad.id = ac.belong_to " \
                               "LEFT JOIN apc_device_group AS adg ON " \
                               "ad.id = adg.device_id " \
                               "RIGHT JOIN apc_groups AS ag ON " \
                               "ag.id = adg.group_id " \
                               "WHERE ag.id = %(group_id)d;"
-
-    SQL_SELECT_GROUP_DEVICE = "SELECT * FROM apc_device d " \
-                              "LEFT JOIN apc_group g ON " \
-                              "d.config_id = g.id WHERE d.id = {0};"
 
     SQL_SELECT_VLAN = "SELECT * FROM apc_vlan v " \
                       "WHERE v.id IS NOT NULL " \
@@ -230,12 +231,13 @@ class SQL(object):
                         "ssid, " \
                         "vlan, " \
                         "channel, " \
-                        "maxclients," \
+                        "maxclient," \
                         "username," \
                         "password," \
                         "enable_password," \
                         "transport_protocol," \
-                        "personality," \
+                        "personality, " \
+                        "belong_to, " \
                         "date_added, " \
                         "date_modified) " \
                         "VALUES(" \
@@ -245,12 +247,13 @@ class SQL(object):
                         "'%(ssid)s', " \
                         "'%(vlan_id)s', " \
                         "'%(channel)s', " \
-                        "'%(maxclients)s', " \
+                        "'%(maxclient)s', " \
                         "'%(username)s', " \
                         "'%(password)s', " \
                         "'%(enable_password)s', " \
                         "'%(transport_protocol)s', " \
                         "'%(personality)s', " \
+                        "%(belong_to)d, " \
                         "'%(date_added)s', " \
                         "'%(date_modified)s') RETURNING id;"
 
@@ -263,7 +266,6 @@ class SQL(object):
                         "password," \
                         "description, " \
                         "ip, " \
-                        "config_id, " \
                         "brand, " \
                         "model, " \
                         "firmware, " \
@@ -276,7 +278,6 @@ class SQL(object):
                         "'%(password)s', " \
                         "'%(desc)s', " \
                         "'%(ip)s', " \
-                        "'%(config)d', " \
                         "'%(brand)s', " \
                         "'%(model)s', " \
                         "'%(firmware)s', " \
@@ -305,15 +306,13 @@ class SQL(object):
                        "apc_groups(" \
                        "name, " \
                        "description, " \
-                       "config_id, " \
                        "date_added, " \
                        "date_modified) " \
                        "VALUES(" \
                        "'{0}'," \
                        "'{1}', " \
                        "'{2}', " \
-                       "'{3}', " \
-                       "'{4}') " \
+                       "'{3}') " \
                        "RETURNING id;"
 
     # =============================
@@ -346,7 +345,7 @@ class SQL(object):
                                "WHERE id IN (" \
                                "SELECT ac.id FROM apc_config AS ac " \
                                "INNER JOIN apc_device AS ad ON " \
-                               "ad.config_id = ac.id " \
+                               "ad.id = ac.belong_to " \
                                "WHERE ad.id=%(id)d);"
 
     #update config
@@ -372,7 +371,7 @@ class SQL(object):
                               "(" \
                               "SELECT ac.id FROM apc_config AS ac " \
                               "INNER JOIN apc_device AS ad ON " \
-                              "ad.config_id = ac.id " \
+                              "ad.id = ac.belong_to " \
                               "INNER JOIN apc_device_group AS adg ON " \
                               "ad.id = adg.device_id " \
                               "INNER JOIN apc_groups AS ag ON " \

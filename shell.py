@@ -6,7 +6,7 @@
 
 <h1>DESCRIPTION</h1>
 
-This software has been created to manage wireless acess point controllers with
+This software has been created to manage wireless access point controllers with
 no brand dependency.
 
 Version 1.0 includes only CLI(Command Line Interface) to manage devices via
@@ -160,39 +160,71 @@ usage group/device/config/vlan</li>
 <ul>
 <li>/bin/sh</li>
 <li>/bin/sh</li>
-<li><a href="http://pkgs.org/download/chkconfig" class="external-link" rel="nofollow">chkconfig</a></li>
-<li><a href="http://pkgs.org/download/erlang-crypto" class="external-link" rel="nofollow">erlang-crypto</a></li>
-<li><a href="http://pkgs.org/download/erlang-erts" class="external-link" rel="nofollow">erlang-erts</a></li>
-<li><a href="http://pkgs.org/download/erlang-ibrowse" class="external-link" rel="nofollow">erlang-ibrowse &gt;= 2.2.0</a></li>
-<li><a href="http://pkgs.org/download/erlang-inets" class="external-link" rel="nofollow">erlang-inets</a></li>
-<li><a href="http://pkgs.org/download/erlang-kernel" class="external-link" rel="nofollow">erlang-kernel</a></li>
-<li><a href="http://pkgs.org/download/erlang-mochiweb" class="external-link" rel="nofollow">erlang-mochiweb</a></li>
-<li><a href="http://pkgs.org/download/erlang-oauth" class="external-link" rel="nofollow">erlang-oauth</a></li>
-<li><a href="http://pkgs.org/download/erlang-sasl" class="external-link" rel="nofollow">erlang-sasl</a></li>
-<li><a href="http://pkgs.org/download/erlang-stdlib" class="external-link" rel="nofollow">erlang-stdlib</a></li>
-<li><a href="http://pkgs.org/download/erlang-tools" class="external-link" rel="nofollow">erlang-tools</a></li>
-<li><a href="http://pkgs.org/download/initscripts" class="external-link" rel="nofollow">initscripts</a></li>
-<li><a href="http://pkgs.org/download/libc.so.6" class="external-link" rel="nofollow">libc.so.6</a></li>
-<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.0%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.0)</a></li>
-<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.1%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.1)</a></li>
-<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.1.3%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.1.3)</a></li>
-<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.3.4%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.3.4)</a></li>
-<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.4%29" class="external-link" rel="nofollow">libc.so.6(GLIBC_2.4)</a></li>
-<li><a href="http://pkgs.org/download/libcrypt.so.1" class="external-link" rel="nofollow">libcrypt.so.1</a></li>
-<li><a href="http://pkgs.org/download/libcurl.so.3" class="external-link" rel="nofollow">libcurl.so.3</a></li>
-<li><a href="http://pkgs.org/download/libicudata.so.36" class="external-link" rel="nofollow">libicudata.so.36</a></li>
-<li><a href="http://pkgs.org/download/libicui18n.so.36" class="external-link" rel="nofollow">libicui18n.so.36</a></li>
-<li><a href="http://pkgs.org/download/libicuuc.so.36" class="external-link" rel="nofollow">libicuuc.so.36</a></li>
-<li><a href="http://pkgs.org/download/libjs.so.1" class="external-link" rel="nofollow">libjs.so.1</a></li>
-<li><a href="http://pkgs.org/download/libm.so.6" class="external-link" rel="nofollow">libm.so.6</a></li>
-<li><a href="http://pkgs.org/download/libpthread.so.0" class="external-link" rel="nofollow">libpthread.so.0</a></li>
-<li><a href="http://pkgs.org/download/rtld%28GNU_HASH%29" class="external-link" rel="nofollow">rtld(GNU_HASH)</a></li>
-<li><a href="http://pkgs.org/download/shadow-utils" class="external-link" rel="nofollow">shadow-utils</a></li></ul></li>
-</ul><p>&nbsp;</p><p><u>Python Libraries:</u></p><ul><li>argparse - built in</li>
-<li>enum - <a href="https://pypi.python.org/packages/source/e/enum/enum-0.4.4.tar.gz#md5=ce75c7c3c86741175a84456cc5bd531e" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/e/enum/enum-0.4.4.tar.gz#md5=ce75c7c3c86741175a84456cc5bd531e</a></li>
-<li>setuptools - <a href="https://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz#md5=7df2a529a074f613b509fb44feefe74e" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz#md5=7df2a529a074f613b509fb44feefe74e</a></li>
-<li>psycopg2 - <a href="https://pypi.python.org/packages/source/p/psycopg2/psycopg2-2.5.tar.gz#md5=facd82faa067e99b80146a0ee2f842f6" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/p/psycopg2/psycopg2-2.5.tar.gz#md5=facd82faa067e99b80146a0ee2f842f6</a></li>
-<li>couchdb - <a href="https://pypi.python.org/packages/source/C/CouchDB/CouchDB-0.9.tar.gz#md5=67afd226fed4c641eeb13a9930d334f7" class="external-link" rel="nofollow">https://pypi.python.org/packages/source/C/CouchDB/CouchDB-0.9.tar.gz#md5=67afd226fed4c641eeb13a9930d334f7</a></li><li>ConfigParser - built in</li><li>json - built in</li>
+<li><a href="http://pkgs.org/download/chkconfig" class="external-link"
+rel="nofollow">chkconfig</a></li>
+<li><a href="http://pkgs.org/download/erlang-crypto" class="external-link"
+rel="nofollow">erlang-crypto</a></li>
+<li><a href="http://pkgs.org/download/erlang-erts" class="external-link"
+rel="nofollow">erlang-erts</a></li>
+<li><a href="http://pkgs.org/download/erlang-ibrowse" class="external-link"
+rel="nofollow">erlang-ibrowse &gt;= 2.2.0</a></li>
+<li><a href="http://pkgs.org/download/erlang-inets" class="external-link"
+rel="nofollow">erlang-inets</a></li>
+<li><a href="http://pkgs.org/download/erlang-kernel" class="external-link"
+rel="nofollow">erlang-kernel</a></li>
+<li><a href="http://pkgs.org/download/erlang-mochiweb" class="external-link"
+rel="nofollow">erlang-mochiweb</a></li>
+<li><a href="http://pkgs.org/download/erlang-oauth" class="external-link"
+rel="nofollow">erlang-oauth</a></li>
+<li><a href="http://pkgs.org/download/erlang-sasl" class="external-link"
+rel="nofollow">erlang-sasl</a></li>
+<li><a href="http://pkgs.org/download/erlang-stdlib" class="external-link"
+rel="nofollow">erlang-stdlib</a></li>
+<li><a href="http://pkgs.org/download/erlang-tools" class="external-link"
+rel="nofollow">erlang-tools</a></li>
+<li><a href="http://pkgs.org/download/initscripts" class="external-link"
+rel="nofollow">initscripts</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6" class="external-link"
+rel="nofollow">libc.so.6</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.0%29"
+class="external-link" rel="nofollow">libc.so.6(GLIBC_2.0)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.1%29"
+class="external-link" rel="nofollow">libc.so.6(GLIBC_2.1)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.1.3%29"
+class="external-link" rel="nofollow">libc.so.6(GLIBC_2.1.3)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.3.4%29"
+class="external-link" rel="nofollow">libc.so.6(GLIBC_2.3.4)</a></li>
+<li><a href="http://pkgs.org/download/libc.so.6%28GLIBC_2.4%29"
+class="external-link" rel="nofollow">libc.so.6(GLIBC_2.4)</a></li>
+<li><a href="http://pkgs.org/download/libcrypt.so.1" class="external-link"
+rel="nofollow">libcrypt.so.1</a></li>
+<li><a href="http://pkgs.org/download/libcurl.so.3" class="external-link"
+rel="nofollow">libcurl.so.3</a></li>
+<li><a href="http://pkgs.org/download/libicudata.so.36" class="external-link"
+rel="nofollow">libicudata.so.36</a></li>
+<li><a href="http://pkgs.org/download/libicui18n.so.36" class="external-link"
+rel="nofollow">libicui18n.so.36</a></li>
+<li><a href="http://pkgs.org/download/libicuuc.so.36" class="external-link"
+rel="nofollow">libicuuc.so.36</a></li>
+<li><a href="http://pkgs.org/download/libjs.so.1" class="external-link"
+rel="nofollow">libjs.so.1</a></li>
+<li><a href="http://pkgs.org/download/libm.so.6" class="external-link"
+rel="nofollow">libm.so.6</a></li>
+<li><a href="http://pkgs.org/download/libpthread.so.0" class="external-link"
+rel="nofollow">libpthread.so.0</a></li>
+<li><a href="http://pkgs.org/download/rtld%28GNU_HASH%29" class="external-link"
+rel="nofollow">rtld(GNU_HASH)</a></li>
+<li><a href="http://pkgs.org/download/shadow-utils" class="external-link"
+rel="nofollow">shadow-utils</a></li></ul></li>
+</ul>
+<p>&nbsp;</p>
+<p><u>Python Libraries:</u></p>
+<ul>
+<li>argparse - built in</li>
+<li>enum </li>
+<li>setuptools</li>
+<li>psycopg2</li>
+<li>couchdb</li>
 </ul>
 <p>&nbsp;</p>
 <p><u>Perl Libraries:</u></p>

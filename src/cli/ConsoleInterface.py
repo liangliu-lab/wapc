@@ -91,6 +91,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_add",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_ADD_HELP
 
     def do_edit(self, args):
@@ -117,6 +119,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_up",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_EDIT_HELP
 
     def do_group(self, args):
@@ -142,6 +146,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_group",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_GROUP_HELP
 
     def do_set(self, args):
@@ -168,6 +174,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_set",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_SET_HELP
 
     def do_unset(self, args):
@@ -194,6 +202,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_unset",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_UNSET_HELP
 
     def do_ls(self, args):
@@ -220,6 +230,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_ls",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_LIST_HELP
 
     def do_sh(self, args):
@@ -249,6 +261,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_sh",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_SHOW_HELP
 
     def do_rm(self, args):
@@ -277,6 +291,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_rm",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_REMOVE_HELP
 
     def do_selftest(self, args):
@@ -298,6 +314,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_selftest",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_CMD_SELFTEST_HELP
 
     def do_help(self, args):
@@ -319,6 +337,8 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_help",
                 host=socket.gethostname()
             )
+            print "An error occured while execution. " \
+                  "Please see log for more details.\n"
             print Language.MSG_ARG_DESC
 
     def cmdloop_with_keyboard_interrupt(self):

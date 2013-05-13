@@ -93,9 +93,9 @@ class PostgreDriver(object):
             conn.commit()
             #print Language.MSG_SUCCESS_SELECT
             return fields, results
-        except BaseException:
+        except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_NORECORD
+                exception.message
             )
         finally:
             self.close_conn(conn)
@@ -123,11 +123,10 @@ class PostgreDriver(object):
                       'id': id
                   }
             cur.execute(cmd)
-            fields = [i[0] for i in cur.description]
-            results = cur.fetchall()
+            result = cur.fetchone()
             conn.commit()
             #print Language.MSG_SUCCESS_SELECT
-            return fields, results
+            return result[0]
         except BaseException as exception:
             raise BaseException(
                 Language.MSG_ERR_DATABASE_ERROR % {exception.message}

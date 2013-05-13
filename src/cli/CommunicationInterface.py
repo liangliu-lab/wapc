@@ -68,11 +68,21 @@ class CommunicationInterface(object):
             new_config.close()
             return config_source
         except IOError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
-        except BufferError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
 
     def call_communication_interface(self, source):
         """
@@ -100,11 +110,21 @@ class CommunicationInterface(object):
             ).communicate()[0]
             return response
         except IOError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
-        except BufferError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
+        except BaseException as exception:
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
 
     def write_source_file(self, source, target, p_type='JSON'):
         """
@@ -134,11 +154,21 @@ class CommunicationInterface(object):
                 new_config.write(source)
             new_config.close()
         except IOError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
         except BufferError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
 
     def backup(self, source, target, time, p_type='RAW'):
         """
@@ -173,9 +203,19 @@ class CommunicationInterface(object):
                 pass
             new_backup.close()
         except IOError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
         except BufferError as exception:
-            print Language.MSG_ERR_COMM_INTERFACE_FAILED % \
-                {'line': self.utils.get_line(), 'exception': exception.message}
+            raise BaseException(
+                Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                {
+                    'line': self.utils.get_line(),
+                    'exception': exception.message
+                }
+            )
 

@@ -26,8 +26,6 @@ import json
 import re
 from src.resources.Resources import Resources
 import src.helpers.Formatter as Formatter
-from src.model.Device import Device
-from src.model.Config import Config
 from time import strftime, gmtime
 import ConfigParser
 
@@ -187,7 +185,7 @@ class Utils(object):
                 zip(source[keys], source[values])))
         return wellformed_dict
 
-    def get_request_config(self, device=Device(), config=Config()):
+    def get_request_config(self, device, config):
         """
 
         @param device
@@ -225,11 +223,23 @@ class Utils(object):
         commands = json.loads(unicode(config_source))
 
         # get/set option
-        if params.option:
-            option = params.option.strip()
+        option = params.option.strip()
 
         # check if command exist in command list
         if str(params.command + '_' + option) in commands:
             return True
         else:
             return False
+
+    def type_exists(self, type):
+        """
+        Check given type parameter if it exists in supported types list
+        @param type
+        @return
+        """
+        new_type = str(type.strip()).lower()
+        if new_type in Resources.type_list:
+            return new_type
+        else:
+            return False
+

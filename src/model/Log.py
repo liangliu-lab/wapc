@@ -24,9 +24,9 @@ retrieve options and details and connect to device execute commands.
 @copyright Labris Teknoloji
 
 """
-from enum import Enum
 from time import strftime, gmtime
 from src.resources.Resources import Resources
+from argparse import Namespace
 
 __author__ = 'fatih'
 
@@ -35,8 +35,13 @@ class Log(dict):
     """
     Log class is used to define log model data structure and
     """
-    severity = Enum('CRITICAL', 'DEBUG', 'ERROR',
-                    'WARNING', 'FATAL', 'INFO')
+    severity = Namespace()
+    severity.CRITICAL = 'CRITICAL'
+    severity.DEBUG = 'DEBUG'
+    severity.ERROR = 'ERROR'
+    severity.WARNING = 'WARNING'
+    severity.FATAL = 'FATAL'
+    severity.INFO = 'INFO'
 
     def __init__(self,
                  name="Default Log",

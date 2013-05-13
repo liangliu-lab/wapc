@@ -21,8 +21,10 @@ limitations under the License.
 @copyright Labris Technology
 
 """
+import re
 
 from src.model.Config import Config
+from src.resources.Resources import Resources
 
 
 class Device(Config):
@@ -73,7 +75,18 @@ class Device(Config):
 
         @param d_ip int gathered from database
         """
-        self["ip"] = d_ip
+        try:
+            d_ip = d_ip.strip()
+            regex = re.compile(Resources.REGEX["ipv4"])
+            result = regex.findall(d_ip)
+            if result:
+                self["ip"] = result[0]
+                return True
+            else:
+                return False
+
+        except BaseException as exception:
+            raise BaseException(exception.message)
 
     def get_ip(self):
         """

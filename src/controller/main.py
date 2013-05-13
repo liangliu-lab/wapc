@@ -56,7 +56,7 @@ class Main(object):
         self.utils = Utils()
         self.arg_parser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
-        self.master_database = Database(self.utils.master_db)
+        self.database = Database(self.utils.master_db)
         self.logger = Logger()
         #self.daemon.start()
 
@@ -78,9 +78,14 @@ class Main(object):
                 group_methods = GroupMethods()
                 vlan_methods = VLanMethods()
 
-                if params.type:
-                    param_type = params.type.split()[0]
-                    param_type = str(param_type).lower()
+                if params.type and self.utils.type_exists(params.type):
+                    param_type = str(params.type.strip()).lower()
+                else:
+                    param_type = raw_input(
+                        "Please provide a type argument "
+                        "[device/group/config/vlan]:").strip()
+                    if not param_type:
+                        param_type = 'device'
 
                 # noinspection PyArgumentList
                 if param_type == 'device':
@@ -117,7 +122,15 @@ class Main(object):
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
                 vlan_methods = VLanMethods()
-                param_type = params.type.split()[0]
+                if params.type and self.utils.type_exists(params.type):
+                    param_type = str(params.type.strip()).lower()
+                else:
+                    param_type = raw_input(
+                        "Please provide a type argument "
+                        "[device/group/config/vlan]:").strip()
+                    if not param_type:
+                        param_type = 'device'
+
                 # noinspection PyArgumentList
                 if param_type == 'device':
                     # noinspection PyArgumentList
@@ -151,7 +164,15 @@ class Main(object):
                 arg_list = self.utils.get_clean_params(args)
                 params = self.arg_parser.get_args(arg_list)
                 #check namespace variables if set
-                param_type = params.type.split()[0]
+                if params.type and self.utils.type_exists(params.type):
+                    param_type = str(params.type.strip()).lower()
+                else:
+                    param_type = raw_input(
+                        "Please provide a type argument "
+                        "[device/group/config/vlan]:").strip()
+                    if not param_type:
+                        param_type = 'device'
+
                 #moderate type value to determine the statement
                 if param_type == 'group':
                     cmd = SQL.SQL_SELECT_GROUP_ALL
@@ -174,7 +195,7 @@ class Main(object):
                             'No or wrong [type] argument provided')
                     )
 
-                fields, results = self.master_database.select(cmd)
+                fields, results = self.database.select(cmd)
                 if fields and results:
                     self.utils.formatter(fields, results)
                 else:
@@ -224,7 +245,7 @@ class Main(object):
                         'added': self.now,
                         'modified': self.now
                     }
-                    self.master_database.insert(cmd)
+                    self.database.insert(cmd)
                     print Language.MSG_SUCCESS_ADD
                 else:
                     raise TypeError(
@@ -243,8 +264,9 @@ class Main(object):
     def show(self, args):
         """
         This method show running configuration by given option
+        Required parameters are type, option, and id
 
-        @param args:
+        @param args
         """
         try:
             #moderate type value to determine the statement
@@ -256,7 +278,22 @@ class Main(object):
                 config_methods = ConfigMethods(Config(), params)
                 group_methods = GroupMethods()
                 vlan_methods = VLanMethods()
-                param_type = params.type.split()[0]
+
+                if params.type and self.utils.type_exists(params.type):
+                    param_type = str(params.type.strip()).lower()
+                else:
+                    param_type = raw_input(
+                        "Please provide a type argument "
+                        "[device/group/config/vlan]:").strip()
+                    if not param_type:
+                        param_type = 'device'
+
+                if not params.option:
+                    print Language.MSG_ERR_EMPTY_OPTION.format('device')
+                    option = raw_input(Language.MSG_INPUT_PARAM_OPTION %
+                                       {'param': 'option'})
+                    params.option = option
+
                 # noinspection PyArgumentList
                 if param_type == 'device':
                     # noinspection PyArgumentList
@@ -437,7 +474,7 @@ class Main(object):
                         raise BaseException("No [type] argument provided")
 
                 if cmd:
-                    self.master_database.remove(cmd)
+                    self.database.remove(cmd)
                     self.logger.create_log(
                         name="Shell.py Exception",
                         severity=self.logger.severity.INFO,

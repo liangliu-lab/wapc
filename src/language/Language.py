@@ -135,11 +135,9 @@ class Language(object):
                        "\n\t[-t],[--type]\tDefine type device, group, " \
                        "vlan, config " \
                        "\n\t[-i],[--id]\tDefine id of device or group" \
-                       "\n\t[-o],[--option]\tProvide option must be " \
+                       "\n\t[-o],[--option]\tProvided option must be " \
                        "one of\n\t" \
-                       "\"ssid, vlan, channel, frequency, maxclients, ip, " \
-                       "cpu, memory, permanent, conf, " \
-                       "firmware, model, serial, clients\"" \
+                       "\"ssid, vlan, channel, frequency, max client, ip\"" \
                        "\n\tThese will be used to gather related commands " \
                        "from config file you provided"
 
@@ -149,11 +147,9 @@ class Language(object):
                          "\n\t[-t],[--type]\tDefine type device, group, " \
                          "vlan, config " \
                          "\n\t[-i],[--id]\tDefine id of device or group" \
-                         "\n\t[-o],[--option]\tProvide option must be " \
+                         "\n\t[-o],[--option]\tProvided option must be " \
                          "one of\n\t" \
-                         "\"ssid, vlan, channel, frequency, maxclients, " \
-                         "ip, cpu, memory, permanent, conf, " \
-                         "firmware, model, serial, clients\"" \
+                         "\"ssid, vlan, channel, frequency, max client, ip\"" \
                          "\n\tThese will be used to gather related commands " \
                          "from config file you provided"
 
@@ -169,9 +165,9 @@ class Language(object):
                         "\n\t[-t],[--type]\tDefine type device, group, " \
                         "vlan, config" \
                         "\n\t[-i],[--id]\tDefine id of device or group" \
-                        "\n\t[-o],[--option]\tProvide option must be one " \
+                        "\n\t[-o],[--option]\tProvided option must be one " \
                         "of\n\t" \
-                        "\"ssid, vlan, channel, frequency, maxclients, ip, " \
+                        "\"ssid, vlan, channel, frequency, max client, ip, " \
                         "cpu, memory, permanent, conf, "
 
     MSG_CMD_REMOVE_HELP = "\nUsage:\t$ rm [OPTIONS]" \
@@ -207,14 +203,14 @@ class Language(object):
                       'with usage to connect, required while adding or ' \
                       'editing device'
 
-    MSG_ADD_NAME_HELP = '\t-n,--name\t\tProvide name for the newly ' \
+    MSG_ADD_NAME_HELP = '\t-n,--name\t\tProvide a name for the newly ' \
                         'added device with usage name, required when adding'
 
     MSG_ADD_USERNAME_HELP = '\t-u,--username\t\tProvide username for ' \
                             'the newly added device ' \
                             'with usage username, required when adding'
 
-    MSG_ADD_PASSWORD_HELP = '\t-p,--password\t\tProvide password for ' \
+    MSG_ADD_PASSWORD_HELP = '\t-p,--password\t\tProvide a password for ' \
                             'given username of the newly added device ' \
                             'with usage password, required when adding'
 
@@ -230,18 +226,19 @@ class Language(object):
     MSG_ADD_DEVICE_HELP = '\t-d,--device\t\tProvide device id to add ' \
                           'provided device to the group'
 
-    MSG_ADD_INTERFACE_HELP = '\t-e,--interface\tProvide ethernet interface ' \
+    MSG_ADD_INTERFACE_HELP = '\t-e,--interface' \
+                             '\tProvide an ethernet interface ' \
                              'to configure VLAN for group or device ' \
                              'with usage  eth0'
 
     MSG_ADD_DESC_HELP = '\t-D,--description\tProvide a short description ' \
                         'for group or device with usage '
 
-    MSG_ADD_RADIUS_HELP = '\t-r,--radius\t\tProvide Radius id to configure ' \
+    MSG_ADD_RADIUS_HELP = '\t-r,--radius\t\tProvide a Radius id to configure ' \
                           'radius authentication for group or device' \
                           ' with usage radius_id'
 
-    MSG_ADD_SSID_HELP = '\t-S,--ssid\t\tProvide SSID for group or device ' \
+    MSG_ADD_SSID_HELP = '\t-S,--ssid\t\tProvide an SSID for group or device ' \
                         'with usage ssid'
 
     MSG_ADD_VLAN_HELP = '\t-V,--vlan\t\tProvide VLAN id to determine VLAN ' \
@@ -250,13 +247,13 @@ class Language(object):
     MSG_ADD_CHANNEL_HELP = '\t-H,--channel\t\tProvide channel to configure ' \
                            'for group or device with usage channel'
 
-    MSG_ADD_TYPE_HELP = '\t-t,--type\t\tProvide type of ' \
+    MSG_ADD_TYPE_HELP = '\t-t,--type\t\tProvide a type of ' \
                         'group/device/config/vlan from database ' \
                         'with usage  group/device/config/vlan ' \
                         'others will cause error(s), always required for all' \
                         'operations'
 
-    MSG_ADD_OPTION_HELP = '\t-o,--option\t\tProvide type of ' \
+    MSG_ADD_OPTION_HELP = '\t-o,--option\t\tProvide a type of ' \
                           'group/device/config/vlan from database ' \
                           'with usage group/device/config/vlan, required' \
                           'when set, unset, edit and sh operations'
@@ -269,16 +266,16 @@ class Language(object):
                             'which device is slave to initialize ' \
                             'the device in inventory'
 
-    MSG_ADD_BRAND_HELP = '\t-b, --brand\t\tProvide device brand to ' \
+    MSG_ADD_BRAND_HELP = '\t-b, --brand\t\tProvide a device brand to ' \
                          'identify which model and/or firmware ' \
                          'config file will be loaded to initialize ' \
                          'the device in inventory'
 
-    MSG_ADD_MODEL_HELP = '\t-m, --model\t\tProvide device model to ' \
+    MSG_ADD_MODEL_HELP = '\t-m, --model\t\tProvide a device model to ' \
                          'identify which config file will be loaded ' \
                          'to initialize the device in inventory'
 
-    MSG_ADD_FIRMWARE_HELP = '\t-F, --firmware\t\tProvide device firmware to ' \
+    MSG_ADD_FIRMWARE_HELP = '\t-F, --firmware\t\tProvide a device firmware to ' \
                             'identify which config file will be loaded '\
                             'to initialize the device in inventory'
 

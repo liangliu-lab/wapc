@@ -118,7 +118,15 @@ class DeviceMethods(threading.Thread):
                 device.set_ip(params.ip.strip())
             else:
                 print Language.MSG_ERR_EMPTY_IP.format('device')
-                device.set_ip(raw_input("Please enter an IP address:").strip())
+                new_ip = raw_input("Please enter an IP address:")
+                if device.set_ip(new_ip):
+                    pass
+                else:
+                    print "The IP address you provide is not in a valid format"
+                    print "Process will start over"
+                    raise BaseException(
+                        "The IP address you provide is not in a valid format"
+                    )
 
             # set device name to connect to the device
             if params.name:
@@ -205,8 +213,14 @@ class DeviceMethods(threading.Thread):
                 config_source = self.communication_interface.get_source_config(
                     config_source_file)
 
-                # replace ipaddress in file content
-                config_source = config_source.replace('###', device.get_ip())
+                # replace ip address, ssid and channel in file content
+                config_source = config_source \
+                    .replace('##ip##', device.get_ip())
+                config_source = config_source.replace('##ssid##',
+                                                      config.get_ssid())
+                channel = config.get_channel()
+                config_source = config_source.replace('##channel##',
+                                                      str(config.get_channel()))
 
                 # write new content into default config file
                 tftp_target = Resources.device_tftp_path % \
@@ -298,6 +312,39 @@ class DeviceMethods(threading.Thread):
                 #check if wap is connected and returned with success
                 #status message 110
                 if resp['status'] == 110:
+                    #insert new device to the database
+                    cmd = SQL.SQL_INSERT_DEVICE % {
+                        "name": device.get_name(),
+                        "username": device.get_username(),
+                        "password": device.get_password(),
+                        "desc": device.get_description(),
+                        "ip": device.get_ip(),
+                        "brand": device.get_brand(),
+                        "model": device.get_model(),
+                        "firmware": device.get_firmware(),
+                        "relation": device.get_relation(),
+                        "date_added": self.now,
+                        "date_modified": self.now
+                    }
+
+                    #get inserted device id and inform user
+                    device_id = self.database.insert(cmd)
+
+                    if device_id[0]:
+                        #write recent config into backup file
+                        self.communication_interface.backup(
+                            config_source,
+                            config.get_name(),
+                            self.now,
+                            'RAW'
+                        )
+                        print Language.MSG_STATUS_ADD_SUCCESS % \
+                              {
+                                  'type': 'device',
+                                  'id': device_id[0],
+                                  'name': device.get_name()
+                              }
+
                     cmd = SQL.SQL_INSERT_CONFIG % {
                         "name": config.get_name(),
                         "description": config.get_description(),
@@ -305,12 +352,13 @@ class DeviceMethods(threading.Thread):
                         "ssid": config.get_ssid(),
                         "vlan_id": config.get_vlan(),
                         "channel": config.get_channel(),
-                        "maxclients": config.get_maxclient(),
+                        "maxclient": config.get_maxclient(),
                         "username": config.get_username(),
                         "password": config.get_password(),
                         "enable_password": config.get_enable_password(),
                         "transport_protocol": config.get_transport_protocol(),
                         "personality": config.get_personality(),
+                        "belong_to": int(device_id[0]),
                         "date_added": self.now,
                         "date_modified": self.now
                     }
@@ -326,49 +374,13 @@ class DeviceMethods(threading.Thread):
                                   'id': cid[0],
                                   'name': config.get_name()
                               }
-                        #insert new device to the database
-                        cmd = SQL.SQL_INSERT_DEVICE % {
-                            "name": device.get_name(),
-                            "username": device.get_username(),
-                            "password": device.get_password(),
-                            "desc": device.get_description(),
-                            "ip": device.get_ip(),
-                            "config": int(cid[0]),
-                            "brand": device.get_brand(),
-                            "model": device.get_model(),
-                            "firmware": device.get_firmware(),
-                            "relation": device.get_relation(),
-                            "date_added": self.now,
-                            "date_modified": self.now
-                        }
-
-                        #get inserted device id and inform user
-                        new_id = self.database.insert(cmd)
-                        if new_id:
-                            #write recent config into backup file
-                            self.communication_interface.backup(
-                                config_source,
-                                config.get_name(),
-                                self.now,
-                                'RAW'
-                            )
-                            print Language.MSG_STATUS_ADD_SUCCESS % \
-                                  {
-                                      'type': 'device',
-                                      'id': new_id[0],
-                                      'name': device.get_name()
-                                  }
-                    else:
-                        raise self.database.DatabaseError(
-                            Language.MSG_ERR_DATABASE_INSERT
-                        )
                 else:
-                    print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED.\
+                    print Language.MSG_ERR_COMM_INTERFACE_CONNECTED_BUT_FAILED. \
                         format(resp['message'])
             else:
                 print Language.MSG_ERR_COMM_INTERFACE_FAILED
-        except RuntimeError as exception:
-            raise exception.message
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def read(self, cid):
         """
@@ -630,13 +642,6 @@ class DeviceMethods(threading.Thread):
         commands = request.get_commands()
         config_methods = ConfigMethods(config, params)
         try:
-            if params.option:
-                option = params.option.strip()
-            else:
-                print Language.MSG_ERR_EMPTY_OPTION.format('device')
-                option = raw_input(Language.MSG_INPUT_PARAM_OPTION %
-                                   {'param': 'option'})
-
             if params.id:
                 device.set_id(params.id.strip())
             else:
@@ -756,6 +761,7 @@ class DeviceMethods(threading.Thread):
                 .get_source_config(Resources.cfg_device_resource)
             #turn into dictionary from json
             commands = json.loads(unicode(config_source))
+            params.ssid = self.database.get('ssid', config["Device"])
             # get/set option
             if params.option:
                 option = params.option.strip()
@@ -856,6 +862,8 @@ class DeviceMethods(threading.Thread):
                         if command["type"]:
                             if command["type"] == "interface":
                                 command["command"] += interface.strip()
+                            elif command["type"] == "ssid":
+                                command["command"] += params.ssid.strip()
                             elif command["type"] == params.option.strip():
                                 command["command"] += new_param.strip()
                             else:
@@ -891,10 +899,18 @@ class DeviceMethods(threading.Thread):
                 # message 110
                 if resp['status'] == 110:
                     #insert updated config and gather inserted record id
-                    if params.command != "show":
+                    if params.command == "set":
                         cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
                             'key': option,
                             'value': new_param,
+                            'modified': self.now,
+                            'id': int(config['Device'])
+                        }
+                        self.database.update(cmd)
+                    elif params.command == "unset":
+                        cmd = SQL.SQL_UPDATE_DEVICE_CONFIG % {
+                            'key': option,
+                            'value': "",
                             'modified': self.now,
                             'id': int(config['Device'])
                         }

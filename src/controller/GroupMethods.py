@@ -68,8 +68,10 @@ class GroupMethods(object):
             if params.name:
                 group.set_name(params.name.strip())
             else:
+                print Language.MSG_ERR_EMPTY_NAME.format('group')
                 group.set_name(
-                    raw_input(Language.MSG_ERR_EMPTY_NAME.format('group'), ":"))
+                    raw_input("Please enter an nick name for group:").strip())
+
 
             if params.description:
                 group.set_description(params.description.strip())
@@ -84,7 +86,6 @@ class GroupMethods(object):
             cmd = SQL.SQL_INSERT_GROUP.format(
                 group.get_name(),
                 group.get_description(),
-                group.get_config_id(),
                 self.now,
                 self.now
             )
@@ -334,8 +335,8 @@ class GroupMethods(object):
 
                 queue = Queue.Queue()
                 for conf in results:
-                    # device_methods.group(params, queue, conf)
-                    thread_config = threading.Thread(
+                    device_methods.group(params, queue, conf)
+                    """thread_config = threading.Thread(
                         target=device_methods.group,
                         name=conf["Device"],
                         args=[params, queue, conf],
@@ -349,7 +350,7 @@ class GroupMethods(object):
 
                 for thread in pool:
                     thread.join()
-
+                """
                 return_response = self.utils.formatter(heading, thread_results)
                 # Generate update command
                 if params.command is not "show":

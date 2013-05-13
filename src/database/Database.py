@@ -81,10 +81,10 @@ class Database(object):
             #gather connection parameters from database config file
             if self.type == self.config.get(
                     self.__system_section__, "master_db"):
-                        self.master_driver.connect()
+                self.master_driver.connect()
             elif self.type == self.config.get(
                     self.__system_section__, "log_db"):
-                        self.log_db_driver.connect()
+                self.log_db_driver.connect()
             return True
         except BaseException as exception:
             raise Language.MSG_ERR_DATABASE_CONNECT.format(exception.message)
@@ -104,9 +104,9 @@ class Database(object):
                     self.__system_section__, "log_db"):
                 fields, results = self.log_db_driver.select(cmd)
             return fields, results
-        except BaseException:
+        except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_NORECORD
+                exception.message
             )
 
     def get(self, key, id, table_postfix="device"):
@@ -119,26 +119,18 @@ class Database(object):
         @return columns header and results
         """
         try:
-            conn = self.connect()
-            cur = conn.cursor()
-
-            # generate table with table prefix and postfix
-            table = self.table_prefix + "_" + table_postfix
-            cmd = SQL.SQL_SELECT_BY_KEY % \
-                  {
-                      'key': key,
-                      'table': table,
-                      'id': id
-                  }
-            cur.execute(cmd)
-            fields = [i[0] for i in cur.description]
-            results = cur.fetchall()
-            conn.commit()
-            #print Language.MSG_SUCCESS_SELECT
-            return fields, results
-        except BaseException:
+            if self.type == self.config.get(self.__system_section__,
+                                            "master_db"):
+                result = self.master_driver.get(key, id,
+                                                            table_postfix)
+            elif self.type == self.config.get(self.__system_section__,
+                                              "log_db"):
+                result = self.log_db_driver.get(key, id,
+                                                            table_postfix)
+            return result
+        except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_NORECORD
+                exception.message
             )
 
     def insert(self, cmd):
@@ -159,9 +151,9 @@ class Database(object):
                 rid = self.log_db_driver.insert(cmd)
             if rid:
                 return rid
-        except BaseException:
+        except BaseException as exception:
             raise BaseException(
-                Language.MSG_ERR_DATABASE_INSERT
+                exception.message
             )
 
     def update(self, cmd):
@@ -201,7 +193,6 @@ class Database(object):
             elif self.type == self.config.get(
                     self.__system_section__, "log_db"):
                 self.log_db_driver.remove(cmd)
-            print Language.MSG_SUCCESS_REMOVE
         except BaseException as exception:
             raise BaseException(
                 Language.MSG_ERR_DATABASE_ERROR % {exception.message}

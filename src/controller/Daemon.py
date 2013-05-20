@@ -25,6 +25,11 @@ retrieve options and details and connect to device execute commands.
 @copyright Labris Teknoloji
 
 """
+import sys
+import os
+PARENTDIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, '%s' % PARENTDIR)
+
 import socket
 from src.helpers.Utils import Utils
 from src.model.Log import Log
@@ -32,8 +37,6 @@ from src.resources.Resources import Resources
 from Logger import Logger
 from DeviceMethods import DeviceMethods
 from argparse import Namespace
-import sys
-import os
 import time
 import atexit
 from signal import SIGTERM
@@ -52,10 +55,11 @@ class Daemon:
         self.stdout = stdout
         self.stderr = stderr
         self.pidfile = pidfile
-        self.logger = Logger()
-        self.log = Log()
         self.daemon_commands = Resources.daemon_commands
         self.utils = Utils()
+        self.logger = Logger(self.utils.daemon_prefix + '_' + self.utils.day)
+        self.log = Log()
+
 
     def daemonize(self):
         """
@@ -116,8 +120,9 @@ class Daemon:
             pf = file(self.pidfile, 'r')
             pid = int(pf.read().strip())
             pf.close()
-        except IOError:
+        except IOError as error:
             pid = None
+            print error.message
 
         if pid:
             message = "pidfile %s already exist. Daemon already running?\n"
@@ -170,7 +175,7 @@ class Daemon:
         """
         You should override this method when you subclass Daemon.
         It will be called after the process has been
-        daemonized by start() or restart().
+        demonized by start() or restart().
         """
         args = Namespace
         self.device_methods = DeviceMethods(args)
@@ -190,7 +195,7 @@ class Daemon:
                             severity=self.log.severity.INFO,
                             line=self.utils.get_line(),
                             message=response,
-                            method="device_methods.show()",
+                            method="Daemon.run",
                             facility=command,
                             host=host
                         )
@@ -207,7 +212,12 @@ class Daemon:
             time.sleep(self.utils.daemon_timeout)
 
 if __name__ == "__main__":
-    my_daemon = Daemon(Resources.daemon_file)
+    try:
+        my_daemon = Daemon('/var/run/wapc.pid')
+        #sys.argv.append('start')
+    except BaseException as exception:
+        print exception.message
+
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
                 my_daemon.start()

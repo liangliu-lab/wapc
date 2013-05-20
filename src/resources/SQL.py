@@ -52,7 +52,6 @@ class SQL(object):
                         "ac.ssid," \
                         "ac.vlan," \
                         "ac.channel," \
-                        "ac.frequency," \
                         "ac.maxclient," \
                         "ac.id AS \"Configuration\", " \
                         "ad.date_added \"Add Date\", " \
@@ -88,7 +87,6 @@ class SQL(object):
                             "ac.ssid," \
                             "ac.vlan," \
                             "ac.channel," \
-                            "ac.frequency," \
                             "ac.maxclient," \
                             "ad.date_added \"Add Date\", " \
                             "ad.date_modified AS \"Last Modified\" " \
@@ -113,7 +111,6 @@ class SQL(object):
                                    "ac.ssid," \
                                    "ac.vlan," \
                                    "ac.channel," \
-                                   "ac.frequency," \
                                    "ac.maxclient," \
                                    "ad.date_added \"Add Date\", " \
                                    "ad.date_modified AS \"Last Modified\" " \
@@ -129,13 +126,12 @@ class SQL(object):
     # select config records
     SQL_SELECT_CONFIG = "SELECT ac.id AS \"ID\"," \
                         "ac.name AS \"Name\", " \
-                        "ac.belong_to AS \"Belong\"," \
+                        "ac.belong_to AS \"Device ID\"," \
                         "ac.description," \
                         "ac.radius," \
                         "ac.ssid," \
                         "ac.vlan," \
                         "ac.channel," \
-                        "ac.frequency," \
                         "ac.maxclient," \
                         "ac.username," \
                         "ac.password," \
@@ -154,7 +150,6 @@ class SQL(object):
                                "ac.ssid," \
                                "ac.vlan," \
                                "ac.channel," \
-                               "ac.frequency," \
                                "ac.maxclient," \
                                "ac.username," \
                                "ac.password," \
@@ -195,7 +190,6 @@ class SQL(object):
                               "ac.ssid," \
                               "ac.vlan," \
                               "ac.channel," \
-                              "ac.frequency," \
                               "ac.maxclient," \
                               "ac.username," \
                               "ac.password," \

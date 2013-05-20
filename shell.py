@@ -291,8 +291,8 @@ def __main__():
         print Language.MSG_APP_CMD_INIT
         ConsoleInterface().cmdloop()
     except BaseException as exception:
-        logger = Logger()
         utils = Utils()
+        logger = Logger(utils.log_prefix + '_' + utils.day)
         logger.create_log(
             name="Shell.py Exception",
             severity=logger.severity.ERROR,
@@ -304,7 +304,6 @@ def __main__():
         )
     finally:
         ConsoleInterface().cmdloop_with_keyboard_interrupt()
-
 
 if __name__ == "__main__":
     __main__()

@@ -23,11 +23,12 @@ limitations under the License.
 """
 
 import logging
-import time
+import os
 from src.model.Log import Log
 from src.helpers.Utils import Utils
 from src.database.Database import Database
 from src.resources.Resources import Resources
+import inspect
 
 
 class Logger(logging.getLoggerClass()):
@@ -40,17 +41,24 @@ class Logger(logging.getLoggerClass()):
 
     """
 
-    def __init__(self):
+    def __init__(self, target=None):
         """
         Logger initializer
+        @param target Database name
         @return:
         """
         self.utils = Utils()
-        self.database = Database(self.utils.log_db)
+        if not target:
+            self.target = Resources.LOG_PATH % {'time': self.utils.day}
+        else:
+            self.target = target
+        self.database = Database(self.utils.log_db, self.target)
         self.severity = Log.severity
         try:
             # try to connect log db server
             self.database.connect()
+
+            # set type variable to decide what db will be used to log
             self.type = self.utils.log_db
         except BaseException:
             print "WARNING:\tLog server could not be reached. " \
@@ -73,6 +81,9 @@ class Logger(logging.getLoggerClass()):
         """
         log = Log(name, severity, line, message, method, facility,
                   host)
+        caller = inspect.stack()[1]
+        # print caller[3]
+
         try:
             # write new log into log database
             if self.type == self.utils.log_db:
@@ -81,17 +92,22 @@ class Logger(logging.getLoggerClass()):
             else:
                 # send log into log file
                 logger = logging.getLogger('debug-log')
-                fh = logging.FileHandler(
-                    Resources.LOG_PATH % {'time': self.utils.day}
-                )
+                fh = logging.FileHandler(self.target)
                 fh.setLevel(logging.DEBUG)
                 logger.addHandler(fh)
-                logger.error(log)
+                logger.log(log.get_severity(), log)
         except BaseException as exception:
+            # If couchdb could not be connected all logs will be inserted into
+            # local file system under /var/log till the new Logger instance will
+            # be called.
             print "Error (%s) occurred on creating log method. " \
                   "Trying to fix..." % {exception.message}
-            time.sleep(5000)
-            self.database.connect()
+            logger = logging.getLogger('debug-log')
+            fh = logging.FileHandler(self.target)
+            fh.setLevel(logging.DEBUG)
+            logger.addHandler(fh)
+            logger.log(log.get_severity(), log)
+
 
     def gather_logs(self, params, opt='_all_docs'):
         """
@@ -126,3 +142,55 @@ class Logger(logging.getLoggerClass()):
             return self.utils.formatter(fields, results)
         except BaseException as exception:
             print exception.message
+
+    def tail(self, f, lines=1, _buffer=1024):
+
+        """Tail a file and get X lines from the end"""
+        # place holder for the lines found
+        lines_found = []
+
+        # block counter will be multiplied by buffer
+        # to get the block size from the end
+        block_counter = -1
+
+        # loop until we find X lines
+        while len(lines_found) < lines:
+            try:
+                f.seek(block_counter * _buffer, os.SEEK_END)
+            except IOError:  # either file is too small, or too many lines requested
+                f.seek(0)
+                lines_found = f.readlines()
+                break
+
+            lines_found = f.readlines()
+
+            # we found enough lines, get out
+            if len(lines_found) > lines:
+                break
+
+            # decrement the block counter to get the
+            # next X bytes
+            block_counter -= 1
+
+        return lines_found[-lines:]
+
+"""
+def try_log():
+    my_logger = Logger()
+    log_id = my_logger.create_log(
+        'Test Log',
+        Log.severity.DEBUG,
+        my_logger.utils.get_line(),
+        'Logger test message',
+        'create_log',
+        'facility',
+        'localhost')
+    print "New log created with id: " + log_id
+
+    print my_logger.gather_logs(None, '_all_docs')
+
+if __name__ == "__main__":
+    #mylogger.tail("/var/log/labris/")
+    try_log()
+"""
+

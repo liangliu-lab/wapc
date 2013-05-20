@@ -28,6 +28,7 @@ class Language(object):
     Language class aims to provide required statement to requester class
     or methods to read matching locale string with given language code.
     """
+
     def __init__(self):
         """
         Constructor of Language class
@@ -54,12 +55,12 @@ class Language(object):
             Language.MSG_ADD_DEVICE_HELP,
             Language.MSG_ADD_DESC_HELP,
             Language.MSG_ADD_RADIUS_HELP,
-            Language.MSG_ADD_SSID_HELP,
             Language.MSG_ADD_VLAN_HELP,
             Language.MSG_ADD_CHANNEL_HELP,
             Language.MSG_ADD_TYPE_HELP,
             Language.MSG_ADD_OPTION_HELP
         )
+
     #prompt messages
     YES = "yes"
 
@@ -83,9 +84,9 @@ class Language(object):
                    'group(s) or config(s) with commands:\n' \
                    'Commands:{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n' \
                    '\nOptions:\n{9}\n{10}\n{11}\n{12}\n{13}\n{14}\n{15}\n{16}' \
-                   '\n{17}\n{18}\n{19}\n{20}\n{21}\n{22}\n{23}\n{24}\n{25}\n'
+                   '\n{17}\n{18}\n{19}\n{20}\n{21}\n{22}\n{23}\n{24}\n'
 
-    MSG_CMD_ADD_HELP = "\nUsage:\t$ add [OPTIONS]"\
+    MSG_CMD_ADD_HELP = "\nUsage:\t$ add [OPTIONS]" \
                        "\n\tAdd device, group, vlan, config etc " \
                        "with given parameters " \
                        "\n\t[-t],[--type]\tDefine \"type\" that should be " \
@@ -110,7 +111,7 @@ class Language(object):
                        "\n\t[-p],[--password]\tProvide a password which will " \
                        "be used to connect  and configure device"
 
-    MSG_CMD_EDIT_HELP = "\nUsage:\t$ edit [OPTIONS]"\
+    MSG_CMD_EDIT_HELP = "\nUsage:\t$ edit [OPTIONS]" \
                         "\n\tEdit details of given type of device with " \
                         "given parameters " \
                         "\n\t[-t],[--type]\tDefine type device, group, " \
@@ -181,7 +182,7 @@ class Language(object):
                           "vlan, config"
 
     MSG_CMD_SELFTEST_HELP = "\nUsage:\t$ self [OPTIONS]" \
-                            "\n\tAdd device, group, vlan, config etc with " \
+                            "\n\tTest by its self with " \
                             "given parameters " \
                             "\n\t[-t],[--type]\tDefine type device, group, " \
                             "vlan, config " \
@@ -193,7 +194,21 @@ class Language(object):
                             "\n\t[-D],[--description]\tTo set a description " \
                             "to related type variable " \
                             "\n\t[-u],[--username]\tProvide a username which " \
-                            "will be used to connect device" \
+                            "will be used to connect device"
+
+    MSG_CMD_TAIL_HELP = "\nUsage:\t$ tail [OPTIONS]" \
+                        "\n\tTail logs with given parameters " \
+                        "\n\t[-f],[--follow]\tFollow provided log file or " \
+                        "log database" \
+                        "\n\t[-s],[--search]\tUse this params when adding " \
+                        "some new variables " \
+                        "which needs an ip such as device, config, etc." \
+                        "\n\t[-n],[--name]\tTo set a name to related " \
+                        "type variable " \
+                        "\n\t[-D],[--description]\tTo set a description " \
+                        "to related type variable " \
+                        "\n\t[-u],[--username]\tProvide a username which " \
+                        "will be used to connect device"
 
     MSG_ADD_ID_HELP = '\t-i,--id\t\t\tProvide ID address to determine ' \
                       'the variable with usage id, always required'
@@ -220,7 +235,7 @@ class Language(object):
     MSG_ADD_CONFIG = '\t-c,--config\t\tAdd new configuration and map it ' \
                      'to the given group or device'
 
-    MSG_ADD_SUBNET_HELP = '\t-s,--subnet\t\tDefine subnet for VLAN will ' \
+    MSG_ADD_SUBNET_HELP = '\t-S,--subnet\t\tDefine subnet for VLAN will ' \
                           'be configured with usage 255.255.255.0'
 
     MSG_ADD_DEVICE_HELP = '\t-d,--device\t\tProvide device id to add ' \
@@ -276,12 +291,11 @@ class Language(object):
                          'to initialize the device in inventory'
 
     MSG_ADD_FIRMWARE_HELP = '\t-F, --firmware\t\tProvide a device firmware to ' \
-                            'identify which config file will be loaded '\
+                            'identify which config file will be loaded ' \
                             'to initialize the device in inventory'
 
-    MSG_ADD_FIRMWARE_HELP = '\t-F, --firmware\t\tProvide device firmware to ' \
-                            'identify which config file will be loaded '\
-                            'to initialize the device in inventory'
+    MSG_ADD_TAIL_FOLLOW_HELP = '\t-f, --follow\t\tFollows streams passing ' \
+                               'into given file '
 
     #newly added variables
     MSG_UPDATE_RECORD = 'Recorded {0} updated with record id {1} and with ' \
@@ -327,7 +341,7 @@ class Language(object):
     MSG_ERR_FILE_READ = "Error %(error)s occurred when reading %(file)s"
 
     #database statement messages
-    MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on database commands '\
+    MSG_ERR_DATABASE_ERROR = 'Unknown error occurred on database commands ' \
                              'with error: (%s)'
     MSG_ERR_DATABASE_INSERT = 'New record could not be inserted into ' \
                               'database. Please try again your command.'
@@ -351,7 +365,7 @@ class Language(object):
 
     #input prompt messages
     MSG_INPUT_CUSTOM = "Enter parameter for %(custom)s of required device:"
-    MSG_INPUT_OPTION = "Enter parameter for %(type)s this command of device:"
+    MSG_INPUT_OPTION = "Enter parameter for %(type)s to execute this command:"
     MSG_INPUT_PARAM_OPTION = "Please enter any %(param)s you would like to set:"
 
     #execution messages

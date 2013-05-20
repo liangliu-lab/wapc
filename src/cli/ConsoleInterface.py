@@ -91,7 +91,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_add",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_ADD_HELP
 
@@ -119,7 +119,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_up",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_EDIT_HELP
 
@@ -146,7 +146,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_group",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_GROUP_HELP
 
@@ -174,7 +174,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_set",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_SET_HELP
 
@@ -202,7 +202,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_unset",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_UNSET_HELP
 
@@ -230,7 +230,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_ls",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_LIST_HELP
 
@@ -261,7 +261,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_sh",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_SHOW_HELP
 
@@ -291,7 +291,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_rm",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_REMOVE_HELP
 
@@ -314,9 +314,32 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_selftest",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_CMD_SELFTEST_HELP
+
+    def do_tail(self, args):
+        """
+        This method will implement a self testing
+        with pre-defined parameters and values
+
+        @param args
+        """
+        try:
+            self.main.tail(args)
+        except BaseException as exception:
+            self.logger.create_log(
+                name="ConsoleInterface Exception",
+                severity=self.logger.severity.ERROR,
+                line=self.utils.get_line(),
+                message=str(exception.message),
+                method="do_tail",
+                facility="ConsoleInterface.do_tail",
+                host=socket.gethostname()
+            )
+            print "An error occurred while execution. " \
+                  "Please see log for more details.\n"
+            print Language.MSG_CMD_TAIL_HELP
 
     def do_help(self, args):
         """
@@ -337,7 +360,7 @@ class ConsoleInterface(cmd.Cmd):
                 facility="ConsoleInterface.do_help",
                 host=socket.gethostname()
             )
-            print "An error occured while execution. " \
+            print "An error occurred while execution. " \
                   "Please see log for more details.\n"
             print Language.MSG_ARG_DESC
 

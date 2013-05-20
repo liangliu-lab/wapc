@@ -24,11 +24,9 @@ limitations under the License.
 
 import json
 import os
-import socket
 import threading
 from time import strftime, gmtime
 from src.cli.CommunicationInterface import CommunicationInterface
-from src.controller.Logger import Logger
 from src.resources.SQL import SQL
 from src.helpers.Utils import Utils
 from src.database.Database import Database
@@ -58,7 +56,6 @@ class DeviceMethods(threading.Thread):
         """
         super(DeviceMethods, self).__init__()
         self.utils = Utils()
-        self.logger = Logger()
         self.database = Database(Resources.cfg_section_master_db)
         self.log_database = Database(Resources.cfg_section_log_db)
         self.communication_interface = CommunicationInterface()
@@ -218,7 +215,6 @@ class DeviceMethods(threading.Thread):
                     .replace('##ip##', device.get_ip())
                 config_source = config_source.replace('##ssid##',
                                                       config.get_ssid())
-                channel = config.get_channel()
                 config_source = config_source.replace('##channel##',
                                                       str(config.get_channel()))
 
@@ -405,9 +401,8 @@ class DeviceMethods(threading.Thread):
                     Language.MSG_ERR_GENERIC.format(
                         self.utils.get_line(),
                         Language.MSG_ERR_DATABASE_NORECORD))
-        except ReferenceError as exception:
-            print Language.MSG_ERR_GENERIC.format(self.utils.get_line(),
-                                                  exception.message)
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def update(self, params):
         """
@@ -648,7 +643,11 @@ class DeviceMethods(threading.Thread):
                 print Language.MSG_ERR_EMPTY_ID.format('device')
                 device.set_id(raw_input(Language.MSG_INPUT_PARAM_OPTION %
                                         {'param': 'ID'}))
-
+            if params.option:
+                option = params.option.strip()
+            else:
+                print Language.MSG_ERR_EMPTY_OPTION
+                option = raw_input()
             if device.get_id():
                 #gather device detail
                 rset_device = self.read(device.get_id())
@@ -732,15 +731,7 @@ class DeviceMethods(threading.Thread):
                     response = Language.MSG_ERR_COMM_INTERFACE_FAILED
                 return response
         except BaseException as exception:
-            self.logger.create_log(
-                name="DeviceMethods BaseException",
-                severity=self.logger.severity.WARNING,
-                line=self.utils.get_line(),
-                message=exception.message,
-                method="group",
-                facility="DeviceMethods.group",
-                host=socket.gethostname()
-            )
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def group(self, params, queue, config=Config()):
         """
@@ -773,15 +764,8 @@ class DeviceMethods(threading.Thread):
 
             # check if command exist in command list
             if str(params.command + '_' + option) not in commands:
-                self.logger.create_log(
-                    name="DeviceMethods Exception",
-                    severity=self.logger.severity.WARNING,
-                    line=self.utils.get_line(),
-                    message="There is no command found on your device "
-                            "commands file '%s'" % option,
-                    method="group",
-                    facility="DeviceMethods.group",
-                    host=socket.gethostname()
+                raise BaseException(
+                    "Submitted command is not in the config json!"
                 )
 
             #set request
@@ -817,8 +801,8 @@ class DeviceMethods(threading.Thread):
                 device = Device()
                 device.set_id(config["Device"])
                 target_file = self.utils.get_request_config(device, config)
-                self.communication_interface \
-                    .write_source_file(config, Resources.ci_source, 'JSON')
+                #self.communication_interface \
+                #    .write_source_file(config, Resources.ci_source, 'JSON')
 
                 #call communication interface script and gather response - RPC
                 #print "Executing device commands please wait..."
@@ -874,28 +858,29 @@ class DeviceMethods(threading.Thread):
             config["request"] = request
 
             #write config model into input.json file
-            source_input = Resources.input_source % {'file': config['Device']}
-            self.communication_interface \
-                .write_source_file(config, source_input, 'JSON')
+            device = Device()
+            device.set_ip(config["ip"])
+            device.set_id(config["Device"])
+            input_source = self.utils.get_request_config(device, config)
 
             #call communication interface script and gather response - RPC
             #print "Executing device commands please wait..."
             resp = json.loads(
                 unicode(
                     self.communication_interface
-                    .call_communication_interface(source_input)
+                    .call_communication_interface(input_source)
                 )
                 .replace('\n', ''),
                 encoding='utf-8'
             )
 
             #remove source input
-            os.remove(source_input)
+            os.remove(input_source)
 
             #check if rpc is responded
             if resp:
                 # check if wap is connected and returned with success status
-                response = None
+
                 # message 110
                 if resp['status'] == 110:
                     #insert updated config and gather inserted record id
@@ -932,51 +917,15 @@ class DeviceMethods(threading.Thread):
                     #self.group(params, queue, config)
                 queue.put(response)
             else:
-                self.logger.create_log(
-                    name="DeviceMethods Exception",
-                    severity=self.logger.severity.WARNING,
-                    line=self.utils.get_line(),
-                    message=Language.MSG_ERR_COMM_INTERFACE_FAILED,
-                    method="group",
-                    facility="DeviceMethods.group",
-                    host=socket.gethostname()
+                raise BaseException(
+                    Language.MSG_ERR_COMM_INTERFACE_FAILED %
+                    {
+                        "line": self.utils.get_line(),
+                        "exception": "[No response has been returned]"
+                    }
                 )
-        except UnboundLocalError as exception:
-            self.logger.create_log(
-                name="DeviceMethods UnboundLocalError",
-                severity=self.logger.severity.FATAL,
-                line=self.utils.get_line(),
-                message=Language.MSG_ERR_FILE_READ % {
-                    'error': exception.message,
-                    'file': str(Resources.cfg_device_resource)
-                },
-                method="group",
-                facility="DeviceMethods.group",
-                host=socket.gethostname()
-            )
-        except IOError as exception:
-            self.logger.create_log(
-                name="DeviceMethods IOError",
-                severity=self.logger.severity.FATAL,
-                line=self.utils.get_line(),
-                message=Language.MSG_ERR_FILE_READ % {
-                    'error': exception.message,
-                    'file': str(Resources.cfg_device_resource)
-                },
-                method="group",
-                facility="DeviceMethods.group",
-                host=socket.gethostname()
-            )
         except BaseException as exception:
-            self.logger.create_log(
-                name="DeviceMethods BaseException",
-                severity=self.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="group",
-                facility="DeviceMethods.group",
-                host=socket.gethostname()
-            )
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def execute_precommand(self, device,
                            commands, config,
@@ -993,60 +942,62 @@ class DeviceMethods(threading.Thread):
         @param option
         @return
         """
+        try:
+            if 'pre' in commands[str(params.command + '_' + option)]:
+                pre = commands[str(params.command + '_' + option)]['pre']
+                request.set_commands(
+                    commands[str(pre + '_' + option)]['commands'])
+                request.set_enable(
+                    commands[str(pre + '_' + option)]['enable'])
+                request.set_configure(
+                    commands[str(pre + '_' + option)]['configure'])
 
-        if 'pre' in commands[str(params.command + '_' + option)]:
-            pre = commands[str(params.command + '_' + option)]['pre']
-            request.set_commands(
-                commands[str(pre + '_' + option)]['commands'])
-            request.set_enable(
-                commands[str(pre + '_' + option)]['enable'])
-            request.set_configure(
-                commands[str(pre + '_' + option)]['configure'])
+                for command in request['commands']:
+                    if 'param' in command:
+                        #new param has been approved??
+                        if command["type"]:
+                            if command["type"] == "interface":
+                                command["command"] += interface.strip()
+                            elif command["type"] == params.option.strip():
+                                command["command"] += config.get_ssid()
+                            else:
+                                command["command"] += config.get_ssid()
+                                #print p["command"]
 
-            for command in request['commands']:
-                if 'param' in command:
-                    #new param has been approved??
-                    if command["type"]:
-                        if command["type"] == "interface":
-                            command["command"] += interface.strip()
-                        elif command["type"] == params.option.strip():
-                            command["command"] += config.get_ssid()
-                        else:
-                            command["command"] += config.get_ssid()
-                            #print p["command"]
+                #set config request to generate input.json file
+                config.set_request(request)
 
-            #set config request to generate input.json file
-            config.set_request(request)
+                #write config model into input.json file
+                target_file = self.utils.get_request_config(device, config)
+                #self.communication_interface.write_source_file(
+                #    config, Resources.ci_source, 'JSON')
 
-            #write config model into input.json file
-            target_file = self.utils.get_request_config(device, config)
-            #self.communication_interface.write_source_file(
-            #    config, Resources.ci_source, 'JSON')
-
-            #call communication interface script and gather
-            # response - RPC
-            #print "Executing device commands please wait..."
-            resp = json.loads(
-                unicode(
-                    self.communication_interface
-                    .call_communication_interface(target_file)
+                #call communication interface script and gather
+                # response - RPC
+                #print "Executing device commands please wait..."
+                resp = json.loads(
+                    unicode(
+                        self.communication_interface
+                        .call_communication_interface(target_file)
+                    )
+                    .replace('\n', ''),
+                    encoding='utf-8'
                 )
-                .replace('\n', ''),
-                encoding='utf-8'
-            )
 
-            #remove input.json
-            os.remove(target_file)
+                #remove input.json
+                os.remove(target_file)
 
-            # check if rpc is responded and shows that pre-request
-            # command
-            # successfully executed
-            if resp:
-                #check if wap is connected and returned with success
-                # status message 110
-                if resp['status'] == 110:
-                    #print "Pre-request command(s) successfully executed"
-                    pass
+                # check if rpc is responded and shows that pre-request
+                # command
+                # successfully executed
+                if resp:
+                    #check if wap is connected and returned with success
+                    # status message 110
+                    if resp['status'] == 110:
+                        #print "Pre-request command(s) successfully executed"
+                        pass
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def get_device_list(self):
         """

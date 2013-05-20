@@ -23,6 +23,7 @@ limitations under the License.
 """
 import ConfigParser
 import couchdb
+import inspect
 from src.helpers.Utils import Utils
 from src.language.Language import Language
 from src.resources.Resources import Resources
@@ -41,9 +42,10 @@ class CouchDriver(object):
     implement detailed statements.
     """
 
-    def __init__(self):
+    def __init__(self, target=None):
         """
         Constructor for CouchDriver class
+        @param target Database name
         """
         self.__config__ = Resources.__db__config__
         self.__section__ = Resources.cfg_section_log_db
@@ -52,10 +54,12 @@ class CouchDriver(object):
         self.config = ConfigParser.RawConfigParser()
         self.config.read(self.__config__)
         self.server_location = self.config.get(self.__section__, 'host')
-        self.db_name = self.config.get(self.__section__, 'db_name')
+        if not target:
+            self.db_name = self.config.get(self.__section__, 'db_name')
+        else:
+            self.db_name = target
         self.db_username = self.config.get(self.__section__, 'username')
         self.db_password = self.config.get(self.__section__, 'password')
-        self.database = None
 
     def connect(self):
         """
@@ -68,6 +72,8 @@ class CouchDriver(object):
             server = couchdb.Server(self.server_location)
             server.resource.credentials = (self.db_username, self.db_password)
             # check if log database exists otherwise create one
+            caller = inspect.stack()
+            #print caller
             try:
                 self.database = server[self.db_name]
             except BaseException:
@@ -118,6 +124,8 @@ class CouchDriver(object):
         @return new record id
         """
         try:
+            if not self.database:
+                self.database = self.connect()
             rid, rev = self.database.save(doc)
             self.database.commit()
             if rid:

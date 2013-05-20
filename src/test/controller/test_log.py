@@ -23,6 +23,7 @@ limitations under the License.
 """
 
 from src.controller.Logger import Logger
+from src.helpers.Utils import Utils
 from src.model.Log import Log
 import unittest
 
@@ -30,9 +31,10 @@ __author__ = 'fatih'
 
 
 class LogTestCase(unittest.TestCase):
+    utils = Utils()
     def test_logger(self):
         self.assertIn()
-        my_logger = Logger()
+        my_logger = Logger(self.utils.daemon_prefix + '_' + self.utils.day)
         log_id = my_logger.create_log(
             'Test Log',
             Log.severity.DEBUG,

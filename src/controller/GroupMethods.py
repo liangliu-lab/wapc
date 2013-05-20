@@ -98,16 +98,7 @@ class GroupMethods(object):
                           'name': group.get_name()
                       }
         except BaseException as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=Language.MSG_ERR_GENERIC
-                .format(self.utils.get_line(), exception.message),
-                method="create",
-                facility="GroupMethods.create",
-                host=socket.gethostname()
-            )
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def read(self, group_id):
         """
@@ -132,17 +123,8 @@ class GroupMethods(object):
                     Language.MSG_ERR_GENERIC
                     .format(self.utils.get_line(),
                             "There is no group record found on table"))
-        except RuntimeError as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=Language.MSG_ERR_GENERIC
-                .format(self.utils.get_line(), exception.message),
-                method="read",
-                facility="GroupMethods.read",
-                host=socket.gethostname()
-            )
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def get_group_config(self, group_id):
         """
@@ -168,17 +150,8 @@ class GroupMethods(object):
                     Language.MSG_ERR_GENERIC
                     .format(self.utils.get_line(),
                             "There is no group record found on table"))
-        except RuntimeError as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=Language.MSG_ERR_GENERIC
-                .format(self.utils.get_line(), exception.message),
-                method="get_group_config",
-                facility="GroupMethods.get_group_config",
-                host=socket.gethostname()
-            )
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def update(self, params):
         """
@@ -215,16 +188,8 @@ class GroupMethods(object):
                 print Language.MSG_ERR_EMPTY_ID
                 params.id = raw_input(Language.MSG_ERR_EMPTY_ID.format('group'))
                 self.update(params)
-        except RuntimeError as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="update",
-                facility="GroupMethods.update",
-                host=socket.gethostname()
-            )
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def set(self, params):
         """
@@ -238,16 +203,8 @@ class GroupMethods(object):
         try:
             params.command = "set"
             self.exec_group(params)
-        except RuntimeError as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="set",
-                facility="GroupMethods.set",
-                host=socket.gethostname()
-            )
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def unset(self, params):
         """
@@ -260,16 +217,8 @@ class GroupMethods(object):
         try:
             params.command = "unset"
             self.exec_group(params)
-        except RuntimeError as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="execute_commands",
-                facility="GroupMethods.execute_commands",
-                host=socket.gethostname()
-            )
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def show(self, params):
         """
@@ -279,16 +228,8 @@ class GroupMethods(object):
         try:
             params.command = "show"
             self.exec_group(params)
-        except RuntimeError as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="show",
-                facility="GroupMethods.show",
-                host=socket.gethostname()
-            )
+        except BaseException as exception:
+            raise BaseException("An error occurred: %s" % {exception.message})
 
     def exec_group(self, params):
         """
@@ -335,8 +276,8 @@ class GroupMethods(object):
 
                 queue = Queue.Queue()
                 for conf in results:
-                    device_methods.group(params, queue, conf)
-                    """thread_config = threading.Thread(
+                    #device_methods.group(params, queue, conf)
+                    thread_config = threading.Thread(
                         target=device_methods.group,
                         name=conf["Device"],
                         args=[params, queue, conf],
@@ -350,7 +291,7 @@ class GroupMethods(object):
 
                 for thread in pool:
                     thread.join()
-                """
+
                 return_response = self.utils.formatter(heading, thread_results)
                 # Generate update command
                 if params.command is not "show":
@@ -362,12 +303,4 @@ class GroupMethods(object):
                     self.database.update(cmd)
             return return_response
         except BaseException as exception:
-            self.utils.logger.create_log(
-                name="GroupMethods Exception",
-                severity=self.utils.logger.severity.ERROR,
-                line=self.utils.get_line(),
-                message=str(exception.message),
-                method="execute_commands",
-                facility="GroupMethods.execute_commands",
-                host=socket.gethostname()
-            )
+            raise ("An error occurred: %s" % {exception.message})

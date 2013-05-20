@@ -33,7 +33,7 @@ class ArgParser(argparse.ArgumentParser):
     actually ConsoleInterface class.
 
     This class parses arguments and generate a namespace with arguments came
-    from Main controller and procssed by Utils.get_clean_params.
+    from Main controller and processed by Utils.get_clean_params.
     """
 
     def __init__(self):
@@ -85,8 +85,6 @@ class ArgParser(argparse.ArgumentParser):
         group or device with usage</li>
         <li><strong>-r,--radius</strong> Provide Radius id to configure radius
         authentication for group or device with usage radius_id</li>
-        <li><strong>-S,--ssid</strong> Provide SSID for group or device with
-        usage ssid</li>
         <li><strong>-V,--vlan</strong> Provide VLAN id to determine VLAN for
         group or device with usage vlan_id</li>
         <li><strong>-H,--channel</strong> Provide channel to configure for
@@ -99,39 +97,38 @@ class ArgParser(argparse.ArgumentParser):
         group/device/config/vlan</li>
         </ul>
         """
-
+        #============== Shared arguments ==================#
+        #============== List Command arguments ============#
+        #============== Group Command arguments ============#
+        self.add_argument('-i', '--id',
+                          dest='id',
+                          help=Language.MSG_ADD_ID_HELP,
+                          action='store'
+        )
+        # list and group commands share this
+        self.add_argument('-g', '--group',
+                          dest='group',
+                          help=Language.MSG_ADD_GROUP_HELP,
+                          action='store'
+        )
+        self.add_argument('-t', '--type',
+                          dest='type',
+                          help=Language.MSG_ADD_TYPE_HELP,
+                          action='store'
+        )
+        #============== Add Command arguments =============#
         self.add_argument('-b', '--brand',
                           dest='brand',
                           help=Language.MSG_ADD_BRAND_HELP,
-                          action='store'
-        )
-        self.add_argument('-c', '--config',
-                          dest='config',
-                          help=Language.MSG_ADD_CONFIG,
                           action='store'
         )
         self.add_argument('-D', '--desc',
                           dest='description',
                           help=Language.MSG_ADD_DESC_HELP
         )
-        self.add_argument('-e', '--inet',
-                          dest='interface',
-                          help=Language.MSG_ADD_INTERFACE_HELP,
-                          action='store'
-        )
         self.add_argument('-F', '--firmware',
                           dest='firmware',
                           help=Language.MSG_ADD_FIRMWARE_HELP,
-                          action='store'
-        )
-        self.add_argument('-g', '--group',
-                          dest='group',
-                          help=Language.MSG_ADD_GROUP_HELP,
-                          action='store'
-        )
-        self.add_argument('-i', '--id',
-                          dest='id',
-                          help=Language.MSG_ADD_ID_HELP,
                           action='store'
         )
         self.add_argument('-I', '--ip',
@@ -144,24 +141,26 @@ class ArgParser(argparse.ArgumentParser):
                           help=Language.MSG_ADD_MODEL_HELP,
                           action='store'
         )
-        self.add_argument('-n', '--name',
-                          dest='name',
-                          help=Language.MSG_ADD_NAME_HELP,
+        # vlan arguments
+        self.add_argument('-V', '--vlan',
+                          dest='vlan',
+                          help=Language.MSG_ADD_VLAN_HELP,
                           action='store'
         )
-        self.add_argument('-o', '--option',
-                          dest='option',
-                          help=Language.MSG_ADD_OPTION_HELP,
+        self.add_argument('-e', '--inet',
+                          dest='interface',
+                          help=Language.MSG_ADD_INTERFACE_HELP,
                           action='store'
         )
+        self.add_argument('-S', '--subnet',
+                          dest='subnet',
+                          help=Language.MSG_ADD_SUBNET_HELP,
+                          action='store'
+        )
+
         self.add_argument('-p', '--password',
                           dest='password',
                           help=Language.MSG_ADD_PASSWORD_HELP,
-                          action='store'
-        )
-        self.add_argument('-P', '--param',
-                          dest='param',
-                          help=Language.MSG_ADD_PARAM_HELP,
                           action='store'
         )
         self.add_argument('-R', '--relation',
@@ -169,24 +168,27 @@ class ArgParser(argparse.ArgumentParser):
                           help=Language.MSG_ADD_RELATION_HELP,
                           action='store'
         )
-        self.add_argument('-s', '--subnet',
-                          dest='subnet',
-                          help=Language.MSG_ADD_SUBNET_HELP,
+        #============== Edit Command arguments ============#
+        self.add_argument('-c', '--config',
+                          dest='config',
+                          help=Language.MSG_ADD_CONFIG,
                           action='store'
         )
-        self.add_argument('-t', '--type',
-                          dest='type',
-                          help=Language.MSG_ADD_TYPE_HELP,
+        #======== Set/Unset/Show Commands arguments ========#
+        self.add_argument('-o', '--option',
+                          dest='option',
+                          help=Language.MSG_ADD_OPTION_HELP,
                           action='store'
         )
-        self.add_argument('-u', '--username',
-                          dest='username',
-                          help=Language.MSG_ADD_USERNAME_HELP,
+        self.add_argument('-P', '--param',
+                          dest='param',
+                          help=Language.MSG_ADD_PARAM_HELP,
                           action='store'
         )
-        self.add_argument('-V', '--vlan',
-                          dest='vlan',
-                          help=Language.MSG_ADD_VLAN_HELP,
+        #============== Log(tail) Command arguments ============#
+        self.add_argument('-f', '--follow',
+                          dest='follow',
+                          help=Language.MSG_ADD_PARAM_HELP,
                           action='store'
         )
 
@@ -204,7 +206,7 @@ class ArgParser(argparse.ArgumentParser):
         """
         try:
             if self._get_args() is Empty:
-                self.params = self.parse_known_args(args.split())
+                self.params = self.parse_known_args(args)
             else:
                 self.params = self.parse_args(args)
             return self.params

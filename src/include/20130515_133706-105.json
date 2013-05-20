@@ -1,0 +1,1 @@
+{"username": "Cisco", "transport_protocol": "Telnet", "ip": "10.6.1.243", "enable_password": "Cisco", "request": {"commands": [{"command": "show memory stat"}], "enable": true, "configure": false}, "password": "Cisco", "personality": "ios"}

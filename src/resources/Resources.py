@@ -36,7 +36,8 @@ class Resources(object):
     INCLUDE_PATH = SOURCE_PATH + "include/"
     CONFIG_PATH = SOURCE_PATH + "config/"
     BACKUP_PATH = SOURCE_PATH + "backup/"
-    LOG_PATH = "/var/log/labris/wapc_%(time)s.log"
+    LOG_PATH = "/var/log/labris/device_%(time)s.log"
+    DAEMON_PATH = "/var/log/labris/daemon_%(time)s.log"
 
     #communication interface script
     ci_script = INCLUDE_PATH + "labris-wap-controller.pl"
@@ -45,7 +46,7 @@ class Resources(object):
     ci_source = INCLUDE_PATH + "input.json"
     input_source = INCLUDE_PATH + "%(file)s.json"
 
-    #defulat config commands for brand new addded device
+    #defulat config commands for brand new added device
     ci_config = INCLUDE_PATH + "default.json"
 
     # initial config will ve set to

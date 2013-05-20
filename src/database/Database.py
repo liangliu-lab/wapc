@@ -28,7 +28,6 @@ from src.language.Language import Language
 from PostgreDriver import PostgreDriver
 from CouchDriver import CouchDriver
 from src.resources.Resources import Resources
-from src.resources.SQL import SQL
 
 
 __author__ = 'fatih'
@@ -44,7 +43,7 @@ class Database(object):
     implement detailed statements.
     """
 
-    def __init__(self, type):
+    def __init__(self, db_type, target=None):
         """
         Constructor for Database class
         """
@@ -66,9 +65,12 @@ class Database(object):
 
         # retrieve provided database type which defines what db will be used
         # with this instance
-        self.type = type
+        self.db_type = db_type
         self.master_driver = PostgreDriver()
-        self.log_db_driver = CouchDriver()
+        if target:
+            self.log_db_driver = CouchDriver(target)
+        else:
+            self.log_db_driver = CouchDriver()
 
     def connect(self):
         """
@@ -79,10 +81,10 @@ class Database(object):
         try:
 
             #gather connection parameters from database config file
-            if self.type == self.config.get(
+            if self.db_type == self.config.get(
                     self.__system_section__, "master_db"):
                 self.master_driver.connect()
-            elif self.type == self.config.get(
+            elif self.db_type == self.config.get(
                     self.__system_section__, "log_db"):
                 self.log_db_driver.connect()
             return True
@@ -97,10 +99,10 @@ class Database(object):
         @return columns header and results
         """
         try:
-            if self.type == self.config.get(
+            if self.db_type == self.config.get(
                     self.__system_section__, "master_db"):
                 fields, results = self.master_driver.select(cmd)
-            elif self.type == self.config.get(
+            elif self.db_type == self.config.get(
                     self.__system_section__, "log_db"):
                 fields, results = self.log_db_driver.select(cmd)
             return fields, results
@@ -119,14 +121,14 @@ class Database(object):
         @return columns header and results
         """
         try:
-            if self.type == self.config.get(self.__system_section__,
-                                            "master_db"):
+            if self.db_type == self.config.get(self.__system_section__,
+                                               "master_db"):
                 result = self.master_driver.get(key, id,
-                                                            table_postfix)
-            elif self.type == self.config.get(self.__system_section__,
-                                              "log_db"):
+                                                table_postfix)
+            elif self.db_type == self.config.get(self.__system_section__,
+                                                 "log_db"):
                 result = self.log_db_driver.get(key, id,
-                                                            table_postfix)
+                                                table_postfix)
             return result
         except BaseException as exception:
             raise BaseException(
@@ -143,10 +145,10 @@ class Database(object):
         """
         rid = None
         try:
-            if self.type == self.config.get(
+            if self.db_type == self.config.get(
                     self.__system_section__, "master_db"):
                 rid = self.master_driver.insert(cmd)
-            elif self.type == self.config.get(
+            elif self.db_type == self.config.get(
                     self.__system_section__, "log_db"):
                 rid = self.log_db_driver.insert(cmd)
             if rid:
@@ -166,10 +168,10 @@ class Database(object):
         @return True or False
         """
         try:
-            if self.type == self.config.get(
+            if self.db_type == self.config.get(
                     self.__system_section__, "master_db"):
                 self.master_driver.update(cmd)
-            elif self.type == self.config.get(
+            elif self.db_type == self.config.get(
                     self.__system_section__, "log_db"):
                 self.log_db_driver.update(cmd)
             return True
@@ -187,10 +189,10 @@ class Database(object):
         @param cmd is an SQL statement
         """
         try:
-            if self.type == self.config.get(
+            if self.db_type == self.config.get(
                     self.__system_section__, "master_db"):
                 self.master_driver.remove(cmd)
-            elif self.type == self.config.get(
+            elif self.db_type == self.config.get(
                     self.__system_section__, "log_db"):
                 self.log_db_driver.remove(cmd)
         except BaseException as exception:

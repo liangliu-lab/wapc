@@ -57,7 +57,7 @@ class Main(object):
         self.arg_parser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
         self.database = Database(self.utils.master_db)
-        self.logger = Logger()
+        self.logger = Logger(self.utils.log_prefix + '_' + self.utils.day)
         #self.daemon.start()
 
     #this methods works fine do not touch it!!!
@@ -430,7 +430,7 @@ class Main(object):
                     param_type = params.type.split()[0]
                     param_type = str(param_type).lower()
                 else:
-                    param_type = raw_input("Please provide a type:")\
+                    param_type = raw_input("Please provide a type:") \
                         .strip()
                     param_type = str(param_type).lower()
 
@@ -492,15 +492,28 @@ class Main(object):
         except BaseException as exception:
             raise BaseException(exception.message)
 
-    #this method works fine do not touch it!!!
-    @classmethod
-    def help(cls, args):
+    def tail(self, args):
         """
-        Print help text
-
-        @param cls class itself
+        Gathers logs from Logger and shows them in a formatted way
         @param args
         """
+        try:
+            if args:
+                pass
+            else:
+                raise BaseException(Language.MSG_ERR_ARGUMENT_PROVIDED)
+        except BaseException as exception:
+            raise BaseException(exception.message)
+
+    #this method works fine do not touch it!!!
+
+    def help(self, args):
+        """
+    Print help text
+
+    @param self instance itself
+    @param args
+    """
         #formatter = parser._get_formatter()
         #parser.exit(message=formatter.format_help())
         del args
@@ -526,7 +539,6 @@ class Main(object):
             Language.MSG_ADD_DEVICE_HELP,
             Language.MSG_ADD_DESC_HELP,
             Language.MSG_ADD_RADIUS_HELP,
-            Language.MSG_ADD_SSID_HELP,
             Language.MSG_ADD_VLAN_HELP,
             Language.MSG_ADD_CHANNEL_HELP,
             Language.MSG_ADD_TYPE_HELP,

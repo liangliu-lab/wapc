@@ -52,12 +52,23 @@ class Utils(object):
         self.day = strftime(Resources.string_day, gmtime())
 
         # Get system environment from system configuration file
-        config_parser = ConfigParser.RawConfigParser()
-        config_parser.read(Resources.__config__system__)
-        self.environment = config_parser.get("system", "environment")
-        self.log_db = config_parser.get("system", "log_db")
-        self.master_db = config_parser.get("system", "master_db")
-        self.daemon_timeout = config_parser.get("system", "daemon_timeout")
+        self.config_parser = ConfigParser.RawConfigParser()
+        self.config_parser.read(Resources.__config__system__)
+        self.environment = self.config_parser.get("system", "environment")
+        self.log_db = self.config_parser.get("system", "log_db")
+        self.master_db = self.config_parser.get("system", "master_db")
+        self.daemon_timeout = self.config_parser.get("system", "daemon_timeout")
+
+        # read database config and set
+        self.config_parser.read(Resources.__db__config__)
+
+        #set logger prefix to create a new logging target
+        self.log_prefix = self.config_parser.get(self.log_db, "db_name")
+
+        #set daemon prefix to create a new logging target
+        self.daemon_prefix = self.config_parser.get(self.log_db, "db_daemon")
+
+        #reassign logger db section in resources statics regarding config file
         Resources.cfg_section_log_db = self.log_db
         Resources.cfg_section_master_db = self.master_db
 

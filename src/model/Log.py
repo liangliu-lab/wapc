@@ -43,6 +43,10 @@ class Log(dict):
     severity.FATAL = 'FATAL'
     severity.INFO = 'INFO'
 
+    severity_level = {severity.CRITICAL: 50, severity.DEBUG: 10,
+                      severity.ERROR: 40, severity.WARNING: 30,
+                      severity.FATAL: 50, severity.INFO: 20}
+
     def __init__(self,
                  name="Default Log",
                  severity=str(severity.INFO),
@@ -101,12 +105,17 @@ class Log(dict):
         """
         self["severity"] = severity
 
-    def get_severity(self):
+    def get_severity(self, s_type="int"):
         """
         Getter for severity
-        @return severity
+        @param s_type str or int
+
+        @return severity either string or int regarding s_type
         """
-        return self["severity"]
+        if s_type is "int":
+            return self.severity_level[self["severity"]]
+        else:
+            return self["severity"]
 
     def set_line(self, line):
         """

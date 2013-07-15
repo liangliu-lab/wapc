@@ -57,7 +57,7 @@ class Main(object):
         self.arg_parser = ArgParser()
         self.now = strftime(Resources.time_format, gmtime())
         self.database = Database(self.utils.master_db)
-        self.logger = Logger(self.utils.log_prefix + '_' + self.utils.day)
+        self.logger = Logger(self.utils.log_prefix % {'time': self.utils.day})
         #self.daemon.start()
 
     #this methods works fine do not touch it!!!

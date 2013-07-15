@@ -22,7 +22,7 @@ limitations under the License.
 
 """
 
-import logging
+import logging as logging
 import os
 from src.model.Log import Log
 from src.helpers.Utils import Utils
@@ -91,23 +91,28 @@ class Logger(logging.getLoggerClass()):
                 return log_id
             else:
                 # send log into log file
-                logger = logging.getLogger('debug-log')
+                logger = logging.getLogger(log.get_severity("str") + "-log")
                 fh = logging.FileHandler(self.target)
-                fh.setLevel(logging.DEBUG)
+                fh.setLevel(log.get_severity())
                 logger.addHandler(fh)
                 logger.log(log.get_severity(), log)
+                logger.removeHandler(fh)
+                del fh
+                del logger
         except BaseException as exception:
             # If couchdb could not be connected all logs will be inserted into
             # local file system under /var/log till the new Logger instance will
             # be called.
             print "Error (%s) occurred on creating log method. " \
                   "Trying to fix..." % {exception.message}
-            logger = logging.getLogger('debug-log')
+            logger = logging.getLogger(log.get_severity("str") + "-log")
             fh = logging.FileHandler(self.target)
-            fh.setLevel(logging.DEBUG)
+            fh.setLevel(log.get_severity())
             logger.addHandler(fh)
             logger.log(log.get_severity(), log)
-
+            logger.removeHandler(fh)
+            del fh
+            del logger
 
     def gather_logs(self, params, opt='_all_docs'):
         """

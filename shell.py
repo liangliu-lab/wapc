@@ -1,4 +1,4 @@
-#!/opt/python/bin/python
+#!/usr/bin/python
 # coding=utf-8
 
 """
@@ -292,10 +292,10 @@ def __main__():
         ConsoleInterface().cmdloop()
     except BaseException as exception:
         utils = Utils()
-        logger = Logger(utils.log_prefix + '_' + utils.day)
+        logger = Logger(utils.log_prefix % {'time': utils.day})
         logger.create_log(
             name="Shell.py Exception",
-            severity=logger.severity.ERROR,
+            severity=logger.severity.FATAL,
             line=utils.get_line(),
             message=str(exception.message),
             method="__main__",

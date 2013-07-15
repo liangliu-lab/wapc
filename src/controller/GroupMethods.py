@@ -72,7 +72,6 @@ class GroupMethods(object):
                 group.set_name(
                     raw_input("Please enter an nick name for group:").strip())
 
-
             if params.description:
                 group.set_description(params.description.strip())
             else:

@@ -342,7 +342,10 @@ class GroupMethods(object):
                 thread_results = []
                 heading = ["id", "name", "ip", "request", "status", "response"]
 
+                # Create a queue to to keep thread returns
                 queue = Queue.Queue()
+
+                # Create a thread pool
                 for conf in results:
                     # device_methods.group(params, queue, conf)
                     thread_config = threading.Thread(
@@ -352,11 +355,13 @@ class GroupMethods(object):
                     )
                     pool.append(thread_config)
 
+                # Start all threads in thread pool
                 for thread in pool:
                     thread.start()
                     response = queue.get()
                     thread_results.append(response)
 
+                # Kill all threads
                 for thread in pool:
                     thread.join()
 

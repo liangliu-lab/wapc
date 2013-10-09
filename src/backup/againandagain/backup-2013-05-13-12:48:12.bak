@@ -1,0 +1,116 @@
+!slave conf (12.3)
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname ap
+!
+enable secret 5 $1$nn3h$GtUpBzAs4bUeTii/aw9dR0
+!
+username Cisco password 7 1531021F0725
+ip subnet-zero
+!
+aaa new-model
+!
+!
+aaa group server radius rad_eap
+ server 10.6.1.1 auth-port 1812 acct-port 1813
+!
+aaa group server radius rad_mac
+!         
+aaa group server radius rad_acct
+!
+aaa group server radius rad_admin
+!
+aaa group server tacacs+ tac_admin
+!
+aaa group server radius rad_pmip
+!
+aaa group server radius dummy
+!
+aaa authentication login eap_methods group rad_eap
+aaa authentication login mac_methods local
+aaa authentication login method_Infrastructure group Infrastructure
+aaa authorization exec default local 
+aaa accounting network acct_methods start-stop group rad_acct
+aaa session-id common
+!
+dot11 ssid LBREAP
+   authentication open eap eap_methods
+   authentication network-eap eap_methods 
+   authentication key-management wpa
+   information-element ssidl advertisement
+!
+!
+!
+bridge irb
+!
+!
+interface Dot11Radio0
+ no ip address
+ no ip route-cache
+ !
+ encryption mode ciphers tkip 
+ !
+ ssid LBREAP
+ !
+ short-slot-time
+ speed basic-1.0 basic-2.0 basic-5.5 6.0 9.0 basic-11.0 12.0 18.0 24.0 36.0 48.0 54.0
+ channel 10
+ station-role root
+ no cdp enable
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+ bridge-group 1 spanning-disabled
+!
+interface FastEthernet0
+ no ip address
+ no ip route-cache
+ duplex auto
+ speed auto
+ bridge-group 1
+ no bridge-group 1 source-learning
+ bridge-group 1 spanning-disabled
+!
+interface BVI1
+ ip address 10.6.1.254 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.6.1.1
+ip http server
+no ip http secure-server
+ip http help-path http://www.cisco.com/warp/public/779/smbiz/prodconfig/help/eag
+ip radius source-interface BVI1 
+logging snmp-trap emergencies
+logging snmp-trap alerts
+logging snmp-trap critical
+logging snmp-trap errors
+logging snmp-trap warnings
+!
+snmp-server community public ro
+radius-server local
+  no authentication eapfast
+  no authentication mac
+  nas 10.6.1.254 key 7 105A0C0A111E1C0C5D5679
+  user test nthash 7 04022A5457036F6D2F4E273140595E257F0F700D11607147244725250F0B087071
+  user wlse nthash 7 144E335954260908027F1113704155375625027C7A06075A2049307D0105037170
+  user wds1 nthash 7 04022A5457036F6D2F4E273140595E257F0F700D11607147244725250F0B087071
+!
+radius-server attribute 32 include-in-access-req format %h
+radius-server host 10.6.1.1 auth-port 1812 acct-port 1813 key 7 044F0E151B284249584B56
+radius-server vsa send accounting
+bridge 1 route ip
+!         
+!
+wlccp ap username wds1 password 7 0703204E5C000A
+!
+line con 0
+line vty 0 4
+line vty 5 15
+!
+end
+

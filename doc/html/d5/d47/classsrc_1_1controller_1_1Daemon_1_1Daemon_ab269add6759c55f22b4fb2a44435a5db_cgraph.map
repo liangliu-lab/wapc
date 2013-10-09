@@ -1,0 +1,5 @@
+<map id="src.controller.Daemon.Daemon.start" name="src.controller.Daemon.Daemon.start">
+<area shape="rect" id="node3" href="$d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#aa060d27803f7b3578f28f86287692624" title="do the UNIX double&#45;fork magic, see Stevens&#39; &quot;Advanced &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Programming in the UNIX Environment&quot; f..." alt="" coords="289,5,559,35"/>
+<area shape="rect" id="node7" href="$d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#a21f9970f0348f68693838857b557d8dd" title="You should override this method when you subclass Daemon." alt="" coords="312,59,536,88"/>
+<area shape="rect" id="node5" href="$d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#a9b41ff053ff39bcbf49356f140d37862" title="src.controller.Daemon.Daemon.delpid" alt="" coords="609,5,849,35"/>
+</map>

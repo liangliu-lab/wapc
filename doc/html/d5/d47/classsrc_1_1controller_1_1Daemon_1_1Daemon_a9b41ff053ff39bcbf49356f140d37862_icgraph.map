@@ -1,0 +1,5 @@
+<map id="src.controller.Daemon.Daemon.delpid" name="src.controller.Daemon.Daemon.delpid">
+<area shape="rect" id="node3" href="$d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#aa060d27803f7b3578f28f86287692624" title="do the UNIX double&#45;fork magic, see Stevens&#39; &quot;Advanced &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Programming in the UNIX Environment&quot; f..." alt="" coords="297,5,567,35"/>
+<area shape="rect" id="node5" href="$d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#ab269add6759c55f22b4fb2a44435a5db" title="Start the daemon." alt="" coords="617,5,849,35"/>
+<area shape="rect" id="node7" href="$d5/d47/classsrc_1_1controller_1_1Daemon_1_1Daemon.html#a6c1981ae651cf535894aaee3894683e4" title="Restart the daemon." alt="" coords="900,5,1143,35"/>
+</map>

@@ -1,0 +1,131 @@
+.TH "src.controller.Daemon.Daemon" 3 "Thu May 2 2013" "Version v1.1.0" "Labris Wireless Access Point Controller" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src.controller.Daemon.Daemon \- 
+.PP
+A generic daemon class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBdaemonize\fP"
+.br
+.RI "\fIdo the UNIX double-fork magic, see Stevens' 'Advanced
+         Programming in the UNIX Environment' for details (ISBN 0201563177) http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16 \fP"
+.ti -1c
+.RI "def \fBdelpid\fP"
+.br
+.ti -1c
+.RI "def \fBstart\fP"
+.br
+.RI "\fIStart the daemon\&. \fP"
+.ti -1c
+.RI "def \fBstop\fP"
+.br
+.RI "\fIStop the daemon\&. \fP"
+.ti -1c
+.RI "def \fBrestart\fP"
+.br
+.RI "\fIRestart the daemon\&. \fP"
+.ti -1c
+.RI "def \fBrun\fP"
+.br
+.RI "\fIYou should override this method when you subclass \fBDaemon\fP\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBstdin\fP"
+.br
+.ti -1c
+.RI "\fBstdout\fP"
+.br
+.ti -1c
+.RI "\fBstderr\fP"
+.br
+.ti -1c
+.RI "\fBpidfile\fP"
+.br
+.ti -1c
+.RI "\fBlogger\fP"
+.br
+.ti -1c
+.RI "\fBlog\fP"
+.br
+.ti -1c
+.RI "\fBdaemon_commands\fP"
+.br
+.ti -1c
+.RI "\fButils\fP"
+.br
+.ti -1c
+.RI "\fBdevice_methods\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A generic daemon class\&. 
+
+Usage: subclass the \fBDaemon\fP class and override the \fBrun()\fP method 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.__init__ (self, pidfile, stdin = \fC'/dev/null'\fP, stdout = \fC'/dev/null'\fP, stderr = \fC'/dev/null'\fP)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.daemonize (self)"
+
+.PP
+do the UNIX double-fork magic, see Stevens' 'Advanced
+         Programming in the UNIX Environment' for details (ISBN 0201563177) http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16 
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.delpid (self)"
+
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.restart (self)"
+
+.PP
+Restart the daemon\&. 
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.run (self)"
+
+.PP
+You should override this method when you subclass \fBDaemon\fP\&. It will be called after the process has been daemonized by \fBstart()\fP or \fBrestart()\fP\&. 
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.start (self)"
+
+.PP
+Start the daemon\&. 
+.SS "def src\&.controller\&.Daemon\&.Daemon\&.stop (self)"
+
+.PP
+Stop the daemon\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "src\&.controller\&.Daemon\&.Daemon\&.daemon_commands"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.device_methods"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.log"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.logger"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.pidfile"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.stderr"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.stdin"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.stdout"
+
+.SS "src\&.controller\&.Daemon\&.Daemon\&.utils"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Labris Wireless Access Point Controller from the source code\&.
